@@ -1,0 +1,16 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { calculateSip } from "@/lib/calculator/sip-calculator";
+import { formatIndianCurrency } from "@/lib/calculator/formatting";
+import { CalculatorInput } from "./CalculatorInput";
+import { CalculatorResult } from "./CalculatorResult";
+
+const defaults = { monthlyInvestment: "5000", annualReturnRate: "12", investmentYears: "10" };
+
+export function SipCalculator() {
+  const [values, setValues] = useState(defaults);
+  const calculation = useMemo(() => { try { return { result: calculateSip({ monthlyInvestment: Number(values.monthlyInvestment), annualReturnRate: Number(values.annualReturnRate), investmentYears: Number(values.investmentYears) }), error: null }; } catch (error) { return { result: null, error: error instanceof Error ? error.message : "Unable to calculate this SIP." }; } }, [values]);
+  const update = (field: keyof typeof defaults) => (value: string) => setValues((current) => ({ ...current, [field]: value }));
+  return <div className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]"><section aria-labelledby="sip-details" className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"><h2 id="sip-details" className="text-lg font-semibold text-slate-950">Investment details</h2><p className="mt-1 text-sm text-slate-600">Update any value to recalculate instantly.</p><div className="mt-6 space-y-5"><CalculatorInput id="monthlyInvestment" label="Monthly investment (INR)" value={values.monthlyInvestment} onChange={update("monthlyInvestment")} min={0} max={100000000} step={500} prefix="₹" error={Boolean(calculation.error)} errorId="sip-error" /><CalculatorInput id="annualReturnRate" label="Expected annual return (%)" value={values.annualReturnRate} onChange={update("annualReturnRate")} min={0} max={100} step={0.1} error={Boolean(calculation.error)} errorId="sip-error" /><CalculatorInput id="investmentYears" label="Investment period (years)" value={values.investmentYears} onChange={update("investmentYears")} min={0} max={100} step={1} hint="Monthly contributions are assumed at the end of each month." error={Boolean(calculation.error)} errorId="sip-error" /></div>{calculation.error && <p id="sip-error" role="alert" className="mt-5 rounded-lg border border-red-200 bg-red-50 px-3 py-2.5 text-sm text-red-800">{calculation.error}</p>}</section><section aria-labelledby="sip-results" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"><h2 id="sip-results" className="text-lg font-semibold text-slate-950">Your estimated value</h2><p className="mt-1 text-sm text-slate-600">Based on monthly compounding. Returns are illustrative.</p>{calculation.result ? <div aria-live="polite" className="mt-6 grid gap-3 sm:grid-cols-3"><CalculatorResult label="Total invested" value={formatIndianCurrency(calculation.result.totalInvested)} /><CalculatorResult label="Estimated returns" value={formatIndianCurrency(calculation.result.estimatedReturns)} /><CalculatorResult label="Future value" value={formatIndianCurrency(calculation.result.futureValue)} emphasis /></div> : <p className="mt-6 rounded-xl bg-slate-50 p-5 text-sm text-slate-600">Enter valid investment details to view your estimate.</p>}</section></div>;
+}

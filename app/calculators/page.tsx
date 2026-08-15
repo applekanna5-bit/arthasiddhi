@@ -1,0 +1,9 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { CalculatorLayout } from "@/components/calculator/CalculatorLayout";
+
+export const metadata: Metadata = { title: "Financial Calculators | ArthaSiddhi", description: "Free Indian financial calculators for loans, SIP investments and fixed deposits." };
+
+const calculators = [{ href: "/calculators/home-loan", title: "Home Loan EMI Calculator", description: "Estimate your home loan EMI, interest and repayment schedule." }, { href: "/calculators/car-loan", title: "Car Loan EMI Calculator", description: "Plan a car loan with a clear monthly repayment estimate." }, { href: "/calculators/personal-loan", title: "Personal Loan EMI Calculator", description: "Understand your personal loan EMI and total repayment." }, { href: "/calculators/sip", title: "SIP Calculator", description: "Estimate the future value of your monthly mutual fund investment." }, { href: "/calculators/fd", title: "FD Calculator", description: "Calculate fixed deposit interest and maturity amount." }];
+
+export default function CalculatorsPage() { return <CalculatorLayout title="Indian financial calculators" description="Simple, free tools for planning loans, investments and fixed deposits."><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{calculators.map((calculator) => <Link key={calculator.href} href={calculator.href} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100"><h2 className="text-lg font-semibold text-slate-950">{calculator.title}</h2><p className="mt-2 text-sm leading-6 text-slate-600">{calculator.description}</p><span className="mt-4 inline-block text-sm font-semibold text-emerald-700">Open calculator →</span></Link>)}</div></CalculatorLayout>; }

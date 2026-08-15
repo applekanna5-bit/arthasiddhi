@@ -2,6 +2,7 @@ import {
   calculateLoanDetails,
   type LoanResult,
 } from "../engine/loan";
+import { formatIndianCurrency as formatCurrency } from "./formatting";
 
 export interface CalculatorFormValues {
   principal: string;
@@ -9,16 +10,9 @@ export interface CalculatorFormValues {
   tenureYears: string;
 }
 
-const inrFormatter = new Intl.NumberFormat("en-IN", {
-  style: "currency",
-  currency: "INR",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
-
 /** Formats a value for display only; the calculation engine retains full precision. */
 export function formatIndianCurrency(value: number): string {
-  return inrFormatter.format(value);
+  return formatCurrency(value);
 }
 
 /**
