@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { siteUrl } from "@/lib/content/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ArthaSiddhi | Loan EMI Calculator",
-  description: "Calculate loan EMIs and review your amortization schedule.",
+  metadataBase: new URL(siteUrl),
+  title: "ArthaSiddhi | Indian Financial Calculators",
+  description: "Indian financial calculators and practical finance education.",
+  openGraph: { siteName: "ArthaSiddhi", type: "website" },
+  twitter: { card: "summary" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
