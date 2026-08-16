@@ -1,147 +1,144 @@
-"use client";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { SiteNav } from "@/components/site/SiteNav";
+import { articles, categoryDescriptions, categoryLabels, getArticlesByCategory } from "@/lib/content/articles";
+import { calculators } from "@/lib/content/calculators";
+import { getArticlePath } from "@/lib/content/seo";
+import type { ContentCategory } from "@/lib/content/types";
 
-import { useMemo, useState } from "react";
-import {
-  calculateFromFormValues,
-  formatIndianCurrency,
-  type CalculatorFormValues,
-} from "@/lib/calculator/loan-calculator";
-
-const ROWS_PER_PAGE = 24;
-
-const initialValues: CalculatorFormValues = {
-  principal: "2500000",
-  annualInterestRate: "8.5",
-  tenureYears: "20",
+export const metadata: Metadata = {
+  title: "ArthaSiddhi | Indian Financial Calculators & Guides",
+  description:
+    "Explore practical Indian financial calculators and plain-language guides for loans, SIPs, fixed deposits, and everyday money decisions.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "ArthaSiddhi | Indian Financial Calculators & Guides",
+    description:
+      "Practical calculators and clear financial education for Indian readers.",
+    url: "/",
+  },
+  twitter: {
+    card: "summary",
+    title: "ArthaSiddhi | Indian Financial Calculators & Guides",
+    description:
+      "Practical calculators and clear financial education for Indian readers.",
+  },
 };
 
-export default function Home() {
-  const [values, setValues] = useState<CalculatorFormValues>(initialValues);
-  const [schedulePage, setSchedulePage] = useState(1);
+const calculatorCards = Object.values(calculators);
+const learnCategories = (Object.keys(categoryLabels) as ContentCategory[]).filter(
+  (category) => getArticlesByCategory(category).length > 0
+);
+const popularGuides = articles.slice(0, 3);
 
-  const calculation = useMemo(() => {
-    try {
-      return { result: calculateFromFormValues(values), error: null };
-    } catch (caughtError) {
-      return {
-        result: null,
-        error:
-          caughtError instanceof Error
-            ? caughtError.message
-            : "Unable to calculate this loan.",
-      };
-    }
-  }, [values]);
-
-  const schedule = calculation.result?.amortizationSchedule ?? [];
-  const pageCount = Math.max(1, Math.ceil(schedule.length / ROWS_PER_PAGE));
-  const visibleRows = schedule.slice(
-    (schedulePage - 1) * ROWS_PER_PAGE,
-    schedulePage * ROWS_PER_PAGE
-  );
-
-  function updateValue(field: keyof CalculatorFormValues, value: string) {
-    setValues((currentValues) => ({ ...currentValues, [field]: value }));
-    setSchedulePage(1);
-  }
-
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <header className="mb-8 max-w-3xl">
-          <p className="mb-3 text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">
+    <main className="min-h-screen bg-slate-50 text-slate-900">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 py-4 sm:py-5">
+          <Link
+            href="/"
+            className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase focus:outline-none focus:ring-3 focus:ring-emerald-100"
+          >
             ArthaSiddhi
-          </p>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-            Loan EMI Calculator
-          </h1>
-          <p className="mt-3 text-base leading-7 text-slate-600">
-            Estimate your monthly repayment and review a complete amortization schedule.
-          </p>
+          </Link>
+          <SiteNav />
         </header>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-          <section aria-labelledby="loan-details-heading" className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-            <h2 id="loan-details-heading" className="text-lg font-semibold text-slate-950">
-              Loan details
-            </h2>
-            <p className="mt-1 text-sm text-slate-600">Update any value to recalculate instantly.</p>
-
-            <div className="mt-6 space-y-5">
-              <div>
-                <label htmlFor="principal" className="block text-sm font-medium text-slate-800">Loan amount (INR)</label>
-                <div className="relative mt-2">
-                  <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500">₹</span>
-                  <input id="principal" name="principal" type="number" inputMode="decimal" min="0" max="10000000000" step="1000" value={values.principal} onChange={(event) => updateValue("principal", event.target.value)} aria-invalid={Boolean(calculation.error)} aria-describedby={calculation.error ? "calculator-error" : undefined} className="w-full rounded-lg border border-slate-300 bg-white py-2.5 pr-3 pl-7 text-base shadow-xs outline-none transition focus:border-emerald-600 focus:ring-3 focus:ring-emerald-100" />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="annualInterestRate" className="block text-sm font-medium text-slate-800">Annual interest rate (%)</label>
-                <input id="annualInterestRate" name="annualInterestRate" type="number" inputMode="decimal" min="0" max="100" step="0.01" value={values.annualInterestRate} onChange={(event) => updateValue("annualInterestRate", event.target.value)} aria-invalid={Boolean(calculation.error)} aria-describedby={calculation.error ? "calculator-error" : undefined} className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base shadow-xs outline-none transition focus:border-emerald-600 focus:ring-3 focus:ring-emerald-100" />
-              </div>
-
-              <div>
-                <label htmlFor="tenureYears" className="block text-sm font-medium text-slate-800">Loan tenure (years)</label>
-                <input id="tenureYears" name="tenureYears" type="number" inputMode="decimal" min="0" max="50" step="0.5" value={values.tenureYears} onChange={(event) => updateValue("tenureYears", event.target.value)} aria-invalid={Boolean(calculation.error)} aria-describedby={calculation.error ? "calculator-error" : undefined} className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base shadow-xs outline-none transition focus:border-emerald-600 focus:ring-3 focus:ring-emerald-100" />
-                <p className="mt-2 text-xs leading-5 text-slate-500">Up to 50 years (600 months). Half-year tenures are supported.</p>
-              </div>
+        <section className="grid gap-10 py-14 sm:py-20 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-center">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">
+              Financial clarity, thoughtfully explained
+            </p>
+            <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+              Make better money decisions with clearer numbers.
+            </h1>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+              ArthaSiddhi brings together simple financial calculators and practical Indian finance guides to help you explore loans, savings, and investing with confidence.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/calculators"
+                className="rounded-lg bg-emerald-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-200"
+              >
+                Explore calculators
+              </Link>
+              <Link
+                href="/learn"
+                className="rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-100 focus:outline-none focus:ring-3 focus:ring-emerald-100"
+              >
+                Browse learning guides
+              </Link>
             </div>
+          </div>
 
-            {calculation.error && <p id="calculator-error" role="alert" className="mt-5 rounded-lg border border-red-200 bg-red-50 px-3 py-2.5 text-sm text-red-800">{calculation.error}</p>}
-          </section>
+          <aside className="rounded-2xl border border-emerald-100 bg-emerald-50 p-6 sm:p-8" aria-label="How ArthaSiddhi helps">
+            <h2 className="text-xl font-semibold text-slate-950">Start where you are</h2>
+            <ul className="mt-5 space-y-4 text-sm leading-6 text-slate-700">
+              <li className="border-l-2 border-emerald-600 pl-4">Estimate repayments before comparing loan options.</li>
+              <li className="border-l-2 border-emerald-600 pl-4">Explore savings and investment assumptions over time.</li>
+              <li className="border-l-2 border-emerald-600 pl-4">Read the concepts behind the calculations before deciding.</li>
+            </ul>
+          </aside>
+        </section>
 
-          <section aria-labelledby="results-heading" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <h2 id="results-heading" className="text-lg font-semibold text-slate-950">Your estimated repayment</h2>
-                <p className="mt-1 text-sm text-slate-600">Based on monthly reducing-balance interest.</p>
-              </div>
-              <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800">Illustrative estimate</span>
+        <section aria-labelledby="calculators-heading" className="border-t border-slate-200 py-12 sm:py-16">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="max-w-2xl">
+              <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">Calculators</p>
+              <h2 id="calculators-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Plan with practical financial tools</h2>
+              <p className="mt-3 leading-7 text-slate-600">Compare your own inputs and use the results as a starting point for your financial planning.</p>
             </div>
+            <Link href="/calculators" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">View all calculators <span aria-hidden="true">→</span></Link>
+          </div>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {calculatorCards.map((calculator) => (
+              <Link key={calculator.href} href={calculator.href} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100">
+                <h3 className="text-lg font-semibold text-slate-950">{calculator.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{calculator.description}</p>
+                <span className="mt-4 inline-block text-sm font-semibold text-emerald-700">Open calculator <span aria-hidden="true">→</span></span>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-            {calculation.result ? (
-              <div aria-live="polite" className="mt-6 grid gap-3 sm:grid-cols-3">
-                <ResultCard label="Monthly EMI" value={formatIndianCurrency(calculation.result.monthlyEmi)} emphasis />
-                <ResultCard label="Total interest" value={formatIndianCurrency(calculation.result.totalInterest)} />
-                <ResultCard label="Total payment" value={formatIndianCurrency(calculation.result.totalPayment)} />
-              </div>
-            ) : (
-              <div className="mt-6 rounded-xl bg-slate-50 p-5 text-sm text-slate-600">Enter valid loan details to view your repayment estimate.</div>
-            )}
-          </section>
-        </div>
+        <section aria-labelledby="learn-heading" className="border-t border-slate-200 py-12 sm:py-16">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">Learn</p>
+            <h2 id="learn-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Understand the choices behind the numbers</h2>
+            <p className="mt-3 leading-7 text-slate-600">Read plain-language guides on borrowing, investing, banking, and everyday personal finance.</p>
+          </div>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {learnCategories.map((category) => (
+              <Link key={category} href={`/learn/${category}`} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100">
+                <h3 className="font-semibold text-slate-950">{categoryLabels[category]}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{categoryDescriptions[category]}</p>
+                <span className="mt-4 inline-block text-sm font-semibold text-emerald-700">Explore guides <span aria-hidden="true">→</span></span>
+              </Link>
+            ))}
+          </div>
+        </section>
 
-        {calculation.result && (
-          <section aria-labelledby="schedule-heading" className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div className="flex flex-wrap items-end justify-between gap-3 border-b border-slate-200 px-5 py-5 sm:px-6">
-              <div>
-                <h2 id="schedule-heading" className="text-lg font-semibold text-slate-950">Amortization schedule</h2>
-                <p className="mt-1 text-sm text-slate-600">Showing months {(schedulePage - 1) * ROWS_PER_PAGE + 1}–{Math.min(schedulePage * ROWS_PER_PAGE, schedule.length)} of {schedule.length}.</p>
-              </div>
-              <p className="text-xs text-slate-500">Values are rounded for display only.</p>
+        <section aria-labelledby="popular-guides-heading" className="border-t border-slate-200 py-12 sm:py-16">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">Popular guides</p>
+              <h2 id="popular-guides-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Helpful places to begin</h2>
             </div>
-
-            <div className="overflow-x-auto">
-              <table className="min-w-[720px] w-full text-right text-sm">
-                <caption className="sr-only">Monthly loan repayment schedule</caption>
-                <thead className="bg-slate-50 text-xs font-semibold tracking-wide text-slate-600 uppercase">
-                  <tr><th scope="col" className="px-5 py-3 text-left sm:px-6">Month</th><th scope="col" className="px-5 py-3">EMI</th><th scope="col" className="px-5 py-3">Principal</th><th scope="col" className="px-5 py-3">Interest</th><th scope="col" className="px-5 py-3 sm:px-6">Remaining balance</th></tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 text-slate-700">
-                  {visibleRows.map((row) => <tr key={row.month} className="hover:bg-slate-50"><th scope="row" className="px-5 py-3.5 text-left font-medium text-slate-900 sm:px-6">{row.month}</th><td className="px-5 py-3.5">{formatIndianCurrency(row.emi)}</td><td className="px-5 py-3.5">{formatIndianCurrency(row.principalComponent)}</td><td className="px-5 py-3.5">{formatIndianCurrency(row.interestComponent)}</td><td className="px-5 py-3.5 sm:px-6">{formatIndianCurrency(row.remainingBalance)}</td></tr>)}
-                </tbody>
-              </table>
-            </div>
-
-            {pageCount > 1 && <nav aria-label="Amortization schedule pages" className="flex items-center justify-between gap-4 border-t border-slate-200 px-5 py-4 sm:px-6"><button type="button" onClick={() => setSchedulePage((page) => Math.max(1, page - 1))} disabled={schedulePage === 1} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-3 focus:ring-emerald-100 disabled:cursor-not-allowed disabled:opacity-50">Previous</button><span aria-current="page" className="text-sm text-slate-600">Page {schedulePage} of {pageCount}</span><button type="button" onClick={() => setSchedulePage((page) => Math.min(pageCount, page + 1))} disabled={schedulePage === pageCount} className="rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-3 focus:ring-emerald-100 disabled:cursor-not-allowed disabled:opacity-50">Next</button></nav>}
-          </section>
-        )}
+            <Link href="/learn" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">Explore all guides <span aria-hidden="true">→</span></Link>
+          </div>
+          <div className="mt-7 grid gap-4 md:grid-cols-3">
+            {popularGuides.map((article) => (
+              <Link key={article.slug} href={getArticlePath(article)} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100">
+                <p className="text-xs font-semibold tracking-wide text-emerald-700 uppercase">{categoryLabels[article.category]}</p>
+                <h3 className="mt-2 text-lg font-semibold text-slate-950">{article.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{article.description}</p>
+                <p className="mt-4 text-sm text-slate-500">{article.readingTime}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );
-}
-
-function ResultCard({ label, value, emphasis = false }: { label: string; value: string; emphasis?: boolean }) {
-  return <div className={`rounded-xl border p-4 ${emphasis ? "border-emerald-200 bg-emerald-50" : "border-slate-200 bg-slate-50"}`}><p className="text-sm text-slate-600">{label}</p><p className={`mt-2 text-xl font-bold tracking-tight ${emphasis ? "text-emerald-900" : "text-slate-900"}`}>{value}</p></div>;
 }
