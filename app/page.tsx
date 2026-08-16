@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/",
 });
 
-const calculatorCards = Object.values(calculators);
+const calculatorCards = ["home-loan", "sip", "fd", "ppf", "inflation", "gratuity"].map((slug) => calculators[slug]);
 const learnCategories = (Object.keys(categoryLabels) as ContentCategory[]).filter(
   (category) => getArticlesByCategory(category).length > 0
 );
@@ -71,7 +71,7 @@ export default function HomePage() {
           <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {calculatorCards.map((calculator) => (
               <Link key={calculator.href} href={calculator.href} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100">
-                <h3 className="text-lg font-semibold text-slate-950">{calculator.title}</h3>
+                <h3 className="text-lg font-semibold text-slate-950">{calculator.name}</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-600">{calculator.description}</p>
                 <span className="mt-4 inline-block text-sm font-semibold text-emerald-700">Open calculator <span aria-hidden="true">→</span></span>
               </Link>

@@ -13,7 +13,7 @@ export interface SipResult {
 }
 
 /**
- * Calculates SIP growth using end-of-month contributions and a monthly rate
+ * Calculates SIP growth using beginning-of-month contributions and a monthly rate
  * derived from the annual percentage rate: FV = P * (((1 + r)^n - 1) / r) * (1 + r).
  */
 export function calculateSip(input: SipInput): SipResult {

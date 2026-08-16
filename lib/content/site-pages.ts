@@ -28,11 +28,6 @@ export const footerLinkGroups: { title: string; links: SiteLink[] }[] = [
 export const staticSitemapRoutes = [
   "/",
   "/calculators",
-  "/calculators/home-loan",
-  "/calculators/car-loan",
-  "/calculators/personal-loan",
-  "/calculators/sip",
-  "/calculators/fd",
   "/learn",
   "/about",
   "/contact",

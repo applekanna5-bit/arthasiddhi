@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { articles } from "../../lib/content/articles";
+import { calculators } from "../../lib/content/calculators";
 import { articleJsonLd, articleMetadata, breadcrumbJsonLd, getArticlePath, pageMetadata, websiteJsonLd } from "../../lib/content/seo";
 import { absoluteUrl, robotsSitemapUrl, siteUrl } from "../../lib/content/site";
 import { footerLinkGroups, primaryLinks, staticSitemapRoutes } from "../../lib/content/site-pages";
@@ -48,5 +49,18 @@ describe("public site routes", () => {
 
   it("builds absolute URLs without changing the route", () => {
     for (const route of staticSitemapRoutes) expect(new URL(absoluteUrl(route)).pathname).toBe(route);
+  });
+
+  it("registers exactly thirteen calculators with valid related routes", () => {
+    expect(Object.keys(calculators)).toHaveLength(13);
+    for (const calculator of Object.values(calculators)) {
+      expect(calculator.href).toBe(`/calculators/${calculator.slug}`);
+      for (const relatedSlug of calculator.relatedCalculators) expect(calculators[relatedSlug]).toBeDefined();
+    }
+  });
+
+  it("includes every calculator route in the sitemap", () => {
+    const sitemapUrls = new Set(buildSitemap().map(({ url }) => url));
+    for (const calculator of Object.values(calculators)) expect(sitemapUrls.has(absoluteUrl(calculator.href))).toBe(true);
   });
 });
