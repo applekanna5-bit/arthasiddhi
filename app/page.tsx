@@ -8,7 +8,7 @@ import type { ContentCategory } from "@/lib/content/types";
 export const metadata: Metadata = pageMetadata({
   title: "ArthaSiddhi | Indian Financial Calculators & Guides",
   description:
-    "Explore practical Indian financial calculators and plain-language guides for loans, SIPs, fixed deposits, and everyday money decisions.",
+    "Indian financial calculators and short guides covering loans, investments, savings, income tax, GST and retirement planning.",
   path: "/",
 });
 
@@ -25,20 +25,20 @@ export default function HomePage() {
         <section className="grid gap-10 py-14 sm:py-20 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-center">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">
-              Financial clarity, thoughtfully explained
+              Indian financial calculators and guides
             </p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-              Make better money decisions with clearer numbers.
+              Calculate the numbers. See what they mean.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-              ArthaSiddhi brings together simple financial calculators and practical Indian finance guides to help you explore loans, savings, and investing with confidence.
+              ArthaSiddhi brings Indian financial calculators and short guides together in one place. Work out loan EMIs, investment projections, savings maturity amounts, income tax, GST and retirement-related estimates, then read how the numbers work.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/calculators"
                 className="rounded-lg bg-emerald-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-200"
               >
-                Explore calculators
+                Choose a calculator
               </Link>
               <Link
                 href="/learn"
@@ -52,9 +52,9 @@ export default function HomePage() {
           <aside className="rounded-2xl border border-emerald-100 bg-emerald-50 p-6 sm:p-8" aria-label="How ArthaSiddhi helps">
             <h2 className="text-xl font-semibold text-slate-950">Start where you are</h2>
             <ul className="mt-5 space-y-4 text-sm leading-6 text-slate-700">
-              <li className="border-l-2 border-emerald-600 pl-4">Estimate repayments before comparing loan options.</li>
-              <li className="border-l-2 border-emerald-600 pl-4">Explore savings and investment assumptions over time.</li>
-              <li className="border-l-2 border-emerald-600 pl-4">Read the concepts behind the calculations before deciding.</li>
+              <li className="border-l-2 border-emerald-600 pl-4">Compare EMIs, total interest and repayment periods.</li>
+              <li className="border-l-2 border-emerald-600 pl-4">Check how savings and investments may grow under different assumptions.</li>
+              <li className="border-l-2 border-emerald-600 pl-4">Read what the result includes before you use it.</li>
             </ul>
           </aside>
         </section>
@@ -63,8 +63,8 @@ export default function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
               <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">Calculators</p>
-              <h2 id="calculators-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Plan with practical financial tools</h2>
-              <p className="mt-3 leading-7 text-slate-600">Compare your own inputs and use the results as a starting point for your financial planning.</p>
+              <h2 id="calculators-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Start with the calculation you need</h2>
+              <p className="mt-3 leading-7 text-slate-600">Enter your own figures, compare the results and check the assumptions shown with each calculator.</p>
             </div>
             <Link href="/calculators" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">View all calculators <span aria-hidden="true">→</span></Link>
           </div>
@@ -82,15 +82,15 @@ export default function HomePage() {
         <section aria-labelledby="learn-heading" className="border-t border-slate-200 py-12 sm:py-16">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">Learn</p>
-            <h2 id="learn-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Understand the choices behind the numbers</h2>
-            <p className="mt-3 leading-7 text-slate-600">Read plain-language guides on borrowing, investing, banking, and everyday personal finance.</p>
+            <h2 id="learn-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Read how the numbers work</h2>
+            <p className="mt-3 leading-7 text-slate-600">Short guides explain borrowing, SIPs, fixed deposits and compound interest without assuming prior financial knowledge.</p>
           </div>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {learnCategories.map((category) => (
               <Link key={category} href={`/learn/${category}`} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100">
                 <h3 className="font-semibold text-slate-950">{categoryLabels[category]}</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-600">{categoryDescriptions[category]}</p>
-                <span className="mt-4 inline-block text-sm font-semibold text-emerald-700">Explore guides <span aria-hidden="true">→</span></span>
+                <span className="mt-4 inline-block text-sm font-semibold text-emerald-700">View guides <span aria-hidden="true">→</span></span>
               </Link>
             ))}
           </div>
@@ -102,7 +102,7 @@ export default function HomePage() {
               <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">Popular guides</p>
               <h2 id="popular-guides-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Helpful places to begin</h2>
             </div>
-            <Link href="/learn" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">Explore all guides <span aria-hidden="true">→</span></Link>
+            <Link href="/learn" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">View all guides <span aria-hidden="true">→</span></Link>
           </div>
           <div className="mt-7 grid gap-4 md:grid-cols-3">
             {popularGuides.map((article) => (

@@ -13,7 +13,7 @@ export function SiteFooter() {
             ArthaSiddhi
           </Link>
           <p className="mt-4 text-sm leading-6 text-slate-400">
-            Practical financial calculators and plain-language finance education for Indian users.
+            Indian financial calculators with short guides explaining the numbers and assumptions.
           </p>
         </div>
         <nav aria-label="Footer navigation" className="grid gap-8 sm:grid-cols-3">

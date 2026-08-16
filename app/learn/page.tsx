@@ -6,7 +6,7 @@ import type { ContentCategory } from "@/lib/content/types";
 
 export const metadata: Metadata = pageMetadata({
   title: "Learn Personal Finance | ArthaSiddhi",
-  description: "Practical Indian finance education on loans, investing, banking, and everyday money decisions.",
+  description: "Short Indian finance guides on home loans, SIPs, fixed deposits and compound interest.",
   path: "/learn",
 });
 
@@ -18,15 +18,15 @@ export default function LearnPage() {
       <div className="mx-auto max-w-6xl">
         <section className="max-w-3xl py-12">
           <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">ArthaSiddhi Learn</p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">Clearer finance decisions, one concept at a time.</h1>
-          <p className="mt-5 text-lg leading-8 text-slate-600">Practical, plain-language financial education for Indian readers. Explore the concepts behind the numbers, then use our calculators to compare your own scenarios.</p>
+          <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">Financial concepts, explained through the numbers.</h1>
+          <p className="mt-5 text-lg leading-8 text-slate-600">Read short guides on home loans, SIPs, fixed deposits and compound interest. Each guide explains the calculation, the terms used and the assumptions that matter.</p>
         </section>
         <section aria-labelledby="categories-heading">
-          <h2 id="categories-heading" className="text-2xl font-bold tracking-tight text-slate-950">Explore topics</h2>
+          <h2 id="categories-heading" className="text-2xl font-bold tracking-tight text-slate-950">Topics</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {allCategories.map((category) => {
               const categoryArticles = getArticlesByCategory(category);
-              const content = <><h3 className="font-semibold text-slate-950">{categoryLabels[category]}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{categoryDescriptions[category]}</p>{categoryArticles.length > 0 ? <span className="mt-4 inline-block text-sm font-semibold text-emerald-700">Explore guides <span aria-hidden="true">→</span></span> : <span className="mt-4 inline-block text-sm font-medium text-slate-500">Coverage planned</span>}</>;
+              const content = <><h3 className="font-semibold text-slate-950">{categoryLabels[category]}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{categoryDescriptions[category]}</p>{categoryArticles.length > 0 ? <span className="mt-4 inline-block text-sm font-semibold text-emerald-700">View guides <span aria-hidden="true">→</span></span> : <span className="mt-4 inline-block text-sm font-medium text-slate-500">Guides not yet available</span>}</>;
               return categoryArticles.length > 0 ? <Link key={category} href={`/learn/${category}`} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100">{content}</Link> : <div key={category} className="rounded-xl border border-slate-200 bg-white p-5">{content}</div>;
             })}
           </div>

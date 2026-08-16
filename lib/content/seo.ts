@@ -43,7 +43,7 @@ export function websiteJsonLd() {
     "@type": "WebSite",
     name: "ArthaSiddhi",
     url: absoluteUrl("/"),
-    description: "Practical Indian financial calculators and plain-language finance education.",
+    description: "Indian financial calculators and short guides for loans, investments, savings, tax and retirement planning.",
   };
 }
 

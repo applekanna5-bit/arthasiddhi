@@ -19,9 +19,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "ArthaSiddhi | Indian Financial Calculators",
-  description: "Indian financial calculators and practical finance education.",
+  description: "Indian financial calculators and short guides for loans, investments, savings, tax and retirement planning.",
   openGraph: { siteName: "ArthaSiddhi", type: "website", url: siteUrl },
-  twitter: { card: "summary", title: "ArthaSiddhi | Indian Financial Calculators", description: "Indian financial calculators and practical finance education." },
+  twitter: { card: "summary", title: "ArthaSiddhi | Indian Financial Calculators", description: "Indian financial calculators and short guides for loans, investments, savings, tax and retirement planning." },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
