@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CalculatorLayout } from "@/components/calculator/CalculatorLayout";
+import { pageMetadata } from "@/lib/content/seo";
 
-export const metadata: Metadata = { title: "Financial Calculators | ArthaSiddhi", description: "Free Indian financial calculators for loans, SIP investments and fixed deposits." };
+export const metadata: Metadata = pageMetadata({ title: "Financial Calculators | ArthaSiddhi", description: "Free Indian financial calculators for loans, SIP investments and fixed deposits.", path: "/calculators" });
 
 const calculators = [{ href: "/calculators/home-loan", title: "Home Loan EMI Calculator", description: "Estimate your home loan EMI, interest and repayment schedule." }, { href: "/calculators/car-loan", title: "Car Loan EMI Calculator", description: "Plan a car loan with a clear monthly repayment estimate." }, { href: "/calculators/personal-loan", title: "Personal Loan EMI Calculator", description: "Understand your personal loan EMI and total repayment." }, { href: "/calculators/sip", title: "SIP Calculator", description: "Estimate the future value of your monthly mutual fund investment." }, { href: "/calculators/fd", title: "FD Calculator", description: "Calculate fixed deposit interest and maturity amount." }];
 

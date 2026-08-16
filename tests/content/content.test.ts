@@ -13,7 +13,7 @@ describe("content registry", () => {
 describe("article SEO data", () => {
   const article = articles[0];
   it("builds a clean article path", () => { expect(getArticlePath(article)).toBe("/learn/loans/home-loan-guide"); });
-  it("produces serializable matching JSON-LD", () => { const articleSchema = articleJsonLd(article); const breadcrumbSchema = breadcrumbJsonLd(article); const faqSchema = faqJsonLd(article); expect(() => JSON.parse(JSON.stringify([articleSchema, breadcrumbSchema, faqSchema]))).not.toThrow(); expect(articleSchema.headline).toBe(article.title); expect(breadcrumbSchema.itemListElement).toHaveLength(4); expect(faqSchema?.["@type"]).toBe("FAQPage"); });
+  it("produces serializable matching JSON-LD", () => { const articleSchema = articleJsonLd(article); const breadcrumbSchema = breadcrumbJsonLd(article); const faqSchema = faqJsonLd(article); expect(() => JSON.parse(JSON.stringify([articleSchema, breadcrumbSchema, faqSchema]))).not.toThrow(); expect(articleSchema.headline).toBe(article.title); expect(articleSchema).not.toHaveProperty("author"); expect(articleSchema).not.toHaveProperty("publisher"); expect(breadcrumbSchema.itemListElement).toHaveLength(4); expect(faqSchema?.["@type"]).toBe("FAQPage"); });
 });
 
 describe("production SEO URLs", () => {

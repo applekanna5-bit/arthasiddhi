@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import { websiteJsonLd } from "@/lib/content/seo";
 import { siteUrl } from "@/lib/content/site";
 import "./globals.css";
 
@@ -17,8 +20,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "ArthaSiddhi | Indian Financial Calculators",
   description: "Indian financial calculators and practical finance education.",
-  openGraph: { siteName: "ArthaSiddhi", type: "website" },
-  twitter: { card: "summary" },
+  openGraph: { siteName: "ArthaSiddhi", type: "website", url: siteUrl },
+  twitter: { card: "summary", title: "ArthaSiddhi | Indian Financial Calculators", description: "Indian financial calculators and practical finance education." },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -27,7 +30,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
+        />
+      </body>
     </html>
   );
 }

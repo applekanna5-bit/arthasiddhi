@@ -1,29 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteNav } from "@/components/site/SiteNav";
 import { articles, categoryDescriptions, categoryLabels, getArticlesByCategory } from "@/lib/content/articles";
 import { calculators } from "@/lib/content/calculators";
-import { getArticlePath } from "@/lib/content/seo";
+import { getArticlePath, pageMetadata } from "@/lib/content/seo";
 import type { ContentCategory } from "@/lib/content/types";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "ArthaSiddhi | Indian Financial Calculators & Guides",
   description:
     "Explore practical Indian financial calculators and plain-language guides for loans, SIPs, fixed deposits, and everyday money decisions.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "ArthaSiddhi | Indian Financial Calculators & Guides",
-    description:
-      "Practical calculators and clear financial education for Indian readers.",
-    url: "/",
-  },
-  twitter: {
-    card: "summary",
-    title: "ArthaSiddhi | Indian Financial Calculators & Guides",
-    description:
-      "Practical calculators and clear financial education for Indian readers.",
-  },
-};
+  path: "/",
+});
 
 const calculatorCards = Object.values(calculators);
 const learnCategories = (Object.keys(categoryLabels) as ContentCategory[]).filter(
@@ -35,16 +22,6 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <header className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 py-4 sm:py-5">
-          <Link
-            href="/"
-            className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase focus:outline-none focus:ring-3 focus:ring-emerald-100"
-          >
-            ArthaSiddhi
-          </Link>
-          <SiteNav />
-        </header>
-
         <section className="grid gap-10 py-14 sm:py-20 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] lg:items-center">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">

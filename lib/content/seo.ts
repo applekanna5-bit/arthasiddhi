@@ -3,6 +3,25 @@ import { categoryLabels } from "./articles";
 import { absoluteUrl } from "./site";
 import type { Article } from "./types";
 
+export function pageMetadata({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}): Metadata {
+  const url = absoluteUrl(path);
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { type: "website", title, description, url, siteName: "ArthaSiddhi" },
+    twitter: { card: "summary", title, description },
+  };
+}
+
 export function getArticlePath(article: Article) {
   return `/learn/${article.category}/${article.slug}`;
 }
@@ -18,8 +37,18 @@ export function articleMetadata(article: Article): Metadata {
   };
 }
 
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "ArthaSiddhi",
+    url: absoluteUrl("/"),
+    description: "Practical Indian financial calculators and plain-language finance education.",
+  };
+}
+
 export function articleJsonLd(article: Article) {
-  return { "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.description, author: { "@type": "Organization", name: article.author }, datePublished: article.publishedAt, dateModified: article.updatedAt, mainEntityOfPage: absoluteUrl(getArticlePath(article)), publisher: { "@type": "Organization", name: "ArthaSiddhi" } };
+  return { "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.description, datePublished: article.publishedAt, dateModified: article.updatedAt, mainEntityOfPage: absoluteUrl(getArticlePath(article)) };
 }
 
 export function breadcrumbJsonLd(article: Article) {

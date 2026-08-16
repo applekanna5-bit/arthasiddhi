@@ -18,6 +18,7 @@ export type ArticleSection = {
 };
 
 export type FaqItem = { question: string; answer: string };
+export type ArticleReference = { title: string; publisher: string; url: string; accessedAt?: string };
 
 export type Article = {
   title: string;
@@ -30,6 +31,7 @@ export type Article = {
   readingTime: string;
   sections: ArticleSection[];
   faq?: FaqItem[];
+  references?: ArticleReference[];
   relatedCalculators: string[];
   relatedArticles: string[];
 };
