@@ -37,7 +37,7 @@ describe("content registry", () => {
     expect(getPrimaryGuideForCalculator("home-loan")?.slug).toBe("home-loan-guide");
     expect(getPrimaryGuideForCalculator("sip")?.slug).toBe("sip-explained");
     expect(getPrimaryGuideForCalculator("fd")?.slug).toBe("fixed-deposit-explained");
-    expect(getSupportingGuidesForCalculator("home-loan")).toEqual([]);
+    expect(getSupportingGuidesForCalculator("home-loan").map(({ slug }) => slug)).toEqual(["home-loan-emi-calculation", "home-loan-tenure-comparison"]);
   });
   it("rejects two core guides for the same calculator", () => {
     const first = { ...articles[0], primaryCalculator: "home-loan", calculatorGuideRole: "core", relatedCalculators: [], relatedArticles: [] } as Article;

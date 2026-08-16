@@ -13,6 +13,9 @@ export type ContentCategory = (typeof contentCategories)[number];
 
 export const articleSlugs = [
   "home-loan-guide",
+  "home-loan-emi-calculation",
+  "home-loan-tenure-comparison",
+  "home-loan-prepayment",
   "sip-explained",
   "fixed-deposit-explained",
   "compound-interest",
