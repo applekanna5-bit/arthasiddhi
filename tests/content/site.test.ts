@@ -51,8 +51,8 @@ describe("public site routes", () => {
     for (const route of staticSitemapRoutes) expect(new URL(absoluteUrl(route)).pathname).toBe(route);
   });
 
-  it("registers exactly thirteen calculators with valid related routes", () => {
-    expect(Object.keys(calculators)).toHaveLength(13);
+  it("registers exactly seventeen calculators with valid related routes", () => {
+    expect(Object.keys(calculators)).toHaveLength(17);
     for (const calculator of Object.values(calculators)) {
       expect(calculator.href).toBe(`/calculators/${calculator.slug}`);
       for (const relatedSlug of calculator.relatedCalculators) expect(calculators[relatedSlug]).toBeDefined();
@@ -62,5 +62,19 @@ describe("public site routes", () => {
   it("includes every calculator route in the sitemap", () => {
     const sitemapUrls = new Set(buildSitemap().map(({ url }) => url));
     for (const calculator of Object.values(calculators)) expect(sitemapUrls.has(absoluteUrl(calculator.href))).toBe(true);
+  });
+
+  it("has no duplicate calculator routes", () => {
+    const routes = Object.values(calculators).map(({ href }) => href);
+    expect(new Set(routes).size).toBe(17);
+  });
+
+  it("builds .com canonical metadata for every calculator", () => {
+    for (const calculator of Object.values(calculators)) {
+      const metadata = pageMetadata({ ...calculator.metadata, path: calculator.href });
+      expect(metadata.alternates?.canonical).toBe(`https://arthasiddhi.com${calculator.href}`);
+      expect(metadata.openGraph).toMatchObject({ url: `https://arthasiddhi.com${calculator.href}` });
+      expect(metadata.twitter).toMatchObject({ card: "summary" });
+    }
   });
 });

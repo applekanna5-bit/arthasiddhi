@@ -1,0 +1,81 @@
+import { describe, expect, it } from "vitest";
+import { calculateEpf, calculateGst, calculateIncomeTax, calculateNps, type IncomeTaxInput } from "../../lib/calculator/rule-driven-calculators";
+import { epfRuleSet, gstRuleSet, incomeTaxRuleSet, npsRuleSet } from "../../lib/financial-rules/rule-sets";
+
+const tax = (overrides: Partial<IncomeTaxInput> = {}) => calculateIncomeTax({ regime: "new", ageCategory: "below-60", taxableOrdinaryIncome: 0, ...overrides }, incomeTaxRuleSet);
+
+describe("Income Tax calculator", () => {
+  it("returns zero for zero income", () => expect(tax()).toMatchObject({ taxBeforeRebate: 0, rebate: 0, cess: 0, totalTax: 0, effectiveTaxRate: 0 }));
+  it.each([
+    [400_000, 0], [400_001, 0.05], [800_000, 20_000], [800_001, 20_000.1], [1_200_000, 60_000], [1_200_001, 60_000.15], [1_600_000, 120_000], [2_000_000, 200_000], [2_400_000, 300_000],
+  ])("calculates the new-regime boundary at ₹%i progressively", (income, expectedSlabTax) => expect(tax({ taxableOrdinaryIncome: income }).taxBeforeRebate).toBeCloseTo(expectedSlabTax, 8));
+  it("applies the full new-regime rebate at ₹12 lakh", () => expect(tax({ taxableOrdinaryIncome: 1_200_000 })).toMatchObject({ taxBeforeRebate: 60_000, rebate: 60_000, taxAfterRebate: 0, totalTax: 0 }));
+  it("does not apply the rebate immediately above ₹12 lakh", () => expect(tax({ taxableOrdinaryIncome: 1_200_001 }).rebate).toBe(0));
+  it("applies 4% cess after rebate", () => expect(tax({ taxableOrdinaryIncome: 1_300_000 })).toMatchObject({ taxBeforeRebate: 75_000, taxAfterRebate: 75_000, cess: 3_000, totalTax: 78_000 }));
+  it("uses below-60 old-regime slabs", () => expect(tax({ regime: "old", taxableOrdinaryIncome: 1_100_000 }).taxBeforeRebate).toBe(142_500));
+  it("uses senior old-regime slabs", () => expect(tax({ regime: "old", ageCategory: "60-to-below-80", taxableOrdinaryIncome: 600_000 }).taxBeforeRebate).toBe(30_000));
+  it("uses super-senior old-regime slabs", () => expect(tax({ regime: "old", ageCategory: "80-or-above", taxableOrdinaryIncome: 600_000 }).taxBeforeRebate).toBe(20_000));
+  it.each([
+    ["below-60", 250_000, 0], ["below-60", 250_001, 0.05],
+    ["60-to-below-80", 300_000, 0], ["60-to-below-80", 300_001, 0.05],
+    ["80-or-above", 500_000, 0], ["80-or-above", 500_001, 0.2],
+  ] as const)("respects the %s old-regime threshold at ₹%i", (ageCategory, taxableOrdinaryIncome, taxBeforeRebate) => expect(tax({ regime: "old", ageCategory, taxableOrdinaryIncome }).taxBeforeRebate).toBeCloseTo(taxBeforeRebate, 8));
+  it("applies the old-regime rebate through ₹5 lakh", () => expect(tax({ regime: "old", taxableOrdinaryIncome: 500_000 })).toMatchObject({ taxBeforeRebate: 12_500, rebate: 12_500, totalTax: 0 }));
+  it("ignores age category under the new regime", () => { const values = (["below-60", "60-to-below-80", "80-or-above"] as const).map((ageCategory) => tax({ ageCategory, taxableOrdinaryIncome: 1_500_000 }).totalTax); expect(new Set(values).size).toBe(1); });
+  it("rejects income above ₹50 lakh", () => expect(() => tax({ taxableOrdinaryIncome: 5_000_001 })).toThrow(/up to 5000000/));
+  it("accepts income exactly at the ₹50 lakh scope ceiling", () => expect(tax({ taxableOrdinaryIncome: 5_000_000 }).taxableIncome).toBe(5_000_000));
+  it("rejects an invalid regime", () => expect(() => tax({ regime: "invalid" as never })).toThrow(/regime/));
+  it("rejects an invalid age category", () => expect(() => tax({ ageCategory: "invalid" as never })).toThrow(/Age category/));
+  it("rejects NaN and Infinity", () => { expect(() => tax({ taxableOrdinaryIncome: Number.NaN })).toThrow(/finite/); expect(() => tax({ taxableOrdinaryIncome: Infinity })).toThrow(/finite/); });
+  it("reconciles the breakdown with slab tax", () => { const result = tax({ taxableOrdinaryIncome: 3_250_000 }); expect(result.breakdown.reduce((sum, row) => sum + row.tax, 0)).toBe(result.taxBeforeRebate); });
+});
+
+describe("GST calculator", () => {
+  const gst = (overrides = {}) => calculateGst({ mode: "exclusive" as const, transactionType: "intra-state" as const, amount: 1000, gstRate: 18, ...overrides }, gstRuleSet);
+  it("handles a zero rate", () => expect(gst({ gstRate: 0 })).toMatchObject({ taxableValue: 1000, totalGst: 0, invoiceTotal: 1000 }));
+  it.each([[5, 50, 1050], [18, 180, 1180], [12, 120, 1120], [28, 280, 1280]])("adds %i%% GST to an exclusive amount", (gstRate, totalGst, invoiceTotal) => expect(gst({ gstRate })).toMatchObject({ totalGst, invoiceTotal }));
+  it("removes GST from an inclusive amount", () => expect(gst({ mode: "inclusive", amount: 1180 })).toMatchObject({ taxableValue: 1000, totalGst: 180, invoiceTotal: 1180 }));
+  it("reconciles exclusive and inclusive calculations", () => { const exclusive = gst({ amount: 1234.56, gstRate: 17.25 }); const inclusive = gst({ mode: "inclusive", amount: exclusive.invoiceTotal, gstRate: 17.25 }); expect(inclusive.taxableValue).toBeCloseTo(exclusive.taxableValue, 10); expect(inclusive.totalGst).toBeCloseTo(exclusive.totalGst, 10); });
+  it("splits intra-state GST equally", () => { const result = gst(); expect(result.cgst + result.sgst).toBe(result.totalGst); expect(result.igst).toBe(0); });
+  it("assigns all inter-state GST to IGST", () => expect(gst({ transactionType: "inter-state" })).toMatchObject({ cgst: 0, sgst: 0, igst: 180, totalGst: 180 }));
+  it("supports an odd custom percentage without intermediate rounding", () => { const result = gst({ amount: 999.99, gstRate: 7.123 }); expect(result.totalGst).toBe(999.99 * 7.123 / 100); expect(result.cgst).toBe(result.totalGst / 2); });
+  it("handles zero amount", () => expect(gst({ amount: 0 })).toMatchObject({ taxableValue: 0, totalGst: 0, invoiceTotal: 0 }));
+  it("rejects negative amounts and invalid rates", () => { expect(() => gst({ amount: -1 })).toThrow(); expect(() => gst({ gstRate: 100.01 })).toThrow(); });
+  it("rejects non-finite values", () => { expect(() => gst({ amount: Number.NaN })).toThrow(/finite/); expect(() => gst({ gstRate: Infinity })).toThrow(/finite/); });
+  it("rejects invalid mode and transaction type", () => { expect(() => gst({ mode: "invalid" })).toThrow(/mode/); expect(() => gst({ transactionType: "invalid" })).toThrow(/transaction type/); });
+});
+
+describe("EPF calculator", () => {
+  const epf = (overrides = {}) => calculateEpf({ monthlyEpfWage: 15_000, currentEpfBalance: 0, employeeContributionRate: 12, employerContributionRate: 12, annualInterestRate: 0, projectionYears: 1, epsEligible: true, ...overrides }, epfRuleSet);
+  it("calculates the standard 12% employee and employer totals", () => expect(epf()).toMatchObject({ monthlyEmployeeEpf: 1800, monthlyEmployerTotal: 1800 }));
+  it("diverts 8.33% of eligible wage to EPS", () => expect(epf().monthlyEmployerEps).toBeCloseTo(1249.5, 10));
+  it("caps EPS eligible wage at ₹15,000", () => expect(epf({ monthlyEpfWage: 30_000 }).monthlyEmployerEps).toBeCloseTo(1249.5, 10));
+  it("uses actual wage below the EPS ceiling", () => expect(epf({ monthlyEpfWage: 10_000 }).monthlyEmployerEps).toBeCloseTo(833, 10));
+  it("sends the full employer contribution to EPF when EPS is disabled", () => expect(epf({ epsEligible: false })).toMatchObject({ monthlyEmployerTotal: 1800, monthlyEmployerEpf: 1800, monthlyEmployerEps: 0 }));
+  it("handles zero wage and zero opening balance", () => expect(epf({ monthlyEpfWage: 0 })).toMatchObject({ closingBalance: 0, estimatedGrowth: 0 }));
+  it("handles zero interest for one year", () => { const result = epf(); expect(result.closingBalance).toBe(result.totalEmployeeEpfContributions + result.totalEmployerEpfContributions); expect(result.estimatedGrowth).toBe(0); });
+  it("projects multiple years with beginning-of-month contributions", () => expect(epf({ annualInterestRate: 8.25, projectionYears: 5 }).closingBalance).toBeGreaterThan(epf({ annualInterestRate: 0, projectionYears: 5 }).closingBalance));
+  it("reconciles employer EPF and EPS with the employer total", () => { const result = epf({ monthlyEpfWage: 25_000 }); expect(result.monthlyEmployerEpf + result.monthlyEmployerEps).toBe(result.monthlyEmployerTotal); });
+  it("excludes EPS diversion from the EPF closing balance", () => { const enabled = epf(); const disabled = epf({ epsEligible: false }); expect(disabled.closingBalance - enabled.closingBalance).toBeCloseTo(enabled.totalEpsDiversion, 8); });
+  it("rejects invalid rates and years", () => { expect(() => epf({ employeeContributionRate: -1 })).toThrow(); expect(() => epf({ projectionYears: 0 })).toThrow(); expect(() => epf({ projectionYears: 1.5 })).toThrow(/whole number/); });
+  it("rejects NaN and Infinity", () => { expect(() => epf({ monthlyEpfWage: Number.NaN })).toThrow(/finite/); expect(() => epf({ annualInterestRate: Infinity })).toThrow(/finite/); });
+});
+
+describe("NPS calculator", () => {
+  const nps = (overrides = {}) => calculateNps({ currentAge: 30, retirementAge: 31, currentCorpus: 0, monthlyContribution: 1000, annualReturnRate: 0, annualContributionIncrease: 0, annuityAllocation: 40, assumedAnnuityRate: 6, ...overrides }, npsRuleSet);
+  it("handles zero current corpus", () => expect(nps().startingCorpus).toBe(0));
+  it("compounds a current corpus with zero contributions", () => expect(nps({ currentCorpus: 100_000, monthlyContribution: 0, annualReturnRate: 12 }).retirementCorpus).toBeGreaterThan(100_000));
+  it("handles zero return without rounding", () => expect(nps()).toMatchObject({ totalContributions: 12_000, estimatedGrowth: 0, retirementCorpus: 12_000 }));
+  it("uses a 40% annuity allocation", () => expect(nps()).toMatchObject({ annuityCorpus: 4800, lumpSumCorpus: 7200 }));
+  it("accepts a 20% annuity allocation and reconciles the 80% lump sum", () => { const result = nps({ annuityAllocation: 20 }); expect(result).toMatchObject({ annuityCorpus: 2400, lumpSumCorpus: 9600 }); expect(result.annuityCorpus + result.lumpSumCorpus).toBe(result.retirementCorpus); });
+  it("supports a higher annuity allocation", () => expect(nps({ annuityAllocation: 75 })).toMatchObject({ annuityCorpus: 9000, lumpSumCorpus: 3000 }));
+  it("steps contributions only after 12 completed months", () => expect(nps({ retirementAge: 32, annualContributionIncrease: 10 })).toMatchObject({ totalContributions: 25_200, finalMonthlyContribution: 1100 }));
+  it("reconciles lump sum and annuity to corpus", () => { const result = nps({ currentCorpus: 12_345, annualReturnRate: 9.5 }); expect(result.lumpSumCorpus + result.annuityCorpus).toBe(result.retirementCorpus); });
+  it("reconciles annual and monthly annuity estimates", () => { const result = nps(); expect(result.estimatedMonthlyAnnuity * 12).toBe(result.estimatedAnnualAnnuity); expect(result.estimatedAnnualAnnuity).toBe(result.annuityCorpus * result.assumedAnnuityRate / 100); });
+  it("requires retirement age greater than current age", () => expect(() => nps({ retirementAge: 30 })).toThrow(/greater than/));
+  it("rejects retirement above 75", () => expect(() => nps({ retirementAge: 76 })).toThrow());
+  it("rejects annuity allocation outside 20% to 100%", () => { expect(() => nps({ annuityAllocation: 19.99 })).toThrow(); expect(() => nps({ annuityAllocation: 100.01 })).toThrow(); });
+  it("rejects negative values", () => expect(() => nps({ monthlyContribution: -1 })).toThrow());
+  it("rejects NaN and Infinity", () => { expect(() => nps({ currentCorpus: Number.NaN })).toThrow(/finite/); expect(() => nps({ annualReturnRate: Infinity })).toThrow(/finite/); });
+  it("retains full precision through accumulation", () => { const result = nps({ monthlyContribution: 1234.56, annualReturnRate: 7.89 }); expect(result.retirementCorpus).not.toBe(Math.round(result.retirementCorpus)); });
+});
