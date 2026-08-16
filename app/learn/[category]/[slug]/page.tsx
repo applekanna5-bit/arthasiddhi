@@ -10,4 +10,4 @@ export function generateStaticParams() { return articles.map((article) => ({ cat
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> { const { category, slug } = await params; const article = getArticle(category, slug); return article ? articleMetadata(article) : {}; }
 
-export default async function ArticlePage({ params }: Props) { const { category, slug } = await params; const article = getArticle(category, slug); if (!article) notFound(); const schema = [articleJsonLd(article), breadcrumbJsonLd(article), faqJsonLd(article)].filter(Boolean); return <><ArticleLayout article={article} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /></>; }
+export default async function ArticlePage({ params }: Props) { const { category, slug } = await params; const article = getArticle(category, slug); if (!article) notFound(); const schema = [articleJsonLd(article), breadcrumbJsonLd(article), faqJsonLd(article)].filter(Boolean); return <><ArticleLayout article={article} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} /></>; }

@@ -64,6 +64,20 @@ describe("public site routes", () => {
     for (const calculator of Object.values(calculators)) expect(sitemapUrls.has(absoluteUrl(calculator.href))).toBe(true);
   });
 
+  it("includes every article and every non-empty category in the sitemap", () => {
+    const sitemapUrls = new Set(buildSitemap().map(({ url }) => url));
+    for (const article of articles) {
+      expect(sitemapUrls.has(absoluteUrl(getArticlePath(article)))).toBe(true);
+      expect(sitemapUrls.has(absoluteUrl(`/learn/${article.category}`))).toBe(true);
+    }
+  });
+
+  it("excludes empty Tax and Retirement categories from the sitemap", () => {
+    const sitemapUrls = new Set(buildSitemap().map(({ url }) => url));
+    expect(sitemapUrls.has("https://arthasiddhi.com/learn/tax")).toBe(false);
+    expect(sitemapUrls.has("https://arthasiddhi.com/learn/retirement")).toBe(false);
+  });
+
   it("has no duplicate calculator routes", () => {
     const routes = Object.values(calculators).map(({ href }) => href);
     expect(new Set(routes).size).toBe(17);

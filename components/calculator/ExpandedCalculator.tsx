@@ -15,7 +15,6 @@ import {
   type PpfScheduleRow,
 } from "@/lib/calculator/expanded-calculators";
 import { formatIndianCurrency, formatNumber, formatPercentage } from "@/lib/calculator/formatting";
-import { getCalculator, getRelatedCalculators } from "@/lib/content/calculators";
 import { CalculatorInput } from "./CalculatorInput";
 import { CalculatorResult } from "./CalculatorResult";
 
@@ -65,11 +64,9 @@ function fieldHasError(error: string | null, field: Field) {
 
 export function ExpandedCalculator({ slug }: { slug: ExpandedSlug }) {
   const config = configs[slug];
-  const definition = getCalculator(slug);
   const [values, setValues] = useState<Record<string, string>>(() => Object.fromEntries(config.fields.map((field) => [field.id, field.defaultValue])));
   const [mode, setMode] = useState<InflationMode>("future-cost");
   const calculation = useMemo(() => { try { return { value: calculate(slug, values, mode), error: null as string | null }; } catch (error) { return { value: null, error: error instanceof Error ? error.message : "Unable to calculate this estimate." }; } }, [slug, values, mode]);
-  const related = getRelatedCalculators(definition.relatedCalculators);
 
   return (
     <div className="space-y-8">
@@ -89,7 +86,6 @@ export function ExpandedCalculator({ slug }: { slug: ExpandedSlug }) {
       </div>
       {calculation.value?.schedule && <section aria-labelledby="ppf-schedule-heading" className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"><h2 id="ppf-schedule-heading" className="border-b border-slate-200 px-5 py-4 text-lg font-semibold text-slate-950">Year-by-year schedule</h2><div className="overflow-x-auto"><table className="min-w-[720px] w-full text-right text-sm"><caption className="sr-only">Illustrative annual PPF accumulation schedule</caption><thead className="bg-slate-50 text-xs font-semibold tracking-wide text-slate-600 uppercase"><tr><th scope="col" className="px-5 py-3 text-left">Year</th><th scope="col" className="px-5 py-3">Opening balance</th><th scope="col" className="px-5 py-3">Contribution</th><th scope="col" className="px-5 py-3">Interest</th><th scope="col" className="px-5 py-3">Closing balance</th></tr></thead><tbody className="divide-y divide-slate-100">{calculation.value.schedule.map((row) => <tr key={row.year}><th scope="row" className="px-5 py-3 text-left font-medium">{row.year}</th><td className="px-5 py-3">{formatIndianCurrency(row.openingBalance)}</td><td className="px-5 py-3">{formatIndianCurrency(row.contribution)}</td><td className="px-5 py-3">{formatIndianCurrency(row.interest)}</td><td className="px-5 py-3">{formatIndianCurrency(row.closingBalance)}</td></tr>)}</tbody></table></div></section>}
       <section aria-labelledby={`${slug}-method`} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6"><h2 id={`${slug}-method`} className="text-xl font-bold text-slate-950">How this is calculated</h2><p className="mt-3 leading-7 text-slate-700">{config.how}</p><h3 className="mt-6 font-semibold text-slate-950">Important assumptions</h3><ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-slate-700">{config.disclosures.map((disclosure) => <li key={disclosure}>{disclosure}</li>)}</ul><p className="mt-5 text-sm text-slate-600">Review the <Link href="/disclaimer" className="font-semibold text-emerald-700 underline underline-offset-4 focus:outline-none focus:ring-3 focus:ring-emerald-100">Financial Disclaimer</Link> before using an estimate for an important decision.</p></section>
-      <section aria-labelledby={`${slug}-related`}><h2 id={`${slug}-related`} className="text-xl font-bold text-slate-950">Related calculators</h2><div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{related.map((calculator) => <Link key={calculator.slug} href={calculator.href} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 focus:outline-none focus:ring-3 focus:ring-emerald-100"><h3 className="font-semibold text-slate-950">{calculator.name}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{calculator.description}</p></Link>)}</div></section>
     </div>
   );
 }

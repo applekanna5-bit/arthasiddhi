@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { articles, categoryDescriptions, categoryLabels, getArticlesByCategory } from "@/lib/content/articles";
+import { categoryDescriptions, categoryLabels, getArticlesByCategory, getFeaturedArticles } from "@/lib/content/articles";
 import { getArticlePath, pageMetadata } from "@/lib/content/seo";
 import type { ContentCategory } from "@/lib/content/types";
 
@@ -13,6 +13,7 @@ export const metadata: Metadata = pageMetadata({
 const allCategories = Object.keys(categoryLabels) as ContentCategory[];
 
 export default function LearnPage() {
+  const featuredArticles = getFeaturedArticles();
   return (
     <main className="flex-1 bg-slate-50 px-4 py-6 text-slate-900 sm:px-6 sm:py-8 lg:px-8">
       <div className="mx-auto max-w-6xl">
@@ -34,7 +35,7 @@ export default function LearnPage() {
         <section aria-labelledby="latest-heading" className="mt-12 pb-12">
           <h2 id="latest-heading" className="text-2xl font-bold tracking-tight text-slate-950">Start with these guides</h2>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
-            {articles.map((article) => <Link key={article.slug} href={getArticlePath(article)} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100"><p className="text-xs font-semibold tracking-wide text-emerald-700 uppercase">{categoryLabels[article.category]}</p><h3 className="mt-2 text-lg font-semibold text-slate-950">{article.title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{article.description}</p><p className="mt-4 text-sm text-slate-500">{article.readingTime}</p></Link>)}
+            {featuredArticles.map((article) => <Link key={article.slug} href={getArticlePath(article)} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100"><p className="text-xs font-semibold tracking-wide text-emerald-700 uppercase">{categoryLabels[article.category]}</p><h3 className="mt-2 text-lg font-semibold text-slate-950">{article.title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{article.description}</p><p className="mt-4 text-sm text-slate-500">{article.readingTime}</p></Link>)}
           </div>
         </section>
       </div>

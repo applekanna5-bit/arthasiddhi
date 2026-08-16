@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { articles, categoryDescriptions, categoryLabels, getArticlesByCategory } from "@/lib/content/articles";
-import { calculators } from "@/lib/content/calculators";
+import { calculators, type CalculatorSlug } from "@/lib/content/calculators";
 import { getArticlePath, pageMetadata } from "@/lib/content/seo";
 import type { ContentCategory } from "@/lib/content/types";
 
@@ -12,7 +12,8 @@ export const metadata: Metadata = pageMetadata({
   path: "/",
 });
 
-const calculatorCards = ["home-loan", "sip", "fd", "ppf", "inflation", "income-tax"].map((slug) => calculators[slug]);
+const calculatorCardSlugs = ["home-loan", "sip", "fd", "ppf", "inflation", "income-tax"] as const satisfies readonly CalculatorSlug[];
+const calculatorCards = calculatorCardSlugs.map((slug) => calculators[slug]);
 const learnCategories = (Object.keys(categoryLabels) as ContentCategory[]).filter(
   (category) => getArticlesByCategory(category).length > 0
 );

@@ -1,6 +1,6 @@
 import type { ArticleReference } from "@/lib/content/types";
 
-export function ArticleReferences({ references }: { references?: ArticleReference[] }) {
+export function ArticleReferences({ references }: { references?: readonly ArticleReference[] }) {
   if (!references?.length) return null;
 
   return (

@@ -6,5 +6,5 @@ type ExpandedSlug = "ppf" | "rd" | "lumpsum" | "cagr" | "step-up-sip" | "gratuit
 
 export function ExpandedCalculatorPage({ slug }: { slug: ExpandedSlug }) {
   const calculator = getCalculator(slug);
-  return <CalculatorLayout title={calculator.name} description={calculator.description}><ExpandedCalculator slug={slug} /></CalculatorLayout>;
+  return <CalculatorLayout calculatorSlug={slug} title={calculator.name} description={calculator.description}><ExpandedCalculator slug={slug} /></CalculatorLayout>;
 }
