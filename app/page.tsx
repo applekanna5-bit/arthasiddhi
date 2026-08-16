@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/",
 });
 
-const calculatorCards = ["home-loan", "sip", "fd", "ppf", "inflation", "gratuity"].map((slug) => calculators[slug]);
+const calculatorCards = ["home-loan", "sip", "fd", "ppf", "inflation", "income-tax"].map((slug) => calculators[slug]);
 const learnCategories = (Object.keys(categoryLabels) as ContentCategory[]).filter(
   (category) => getArticlesByCategory(category).length > 0
 );
