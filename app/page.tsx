@@ -32,7 +32,7 @@ export default function HomePage() {
               Calculate the numbers. See what they mean.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-              ArthaSiddhi brings Indian financial calculators and short guides together in one place. Work out loan EMIs, investment projections, savings maturity amounts, income tax, GST and retirement-related estimates, then read how the numbers work.
+              Check a loan EMI, project how an investment may grow, work out a deposit&apos;s maturity value or estimate tax. You&apos;ll see the result first, followed by the assumptions that matter to that calculation.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -51,11 +51,11 @@ export default function HomePage() {
           </div>
 
           <aside className="rounded-2xl border border-emerald-100 bg-emerald-50 p-6 sm:p-8" aria-label="How ArthaSiddhi helps">
-            <h2 className="text-xl font-semibold text-slate-950">Start where you are</h2>
+            <h2 className="text-xl font-semibold text-slate-950">What do you need to work out?</h2>
             <ul className="mt-5 space-y-4 text-sm leading-6 text-slate-700">
-              <li className="border-l-2 border-emerald-600 pl-4">Compare EMIs, total interest and repayment periods.</li>
-              <li className="border-l-2 border-emerald-600 pl-4">Check how savings and investments may grow under different assumptions.</li>
-              <li className="border-l-2 border-emerald-600 pl-4">Read what the result includes before you use it.</li>
+              <li className="border-l-2 border-emerald-600 pl-4">See a loan&apos;s monthly repayment and its total interest together.</li>
+              <li className="border-l-2 border-emerald-600 pl-4">See how much you put in and how much of the projected value comes from growth.</li>
+              <li className="border-l-2 border-emerald-600 pl-4">Check the rule period and official sources on tax and retirement calculators.</li>
             </ul>
           </aside>
         </section>
@@ -65,7 +65,7 @@ export default function HomePage() {
             <div className="max-w-2xl">
               <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">Calculators</p>
               <h2 id="calculators-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Start with the calculation you need</h2>
-              <p className="mt-3 leading-7 text-slate-600">Enter your own figures, compare the results and check the assumptions shown with each calculator.</p>
+              <p className="mt-3 leading-7 text-slate-600">Choose the calculation you need and use your own figures.</p>
             </div>
             <Link href="/calculators" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">View all calculators <span aria-hidden="true">→</span></Link>
           </div>
@@ -84,7 +84,7 @@ export default function HomePage() {
           <div className="max-w-2xl">
             <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">Learn</p>
             <h2 id="learn-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Read how the numbers work</h2>
-            <p className="mt-3 leading-7 text-slate-600">Short guides explain borrowing, SIPs, fixed deposits and compound interest without assuming prior financial knowledge.</p>
+            <p className="mt-3 leading-7 text-slate-600">Short guides break down borrowing, SIPs, fixed deposits and compound interest with examples you can follow.</p>
           </div>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {learnCategories.map((category) => (
@@ -101,7 +101,7 @@ export default function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-sm font-semibold tracking-[0.18em] text-emerald-700 uppercase">Popular guides</p>
-              <h2 id="popular-guides-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Helpful places to begin</h2>
+              <h2 id="popular-guides-heading" className="mt-2 text-3xl font-bold tracking-tight text-slate-950">Guides worth starting with</h2>
             </div>
             <Link href="/learn" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">View all guides <span aria-hidden="true">→</span></Link>
           </div>
