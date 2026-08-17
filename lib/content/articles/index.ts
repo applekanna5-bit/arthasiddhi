@@ -24,10 +24,10 @@ export const categoryLabels: Record<ContentCategory, string> = {
 };
 
 export const categoryDescriptions: Record<ContentCategory, string> = {
-  "personal-finance": "Start with compound interest and the way time changes growth.",
+  "personal-finance": "Start with compound interest: why growth builds on earlier growth and how time changes the result.",
   loans: "Read how home-loan EMIs, tenure and interest affect the total amount repaid.",
-  investments: "See how a SIP works, what projected value means and why returns are not assured.",
-  banking: "Read how fixed-deposit rates, tenure and compounding affect the maturity amount.",
+  investments: "See how regular SIP contributions build over time, how projected growth is calculated and where the assumptions matter.",
+  banking: "Understand how a fixed deposit grows and how rate, tenure and compounding frequency change the maturity amount.",
   tax: "Future guides will cover taxable income, tax regimes and common tax calculations.",
   retirement: "Future guides will cover retirement contributions, corpus estimates and withdrawal assumptions.",
 };
@@ -38,6 +38,8 @@ export const articles: readonly Article[] = [
   ...bankingArticles,
   ...personalFinanceArticles,
 ];
+
+export const publishedCategories = contentCategories.filter((category) => articles.some((article) => article.category === category));
 
 export const featuredArticleSlugs = [
   "home-loan-guide",
