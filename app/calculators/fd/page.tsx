@@ -7,4 +7,4 @@ import { pageMetadata } from "@/lib/content/seo";
 const calculator = getCalculator("fd");
 export const metadata: Metadata = pageMetadata({ ...calculator.metadata, path: calculator.href });
 
-export default function FdPage() { return <CalculatorLayout calculatorSlug="fd" title="FD Calculator" description="Enter the deposit amount, rate, tenure and compounding frequency to see the interest earned and maturity amount."><FdCalculator /></CalculatorLayout>; }
+export default function FdPage() { return <CalculatorLayout calculatorSlug="fd" title="FD Calculator" description="See how the deposit amount, rate, tenure and compounding frequency affect maturity."><FdCalculator /></CalculatorLayout>; }

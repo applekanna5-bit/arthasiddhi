@@ -7,4 +7,4 @@ import { pageMetadata } from "@/lib/content/seo";
 const calculator = getCalculator("sip");
 export const metadata: Metadata = pageMetadata({ ...calculator.metadata, path: calculator.href });
 
-export default function SipPage() { return <CalculatorLayout calculatorSlug="sip" title="SIP Calculator" description="Enter a monthly SIP, investment period and assumed return to see the total invested, projected returns and future value."><SipCalculator /></CalculatorLayout>; }
+export default function SipPage() { return <CalculatorLayout calculatorSlug="sip" title="SIP Calculator" description="See how much you invest over the period and what the projected value becomes at the return you enter."><SipCalculator /></CalculatorLayout>; }

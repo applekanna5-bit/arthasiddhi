@@ -7,4 +7,4 @@ import { pageMetadata } from "@/lib/content/seo";
 const calculator = getCalculator("home-loan");
 export const metadata: Metadata = pageMetadata({ ...calculator.metadata, path: calculator.href });
 
-export default function HomeLoanPage() { return <CalculatorLayout calculatorSlug="home-loan" title="Home Loan EMI Calculator" description="Enter the loan amount, interest rate and tenure to see the monthly EMI, total interest, total repayment and month-by-month schedule."><LoanCalculator defaults={{ principal: "5000000", annualInterestRate: "8.5", tenureYears: "20" }} /></CalculatorLayout>; }
+export default function HomeLoanPage() { return <CalculatorLayout calculatorSlug="home-loan" title="Home Loan EMI Calculator" description="See what the loan costs each month and how much interest it adds over the full tenure."><LoanCalculator defaults={{ principal: "5000000", annualInterestRate: "8.5", tenureYears: "20" }} /></CalculatorLayout>; }
