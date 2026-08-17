@@ -4,10 +4,10 @@ export const loanArticles = [
   {
     title: "Home Loan Guide for Beginners",
     slug: "home-loan-guide",
-    description: "How home-loan EMIs, tenure and interest affect the total cost, with points to check before borrowing.",
+    description: "What EMI, tenure, interest and lender terms mean when you compare a home loan.",
     category: "loans",
     publishedAt: "2026-08-15",
-    updatedAt: "2026-08-15",
+    updatedAt: "2026-08-17",
     readingTime: "7 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "home-loan",
@@ -15,15 +15,98 @@ export const loanArticles = [
     relatedCalculators: [],
     relatedArticles: ["home-loan-emi-calculation", "home-loan-tenure-comparison", "home-loan-prepayment"],
     sections: [
-      { id: "what-is-a-home-loan", heading: "What is a home loan?", paragraphs: ["A home loan is a secured loan used to buy, build, or improve a residential property. The property generally serves as security until the loan is repaid.", "Before applying, compare the total borrowing cost, not only the monthly EMI. The loan amount, interest rate, tenure, fees, and prepayment terms can all change the cost of ownership."] },
-      { id: "understanding-emi", heading: "What your EMI includes", paragraphs: ["An EMI, or equated monthly instalment, is the regular payment made toward a loan. In a typical reducing-balance loan, each EMI includes both interest and principal.", "At the start of a long loan, the interest part is usually larger. As the outstanding balance falls, a larger share of later EMIs goes toward principal."] },
-      { id: "what-affects-your-emi", heading: "What affects your EMI?", list: ["Loan amount: borrowing more generally raises the EMI and total interest.", "Interest rate: even small rate changes can matter over a long tenure.", "Tenure: a longer tenure can lower the monthly EMI but may increase total interest paid.", "Prepayments: reducing the outstanding principal early may reduce future interest, subject to your loan terms."] },
-      { id: "tenure-trade-off", heading: "The tenure trade-off", paragraphs: ["Choosing the longest possible tenure may make the monthly payment feel easier, but it is not automatically the cheapest choice. Choose a repayment plan that leaves room for emergency savings and other essential goals.", "Compare a few tenures and rates. Look at both the EMI you would pay each month and the total interest over the full loan."], table: { caption: "How common home-loan choices can affect your plan", headers: ["Choice", "Possible effect", "Question to consider"], rows: [["Higher down payment", "Lower amount borrowed", "Will emergency savings remain adequate?"], ["Longer tenure", "Lower EMI, potentially more total interest", "Is the monthly relief worth the extra interest?"], ["Part-prepayment", "May reduce outstanding principal", "Are there conditions or charges in your agreement?"]] } },
-      { id: "before-you-borrow", heading: "Before you borrow", paragraphs: ["Read the lender’s current terms carefully and ask how interest-rate changes, processing charges, insurance, and prepayment are handled. Your eligibility and final rate depend on the lender’s assessment; this guide is educational, not a loan recommendation."], callout: { title: "Useful next step", text: [{ text: "Try different loan amounts, rates, and tenures with the " }, { text: "Home Loan EMI Calculator", link: { kind: "calculator", slug: "home-loan" } }, { text: " to see how the monthly payment and total interest change." }] } },
+      {
+        id: "read-cost-together",
+        heading: "Read the EMI and lifetime cost together",
+        paragraphs: [
+          "A lower EMI can make a home loan feel easier to manage, but it does not necessarily make the loan cheaper. Before choosing a tenure or comparing offers, read the monthly payment alongside total interest and total repayment.",
+          "Those figures come from the amount borrowed, interest rate and tenure. Lender charges and later changes to the loan terms can affect what you actually pay, so the EMI is a starting point rather than the whole comparison.",
+        ],
+      },
+      {
+        id: "numbers-to-read",
+        heading: "The numbers to read together",
+        list: [
+          "Principal: the amount you borrow and need to repay.",
+          "Interest rate: the rate used to calculate interest on the outstanding balance.",
+          "Tenure: the period over which the scheduled repayments run.",
+          "EMI: the regular monthly payment containing both principal and interest.",
+          "Total interest and repayment: the interest added over the tenure and the full amount repaid through the scheduled EMIs.",
+        ],
+      },
+      {
+        id: "reducing-balance",
+        heading: "How a reducing-balance EMI changes",
+        paragraphs: [
+          "In a monthly reducing-balance loan, interest is calculated on the principal still outstanding. Part of each EMI pays that interest and the rest reduces principal, leaving a lower balance for the next month.",
+          [
+            { text: "Early EMIs therefore contain more interest, while later EMIs usually direct more money to principal when the rate and payment stay unchanged. See " },
+            { text: "how a home-loan EMI is calculated", link: { kind: "article", slug: "home-loan-emi-calculation" } },
+            { text: " for the formula and an amortization example." },
+          ],
+        ],
+      },
+      {
+        id: "worked-example",
+        heading: "Worked example: ₹40 lakh for 20 years",
+        paragraphs: [
+          "Consider a ₹40,00,000 loan at 8.5% a year for 20 years, calculated on a monthly reducing balance. With a constant rate, regular monthly payments and no fees or prepayments, the rounded figures are:",
+        ],
+        table: {
+          caption: "Illustrative ₹40 lakh home loan at 8.5% for 20 years",
+          headers: ["Monthly EMI", "Total interest", "Total repayment"],
+          rows: [["₹34,713", "₹43,31,103", "₹83,31,103"]],
+        },
+      },
+      {
+        id: "tenure-and-terms",
+        heading: "A longer tenure changes more than the EMI",
+        paragraphs: [
+          "Spreading the same loan over more months usually lowers the EMI. But the balance remains outstanding for longer, so total interest can rise. The lower monthly payment and the higher lifetime cost need to be considered together.",
+          [
+            { text: "The worked example above shows why affordability cannot be judged from ₹34,713 alone: interest adds ₹43,31,103 over the full tenure under these assumptions. The " },
+            { text: "home-loan tenure comparison", link: { kind: "article", slug: "home-loan-tenure-comparison" } },
+            { text: " shows this trade-off across several tenures without changing the loan amount or rate." },
+          ],
+          "A floating rate can also change the EMI, tenure or both after the loan starts. Check how the lender handles rate changes instead of assuming the opening schedule will remain fixed.",
+        ],
+      },
+      {
+        id: "offer-checklist",
+        heading: "What to check before accepting an offer",
+        paragraphs: [
+          [
+            { text: "If you may repay extra later, read the lender’s prepayment terms and how a part-payment would change the schedule. The " },
+            { text: "home-loan prepayment guide", link: { kind: "article", slug: "home-loan-prepayment" } },
+            { text: " explains the questions to ask without assuming every lender treats prepayment the same way." },
+          ],
+        ],
+        list: [
+          "Rate type and how a rate reset may affect the EMI or tenure.",
+          "EMI, tenure, total interest and total repayment for the same loan amount.",
+          "Processing, legal, valuation, insurance and other applicable charges.",
+          "Prepayment and foreclosure terms, including any conditions or charges.",
+          "Figures and conditions in the sanction letter, loan agreement and repayment schedule.",
+        ],
+      },
+      {
+        id: "compare-your-scenario",
+        heading: "Compare one actual loan scenario",
+        paragraphs: [
+          "Use the amount, rate and tenure from an offer you are considering. Start with the EMI, then read the total interest and total repayment. Change the rate or tenure one at a time to see what moves.",
+        ],
+        callout: {
+          title: "Check the EMI and full-tenure cost",
+          text: [
+            { text: "Enter the offer’s figures in the " },
+            { text: "Home Loan EMI Calculator", link: { kind: "calculator", slug: "home-loan" } },
+            { text: "." },
+          ],
+        },
+      },
     ],
     faq: [
-      { question: "Does a lower EMI always mean a better home loan?", answer: "Not necessarily. A lower EMI can come from a longer tenure, which may increase the total interest paid. Compare both affordability and total repayment." },
-      { question: "Can I pay a home loan early?", answer: "Many loans allow part-prepayment or foreclosure, but the terms and any charges depend on the loan agreement and applicable rules. Check with the lender before deciding." },
+      { question: "What should I check before planning a home-loan prepayment?", answer: "Check how the lender will apply the amount, whether the EMI or tenure will change, when the revised schedule starts and whether any conditions or charges apply. Ask for the updated repayment schedule after the payment is posted." },
     ],
   },
   {
