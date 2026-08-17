@@ -132,6 +132,24 @@ describe("core article numeric examples", () => {
 });
 
 describe("core article editorial boundaries", () => {
+  it("protects the approved D2 editorial micro-edits", () => {
+    const compoundInterest = getArticle("personal-finance", "compound-interest")!;
+    const tenure = getArticle("loans", "home-loan-tenure-comparison")!;
+    const prepayment = getArticle("loans", "home-loan-prepayment")!;
+    const changedText = [articleText(compoundInterest), articleText(tenure), articleText(prepayment)].join(" ");
+
+    expect(articleText(compoundInterest)).toContain("The example shows how compounding works; it is not a forecast of investment returns.");
+    expect(section(compoundInterest, "using-calculators").heading).toBe("How compounding applies to an FD or SIP");
+    expect(articleText(tenure)).toContain("Do not assume the lender will apply the same outcome in every case.");
+    expect(section(prepayment, "calculator-scope").heading).toBe("Start with the original loan schedule");
+    expect(articleText(prepayment)).toContain("The Home Loan EMI Calculator shows the original EMI, total interest and schedule for the amount, rate and tenure entered. It does not estimate the saving from a later part-prepayment.");
+    expect(changedText).not.toContain("The example is mathematics, not an investment forecast.");
+    expect(changedText).not.toContain("Using the idea in a calculation");
+    expect(changedText).not.toContain("The lender should not be assumed to apply one outcome in every case.");
+    expect(changedText).not.toContain("What the current calculator can show");
+    expect(changedText).not.toContain("ArthaSiddhi does not currently have a dedicated prepayment calculator.");
+  });
+
   it("keeps the beginner home-loan guide out of detailed comparison and amortization territory", () => {
     const article = target("home-loan-guide");
     expect(article.sections.filter(({ table }) => table)).toHaveLength(1);
