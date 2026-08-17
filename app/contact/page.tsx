@@ -11,9 +11,8 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ContactPage() {
   return (
-    <InfoPage eyebrow="Contact" title="Contact ArthaSiddhi" description="ArthaSiddhi does not currently operate a public contact form or publish a support email address.">
-      <section aria-labelledby="contact-status"><h2 id="contact-status" className="text-2xl font-bold text-slate-950">Current contact options</h2><p className="mt-3">ArthaSiddhi does not currently publish a support email address or provide a contact form.</p></section>
-      <section aria-labelledby="helpful-resources"><h2 id="helpful-resources" className="text-2xl font-bold text-slate-950">Helpful resources</h2><p className="mt-3">For information about how the site handles data, read the <Link href="/privacy" className="font-semibold text-emerald-700 underline underline-offset-4">Privacy Policy</Link>. For the limits of calculator results and educational content, read the <Link href="/disclaimer" className="font-semibold text-emerald-700 underline underline-offset-4">Financial Disclaimer</Link>.</p></section>
+    <InfoPage eyebrow="Contact" title="Contact ArthaSiddhi" description="ArthaSiddhi does not currently provide a public email address or contact form.">
+      <section aria-labelledby="site-information"><h2 id="site-information" className="text-2xl font-bold text-slate-950">Site information</h2><p className="mt-3">For how the calculators are intended to be used, read <Link href="/about" className="font-semibold text-emerald-700 underline underline-offset-4">About ArthaSiddhi</Link>. For data handling, read the <Link href="/privacy" className="font-semibold text-emerald-700 underline underline-offset-4">Privacy Policy</Link>. For the limits of calculator results and educational content, read the <Link href="/disclaimer" className="font-semibold text-emerald-700 underline underline-offset-4">Financial Disclaimer</Link>.</p></section>
     </InfoPage>
   );
 }
