@@ -17,6 +17,10 @@ export const articleSlugs = [
   "home-loan-tenure-comparison",
   "home-loan-prepayment",
   "sip-explained",
+  "sip-return-calculation",
+  "sip-vs-lumpsum",
+  "fixed-sip-vs-step-up-sip",
+  "sip-projection-assumptions",
   "fixed-deposit-explained",
   "compound-interest",
 ] as const;
@@ -80,6 +84,7 @@ type ArticleBase = {
   maintenance: ArticleMaintenance;
   primaryCalculator: CalculatorSlug | null;
   calculatorGuideRole: "core" | "supporting" | null;
+  calculatorDiscoveryPriority?: number;
   sections: readonly ArticleSection[];
   faq?: readonly FaqItem[];
   references?: readonly ArticleReference[];

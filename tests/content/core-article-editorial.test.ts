@@ -27,7 +27,7 @@ const identities = {
     title: "SIP Explained for Beginners",
     primaryCalculator: "sip",
     calculatorGuideRole: "core",
-    relatedArticles: ["compound-interest"],
+    relatedArticles: ["sip-return-calculation", "sip-vs-lumpsum", "fixed-sip-vs-step-up-sip", "sip-projection-assumptions", "compound-interest"],
     relatedCalculators: [],
     description: "How monthly SIP contributions add up, where projected growth comes from and how to read the future value.",
   },
@@ -75,8 +75,8 @@ describe("core article identity and architecture", () => {
   });
 
   it("keeps every declared article route valid and the registry clean", () => {
-    expect(articles).toHaveLength(7);
-    expect(new Set(articles.map(getArticlePath)).size).toBe(7);
+    expect(articles).toHaveLength(11);
+    expect(new Set(articles.map(getArticlePath)).size).toBe(11);
     expect(getArticleRegistryIssues()).toEqual([]);
   });
 
@@ -160,7 +160,7 @@ describe("core article editorial boundaries", () => {
   it("resolves contextual article and calculator links through declared slugs", () => {
     const expectedArticleLinks: Record<keyof typeof identities, readonly ArticleSlug[]> = {
       "home-loan-guide": ["home-loan-emi-calculation", "home-loan-tenure-comparison", "home-loan-prepayment"],
-      "sip-explained": ["compound-interest"],
+      "sip-explained": ["compound-interest", "sip-return-calculation", "sip-vs-lumpsum", "fixed-sip-vs-step-up-sip", "sip-projection-assumptions"],
       "fixed-deposit-explained": ["compound-interest"],
     };
     for (const slug of Object.keys(identities) as (keyof typeof identities)[]) {

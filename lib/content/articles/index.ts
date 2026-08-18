@@ -92,6 +92,7 @@ export function getPrimaryGuideForCalculator(slug: CalculatorSlug) {
 export function getSupportingGuidesForCalculator(slug: CalculatorSlug, limit = 2) {
   return articles
     .filter((article) => article.primaryCalculator === slug && article.calculatorGuideRole === "supporting")
+    .toSorted((left, right) => (right.calculatorDiscoveryPriority ?? 0) - (left.calculatorDiscoveryPriority ?? 0))
     .slice(0, limit);
 }
 

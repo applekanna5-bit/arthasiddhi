@@ -13,7 +13,7 @@ export const investmentArticles = [
     primaryCalculator: "sip",
     calculatorGuideRole: "core",
     relatedCalculators: [],
-    relatedArticles: ["compound-interest"],
+    relatedArticles: ["sip-return-calculation", "sip-vs-lumpsum", "fixed-sip-vs-step-up-sip", "sip-projection-assumptions", "compound-interest"],
     sections: [
       {
         id: "monthly-investing",
@@ -86,10 +86,403 @@ export const investmentArticles = [
           ],
         },
       },
+      {
+        id: "explore-the-projection",
+        heading: "Explore one question at a time",
+        paragraphs: [
+          [
+            { text: "For the mechanics behind the projection, read " },
+            { text: "how monthly contributions and their timing produce the displayed value", link: { kind: "article", slug: "sip-return-calculation" } },
+            { text: "." },
+          ],
+          [
+            { text: "The comparisons between " },
+            { text: "a SIP and a one-time investment", link: { kind: "article", slug: "sip-vs-lumpsum" } },
+            { text: " and between " },
+            { text: "a fixed SIP and an annually increasing SIP", link: { kind: "article", slug: "fixed-sip-vs-step-up-sip" } },
+            { text: " keep their assumptions explicit rather than naming a universal winner." },
+          ],
+          [
+            { text: "Before treating any projected value as an outcome, review " },
+            { text: "what the constant-return model leaves out", link: { kind: "article", slug: "sip-projection-assumptions" } },
+            { text: "." },
+          ],
+        ],
+      },
     ],
     faq: [
       { question: "Is a SIP guaranteed to make money?", answer: "No. A SIP is an investing method. Returns and capital value can rise or fall when the underlying investment is market-linked." },
       { question: "Can I change my SIP amount?", answer: "That depends on the investment platform and scheme. Check the current instructions and terms before changing the amount." },
+    ],
+  },
+  {
+    title: "How SIP Returns Are Calculated: Contributions, Timing and Projected Growth",
+    slug: "sip-return-calculation",
+    description: "How monthly SIP contributions, contribution timing and an assumed return produce total invested, projected growth and future value.",
+    category: "investments",
+    publishedAt: "2026-08-18",
+    updatedAt: "2026-08-18",
+    readingTime: "8 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "sip",
+    calculatorGuideRole: "supporting",
+    calculatorDiscoveryPriority: 100,
+    relatedCalculators: [],
+    relatedArticles: ["sip-explained", "sip-projection-assumptions"],
+    sections: [
+      {
+        id: "three-parts",
+        heading: "A SIP projection has three parts",
+        paragraphs: [
+          "A SIP projection starts with every scheduled contribution, gives each contribution a growth period and adds the resulting values together. The output separates total invested from projected growth; their sum is the projected future value.",
+          "Total invested follows from the contribution schedule. Projected growth depends on the assumed return and the model's timing convention, so it is not an earned result or a promise of return.",
+        ],
+      },
+      {
+        id: "different-growth-periods",
+        heading: "Why every monthly contribution grows for a different period",
+        paragraphs: [
+          "A monthly SIP is a series of contributions, not one amount invested on the first day. The earliest contribution remains in the projection for almost the full duration. Each later contribution has one month less, and the final contribution has the shortest growth period.",
+          "That difference in time is why multiplying the total contributions by one ten-year growth factor would be wrong. The model grows each monthly amount for the time available to it and then combines the results.",
+        ],
+      },
+      {
+        id: "calculator-convention",
+        heading: "The contribution and return convention used here",
+        paragraphs: [
+          "ArthaSiddhi models each contribution at the beginning of the month. A contribution therefore receives that month's modelled growth before the next contribution is added.",
+          "The entered annual percentage is divided by 12 and by 100 to produce the monthly rate used by the projection. At 12% a year, the periodic convention is 1% a month. This is a modelling conversion, not a claim that a market investment earns 1% in every month.",
+        ],
+      },
+      {
+        id: "worked-example",
+        heading: "Worked example: ₹5,000 a month for 10 years",
+        paragraphs: [
+          "Suppose ₹5,000 is contributed at the beginning of every month for 10 years and the projection uses a constant 12% annual return, converted to 1% a month. There are 120 contributions under these assumptions.",
+        ],
+        table: {
+          caption: "Beginning-of-month SIP projection at an illustrative 12% annual return",
+          headers: ["Monthly contribution", "Duration", "Total invested", "Projected growth", "Projected future value"],
+          rows: [["₹5,000", "10 years", "₹6,00,000", "₹5,61,695", "₹11,61,695"]],
+        },
+      },
+      {
+        id: "read-example",
+        heading: "What the worked result means",
+        paragraphs: [
+          "The ₹6,00,000 is defined by ₹5,000 multiplied by 120 monthly contributions. The other ₹5,61,695 is projected growth produced by applying the smooth-return convention to contributions made at different times.",
+          "The projected future value of ₹11,61,695 is the sum of those two parts. It does not mean every contribution earns the same rupee gain: the early contributions account for more projected growth because they remain in the model for longer.",
+        ],
+      },
+      {
+        id: "changing-inputs",
+        heading: "What changes when one input moves",
+        list: [
+          "Monthly amount: a larger contribution raises both total invested and the capital available for projected growth.",
+          "Duration: more months add more contributions and give the earlier contributions more time in the model.",
+          "Assumed return: total invested stays unchanged, but projected growth and future value move.",
+        ],
+        paragraphs: [
+          [
+            { text: "The " },
+            { text: "projection-assumptions guide", link: { kind: "article", slug: "sip-projection-assumptions" } },
+            { text: " shows why changing only the assumed return can produce materially different values even though the contribution schedule is identical." },
+          ],
+        ],
+        callout: {
+          title: "Test the mechanics with your figures",
+          text: [
+            { text: "Use the " },
+            { text: "SIP projection tool", link: { kind: "calculator", slug: "sip" } },
+            { text: " to change one input at a time, or return to " },
+            { text: "SIP Explained", link: { kind: "article", slug: "sip-explained" } },
+            { text: " for the beginner overview." },
+          ],
+        },
+      },
+    ],
+    faq: [
+      { question: "Why is total invested different from projected growth?", answer: "Total invested is the sum of scheduled contributions. Projected growth is the modelled increase generated from those contributions using the entered return and timing convention." },
+      { question: "Why does the first SIP contribution have more projected growth?", answer: "It enters the model earlier and therefore has more monthly growth periods than a contribution made near the end." },
+      { question: "Does dividing an annual return by 12 predict each month's market return?", answer: "No. It is the periodic convention used for a smooth projection. Actual monthly returns can be positive, negative or uneven." },
+    ],
+  },
+  {
+    title: "SIP vs Lumpsum: How Contribution Timing Changes the Projection",
+    slug: "sip-vs-lumpsum",
+    description: "A controlled comparison showing how gradual monthly contributions and one amount invested upfront produce different projections.",
+    category: "investments",
+    publishedAt: "2026-08-18",
+    updatedAt: "2026-08-18",
+    readingTime: "7 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "sip",
+    calculatorGuideRole: "supporting",
+    relatedCalculators: ["lumpsum"],
+    relatedArticles: ["sip-explained", "sip-return-calculation"],
+    sections: [
+      {
+        id: "answer",
+        heading: "Timing—not a universal winner—drives this comparison",
+        paragraphs: [
+          "A lumpsum placed at the start has the full period in the projection. SIP capital enters month by month, so later contributions have less time to grow. When total capital, duration and assumed annual return are held constant, that timing difference changes the projected value.",
+          "This mathematical comparison does not establish which approach is suitable or which will produce a better real-world outcome. It isolates contribution timing under a smooth-return model.",
+        ],
+      },
+      {
+        id: "assumptions",
+        heading: "What the comparison holds constant",
+        list: [
+          "Total capital contributed: ₹6,00,000 in both cases.",
+          "Duration: 10 years.",
+          "Assumed annual return: 12% in both projections.",
+          "Fees, taxes and withdrawals: excluded.",
+          "SIP timing: ₹5,000 at the beginning of each month for 120 months.",
+          "Lumpsum timing: the full ₹6,00,000 at the start of the 10-year period.",
+        ],
+      },
+      {
+        id: "worked-comparison",
+        heading: "Controlled projection with equal contributed capital",
+        paragraphs: [
+          "The SIP uses the site's monthly beginning-of-month convention. The lumpsum compounds once per year at the same entered annual rate. The conventions match the corresponding ArthaSiddhi tools.",
+        ],
+        table: {
+          caption: "₹6 lakh contributed over or at the start of 10 years at an illustrative 12% annual return",
+          headers: ["Method", "Contribution timing", "Capital contributed", "Projected growth", "Projected future value"],
+          rows: [
+            ["Monthly SIP", "₹5,000 at the beginning of each month", "₹6,00,000", "₹5,61,695", "₹11,61,695"],
+            ["Lumpsum", "₹6,00,000 at the start", "₹6,00,000", "₹12,63,509", "₹18,63,509"],
+          ],
+        },
+      },
+      {
+        id: "why-results-differ",
+        heading: "Why the projected values differ",
+        paragraphs: [
+          "The difference is not created by contributing more to the lumpsum: both rows use ₹6,00,000. It arises because every rupee of the lumpsum is present from the start, while much of the SIP capital arrives years later.",
+          [
+            { text: "For a closer look at the monthly timing mechanics, read " },
+            { text: "how SIP contributions build the projection", link: { kind: "article", slug: "sip-return-calculation" } },
+            { text: "." },
+          ],
+        ],
+      },
+      {
+        id: "real-world-limit",
+        heading: "Real markets do not follow the smooth comparison",
+        paragraphs: [
+          "Market returns do not arrive as a constant 12% each year or 1% each month. Prices can rise or fall between contributions, so the actual sequence of returns can change the outcome for both approaches.",
+          "The example also assumes the full lumpsum is available on day one. If capital becomes available gradually, that is a different cash-flow situation and should not be presented as the same comparison.",
+        ],
+        callout: {
+          title: "Compare the two cash-flow patterns",
+          text: [
+            { text: "Model monthly contributions with the " },
+            { text: "SIP tool", link: { kind: "calculator", slug: "sip" } },
+            { text: " and a one-time amount with the " },
+            { text: "lumpsum projection tool", link: { kind: "calculator", slug: "lumpsum" } },
+            { text: ". For the underlying beginner concepts, see " },
+            { text: "SIP Explained", link: { kind: "article", slug: "sip-explained" } },
+            { text: "." },
+          ],
+        },
+      },
+    ],
+    faq: [
+      { question: "Is it fair to compare a ₹5,000 SIP with a ₹6 lakh lumpsum?", answer: "Only when the comparison clearly states that both contribute ₹6 lakh in total and explains that the lumpsum is available earlier. The cash-flow timing remains different." },
+      { question: "Does the higher projected lumpsum value mean it will always perform better?", answer: "No. The table is a smooth-return timing illustration, not a forecast. Actual market returns are uneven, and personal cash availability and risk are outside the calculation." },
+    ],
+  },
+  {
+    title: "Fixed SIP vs Step-up SIP: What an Annual Increase Changes",
+    slug: "fixed-sip-vs-step-up-sip",
+    description: "How an annual increase changes total contributions and projected value compared with keeping the monthly SIP fixed.",
+    category: "investments",
+    publishedAt: "2026-08-18",
+    updatedAt: "2026-08-18",
+    readingTime: "7 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "sip",
+    calculatorGuideRole: "supporting",
+    relatedCalculators: ["step-up-sip"],
+    relatedArticles: ["sip-explained", "sip-projection-assumptions"],
+    sections: [
+      {
+        id: "difference",
+        heading: "A step-up changes the contribution schedule",
+        paragraphs: [
+          "A fixed SIP keeps the monthly contribution unchanged. A step-up SIP raises that monthly amount at a stated interval; in this example, the increase happens once after every 12 contributions.",
+          "The step-up projection can be higher for two separate reasons: more money is contributed, and those additional contributions receive modelled growth. Calling the entire difference 'extra return' would confuse capital added with projected growth.",
+        ],
+      },
+      {
+        id: "assumptions",
+        heading: "What the worked comparison assumes",
+        list: [
+          "Starting monthly contribution: ₹5,000 in both cases.",
+          "Fixed SIP increase: 0% a year.",
+          "Step-up SIP increase: 10% once a year.",
+          "Duration: 10 years.",
+          "Assumed annual return: 12%, converted to the site's monthly convention.",
+          "Contribution timing: beginning of each month; fees and taxes excluded.",
+        ],
+      },
+      {
+        id: "worked-example",
+        heading: "Worked example: fixed ₹5,000 vs 10% annual step-up",
+        table: {
+          caption: "Ten-year projections at an illustrative 12% annual return",
+          headers: ["Schedule", "Total invested", "Projected growth", "Projected future value", "Monthly contribution in year 10"],
+          rows: [
+            ["Fixed ₹5,000 a month", "₹6,00,000", "₹5,61,695", "₹11,61,695", "₹5,000"],
+            ["₹5,000 initially; 10% annual step-up", "₹9,56,245", "₹7,30,918", "₹16,87,163", "₹11,790"],
+          ],
+        },
+      },
+      {
+        id: "separate-contributions-growth",
+        heading: "Separate additional contributions from projected growth",
+        paragraphs: [
+          "The step-up schedule contributes about ₹3,56,245 more over the decade. Its projected growth is about ₹1,69,222 higher. Together those two changes account for the roughly ₹5,25,468 difference between the projected future values, subject to displayed rounding.",
+          "The annual increase also means the monthly contribution reaches about ₹11,790 in year 10. A projection should not hide that higher future cash commitment behind the larger final value.",
+        ],
+      },
+      {
+        id: "interpretation",
+        heading: "What the comparison can and cannot show",
+        paragraphs: [
+          "The table shows the mathematical effect of one fixed escalation schedule. It does not show whether a future contribution will fit a person's income or whether the underlying investment will deliver the assumed return.",
+          [
+            { text: "Review the " },
+            { text: "limits of smooth SIP projections", link: { kind: "article", slug: "sip-projection-assumptions" } },
+            { text: " before treating either value as an expected outcome." },
+          ],
+        ],
+        callout: {
+          title: "Model each schedule separately",
+          text: [
+            { text: "Use the " },
+            { text: "fixed-contribution SIP tool", link: { kind: "calculator", slug: "sip" } },
+            { text: " and the " },
+            { text: "annual step-up tool", link: { kind: "calculator", slug: "step-up-sip" } },
+            { text: ". Return to " },
+            { text: "SIP Explained", link: { kind: "article", slug: "sip-explained" } },
+            { text: " for the core concept." },
+          ],
+        },
+      },
+    ],
+    faq: [
+      { question: "Is the difference in future value all investment growth?", answer: "No. A step-up schedule contributes more capital. Compare total invested and projected growth separately before comparing the final values." },
+      { question: "When does the annual step-up occur in this example?", answer: "The monthly contribution increases after each block of 12 contributions, so the second year's monthly amount is 10% above the first year's amount." },
+    ],
+  },
+  {
+    title: "Why a SIP Projection Is Not a Return Guarantee",
+    slug: "sip-projection-assumptions",
+    description: "Why constant-return SIP projections differ from market outcomes, and how return assumptions, timing, costs and taxes affect interpretation.",
+    category: "investments",
+    publishedAt: "2026-08-18",
+    updatedAt: "2026-08-18",
+    readingTime: "7 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "sip",
+    calculatorGuideRole: "supporting",
+    calculatorDiscoveryPriority: 50,
+    relatedCalculators: [],
+    relatedArticles: ["sip-explained", "sip-return-calculation", "fixed-sip-vs-step-up-sip"],
+    sections: [
+      {
+        id: "answer",
+        heading: "A projection applies an assumption; the market supplies the outcome",
+        paragraphs: [
+          "A SIP projection is not a return guarantee because it applies one constant assumed rate to a contribution schedule. Actual investment values respond to changing market prices, costs, taxes and the timing of each contribution.",
+          "Total contributions are defined by the schedule. Projected growth is model-dependent. Actual market growth remains uncertain.",
+        ],
+      },
+      {
+        id: "constant-return-model",
+        heading: "What constant-return modelling does",
+        paragraphs: [
+          "The site's SIP model divides the entered annual percentage by 12 and applies that monthly rate to beginning-of-month contributions. That produces a consistent scenario that is useful for comparing inputs.",
+          "It does not predict a repeated monthly market return. Real monthly results may be positive, negative or flat, and the path taken can matter as much as a long-period average.",
+        ],
+      },
+      {
+        id: "three-assumptions",
+        heading: "One contribution schedule, three return assumptions",
+        paragraphs: [
+          "Each row below uses ₹5,000 at the beginning of every month for 10 years. Only the assumed annual return changes. None of the three rates is presented as expected or recommended.",
+        ],
+        table: {
+          caption: "Illustrative SIP projections with total contributions fixed at ₹6,00,000",
+          headers: ["Assumed annual return", "Total contributions", "Projected growth", "Projected future value"],
+          rows: [
+            ["8%", "₹6,00,000", "₹3,20,828", "₹9,20,828"],
+            ["10%", "₹6,00,000", "₹4,32,760", "₹10,32,760"],
+            ["12%", "₹6,00,000", "₹5,61,695", "₹11,61,695"],
+          ],
+        },
+      },
+      {
+        id: "read-scenarios",
+        heading: "What changes—and what does not—in the table",
+        paragraphs: [
+          "The ₹6,00,000 contribution total does not move because the amount and schedule are unchanged. The projected future value does move because each rate produces a different modelled growth path.",
+          [
+            { text: "The contribution-by-contribution mechanics are explained in " },
+            { text: "the SIP return calculation guide", link: { kind: "article", slug: "sip-return-calculation" } },
+            { text: "." },
+          ],
+        ],
+      },
+      {
+        id: "sequence",
+        heading: "Why the sequence of market returns matters",
+        paragraphs: [
+          "Two periods can have the same broad average return but different monthly paths. Because a SIP adds money throughout the period, a fall before many later contributions and a fall near the end do not affect the accumulated units and ending value in the same way.",
+          "A constant-return table removes that sequence so inputs can be compared cleanly. Removing it from the model does not remove it from real investing.",
+        ],
+      },
+      {
+        id: "excluded-effects",
+        heading: "Costs, taxes, timing and rounding can change the outcome",
+        list: [
+          "Fees and product costs can reduce the value retained by the investor and are not deducted by the projection.",
+          "Taxes depend on the investment and the applicable rules and are not calculated in the displayed SIP result.",
+          "Actual debit, allotment and valuation timing may differ from a beginning-of-month convention.",
+          "Displayed rupee values are rounded, while the engine calculates with unrounded numbers.",
+          "Changing, pausing or missing contributions changes both total capital and the periods available for growth.",
+        ],
+      },
+      {
+        id: "use-projection",
+        heading: "Use a range to understand the assumption",
+        paragraphs: [
+          "Changing the assumed return is useful because it reveals how much of the displayed value depends on that input. It does not turn the highest or lowest scenario into a forecast.",
+          [
+            { text: "A rising contribution schedule introduces another variable; the " },
+            { text: "fixed-versus-step-up comparison", link: { kind: "article", slug: "fixed-sip-vs-step-up-sip" } },
+            { text: " separates additional capital from projected growth." },
+          ],
+        ],
+        callout: {
+          title: "Compare assumptions, not predictions",
+          text: [
+            { text: "Change one rate at a time in the " },
+            { text: "SIP projection tool", link: { kind: "calculator", slug: "sip" } },
+            { text: ". For the beginner overview, return to " },
+            { text: "SIP Explained", link: { kind: "article", slug: "sip-explained" } },
+            { text: "." },
+          ],
+        },
+      },
+    ],
+    faq: [
+      { question: "Are 8%, 10% or 12% expected SIP returns?", answer: "No. They are illustrative inputs used to show how the model changes. None is an expected, promised or recommended return." },
+      { question: "Why can an actual SIP value differ from the projection?", answer: "Actual returns vary over time, while the projection uses a constant rate. Costs, taxes, transaction timing and changes to contributions can also alter the outcome." },
+      { question: "Is the total contribution also uncertain?", answer: "The scheduled total is defined by the amount and number of contributions. It changes if contributions are increased, reduced, paused or missed." },
     ],
   },
 ] satisfies readonly Article[];

@@ -55,6 +55,10 @@ describe("Batch C Learn discovery", () => {
       "/learn/loans/home-loan-tenure-comparison",
       "/learn/loans/home-loan-prepayment",
       "/learn/investments/sip-explained",
+      "/learn/investments/sip-return-calculation",
+      "/learn/investments/sip-vs-lumpsum",
+      "/learn/investments/fixed-sip-vs-step-up-sip",
+      "/learn/investments/sip-projection-assumptions",
       "/learn/banking/fixed-deposit-explained",
       "/learn/personal-finance/compound-interest",
     ]);

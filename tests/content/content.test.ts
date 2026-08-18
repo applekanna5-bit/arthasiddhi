@@ -32,7 +32,7 @@ describe("content registry", () => {
       expect(getRelatedArticles(article)).toHaveLength(article.relatedArticles.length);
     }
   });
-  it("only returns real related articles", () => { const article = getArticle("investments", "sip-explained"); expect(article).toBeDefined(); expect(getRelatedArticles(article!).map((item) => item.slug)).toEqual(["compound-interest"]); });
+  it("only returns real related articles", () => { const article = getArticle("investments", "sip-explained"); expect(article).toBeDefined(); expect(getRelatedArticles(article!).map((item) => item.slug)).toEqual(["sip-return-calculation", "sip-vs-lumpsum", "fixed-sip-vs-step-up-sip", "sip-projection-assumptions", "compound-interest"]); });
   it("resolves calculator guides in both directions", () => {
     expect(getPrimaryGuideForCalculator("home-loan")?.slug).toBe("home-loan-guide");
     expect(getPrimaryGuideForCalculator("sip")?.slug).toBe("sip-explained");
