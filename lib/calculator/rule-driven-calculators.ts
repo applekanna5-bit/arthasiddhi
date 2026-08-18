@@ -24,7 +24,7 @@ export type TaxRegime = "new" | "old";
 export type TaxAgeCategory = "below-60" | "60-to-below-80" | "80-or-above";
 export type IncomeTaxInput = { regime: TaxRegime; ageCategory: TaxAgeCategory; taxableOrdinaryIncome: number };
 export type IncomeTaxBreakdownRow = { lowerBound: number; upperBound: number | null; rate: number; taxableAmount: number; tax: number };
-export type IncomeTaxResult = { ruleSetId: string; taxYear: string; regime: TaxRegime; ageCategory: TaxAgeCategory; taxableIncome: number; taxBeforeRebate: number; rebate: number; taxAfterRebate: number; cess: number; totalTax: number; effectiveTaxRate: number; breakdown: IncomeTaxBreakdownRow[] };
+export type IncomeTaxResult = { ruleSetId: string; applicablePeriod: string; regime: TaxRegime; ageCategory: TaxAgeCategory; taxableIncome: number; taxBeforeRebate: number; rebate: number; marginalRelief: number; taxAfterRelief: number; cess: number; totalTax: number; effectiveTaxRate: number; breakdown: IncomeTaxBreakdownRow[] };
 
 function calculateSlabTax(income: number, slabs: TaxSlab[]) {
   let lowerBound = 0;
@@ -47,10 +47,12 @@ export function calculateIncomeTax(input: IncomeTaxInput, ruleSet: FinancialRule
   const slabs = input.regime === "new" ? ruleSet.rules.newRegime.slabs : ruleSet.rules.oldRegime.slabsByAge[input.ageCategory];
   const slabResult = calculateSlabTax(input.taxableOrdinaryIncome, slabs);
   const rebate = input.taxableOrdinaryIncome <= regimeRules.rebateIncomeLimit ? Math.min(slabResult.tax, regimeRules.maximumRebate) : 0;
-  const taxAfterRebate = Math.max(0, slabResult.tax - rebate);
-  const cess = taxAfterRebate * ruleSet.rules.cessRate / 100;
-  const totalTax = taxAfterRebate + cess;
-  return { ruleSetId: ruleSet.id, taxYear: ruleSet.effectivePeriod, regime: input.regime, ageCategory: input.ageCategory, taxableIncome: input.taxableOrdinaryIncome, taxBeforeRebate: slabResult.tax, rebate, taxAfterRebate, cess, totalTax, effectiveTaxRate: input.taxableOrdinaryIncome === 0 ? 0 : totalTax / input.taxableOrdinaryIncome * 100, breakdown: slabResult.breakdown };
+  const thresholdExcess = input.taxableOrdinaryIncome - regimeRules.rebateIncomeLimit;
+  const marginalRelief = input.regime === "new" && input.taxableOrdinaryIncome > regimeRules.rebateIncomeLimit && ruleSet.rules.newRegime.marginalReliefAboveRebateLimit ? Math.max(0, slabResult.tax - thresholdExcess) : 0;
+  const taxAfterRelief = Math.max(0, slabResult.tax - rebate - marginalRelief);
+  const cess = taxAfterRelief * ruleSet.rules.cessRate / 100;
+  const totalTax = taxAfterRelief + cess;
+  return { ruleSetId: ruleSet.id, applicablePeriod: ruleSet.effectivePeriod, regime: input.regime, ageCategory: input.ageCategory, taxableIncome: input.taxableOrdinaryIncome, taxBeforeRebate: slabResult.tax, rebate, marginalRelief, taxAfterRelief, cess, totalTax, effectiveTaxRate: input.taxableOrdinaryIncome === 0 ? 0 : totalTax / input.taxableOrdinaryIncome * 100, breakdown: slabResult.breakdown };
 }
 
 export type GstMode = "exclusive" | "inclusive";
@@ -128,4 +130,3 @@ export function calculateNps(input: NpsInput, ruleSet: FinancialRuleSet<NpsRules
   const estimatedAnnualAnnuity = annuityCorpus * input.assumedAnnuityRate / 100;
   return { ruleSetId: ruleSet.id, yearsUntilRetirement, startingCorpus: input.currentCorpus, totalContributions, estimatedGrowth: balance - input.currentCorpus - totalContributions, retirementCorpus: balance, lumpSumCorpus, annuityCorpus, annuityAllocation: input.annuityAllocation, assumedAnnuityRate: input.assumedAnnuityRate, estimatedAnnualAnnuity, estimatedMonthlyAnnuity: estimatedAnnualAnnuity / 12, finalMonthlyContribution: contribution };
 }
-

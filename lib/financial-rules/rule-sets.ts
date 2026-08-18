@@ -4,7 +4,7 @@ export type TaxSlab = { upTo: number | null; rate: number };
 export type IncomeTaxRules = {
   maximumSupportedIncome: number;
   cessRate: number;
-  newRegime: { slabs: TaxSlab[]; rebateIncomeLimit: number; maximumRebate: number };
+  newRegime: { slabs: TaxSlab[]; rebateIncomeLimit: number; maximumRebate: number; marginalReliefAboveRebateLimit: boolean };
   oldRegime: {
     slabsByAge: Record<"below-60" | "60-to-below-80" | "80-or-above", TaxSlab[]>;
     rebateIncomeLimit: number;
@@ -13,10 +13,11 @@ export type IncomeTaxRules = {
 };
 
 export const incomeTaxRuleSet: FinancialRuleSet<IncomeTaxRules> = {
-  id: "income-tax-ty-2026-27",
-  label: "Income Tax — Tax Year 2026–27",
-  effectivePeriod: "Tax Year 2026–27",
-  lastVerified: "2026-08-16",
+  id: "income-tax-fy-2025-26-ay-2026-27",
+  label: "Income Tax — FY 2025–26 / AY 2026–27",
+  effectivePeriod: "FY 2025–26 / AY 2026–27",
+  periodLabels: [{ label: "Applicable Financial Year", value: "FY 2025–26" }, { label: "Applicable Assessment Year", value: "AY 2026–27" }],
+  lastVerified: "2026-08-18",
   rules: {
     maximumSupportedIncome: 5_000_000,
     cessRate: 4,
@@ -24,6 +25,7 @@ export const incomeTaxRuleSet: FinancialRuleSet<IncomeTaxRules> = {
       slabs: [{ upTo: 400_000, rate: 0 }, { upTo: 800_000, rate: 5 }, { upTo: 1_200_000, rate: 10 }, { upTo: 1_600_000, rate: 15 }, { upTo: 2_000_000, rate: 20 }, { upTo: 2_400_000, rate: 25 }, { upTo: null, rate: 30 }],
       rebateIncomeLimit: 1_200_000,
       maximumRebate: 60_000,
+      marginalReliefAboveRebateLimit: true,
     },
     oldRegime: {
       slabsByAge: {
@@ -36,9 +38,9 @@ export const incomeTaxRuleSet: FinancialRuleSet<IncomeTaxRules> = {
     },
   },
   sources: [
-    { title: "Objective and scope of the Income-tax Act, 2025", authority: "Income Tax Department", effectiveFrom: "2026-04-01", reference: "https://www.incometax.gov.in/iec/foportal/help/all-topics/e-filing-services/objective-and-scope-new-act" },
-    { title: "Income-tax slabs and section 87A rebate guidance", authority: "Income Tax Department", reference: "https://www.incometax.gov.in/iec/foportal/help/all-topics/e-filing-services/file-itr-2-online" },
-    { title: "Union Budget 2025–26 speech", authority: "Ministry of Finance", reference: "https://www.indiabudget.gov.in/doc/bspeech/bs2025_26.pdf" },
+    { title: "Finance Act 2025 — amendment of section 87A", authority: "Income Tax Department", effectiveFrom: "2026-04-01", reference: "https://www.incometaxindia.gov.in/w/section-20-111", sourceType: "official", accessedAt: "2026-08-18" },
+    { title: "Salaried Individuals for AY 2026–27", authority: "Income Tax Department", reference: "https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1", sourceType: "official", accessedAt: "2026-08-18" },
+    { title: "Memorandum explaining the provisions of the Finance Bill, 2025", authority: "Ministry of Finance", reference: "https://www.indiabudget.gov.in/budget2025-26/doc/memo.pdf", sourceType: "official", accessedAt: "2026-08-18" },
   ],
 };
 

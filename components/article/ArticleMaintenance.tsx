@@ -10,7 +10,7 @@ export function ArticleMaintenance({ article }: { article: Article }) {
   if (!context) return null;
   return (
     <dl className="mt-5 grid gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-950 sm:grid-cols-2">
-      <div><dt className="font-semibold">Applies to</dt><dd className="mt-1">{context.applicablePeriod}</dd></div>
+      {context.periodLabels?.map((period) => <div key={period.label}><dt className="font-semibold">{period.label}</dt><dd className="mt-1">{period.value}</dd></div>) ?? <div><dt className="font-semibold">Applies to</dt><dd className="mt-1">{context.applicablePeriod}</dd></div>}
       <div><dt className="font-semibold">Last verified</dt><dd className="mt-1"><time dateTime={context.verifiedAt}>{formatDate(context.verifiedAt)}</time></dd></div>
     </dl>
   );

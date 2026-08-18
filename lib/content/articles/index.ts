@@ -105,12 +105,13 @@ export function getArticleReferences(article: Article): readonly ArticleReferenc
     title: source.title,
     publisher: source.authority,
     url: source.reference,
-    sourceType: "official" as const,
+    sourceType: source.sourceType ?? "official" as const,
+    accessedAt: source.accessedAt,
   }));
   return [...directReferences, ...ruleReferences];
 }
 
-export function getArticleMaintenanceContext(article: Article): { applicablePeriod: string; verifiedAt: string } | null {
+export function getArticleMaintenanceContext(article: Article): { applicablePeriod: string; periodLabels?: { label: string; value: string }[]; verifiedAt: string } | null {
   if (article.maintenance.kind === "evergreen") return null;
   if (article.maintenance.ruleSetId === undefined && article.maintenance.verifiedAt !== undefined && article.maintenance.applicablePeriod !== undefined) {
     return {
@@ -120,7 +121,7 @@ export function getArticleMaintenanceContext(article: Article): { applicablePeri
   }
   const ruleSet = getRuleSetById(article.maintenance.ruleSetId);
   if (!ruleSet) return null;
-  return { applicablePeriod: ruleSet.effectivePeriod, verifiedAt: ruleSet.lastVerified };
+  return { applicablePeriod: ruleSet.effectivePeriod, periodLabels: ruleSet.periodLabels, verifiedAt: ruleSet.lastVerified };
 }
 
 export function getArticleRegistryIssues(
