@@ -22,6 +22,9 @@ export const articleSlugs = [
   "fixed-sip-vs-step-up-sip",
   "sip-projection-assumptions",
   "fixed-deposit-explained",
+  "fd-interest-calculation",
+  "fd-vs-rd",
+  "premature-fd-withdrawal",
   "compound-interest",
 ] as const;
 

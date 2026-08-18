@@ -60,6 +60,9 @@ describe("Batch C Learn discovery", () => {
       "/learn/investments/fixed-sip-vs-step-up-sip",
       "/learn/investments/sip-projection-assumptions",
       "/learn/banking/fixed-deposit-explained",
+      "/learn/banking/fd-interest-calculation",
+      "/learn/banking/fd-vs-rd",
+      "/learn/banking/premature-fd-withdrawal",
       "/learn/personal-finance/compound-interest",
     ]);
   });

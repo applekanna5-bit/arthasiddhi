@@ -79,7 +79,7 @@ describe("SIP content cluster registry and discovery", () => {
     expect(getPrimaryGuideForCalculator("sip")?.slug).toBe("sip-explained");
     expect(getSupportingGuidesForCalculator("sip").map(({ slug }) => slug)).toEqual(["sip-return-calculation", "sip-projection-assumptions"]);
     expect(getSupportingGuidesForCalculator("sip")).toHaveLength(2);
-    expect(getSupportingGuidesForCalculator("fd").map(({ slug }) => slug)).toEqual([]);
+    expect(getSupportingGuidesForCalculator("fd").map(({ slug }) => slug)).toEqual(["fd-interest-calculation", "fd-vs-rd"]);
     expect(getSupportingGuidesForCalculator("home-loan").map(({ slug }) => slug)).toEqual(["home-loan-emi-calculation", "home-loan-tenure-comparison"]);
   });
 });
@@ -163,11 +163,11 @@ describe("SIP cluster search-intent and SEO protection", () => {
     }
   });
 
-  it("adds all four routes to a unique 40-URL sitemap", () => {
+  it("keeps all four routes in the expanded unique sitemap", () => {
     const sitemap = buildSitemap();
     const urls = sitemap.map(({ url }) => url);
-    expect(urls).toHaveLength(40);
-    expect(new Set(urls).size).toBe(40);
+    expect(urls).toHaveLength(43);
+    expect(new Set(urls).size).toBe(43);
     for (const slug of sipSupportingSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(sipArticle(slug))));
   });
 });

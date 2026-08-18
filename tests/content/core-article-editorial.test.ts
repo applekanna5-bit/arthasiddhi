@@ -36,7 +36,7 @@ const identities = {
     title: "Fixed Deposit Explained",
     primaryCalculator: "fd",
     calculatorGuideRole: "core",
-    relatedArticles: ["compound-interest"],
+    relatedArticles: ["fd-interest-calculation", "fd-vs-rd", "premature-fd-withdrawal", "compound-interest"],
     relatedCalculators: [],
     description: "How principal, rate, tenure and compounding determine an FD’s maturity amount, with terms to compare before opening one.",
   },
@@ -75,8 +75,8 @@ describe("core article identity and architecture", () => {
   });
 
   it("keeps every declared article route valid and the registry clean", () => {
-    expect(articles).toHaveLength(11);
-    expect(new Set(articles.map(getArticlePath)).size).toBe(11);
+    expect(articles).toHaveLength(14);
+    expect(new Set(articles.map(getArticlePath)).size).toBe(14);
     expect(getArticleRegistryIssues()).toEqual([]);
   });
 
@@ -161,7 +161,7 @@ describe("core article editorial boundaries", () => {
     const expectedArticleLinks: Record<keyof typeof identities, readonly ArticleSlug[]> = {
       "home-loan-guide": ["home-loan-emi-calculation", "home-loan-tenure-comparison", "home-loan-prepayment"],
       "sip-explained": ["compound-interest", "sip-return-calculation", "sip-vs-lumpsum", "fixed-sip-vs-step-up-sip", "sip-projection-assumptions"],
-      "fixed-deposit-explained": ["compound-interest"],
+      "fixed-deposit-explained": ["compound-interest", "fd-interest-calculation", "fd-vs-rd", "premature-fd-withdrawal"],
     };
     for (const slug of Object.keys(identities) as (keyof typeof identities)[]) {
       const article = target(slug);
