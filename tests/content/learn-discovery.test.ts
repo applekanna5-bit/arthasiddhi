@@ -12,15 +12,15 @@ import { absoluteUrl } from "../../lib/content/site";
 import { buildSitemap } from "../../lib/content/sitemap";
 
 describe("Batch C Learn discovery", () => {
-  const expectedCategories = ["personal-finance", "loans", "investments", "banking"];
+  const expectedCategories = ["personal-finance", "loans", "investments", "banking", "tax"];
 
   it("shows only categories containing published articles", () => {
     expect(publishedCategories).toEqual(expectedCategories);
     expect(publishedCategories.every((category) => getArticlesByCategory(category).length > 0)).toBe(true);
   });
 
-  it("does not expose Tax or Retirement in primary discovery", () => {
-    expect(publishedCategories).not.toContain("tax");
+  it("exposes Tax but not empty Retirement in primary discovery", () => {
+    expect(publishedCategories).toContain("tax");
     expect(publishedCategories).not.toContain("retirement");
   });
 
@@ -41,9 +41,9 @@ describe("Batch C Learn discovery", () => {
     expect(getFeaturedArticles().map(({ slug }) => slug)).toEqual(featuredArticleSlugs);
   });
 
-  it("keeps empty categories out of the sitemap", () => {
+  it("adds populated Tax and keeps empty Retirement out of the sitemap", () => {
     const sitemapUrls = new Set(buildSitemap().map(({ url }) => url));
-    expect(sitemapUrls.has(absoluteUrl("/learn/tax"))).toBe(false);
+    expect(sitemapUrls.has(absoluteUrl("/learn/tax"))).toBe(true);
     expect(sitemapUrls.has(absoluteUrl("/learn/retirement"))).toBe(false);
   });
 
@@ -64,6 +64,11 @@ describe("Batch C Learn discovery", () => {
       "/learn/banking/fd-vs-rd",
       "/learn/banking/premature-fd-withdrawal",
       "/learn/personal-finance/compound-interest",
+      "/learn/tax/new-tax-regime-slab-calculation",
+      "/learn/tax/section-87a-rebate",
+      "/learn/tax/health-education-cess-calculation",
+      "/learn/tax/gross-income-vs-taxable-income",
+      "/learn/tax/income-tax-calculator-vs-payroll-tds",
     ]);
   });
 });

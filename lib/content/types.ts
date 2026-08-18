@@ -26,6 +26,11 @@ export const articleSlugs = [
   "fd-vs-rd",
   "premature-fd-withdrawal",
   "compound-interest",
+  "new-tax-regime-slab-calculation",
+  "section-87a-rebate",
+  "health-education-cess-calculation",
+  "gross-income-vs-taxable-income",
+  "income-tax-calculator-vs-payroll-tds",
 ] as const;
 
 export type ArticleSlug = (typeof articleSlugs)[number];

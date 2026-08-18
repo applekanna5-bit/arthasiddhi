@@ -72,9 +72,9 @@ describe("public site routes", () => {
     }
   });
 
-  it("excludes empty Tax and Retirement categories from the sitemap", () => {
+  it("includes populated Tax and excludes empty Retirement from the sitemap", () => {
     const sitemapUrls = new Set(buildSitemap().map(({ url }) => url));
-    expect(sitemapUrls.has("https://arthasiddhi.com/learn/tax")).toBe(false);
+    expect(sitemapUrls.has("https://arthasiddhi.com/learn/tax")).toBe(true);
     expect(sitemapUrls.has("https://arthasiddhi.com/learn/retirement")).toBe(false);
   });
 
