@@ -175,10 +175,10 @@ describe("Inflation cluster SEO and sitemap", () => {
     expect(descriptions.size).toBe(4);
   });
 
-  it("adds all four URLs to a unique 57-URL sitemap without a new category", () => {
+  it("keeps all four URLs in the expanded unique sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(57);
-    expect(new Set(urls).size).toBe(57);
+    expect(urls).toHaveLength(60);
+    expect(new Set(urls).size).toBe(60);
     for (const slug of inflationSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(inflationArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/personal-finance"))).toHaveLength(1);
   });

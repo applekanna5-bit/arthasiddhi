@@ -204,4 +204,250 @@ export const loanArticles = [
       { title: "Key Facts Statement (KFS) for Loans & Advances", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12663&Mode=0", sourceType: "official", accessedAt: "2026-08-16" },
     ],
   },
+  {
+    title: "Personal Loan EMI Explained: Interest, Tenure and Total Repayment",
+    slug: "personal-loan-emi-explained",
+    description: "How to read a personal-loan EMI, total interest and scheduled repayment under the calculator's reducing-balance assumptions.",
+    category: "loans",
+    publishedAt: "2026-08-20",
+    updatedAt: "2026-08-20",
+    readingTime: "8 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "personal-loan",
+    calculatorGuideRole: "core",
+    relatedCalculators: [],
+    relatedArticles: ["personal-loan-tenure-comparison", "personal-loan-calculator-vs-lender-quote", "home-loan-emi-calculation"],
+    sections: [
+      {
+        id: "read-results-together",
+        heading: "Read the EMI and total repayment together",
+        paragraphs: [
+          "A personal-loan EMI estimate is determined by the principal entered, the annual interest rate and the repayment tenure. The monthly payment matters for cash flow, while total interest and total scheduled repayment show the modeled cost over the full tenure.",
+          "The ArthaSiddhi Personal Loan Calculator applies one constant annual rate to a regular monthly reducing-balance schedule. It estimates a repayment scenario; it is not a lender quote, sanction, approval or eligibility decision.",
+        ],
+      },
+      {
+        id: "inputs-and-results",
+        heading: "What the calculator inputs and results mean",
+        list: [
+          "Principal: the loan amount entered for the calculation.",
+          "Annual interest rate: the constant entered rate used across the modeled tenure.",
+          "Tenure: the number of years converted into regular monthly instalments.",
+          "Monthly EMI: the modeled monthly payment containing principal and interest.",
+          "Total interest: the interest accumulated across the modeled repayment schedule.",
+          "Total payment: principal plus modeled interest, not necessarily the full all-in borrowing cost.",
+        ],
+      },
+      {
+        id: "worked-example",
+        heading: "Worked example: ₹5 lakh at an illustrative 12% for five years",
+        paragraphs: [
+          "For a principal of ₹5,00,000, an illustrative constant annual rate of 12% and a 60-month tenure, the approved loan engine produces:",
+          "The ₹11,122.22 EMI is the regular modeled payment. The ₹6,67,333.43 total is principal plus interest in this schedule; it does not automatically include processing fees, insurance, taxes, charges or financed add-ons.",
+        ],
+        table: {
+          caption: "Engine-generated personal-loan repayment estimate",
+          headers: ["Principal", "Illustrative annual rate", "Tenure", "Monthly EMI", "Total interest", "Total scheduled repayment"],
+          rows: [["₹5,00,000.00", "12%", "5 years", "₹11,122.22", "₹1,67,333.43", "₹6,67,333.43"]],
+        },
+      },
+      {
+        id: "reducing-balance",
+        heading: "The schedule uses a monthly reducing balance",
+        paragraphs: [
+          "Each month, interest is calculated on the principal still outstanding. The rest of that month's EMI reduces principal, so the interest and principal portions change even when the regular EMI stays similar.",
+          [
+            { text: "This guide focuses on interpreting a personal-loan result. For the detailed generic formula derivation and amortization mathematics, see " },
+            { text: "How Home Loan EMI Is Calculated", link: { kind: "article", slug: "home-loan-emi-calculation" } },
+            { text: "." },
+          ],
+        ],
+      },
+      {
+        id: "tenure-trade-off",
+        heading: "A shorter or longer tenure changes both figures",
+        paragraphs: [
+          "With the principal and rate unchanged, fewer instalments usually produce a higher EMI and less scheduled interest. More instalments usually lower the EMI but keep the balance outstanding for longer, increasing scheduled interest.",
+          [
+            { text: "The " },
+            { text: "personal-loan tenure comparison", link: { kind: "article", slug: "personal-loan-tenure-comparison" } },
+            { text: " applies that trade-off to two-, three- and five-year scenarios without identifying one tenure as suitable for everyone." },
+          ],
+        ],
+      },
+      {
+        id: "limitations",
+        heading: "What the calculator does not determine",
+        paragraphs: [
+          "The model assumes a constant rate and regular monthly repayments. It does not model variable-rate changes, payment-date differences, missed payments, prepayment, flat-rate interest or lender-specific accrual methods.",
+          "It also excludes processing fees, insurance, taxes and charges, financed add-ons, and APR or effective borrowing cost. It does not use income, existing obligations, FOIR, credit score, age, employment or lender policy to determine affordability, eligibility, sanction or approval.",
+          [
+            { text: "Read " },
+            { text: "why a calculator estimate may differ from a lender quote", link: { kind: "article", slug: "personal-loan-calculator-vs-lender-quote" } },
+            { text: ", or enter a controlled scenario in the " },
+            { text: "Personal Loan EMI Calculator", link: { kind: "calculator", slug: "personal-loan" } },
+            { text: "." },
+          ],
+        ],
+      },
+    ],
+    faq: [
+      { question: "Does the calculator's total repayment include every borrowing cost?", answer: "No. It adds modeled interest to principal but does not automatically include processing fees, insurance, taxes, charges, add-ons or APR effects." },
+      { question: "Does a Personal Loan EMI estimate mean the loan will be approved?", answer: "No. The calculator does not assess eligibility, credit profile, sanction terms or lender approval policy." },
+      { question: "Is 12% a current Personal Loan rate?", answer: "No. It is an illustrative constant input used only for the worked example, not a current, typical, best or guaranteed offered rate." },
+    ],
+  },
+  {
+    title: "Personal Loan Tenure: Shorter vs Longer Repayment",
+    slug: "personal-loan-tenure-comparison",
+    description: "Compare how two-, three- and five-year personal-loan tenures change EMI, total interest and scheduled repayment at the same inputs.",
+    category: "loans",
+    publishedAt: "2026-08-20",
+    updatedAt: "2026-08-20",
+    readingTime: "7 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "personal-loan",
+    calculatorGuideRole: "supporting",
+    calculatorDiscoveryPriority: 100,
+    relatedCalculators: [],
+    relatedArticles: ["personal-loan-emi-explained", "personal-loan-calculator-vs-lender-quote"],
+    sections: [
+      {
+        id: "answer",
+        heading: "Tenure changes the monthly payment and scheduled interest",
+        paragraphs: [
+          "For the same principal and rate, a shorter personal-loan tenure usually requires a higher EMI but leaves less time for interest to accumulate. A longer tenure usually lowers the EMI and increases total scheduled interest.",
+          "That is a mathematical comparison, not an affordability, eligibility or suitability assessment. The calculator does not know a borrower's income, existing obligations, FOIR, credit profile, age, employment or lender policy.",
+        ],
+      },
+      {
+        id: "comparison",
+        heading: "Two, three and five years compared",
+        paragraphs: [
+          "Each row keeps the principal at ₹5,00,000 and uses the same illustrative constant annual rate of 12%. It assumes monthly reducing-balance interest, regular monthly repayments, no prepayment and no fees or charges.",
+        ],
+        table: {
+          caption: "Engine-generated short-tenure personal-loan comparison",
+          headers: ["Tenure", "Monthly EMI", "Total interest", "Total scheduled repayment"],
+          rows: [
+            ["2 years", "₹23,536.74", "₹64,881.67", "₹5,64,881.67"],
+            ["3 years", "₹16,607.15", "₹97,857.58", "₹5,97,857.58"],
+            ["5 years", "₹11,122.22", "₹1,67,333.43", "₹6,67,333.43"],
+          ],
+        },
+      },
+      {
+        id: "interpretation",
+        heading: "The lower EMI comes with a longer schedule",
+        paragraphs: [
+          "In this controlled example, extending repayment from two to five years reduces the displayed EMI from ₹23,536.74 to ₹11,122.22. Total scheduled interest rises from ₹64,881.67 to ₹1,67,333.43 because principal remains outstanding across more months.",
+          "Changing the principal or rate changes the comparison. The 12% input is illustrative and is not a current market rate, typical lender rate, best available rate or guaranteed offer.",
+        ],
+      },
+      {
+        id: "no-universal-tenure",
+        heading: "The table does not identify one universally best tenure",
+        paragraphs: [
+          "A higher or lower modeled EMI does not establish what is affordable or safe for a particular borrower, and the table cannot predict eligibility or approval. Compare the arithmetic, then use the lender's actual offer and your own obligations for any real borrowing decision.",
+          [
+            { text: "Return to " },
+            { text: "Personal Loan EMI Explained", link: { kind: "article", slug: "personal-loan-emi-explained" } },
+            { text: ", review possible " },
+            { text: "lender-quote differences", link: { kind: "article", slug: "personal-loan-calculator-vs-lender-quote" } },
+            { text: ", or compare another short tenure in the " },
+            { text: "Personal Loan EMI Calculator", link: { kind: "calculator", slug: "personal-loan" } },
+            { text: "." },
+          ],
+        ],
+      },
+    ],
+    faq: [
+      { question: "Does a longer Personal Loan tenure always cost less?", answer: "No. It commonly lowers the EMI for the same principal and rate, but scheduled interest can rise because repayment runs for more months." },
+      { question: "Does this comparison show which tenure I can afford?", answer: "No. It compares calculator outputs and does not assess income, obligations, eligibility or lender approval." },
+      { question: "Is the 12% example a lender rate recommendation?", answer: "No. It is an illustrative constant input, not a current rate claim or recommendation." },
+    ],
+  },
+  {
+    title: "Why a Personal Loan Calculator Estimate May Differ From a Lender Quote",
+    slug: "personal-loan-calculator-vs-lender-quote",
+    description: "Why a personal-loan EMI estimate may not match a lender quote, sanction terms, net disbursement or all-in borrowing cost.",
+    category: "loans",
+    publishedAt: "2026-08-20",
+    updatedAt: "2026-08-20",
+    readingTime: "7 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "personal-loan",
+    calculatorGuideRole: "supporting",
+    calculatorDiscoveryPriority: 50,
+    relatedCalculators: [],
+    relatedArticles: ["personal-loan-emi-explained", "personal-loan-tenure-comparison"],
+    references: [
+      { title: "Key Facts Statement (KFS) for Loans & Advances", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12663&Mode=0", sourceType: "official", accessedAt: "2026-08-20" },
+    ],
+    sections: [
+      {
+        id: "answer",
+        heading: "A calculator scenario and a lender quote serve different purposes",
+        paragraphs: [
+          "The Personal Loan EMI Calculator applies the principal, constant annual rate and tenure entered to a standard monthly reducing-balance schedule. A lender quote or sanction document can use applicant-specific terms and include costs outside that schedule.",
+          "Calculator estimate does not equal lender quote. A calculator result is also not a sanction, approval or eligibility decision, and it does not predict the rate or amount a lender may offer.",
+        ],
+      },
+      {
+        id: "baseline",
+        heading: "Start by comparing the same principal, rate and tenure",
+        paragraphs: [
+          "For ₹5,00,000 at an illustrative constant 12% for 60 months, the calculator estimates an EMI of ₹11,122.22, total interest of ₹1,67,333.43 and total scheduled repayment of ₹6,67,333.43. These are engine-generated principal-and-interest figures, not a simulated lender quotation.",
+          "Before investigating a difference, confirm that the lender document uses the same sanctioned principal, offered rate and number of instalments as the calculator inputs.",
+        ],
+      },
+      {
+        id: "inputs-can-differ",
+        heading: "The lender may be using different inputs",
+        list: [
+          "Sanctioned amount may differ from the amount requested or entered.",
+          "The offered interest rate may be applicant-specific.",
+          "The contractual tenure or first instalment period may differ.",
+          "Payment dates and product-specific interest-accrual conventions may affect the schedule.",
+          "Lender rounding may create small differences between displayed instalments and totals.",
+        ],
+      },
+      {
+        id: "costs-outside-model",
+        heading: "Some borrowing costs sit outside the calculator",
+        paragraphs: [
+          "Processing fees, insurance or other add-ons, applicable taxes and charges, and deductions from disbursement are not included in the calculator's principal-and-interest total. If a charge is financed, the contractual amount used for repayment may also differ from the cash received.",
+          "APR or effective borrowing cost is not calculated by this tool. Review the lender's Key Facts Statement, sanction letter, repayment schedule and agreement for the applicable all-in disclosures and terms. Do not assume every lender applies or presents each item identically.",
+        ],
+      },
+      {
+        id: "not-modeled",
+        heading: "The estimate does not reproduce every contractual event",
+        paragraphs: [
+          "The engine does not model variable-rate changes, missed payments, prepayment, flat-rate interest, lender-specific accrual methods or revised schedules. It therefore cannot calculate foreclosure savings, a revised EMI or a revised tenure.",
+          "A difference does not by itself mean either figure is an error. First align the inputs, then identify fees, deductions, dates and contractual treatments that the simplified model excludes.",
+        ],
+      },
+      {
+        id: "compare-documents",
+        heading: "Compare the estimate with the lender's documents",
+        paragraphs: [
+          [
+            { text: "Use the " },
+            { text: "Personal Loan EMI Calculator", link: { kind: "calculator", slug: "personal-loan" } },
+            { text: " for a consistent principal-and-interest baseline. Read " },
+            { text: "Personal Loan EMI Explained", link: { kind: "article", slug: "personal-loan-emi-explained" } },
+            { text: " for the model assumptions, or compare the effect of " },
+            { text: "shorter and longer tenures", link: { kind: "article", slug: "personal-loan-tenure-comparison" } },
+            { text: "." },
+          ],
+        ],
+      },
+    ],
+    faq: [
+      { question: "Why can the amount received be lower than the sanctioned amount?", answer: "A lender may deduct applicable fees, taxes, insurance or other documented charges before disbursement. The calculator does not model those deductions." },
+      { question: "Does the calculator show APR or effective borrowing cost?", answer: "No. It calculates principal and interest under its repayment assumptions and does not incorporate every fee or charge used in an all-in cost measure." },
+      { question: "Can the calculator predict approval or the rate I will receive?", answer: "No. It does not assess eligibility, credit profile, lender policy, sanction amount or offered rate." },
+    ],
+  },
 ] satisfies readonly Article[];

@@ -26,7 +26,7 @@ export const categoryLabels: Record<ContentCategory, string> = {
 
 export const categoryDescriptions: Record<ContentCategory, string> = {
   "personal-finance": "Understand compound growth, inflation, future costs and how purchasing power can change over time.",
-  loans: "Read how home-loan EMIs, tenure and interest affect the total amount repaid.",
+  loans: "Understand how loan EMIs, tenure, interest and lender-specific costs affect monthly payments and total repayment.",
   investments: "See how regular SIP contributions build over time, how projected growth is calculated and where the assumptions matter.",
   banking: "Understand deposits, savings products and Government-backed savings schemes such as PPF, including how contributions, rates and timing affect an estimate.",
   tax: "Understand taxable-income inputs, new-regime slabs, Section 87A, cess and the difference between annual tax estimates and payroll TDS.",
