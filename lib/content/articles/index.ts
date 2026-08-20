@@ -28,7 +28,7 @@ export const categoryDescriptions: Record<ContentCategory, string> = {
   "personal-finance": "Start with compound interest: why growth builds on earlier growth and how time changes the result.",
   loans: "Read how home-loan EMIs, tenure and interest affect the total amount repaid.",
   investments: "See how regular SIP contributions build over time, how projected growth is calculated and where the assumptions matter.",
-  banking: "Understand how a fixed deposit grows and how rate, tenure and compounding frequency change the maturity amount.",
+  banking: "Understand deposits, savings products and Government-backed savings schemes such as PPF, including how contributions, rates and timing affect an estimate.",
   tax: "Understand taxable-income inputs, new-regime slabs, Section 87A, cess and the difference between annual tax estimates and payroll TDS.",
   retirement: "Future guides will cover retirement contributions, corpus estimates and withdrawal assumptions.",
 };

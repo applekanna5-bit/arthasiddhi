@@ -72,7 +72,7 @@ describe("FD content cluster registry and discovery", () => {
   });
 
   it("lists the core guide and all three supporting guides in Banking", () => {
-    expect(getArticlesByCategory("banking").map(({ slug }) => slug)).toEqual(["fixed-deposit-explained", ...fdSupportingSlugs]);
+    expect(getArticlesByCategory("banking").map(({ slug }) => slug)).toEqual(["fixed-deposit-explained", ...fdSupportingSlugs, "ppf-explained", "ppf-interest-calculation", "ppf-tenure-extension", "ppf-calculator-projection-vs-actual-maturity"]);
   });
 
   it("curates exactly the approved two FD calculator cards", () => {
@@ -80,7 +80,7 @@ describe("FD content cluster registry and discovery", () => {
     expect(getSupportingGuidesForCalculator("fd")).toHaveLength(2);
     expect(getSupportingGuidesForCalculator("fd").map(({ slug }) => slug)).not.toContain("premature-fd-withdrawal");
     expect(getSupportingGuidesForCalculator("rd")).toEqual([]);
-    expect(getSupportingGuidesForCalculator("ppf")).toEqual([]);
+    expect(getSupportingGuidesForCalculator("ppf").map(({ slug }) => slug)).toEqual(["ppf-interest-calculation", "ppf-calculator-projection-vs-actual-maturity"]);
     expect(getSupportingGuidesForCalculator("sip").map(({ slug }) => slug)).toEqual(["sip-return-calculation", "sip-projection-assumptions"]);
   });
 });
@@ -186,10 +186,10 @@ describe("FD cluster search-intent and SEO protection", () => {
     expect(descriptions.size).toBe(3);
   });
 
-  it("adds all three article routes to a unique 49-URL sitemap", () => {
+  it("keeps all three article routes in the expanded unique sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(49);
-    expect(new Set(urls).size).toBe(49);
+    expect(urls).toHaveLength(53);
+    expect(new Set(urls).size).toBe(53);
     for (const slug of fdSupportingSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(fdArticle(slug))));
   });
 });

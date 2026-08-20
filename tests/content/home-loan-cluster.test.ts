@@ -44,7 +44,7 @@ function section(article: Article, id: string) {
 describe("Home Loan search cluster", () => {
   it("resolves exactly three new slugs while preserving the four original article paths", () => {
     expect(newArticles().map(({ slug }) => slug)).toEqual(newSlugs);
-    expect(articles).toHaveLength(19);
+    expect(articles).toHaveLength(23);
     expect([
       getArticlePath(getArticle("loans", "home-loan-guide")!),
       getArticlePath(getArticle("investments", "sip-explained")!),

@@ -133,9 +133,9 @@ describe("Income Tax SEO and sitemap", () => {
     expect(titles.size).toBe(5); expect(descriptions.size).toBe(5);
   });
 
-  it("publishes the Tax category and five articles in exactly 49 unique URLs", () => {
+  it("publishes the Tax category and five articles in the expanded unique sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(49); expect(new Set(urls).size).toBe(49); expect(urls).toContain(absoluteUrl("/learn/tax"));
+    expect(urls).toHaveLength(53); expect(new Set(urls).size).toBe(53); expect(urls).toContain(absoluteUrl("/learn/tax"));
     for (const slug of taxSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(taxArticle(slug))));
   });
 });

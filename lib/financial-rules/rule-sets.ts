@@ -45,6 +45,42 @@ export const incomeTaxRuleSet: FinancialRuleSet<IncomeTaxRules> = {
 };
 
 export type GstRules = { minimumRate: number; maximumRate: number; presets: number[] };
+
+export type PpfRules = {
+  schemeName: string;
+  minimumAnnualContribution: number;
+  maximumAnnualContribution: number;
+  maturityYearsFromEndOfOpeningYear: number;
+  extensionBlockYears: number;
+  extensionOptionDeadlineYears: number;
+  interestEligibleBalanceFromDay: number;
+  interestCreditedAnnually: boolean;
+};
+
+export const ppfRuleSet: FinancialRuleSet<PpfRules> = {
+  id: "ppf-scheme-2019-amended-2020",
+  label: "Public Provident Fund Scheme, 2019 (as amended in 2020)",
+  effectivePeriod: "Public Provident Fund Scheme, 2019, as amended by G.S.R. 290(E) dated 5 May 2020",
+  periodLabels: [{ label: "Applicable scheme", value: "Public Provident Fund Scheme, 2019 (as amended in 2020)" }],
+  lastVerified: "2026-08-20",
+  rules: {
+    schemeName: "Public Provident Fund Scheme, 2019",
+    minimumAnnualContribution: 500,
+    maximumAnnualContribution: 150_000,
+    maturityYearsFromEndOfOpeningYear: 15,
+    extensionBlockYears: 5,
+    extensionOptionDeadlineYears: 1,
+    interestEligibleBalanceFromDay: 5,
+    interestCreditedAnnually: true,
+  },
+  sources: [
+    { title: "Public Provident Fund Scheme, 2019", authority: "National Savings Institute, Ministry of Finance", reference: "https://www.nsiindia.gov.in/InternalPage.aspx?Id_Pk=169", sourceType: "official", accessedAt: "2026-08-20" },
+    { title: "Public Provident Fund Scheme, 2019 — scheme text", authority: "National Savings Institute, Ministry of Finance", reference: "https://www.nsiindia.gov.in/writereaddata/SchemeRules/PublicProvidentFundSchemeRule.pdf", sourceType: "official", accessedAt: "2026-08-20" },
+    { title: "Acts and Rules Governing Small Savings Schemes", authority: "Department of Economic Affairs, Ministry of Finance", reference: "https://dea.gov.in/budget-division/477", sourceType: "official", accessedAt: "2026-08-20" },
+    { title: "Government Savings Promotion General Rules, 2018", authority: "Department of Economic Affairs, Ministry of Finance", reference: "https://dea.gov.in/budget-division/government-savings-promotion-general-rules-2018", sourceType: "official", accessedAt: "2026-08-20" },
+  ],
+};
+
 export const gstRuleSet: FinancialRuleSet<GstRules> = {
   id: "gst-generic-arithmetic-2026-08",
   label: "GST generic arithmetic rules",
@@ -81,4 +117,4 @@ export const npsRuleSet: FinancialRuleSet<NpsRules> = {
   ],
 };
 
-export const financialRuleSets = { incomeTax: incomeTaxRuleSet, gst: gstRuleSet, epf: epfRuleSet, nps: npsRuleSet } as const;
+export const financialRuleSets = { incomeTax: incomeTaxRuleSet, ppf: ppfRuleSet, gst: gstRuleSet, epf: epfRuleSet, nps: npsRuleSet } as const;
