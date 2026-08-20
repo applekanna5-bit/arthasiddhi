@@ -25,7 +25,7 @@ export const categoryLabels: Record<ContentCategory, string> = {
 };
 
 export const categoryDescriptions: Record<ContentCategory, string> = {
-  "personal-finance": "Start with compound interest: why growth builds on earlier growth and how time changes the result.",
+  "personal-finance": "Understand compound growth, inflation, future costs and how purchasing power can change over time.",
   loans: "Read how home-loan EMIs, tenure and interest affect the total amount repaid.",
   investments: "See how regular SIP contributions build over time, how projected growth is calculated and where the assumptions matter.",
   banking: "Understand deposits, savings products and Government-backed savings schemes such as PPF, including how contributions, rates and timing affect an estimate.",

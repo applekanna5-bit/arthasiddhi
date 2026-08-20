@@ -188,8 +188,8 @@ describe("FD cluster search-intent and SEO protection", () => {
 
   it("keeps all three article routes in the expanded unique sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(53);
-    expect(new Set(urls).size).toBe(53);
+    expect(urls).toHaveLength(57);
+    expect(new Set(urls).size).toBe(57);
     for (const slug of fdSupportingSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(fdArticle(slug))));
   });
 });
