@@ -44,7 +44,7 @@ function section(article: Article, id: string) {
 describe("Home Loan search cluster", () => {
   it("resolves exactly three new slugs while preserving the four original article paths", () => {
     expect(newArticles().map(({ slug }) => slug)).toEqual(newSlugs);
-    expect(articles).toHaveLength(30);
+    expect(articles).toHaveLength(33);
     expect([
       getArticlePath(getArticle("loans", "home-loan-guide")!),
       getArticlePath(getArticle("investments", "sip-explained")!),
@@ -61,7 +61,7 @@ describe("Home Loan search cluster", () => {
   it("keeps one Home Loan core guide and three supporting guides in the expanded Loans category", () => {
     const loanArticles = getArticlesByCategory("loans");
     const homeLoanGuides = articles.filter(({ primaryCalculator }) => primaryCalculator === "home-loan");
-    expect(loanArticles).toHaveLength(7);
+    expect(loanArticles).toHaveLength(10);
     expect(homeLoanGuides.filter(({ calculatorGuideRole }) => calculatorGuideRole === "core")).toHaveLength(1);
     expect(getPrimaryGuideForCalculator("home-loan")?.slug).toBe("home-loan-guide");
     expect(homeLoanGuides.filter(({ calculatorGuideRole }) => calculatorGuideRole === "supporting")).toHaveLength(3);

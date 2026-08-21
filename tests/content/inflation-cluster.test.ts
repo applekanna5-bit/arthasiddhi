@@ -177,8 +177,8 @@ describe("Inflation cluster SEO and sitemap", () => {
 
   it("keeps all four URLs in the expanded unique sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(60);
-    expect(new Set(urls).size).toBe(60);
+    expect(urls).toHaveLength(63);
+    expect(new Set(urls).size).toBe(63);
     for (const slug of inflationSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(inflationArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/personal-finance"))).toHaveLength(1);
   });

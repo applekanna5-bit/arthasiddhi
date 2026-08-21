@@ -450,4 +450,247 @@ export const loanArticles = [
       { question: "Can the calculator predict approval or the rate I will receive?", answer: "No. It does not assess eligibility, credit profile, lender policy, sanction amount or offered rate." },
     ],
   },
+  {
+    title: "Car Loan Cost Guide: Loan Amount, EMI, Interest and Total Repayment",
+    slug: "car-loan-cost-guide",
+    description: "How to read a car-loan principal, EMI, interest, total scheduled repayment and amortization estimate in a vehicle-financing scenario.",
+    category: "loans",
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
+    readingTime: "7 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "car-loan",
+    calculatorGuideRole: "core",
+    relatedCalculators: [],
+    relatedArticles: ["car-loan-down-payment-and-loan-amount", "car-loan-on-road-price-vs-loan-amount", "home-loan-emi-calculation"],
+    sections: [
+      {
+        id: "read-the-estimate",
+        heading: "Read the financed amount and repayment results together",
+        paragraphs: [
+          "A Car Loan calculator scenario starts with the loan principal being modeled, not automatically the vehicle's ex-showroom or on-road price. Enter the actual loan amount you want to test, then read its monthly EMI alongside total interest and total scheduled repayment.",
+          "The entered annual interest rate and tenure determine the repayment schedule under the calculator's assumptions. The result is an estimate for those inputs, not an affordability assessment, lender offer, sanction, approval or eligibility decision.",
+        ],
+      },
+      {
+        id: "inputs-and-results",
+        heading: "What the inputs and results mean",
+        list: [
+          "Loan principal: the amount entered for financing and repayment modeling.",
+          "Annual interest rate: the illustrative or offer-specific rate entered by the user.",
+          "Tenure: the number of years converted into monthly instalments.",
+          "Monthly EMI: the scheduled monthly principal-and-interest payment under the model.",
+          "Total interest: the interest accumulated across the modeled schedule.",
+          "Total scheduled repayment: principal plus modeled interest over the full tenure.",
+        ],
+      },
+      {
+        id: "worked-example",
+        heading: "Worked example: ₹8 lakh at an illustrative 9% for five years",
+        paragraphs: [
+          "For a ₹8,00,000 principal, an illustrative entered annual rate of 9% and a five-year tenure of 60 months, the calculator produces the following monthly reducing-balance estimate. The 9% input is an assumption for this example, not a current, typical, market, best or available lender rate.",
+        ],
+        table: {
+          caption: "Illustrative ₹8 lakh car-loan schedule at 9% for 60 months",
+          headers: ["Loan amount", "Annual rate", "Tenure", "Monthly EMI", "Total interest", "Total repayment"],
+          rows: [["₹8,00,000.00", "9%", "5 years / 60 months", "₹16,606.68", "₹1,96,401.05", "₹9,96,401.05"]],
+        },
+      },
+      {
+        id: "reducing-balance",
+        heading: "How reducing balance and amortization affect the schedule",
+        paragraphs: [
+          "The calculator uses monthly reducing-balance interest. Each EMI contains interest on the outstanding principal and a principal component; as principal is repaid, later interest is calculated on a lower balance when the inputs remain unchanged.",
+          [
+            { text: "The amortization schedule shows that changing split and the balance remaining after each payment. For the detailed generic mathematics, see " },
+            { text: "How Home Loan EMI Is Calculated", link: { kind: "article", slug: "home-loan-emi-calculation" } },
+            { text: "; this guide keeps the focus on interpreting a vehicle-financing scenario." },
+          ],
+        ],
+      },
+      {
+        id: "vehicle-cost-and-principal",
+        heading: "Vehicle cost is not automatically the loan principal",
+        paragraphs: [
+          [
+            { text: "A borrower contribution can reduce the amount requiring finance, while insurance, accessories or other transaction amounts may be handled separately or added to financing. Start with " },
+            { text: "Car Loan Down Payment and Loan Amount", link: { kind: "article", slug: "car-loan-down-payment-and-loan-amount" } },
+            { text: ", then use " },
+            { text: "Car Loan On-Road Price vs Loan Amount", link: { kind: "article", slug: "car-loan-on-road-price-vs-loan-amount" } },
+            { text: " to reconcile the acquisition cost with the principal being modeled." },
+          ],
+        ],
+      },
+      {
+        id: "calculator-boundary",
+        heading: "What the calculator accepts and what it leaves outside",
+        paragraphs: [
+          "The Car Loan calculator accepts only loan amount, annual interest rate and tenure. It does not directly accept or calculate ex-showroom price, on-road price, down payment, registration charges, road tax, insurance, accessories, processing fees or financed add-ons.",
+          "It also does not calculate APR or effective borrowing cost, prepayment, balloon or residual value, flat-rate interest, eligibility, approval or sanction. It assumes a constant annual rate, monthly reducing-balance interest and regular monthly repayments; actual payment dates, rounding, fees and contractual terms can differ.",
+        ],
+        callout: {
+          title: "Model the principal you intend to finance",
+          text: [
+            { text: "Enter that amount, rate and tenure in the " },
+            { text: "Car Loan EMI Calculator", link: { kind: "calculator", slug: "car-loan" } },
+            { text: "." },
+          ],
+        },
+      },
+    ],
+    faq: [
+      { question: "Is the vehicle's on-road price the amount I should enter?", answer: "Not necessarily. Enter the loan principal being modeled after identifying the borrower contribution and how transaction components are treated. The calculator does not derive principal from an on-road price." },
+      { question: "Does the result include fees or insurance?", answer: "No. The calculator models principal and interest for the entered amount, rate and tenure. It does not automatically add fees, insurance, taxes, accessories or other transaction costs." },
+      { question: "Does the calculator determine approval or affordability?", answer: "No. It does not assess affordability, eligibility, creditworthiness, approval, sanction terms or the rate a lender may offer." },
+    ],
+  },
+  {
+    title: "Car Loan Down Payment and Loan Amount",
+    slug: "car-loan-down-payment-and-loan-amount",
+    description: "How vehicle cost and an upfront contribution can translate into an amount requiring finance before using the Car Loan calculator.",
+    category: "loans",
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
+    readingTime: "6 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "car-loan",
+    calculatorGuideRole: "supporting",
+    calculatorDiscoveryPriority: 100,
+    relatedCalculators: [],
+    relatedArticles: ["car-loan-cost-guide", "car-loan-on-road-price-vs-loan-amount"],
+    sections: [
+      {
+        id: "planning-bridge",
+        heading: "Work out the principal before using the calculator",
+        paragraphs: [
+          "A simple planning bridge is vehicle or on-road price minus upfront contribution ≈ amount requiring finance. This subtraction happens outside the Car Loan calculator: the calculator has no vehicle-price or down-payment input and expects the resulting loan principal to be entered directly.",
+          "The relationship is approximate because the actual financed amount can depend on which costs are included, which amounts are paid upfront and the principal ultimately sanctioned. It does not predict a lender offer, approval or eligibility.",
+        ],
+      },
+      {
+        id: "subtraction-example",
+        heading: "Illustrative subtraction: ₹10 lakh minus ₹2 lakh",
+        paragraphs: [
+          "Suppose the illustrative vehicle amount is ₹10,00,000 and the upfront contribution is ₹2,00,000. The transparent planning arithmetic is ₹10,00,000 − ₹2,00,000 = ₹8,00,000, so ₹8,00,000 is the illustrative amount requiring finance before considering any differently treated transaction costs.",
+          "This ₹8,00,000 is not a guaranteed sanctioned principal. Confirm the actual financed amount from the transaction documents and enter that principal directly in the calculator.",
+        ],
+        table: {
+          caption: "Illustrative planning arithmetic performed outside the calculator",
+          headers: ["Vehicle amount", "Upfront contribution", "Amount requiring finance"],
+          rows: [["₹10,00,000", "₹2,00,000", "₹8,00,000"]],
+        },
+      },
+      {
+        id: "engine-example",
+        heading: "Model the resulting principal",
+        paragraphs: [
+          "After entering ₹8,00,000 as principal with an illustrative 9% annual rate and a five-year tenure, the monthly reducing-balance engine estimates an EMI of ₹16,606.68, total interest of ₹1,96,401.05 and total scheduled repayment of ₹9,96,401.05. The rate is only an entered assumption, not a current lender-rate claim.",
+          "A different upfront contribution changes the principal produced by the outside subtraction. All else equal, entering a lower principal changes the EMI and scheduled interest, but this comparison does not identify an ideal contribution or decide affordability.",
+        ],
+      },
+      {
+        id: "why-actual-can-differ",
+        heading: "Why the actual financed principal can differ",
+        list: [
+          "Some insurance, accessories, add-ons, taxes, registration charges or fees may be paid upfront, financed or handled separately.",
+          "A lender may sanction a principal different from the planning amount.",
+          "A dealer document and lender document may group transaction components differently.",
+          "The offered rate, payment dates and contractual schedule can differ from the illustrative assumptions.",
+        ],
+      },
+      {
+        id: "next-step",
+        heading: "Carry the principal into the calculator",
+        paragraphs: [[
+          { text: "Read the " },
+          { text: "Car Loan Cost Guide", link: { kind: "article", slug: "car-loan-cost-guide" } },
+          { text: " to interpret the results and " },
+          { text: "Car Loan On-Road Price vs Loan Amount", link: { kind: "article", slug: "car-loan-on-road-price-vs-loan-amount" } },
+          { text: " to identify cost components before entering the principal in the " },
+          { text: "Car Loan EMI Calculator", link: { kind: "calculator", slug: "car-loan" } },
+          { text: "." },
+        ]],
+      },
+    ],
+    faq: [
+      { question: "Does the Car Loan calculator have a down-payment input?", answer: "No. Work out an illustrative amount requiring finance outside the calculator, then enter the loan principal directly." },
+      { question: "Does a larger upfront contribution guarantee a particular loan amount?", answer: "No. It changes the planning arithmetic, but the actual sanctioned and financed principal depends on the transaction and lender terms." },
+      { question: "Is there an ideal down-payment percentage?", answer: "This article does not recommend a percentage or assess affordability. It explains how to translate an upfront contribution into a principal for a controlled calculator scenario." },
+    ],
+  },
+  {
+    title: "Car Loan On-Road Price vs Loan Amount",
+    slug: "car-loan-on-road-price-vs-loan-amount",
+    description: "Why a vehicle's ex-showroom or on-road cost can differ from the principal entered into a Car Loan calculator.",
+    category: "loans",
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
+    readingTime: "6 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "car-loan",
+    calculatorGuideRole: "supporting",
+    calculatorDiscoveryPriority: 50,
+    relatedCalculators: [],
+    relatedArticles: ["car-loan-cost-guide", "car-loan-down-payment-and-loan-amount"],
+    sections: [
+      {
+        id: "three-different-numbers",
+        heading: "Vehicle price, on-road cost and loan principal are different concepts",
+        paragraphs: [
+          "An ex-showroom price is not automatically the complete on-road amount, and neither figure is automatically the loan principal. On-road cost can contain additional transaction components, while the financed principal depends on the borrower contribution and how each component is treated.",
+          "The Car Loan calculator models only the principal entered by the user. It does not calculate a vehicle price, build an on-road amount or decide which costs a lender will finance.",
+        ],
+      },
+      {
+        id: "cost-components",
+        heading: "Additional components do not all receive the same treatment",
+        paragraphs: [
+          "Registration charges, road tax, insurance, accessories, processing fees and other applicable amounts may contribute to the acquisition cost, but this article does not publish current percentages or fee schedules. The treatment depends on the transaction and documents.",
+          "Do not assume every component is financed. Some amounts may be paid upfront, some may be included in principal and others may remain separate. Use the actual documented financed amount when modeling repayment.",
+        ],
+      },
+      {
+        id: "contribution-and-financing",
+        heading: "Borrower contribution changes the financing requirement",
+        paragraphs: [[
+          { text: "An upfront contribution can reduce the amount requiring finance, but the result remains planning arithmetic until the transaction terms are known. " },
+          { text: "Car Loan Down Payment and Loan Amount", link: { kind: "article", slug: "car-loan-down-payment-and-loan-amount" } },
+          { text: " demonstrates the subtraction outside the calculator." },
+        ]],
+      },
+      {
+        id: "reconcile-principal",
+        heading: "Reconcile the amount before calculating EMI",
+        list: [
+          "Identify the vehicle amount and any additional acquisition-cost components.",
+          "Identify what will be paid upfront by the borrower.",
+          "Check which insurance, accessories, add-ons, charges or other amounts are included in the financed principal, if any.",
+          "Use the actual sanctioned or financed principal from the applicable documents when available.",
+          "Enter only that principal, along with the rate and tenure being modeled, into the calculator.",
+        ],
+      },
+      {
+        id: "calculator-use",
+        heading: "Use the calculator as a principal-and-interest model",
+        paragraphs: [
+          "The result is a monthly reducing-balance estimate for the entered principal, annual rate and tenure. It excludes APR or effective borrowing cost and does not determine fees, prepayment effects, balloon or residual value, flat-rate interest, eligibility, approval, sanction, affordability or the rate offered.",
+        ],
+        callout: {
+          title: "Model the reconciled principal",
+          text: [
+            { text: "Use the " },
+            { text: "Car Loan EMI Calculator", link: { kind: "calculator", slug: "car-loan" } },
+            { text: ", then read the " },
+            { text: "Car Loan Cost Guide", link: { kind: "article", slug: "car-loan-cost-guide" } },
+            { text: " to interpret its EMI, interest and repayment outputs." },
+          ],
+        },
+      },
+    ],
+    faq: [
+      { question: "Is on-road price always the financed loan amount?", answer: "No. Borrower contribution and the treatment of insurance, accessories, charges and other components can make the financed principal different." },
+      { question: "Does the calculator add registration, road tax or insurance?", answer: "No. It accepts a loan principal directly and does not construct an on-road price or automatically add transaction components." },
+      { question: "Can the calculator tell which add-ons a lender will finance?", answer: "No. Check the applicable transaction and lender documents, then enter the principal you intend to model." },
+    ],
+  },
 ] satisfies readonly Article[];

@@ -58,7 +58,7 @@ describe("Personal Loan cluster registry and discovery", () => {
       expect(article.category).toBe("loans");
       expect(article.maintenance).toEqual({ kind: "evergreen" });
     }
-    expect(getArticlesByCategory("loans")).toHaveLength(7);
+    expect(getArticlesByCategory("loans")).toHaveLength(10);
   });
 
   it("keeps one core guide and two supporting guides", () => {
@@ -74,7 +74,7 @@ describe("Personal Loan cluster registry and discovery", () => {
     ]);
     expect(getSupportingGuidesForCalculator("personal-loan")).toHaveLength(2);
     expect(getSupportingGuidesForCalculator("home-loan").map(({ slug }) => slug)).toEqual(["home-loan-emi-calculation", "home-loan-tenure-comparison"]);
-    expect(getSupportingGuidesForCalculator("car-loan")).toEqual([]);
+    expect(getSupportingGuidesForCalculator("car-loan").map(({ slug }) => slug)).toEqual(["car-loan-down-payment-and-loan-amount", "car-loan-on-road-price-vs-loan-amount"]);
     expect(getSupportingGuidesForCalculator("inflation").map(({ slug }) => slug)).toEqual(["inflation-future-cost", "purchasing-power-explained"]);
   });
 });
@@ -174,10 +174,10 @@ describe("Personal Loan cluster SEO and sitemap", () => {
     expect(descriptions.size).toBe(3);
   });
 
-  it("adds three URLs to a unique 60-URL sitemap without a new category", () => {
+  it("preserves Personal Loan URLs in the unique 63-URL sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(60);
-    expect(new Set(urls).size).toBe(60);
+    expect(urls).toHaveLength(63);
+    expect(new Set(urls).size).toBe(63);
     for (const slug of personalLoanSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(personalLoanArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/loans"))).toHaveLength(1);
   });
