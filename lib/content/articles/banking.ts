@@ -692,4 +692,249 @@ export const bankingArticles = [
       { question: "Does a different actual value mean the calculator is wrong?", answer: "Not necessarily. A projection and an account history can use different rates, dates and events. Compare the assumptions before comparing the values." },
     ],
   },
+  {
+    title: "RD Explained: Monthly Deposits, Interest and Maturity",
+    slug: "rd-explained",
+    description: "How recurring monthly deposits, the entered rate and tenure build total deposits, estimated interest and RD maturity in the calculator.",
+    category: "banking",
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
+    readingTime: "7 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "rd",
+    calculatorGuideRole: "core",
+    relatedCalculators: [],
+    relatedArticles: ["rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity", "fd-vs-rd"],
+    sections: [
+      {
+        id: "what-an-rd-models",
+        heading: "An RD builds maturity through recurring monthly deposits",
+        paragraphs: [
+          "A recurring deposit adds a fixed amount month by month rather than placing the full principal into the model at once. The RD Calculator uses the monthly deposit, entered annual interest rate and whole-year tenure to estimate total deposits, interest and maturity.",
+          "The result is a controlled projection under the calculator's timing and constant-rate assumptions. It is not a bank recommendation, a guaranteed return or a promise of the amount an institution will pay.",
+        ],
+      },
+      {
+        id: "inputs-and-results",
+        heading: "Read the inputs and results together",
+        list: [
+          "Monthly deposit: the fixed contribution added in every modeled month.",
+          "Entered annual interest rate: an illustrative constant percentage converted to a monthly equivalent by the engine.",
+          "Tenure: a whole number of years; years multiplied by 12 gives the number of monthly deposits.",
+          "Total deposits: the monthly deposit multiplied by the number of deposits.",
+          "Estimated interest: the projected maturity amount minus total deposits.",
+          "Estimated maturity: total deposits plus modeled interest under the stated assumptions.",
+        ],
+      },
+      {
+        id: "worked-example",
+        heading: "Worked example: ₹10,000 monthly for three years",
+        paragraphs: [
+          "Consider ₹10,000 deposited monthly for three years at an illustrative entered annual rate of 7%. The tenure produces 36 deposits. The 7% input is an assumption for this example, not a current, market, typical, best or prevailing RD rate.",
+        ],
+        table: {
+          caption: "RD estimate for ₹10,000 monthly at an illustrative 7% for three years",
+          headers: ["Monthly deposit", "Annual rate", "Tenure", "Number of deposits", "Total deposited", "Estimated interest", "Estimated maturity"],
+          rows: [["₹10,000.00", "7%", "3 years", "36", "₹3,60,000.00", "₹41,630.26", "₹4,01,630.26"]],
+        },
+      },
+      {
+        id: "contribution-timing",
+        heading: "The calculator assumes beginning-of-month deposits",
+        paragraphs: [
+          "Each monthly deposit is added at the beginning of the modeled month and then receives that month's growth. In the 36-month example, the first contribution receives 36 monthly growth periods and the final contribution receives one, so installments do not all earn interest for the same duration.",
+          [
+            { text: "See " },
+            { text: "How RD Interest Is Calculated", link: { kind: "article", slug: "rd-interest-calculation" } },
+            { text: " for the installment-specific timing mechanics." },
+          ],
+        ],
+      },
+      {
+        id: "comparison-boundary",
+        heading: "An RD cash flow differs from one upfront deposit",
+        paragraphs: [[
+          { text: "Because RD capital enters month by month, it should not be treated as though the full amount was present from the start. The existing " },
+          { text: "FD vs RD comparison", link: { kind: "article", slug: "fd-vs-rd" } },
+          { text: " owns the lump-sum-versus-recurring timing comparison." },
+        ]],
+      },
+      {
+        id: "calculator-boundaries",
+        heading: "What the projection does not model",
+        paragraphs: [
+          "The calculator uses a fixed monthly contribution, one constant entered annual rate, beginning-of-month timing and a fixed whole-year tenure. It returns summary totals and does not expose an installment schedule.",
+          "It does not model variable interest rates, missed or late installments, penalties, premature closure, tax, TDS, current bank rates, bank-specific contribution timing, bank-specific rounding or institution-specific contractual terms.",
+          [
+            { text: "Read " },
+            { text: "why an RD projection may differ from actual maturity", link: { kind: "article", slug: "rd-calculator-projection-vs-actual-maturity" } },
+            { text: ", or enter a controlled scenario in the " },
+            { text: "RD Calculator", link: { kind: "calculator", slug: "rd" } },
+            { text: "." },
+          ],
+        ],
+      },
+    ],
+    faq: [
+      { question: "How many deposits does a three-year RD projection contain?", answer: "The calculator multiplies three whole years by 12, producing 36 fixed monthly deposits." },
+      { question: "Do all monthly deposits earn interest for the same period?", answer: "No. Under the beginning-of-month model, the first deposit receives every monthly growth period and each later deposit receives one fewer, with the final deposit receiving one." },
+      { question: "Does the calculator guarantee the maturity amount?", answer: "No. It is a generic constant-rate estimate. Actual product terms, deposit dates, missed payments, rounding and other contractual events can produce a different outcome." },
+    ],
+  },
+  {
+    title: "How RD Interest Is Calculated: Monthly Installments and Maturity",
+    slug: "rd-interest-calculation",
+    description: "How beginning-of-month RD installments receive different growth periods and combine into total deposits, interest and estimated maturity.",
+    category: "banking",
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
+    readingTime: "7 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "rd",
+    calculatorGuideRole: "supporting",
+    calculatorDiscoveryPriority: 100,
+    relatedCalculators: [],
+    relatedArticles: ["rd-explained", "rd-calculator-projection-vs-actual-maturity", "fd-vs-rd"],
+    sections: [
+      {
+        id: "recurring-mechanics",
+        heading: "RD interest starts with a series of deposits",
+        paragraphs: [
+          "The calculator does not compound one upfront principal. It adds the same deposit at the beginning of every month, applies the monthly-equivalent rate, and combines installments that have been present for different lengths of time.",
+          "This is an RD-specific cash-flow explanation, not a generic compound-interest derivation and not a statement of every institution's contractual method.",
+        ],
+      },
+      {
+        id: "monthly-rate",
+        heading: "How the entered annual percentage becomes a monthly rate",
+        paragraphs: [
+          "The engine converts the entered annual percentage to a monthly equivalent as annual percentage ÷ 12 ÷ 100. An illustrative entered 7% therefore becomes the constant monthly rate used for every modeled growth period.",
+          "This conversion is a calculator convention. The calculator does not retrieve current bank rates or reproduce institution-specific compounding, crediting or rounding rules.",
+        ],
+      },
+      {
+        id: "deposit-count-and-timing",
+        heading: "Each installment receives a different number of growth periods",
+        paragraphs: [
+          "Tenure years multiplied by 12 determines the deposit count. For three years, the engine models 36 beginning-of-month deposits.",
+          "The first ₹10,000 contribution is present for all 36 monthly growth periods. The second receives 35, and the pattern continues until the final contribution receives one monthly growth period. The calculator does not display a month-by-month installment schedule; these durations explain the engine convention conceptually.",
+        ],
+        table: {
+          caption: "Selected installment timing in the 36-deposit model",
+          headers: ["Installment", "Contribution timing", "Modeled growth periods"],
+          rows: [["First", "Beginning of month 1", "36"], ["Second", "Beginning of month 2", "35"], ["Final", "Beginning of month 36", "1"]],
+        },
+      },
+      {
+        id: "maturity-components",
+        heading: "From deposits to interest and maturity",
+        paragraphs: [
+          "For ₹10,000 monthly over 36 deposits, total deposits are ₹3,60,000.00. At the illustrative constant 7% input, the engine estimates ₹41,630.26 of interest and maturity of ₹4,01,630.26.",
+          "Total deposits equal the fixed monthly deposit multiplied by the deposit count. Estimated interest is maturity minus total deposits. Changing the rate or whole-year tenure requires a fresh engine calculation; these figures should not be extrapolated manually.",
+        ],
+      },
+      {
+        id: "timing-comparison",
+        heading: "Do not treat recurring deposits as one opening balance",
+        paragraphs: [[
+          { text: "The " },
+          { text: "existing FD vs RD article", link: { kind: "article", slug: "fd-vs-rd" } },
+          { text: " demonstrates why one upfront amount and recurring monthly deposits produce different timing exposure even when total capital is equal." },
+        ]],
+      },
+      {
+        id: "continue",
+        heading: "Use the mechanics within their boundaries",
+        paragraphs: [[
+          { text: "Return to " },
+          { text: "RD Explained", link: { kind: "article", slug: "rd-explained" } },
+          { text: ", review " },
+          { text: "projection-versus-actual differences", link: { kind: "article", slug: "rd-calculator-projection-vs-actual-maturity" } },
+          { text: ", or test the same inputs in the " },
+          { text: "RD Calculator", link: { kind: "calculator", slug: "rd" } },
+          { text: "." },
+        ]],
+      },
+    ],
+    faq: [
+      { question: "Are RD deposits modeled at the beginning or end of each month?", answer: "The calculator uses beginning-of-month deposits, so every installment receives growth in the month when it is added." },
+      { question: "Why does the final deposit receive only one growth period?", answer: "It is added at the beginning of the final modeled month and receives that month's growth before maturity is reported." },
+      { question: "Does the calculator show an installment schedule?", answer: "No. It returns total deposits, estimated interest and estimated maturity. The timing explanation describes the engine convention rather than a displayed schedule." },
+    ],
+  },
+  {
+    title: "Why an RD Calculator Projection May Differ From Actual Maturity",
+    slug: "rd-calculator-projection-vs-actual-maturity",
+    description: "Why deposit dates, product terms, missed installments and other events can make actual RD maturity differ from a generic calculator estimate.",
+    category: "banking",
+    publishedAt: "2026-08-21",
+    updatedAt: "2026-08-21",
+    readingTime: "7 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "rd",
+    calculatorGuideRole: "supporting",
+    calculatorDiscoveryPriority: 50,
+    relatedCalculators: [],
+    relatedArticles: ["rd-explained", "rd-interest-calculation"],
+    sections: [
+      {
+        id: "estimate-vs-outcome",
+        heading: "The calculator standardizes inputs; an actual RD follows its terms",
+        paragraphs: [
+          "The RD Calculator estimates maturity using a fixed monthly contribution, one constant entered annual rate, beginning-of-month deposits, a whole-year tenure and a generic monthly-equivalent rate treatment. An actual RD follows deposit dates and the institution-specific contractual terms that apply to it.",
+          "A difference does not by itself mean the engine is incorrect. It can mean the calculator assumptions and actual account events were different.",
+        ],
+      },
+      {
+        id: "controlled-baseline",
+        heading: "Start with the same controlled inputs",
+        paragraphs: [
+          "For ₹10,000 monthly, an illustrative entered 7% annual rate and three years, the engine models 36 deposits totaling ₹3,60,000.00. It estimates interest of ₹41,630.26 and maturity of ₹4,01,630.26 under its beginning-of-month constant-rate convention.",
+          "The 7% rate is an illustrative assumption, not a current, market, typical, best or prevailing RD rate. Compare an actual account only after aligning the deposit, rate, tenure and timing inputs.",
+        ],
+      },
+      {
+        id: "deposit-events",
+        heading: "Actual deposit dates and payment events can differ",
+        paragraphs: [
+          "Deposits made on different dates may receive different treatment from the calculator's beginning-of-month convention. Missed or late installments can also affect an actual account according to its terms.",
+          "The calculator does not model missed installments, late installments or penalties. This article does not calculate or assert any universal or bank-specific penalty.",
+        ],
+      },
+      {
+        id: "product-terms",
+        heading: "Product rules can change the eventual outcome",
+        paragraphs: [
+          "An institution may apply its own rate rules, interest-crediting method, contribution timing, rounding convention and other contractual conditions. The calculator uses one generic convention and does not reproduce those product-specific rules.",
+          "Premature closure can change actual proceeds according to the applicable terms, but the calculator does not model premature closure, closure penalties or revised maturity. Variable interest rates are also outside the model.",
+        ],
+      },
+      {
+        id: "other-boundaries",
+        heading: "Tax, TDS and current rates remain outside the projection",
+        paragraphs: [
+          "The calculator does not calculate tax or TDS and does not retrieve current bank rates. Review applicable documents and qualified guidance separately rather than treating the maturity estimate as tax guidance or a current product quotation.",
+          "It also returns summary totals rather than an installment schedule, so it should not be presented as a bank account statement or contractual maturity record.",
+        ],
+      },
+      {
+        id: "compare-assumptions",
+        heading: "Compare assumptions before comparing maturity values",
+        paragraphs: [[
+          { text: "Use " },
+          { text: "RD Explained", link: { kind: "article", slug: "rd-explained" } },
+          { text: " for the output definitions, read " },
+          { text: "How RD Interest Is Calculated", link: { kind: "article", slug: "rd-interest-calculation" } },
+          { text: " for the modeled timing, or enter the intended scenario in the " },
+          { text: "RD Calculator", link: { kind: "calculator", slug: "rd" } },
+          { text: "." },
+        ]],
+      },
+    ],
+    faq: [
+      { question: "Why might actual RD maturity differ from the calculator?", answer: "Actual deposit dates, missed or late installments, rate rules, rounding, premature closure and other product terms can differ from the calculator's fixed generic assumptions." },
+      { question: "Does the calculator include late-payment or premature-closure penalties?", answer: "No. It does not model penalties or premature closure, and this article does not assume how an institution would calculate them." },
+      { question: "Does the estimate include tax or TDS?", answer: "No. Tax and TDS are outside the calculator, and the article does not provide current thresholds or tax rules." },
+    ],
+  },
 ] satisfies readonly Article[];

@@ -64,6 +64,7 @@ describe("PPF cluster registry and maintenance", () => {
     for (const article of registered) expect(article.category).toBe("banking");
     expect(getArticlesByCategory("banking").map(({ slug }) => slug)).toEqual([
       "fixed-deposit-explained", "fd-interest-calculation", "fd-vs-rd", "premature-fd-withdrawal", ...ppfSlugs,
+      "rd-explained", "rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity",
     ]);
   });
 
@@ -95,7 +96,7 @@ describe("PPF calculator discovery and internal links", () => {
     expect(getSupportingGuidesForCalculator("ppf")).toHaveLength(2);
     expect(getSupportingGuidesForCalculator("ppf").map(({ slug }) => slug)).not.toContain("ppf-tenure-extension");
     expect(getSupportingGuidesForCalculator("fd").map(({ slug }) => slug)).toEqual(["fd-interest-calculation", "fd-vs-rd"]);
-    expect(getSupportingGuidesForCalculator("rd")).toEqual([]);
+    expect(getSupportingGuidesForCalculator("rd").map(({ slug }) => slug)).toEqual(["rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity"]);
     expect(getSupportingGuidesForCalculator("sip").map(({ slug }) => slug)).toEqual(["sip-return-calculation", "sip-projection-assumptions"]);
     expect(getSupportingGuidesForCalculator("home-loan").map(({ slug }) => slug)).toEqual(["home-loan-emi-calculation", "home-loan-tenure-comparison"]);
   });
@@ -194,8 +195,8 @@ describe("PPF tenure, editorial and SEO safety", () => {
 
   it("keeps all four article URLs in the expanded unique sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(63);
-    expect(new Set(urls).size).toBe(63);
+    expect(urls).toHaveLength(66);
+    expect(new Set(urls).size).toBe(66);
     for (const slug of ppfSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(ppfArticle(slug))));
     expect(urls.filter((url) => url === absoluteUrl("/learn/banking"))).toHaveLength(1);
     expect(urls.filter((url) => /\/learn\/(government-savings|ppf)$/.test(url))).toEqual([]);

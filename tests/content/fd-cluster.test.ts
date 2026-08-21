@@ -72,14 +72,14 @@ describe("FD content cluster registry and discovery", () => {
   });
 
   it("lists the core guide and all three supporting guides in Banking", () => {
-    expect(getArticlesByCategory("banking").map(({ slug }) => slug)).toEqual(["fixed-deposit-explained", ...fdSupportingSlugs, "ppf-explained", "ppf-interest-calculation", "ppf-tenure-extension", "ppf-calculator-projection-vs-actual-maturity"]);
+    expect(getArticlesByCategory("banking").map(({ slug }) => slug)).toEqual(["fixed-deposit-explained", ...fdSupportingSlugs, "ppf-explained", "ppf-interest-calculation", "ppf-tenure-extension", "ppf-calculator-projection-vs-actual-maturity", "rd-explained", "rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity"]);
   });
 
   it("curates exactly the approved two FD calculator cards", () => {
     expect(getSupportingGuidesForCalculator("fd").map(({ slug }) => slug)).toEqual(["fd-interest-calculation", "fd-vs-rd"]);
     expect(getSupportingGuidesForCalculator("fd")).toHaveLength(2);
     expect(getSupportingGuidesForCalculator("fd").map(({ slug }) => slug)).not.toContain("premature-fd-withdrawal");
-    expect(getSupportingGuidesForCalculator("rd")).toEqual([]);
+    expect(getSupportingGuidesForCalculator("rd").map(({ slug }) => slug)).toEqual(["rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity"]);
     expect(getSupportingGuidesForCalculator("ppf").map(({ slug }) => slug)).toEqual(["ppf-interest-calculation", "ppf-calculator-projection-vs-actual-maturity"]);
     expect(getSupportingGuidesForCalculator("sip").map(({ slug }) => slug)).toEqual(["sip-return-calculation", "sip-projection-assumptions"]);
   });
@@ -188,8 +188,8 @@ describe("FD cluster search-intent and SEO protection", () => {
 
   it("keeps all three article routes in the expanded unique sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(63);
-    expect(new Set(urls).size).toBe(63);
+    expect(urls).toHaveLength(66);
+    expect(new Set(urls).size).toBe(66);
     for (const slug of fdSupportingSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(fdArticle(slug))));
   });
 });
