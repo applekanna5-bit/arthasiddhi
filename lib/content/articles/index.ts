@@ -11,6 +11,7 @@ import {
 } from "../types";
 import { bankingArticles } from "./banking";
 import { epfArticles } from "./epf";
+import { gratuityArticles } from "./gratuity";
 import { investmentArticles } from "./investments";
 import { loanArticles } from "./loans";
 import { personalFinanceArticles } from "./personal-finance";
@@ -43,6 +44,7 @@ export const articles: readonly Article[] = [
   ...taxArticles,
   ...retirementArticles,
   ...epfArticles,
+  ...gratuityArticles,
 ];
 
 export const publishedCategories = contentCategories.filter((category) => articles.some((article) => article.category === category));

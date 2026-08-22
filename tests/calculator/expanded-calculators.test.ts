@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { calculateSip } from "../../lib/calculator/sip-calculator";
 import { calculateCagr, calculateGratuity, calculateInflation, calculateLumpsum, calculatePpf, calculateRd, calculateStepUpSip, calculateSwp } from "../../lib/calculator/expanded-calculators";
+import { gratuityRuleSet } from "../../lib/financial-rules/rule-sets";
 
 describe("PPF calculator", () => {
   it("accumulates annual beginning contributions", () => { const result = calculatePpf({ annualContribution: 150000, annualInterestRate: 7.1, tenureYears: 15 }); expect(result.totalContribution).toBe(2250000); expect(result.maturityAmount).toBeCloseTo(4_068_209.22, 2); expect(result.schedule).toHaveLength(15); });
@@ -61,15 +62,17 @@ describe("step-up SIP calculator", () => {
 });
 
 describe("gratuity calculator", () => {
-  it("calculates whole years", () => expect(calculateGratuity({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 0 }).estimatedGratuity).toBeCloseTo(288_461.54, 2));
-  it("does not round up six additional months", () => expect(calculateGratuity({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 6 }).serviceYearsCounted).toBe(10));
-  it("rounds up more than six additional months", () => expect(calculateGratuity({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 7 }).serviceYearsCounted).toBe(11));
-  it("handles zero wage", () => expect(calculateGratuity({ eligibleMonthlyWage: 0, completedYears: 10, additionalMonths: 0 }).estimatedGratuity).toBe(0));
-  it("rejects invalid month count", () => expect(() => calculateGratuity({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 12 })).toThrow());
-  it("rejects negative values", () => expect(() => calculateGratuity({ eligibleMonthlyWage: 50000, completedYears: -1, additionalMonths: 0 })).toThrow());
-  it("accepts the inclusive service and month upper limits", () => expect(calculateGratuity({ eligibleMonthlyWage: 100_000_000_000, completedYears: 100, additionalMonths: 11 }).serviceYearsCounted).toBe(101));
-  it("rejects fractional completed years", () => expect(() => calculateGratuity({ eligibleMonthlyWage: 50000, completedYears: 10.5, additionalMonths: 0 })).toThrow(/whole number/));
-  it("rejects fractional additional months", () => expect(() => calculateGratuity({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 6.5 })).toThrow(/whole number/));
+  const calculate = (input: Parameters<typeof calculateGratuity>[0]) => calculateGratuity(input, gratuityRuleSet);
+  it("calculates whole years", () => expect(calculate({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 0 }).estimatedGratuity).toBeCloseTo(288_461.54, 2));
+  it("does not round up six additional months", () => expect(calculate({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 6 }).serviceYearsCounted).toBe(10));
+  it("rounds up more than six additional months", () => expect(calculate({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 7 }).serviceYearsCounted).toBe(11));
+  it("caps the statutory estimate while retaining the raw amount", () => expect(calculate({ eligibleMonthlyWage: 500_000, completedYears: 30, additionalMonths: 0 })).toMatchObject({ statutoryCeiling: 2_000_000, estimatedGratuity: 2_000_000, ceilingApplied: true }));
+  it("handles zero wage", () => expect(calculate({ eligibleMonthlyWage: 0, completedYears: 10, additionalMonths: 0 }).estimatedGratuity).toBe(0));
+  it("rejects invalid month count", () => expect(() => calculate({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 12 })).toThrow());
+  it("rejects negative values", () => expect(() => calculate({ eligibleMonthlyWage: 50000, completedYears: -1, additionalMonths: 0 })).toThrow());
+  it("accepts the inclusive service and month upper limits", () => expect(calculate({ eligibleMonthlyWage: 100_000_000_000, completedYears: 100, additionalMonths: 11 }).serviceYearsCounted).toBe(101));
+  it("rejects fractional completed years", () => expect(() => calculate({ eligibleMonthlyWage: 50000, completedYears: 10.5, additionalMonths: 0 })).toThrow(/whole number/));
+  it("rejects fractional additional months", () => expect(() => calculate({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 6.5 })).toThrow(/whole number/));
 });
 
 describe("SWP calculator", () => {

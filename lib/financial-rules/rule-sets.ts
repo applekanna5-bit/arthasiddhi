@@ -178,4 +178,50 @@ export const npsRuleSet: FinancialRuleSet<NpsRules> = {
   ],
 };
 
-export const financialRuleSets = { incomeTax: incomeTaxRuleSet, ppf: ppfRuleSet, gst: gstRuleSet, epf: epfRuleSet, nps: npsRuleSet } as const;
+export type GratuityRules = {
+  framework: string;
+  commencementDate: string;
+  ordinaryMonthlyRatedNumerator: number;
+  ordinaryMonthlyRatedDenominator: number;
+  additionalMonthsMustExceed: number;
+  generalContinuousServiceYears: number;
+  deathException: boolean;
+  disablementException: boolean;
+  fixedTermContext: string;
+  statutoryCeiling: number;
+  wageDefinitionContext: string;
+  specialCasesExcludedFromCalculator: readonly string[];
+  betterTermsMayApply: boolean;
+};
+
+export const gratuityRuleSet: FinancialRuleSet<GratuityRules> = {
+  id: "gratuity-social-security-code-2025-11",
+  label: "Code on Social Security, 2020 — gratuity framework",
+  effectivePeriod: "Gratuity provisions operative from 21 November 2025",
+  periodLabels: [{ label: "Operative framework", value: "Code on Social Security, 2020, effective for gratuity from 21 November 2025" }],
+  lastVerified: "2026-08-22",
+  rules: {
+    framework: "Code on Social Security, 2020",
+    commencementDate: "2025-11-21",
+    ordinaryMonthlyRatedNumerator: 15,
+    ordinaryMonthlyRatedDenominator: 26,
+    additionalMonthsMustExceed: 6,
+    generalContinuousServiceYears: 5,
+    deathException: true,
+    disablementException: true,
+    fixedTermContext: "Special eligibility and pro-rata treatment apply; current Ministry guidance identifies one year under the fixed-term contract.",
+    statutoryCeiling: 2_000_000,
+    wageDefinitionContext: "Use wages under the operative Code and applicable employment context; the amount is not universally identical to basic salary, gross salary, CTC or take-home pay.",
+    specialCasesExcludedFromCalculator: ["piece-rated", "seasonal", "fixed-term-pro-rata", "death-or-disablement-specific", "forfeiture", "enhanced-employer-terms", "tax"],
+    betterTermsMayApply: true,
+  },
+  sources: [
+    { title: "Code on Social Security, 2020 — section 53", authority: "India Code, Government of India", reference: "https://www.indiacode.nic.in/show-data?actid=AC_CEN_6_0_00036_202036_1623221080799&orderno=53&sectionId=54077&sectionno=53", sourceType: "official", accessedAt: "2026-08-22", effectiveFrom: "2025-11-21" },
+    { title: "Key provisions under the Code on Social Security, 2020", authority: "Ministry of Labour & Employment", reference: "https://www.labour.gov.in/static/uploads/2026/03/d70bb9f7e87ec48bd64fde40329f9c09.pdf", sourceType: "official", accessedAt: "2026-08-22", effectiveFrom: "2025-11-21" },
+    { title: "FAQs on Labour Codes", authority: "Ministry of Labour & Employment", reference: "https://labour.gov.in/sites/default/files/faqs_on_labour_codes.pdf", sourceType: "official", accessedAt: "2026-08-22" },
+    { title: "Additional FAQs on Labour Codes", authority: "Ministry of Labour & Employment", reference: "https://www.labour.gov.in/static/uploads/2026/03/a4ccf4c6d97c4f1f36a6d83f8c64213d.pdf", sourceType: "official", accessedAt: "2026-08-22" },
+    { title: "Gratuity exemption ceiling notification context", authority: "Income Tax Department", reference: "https://www.incometaxindia.gov.in/w/what-is-the-effective-date-of-enhancement-of-limit-of-gratuity-from-rs-10-lakh-to-20-lakh-for-purpose-of-tax-exemption-computation-under-section-10-10-ii-", sourceType: "official", accessedAt: "2026-08-22", effectiveFrom: "2018-03-29" },
+  ],
+};
+
+export const financialRuleSets = { incomeTax: incomeTaxRuleSet, ppf: ppfRuleSet, gst: gstRuleSet, epf: epfRuleSet, nps: npsRuleSet, gratuity: gratuityRuleSet } as const;

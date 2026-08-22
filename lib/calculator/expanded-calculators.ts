@@ -1,4 +1,6 @@
 import { assertFiniteNumber, assertInRange } from "./validation";
+import type { FinancialRuleSet } from "../financial-rules/types";
+import type { GratuityRules } from "../financial-rules/rule-sets";
 
 function validateAmount(value: number, label: string, allowZero = true) {
   assertFiniteNumber(value, label);
@@ -95,9 +97,9 @@ export function calculateStepUpSip(input: StepUpSipInput): StepUpSipResult {
 }
 
 export interface GratuityInput { eligibleMonthlyWage: number; completedYears: number; additionalMonths: number }
-export interface GratuityResult { eligibleMonthlyWage: number; serviceYearsCounted: number; estimatedGratuity: number }
+export interface GratuityResult { eligibleMonthlyWage: number; serviceYearsCounted: number; rawFormulaGratuity: number; statutoryCeiling: number; estimatedGratuity: number; ceilingApplied: boolean }
 
-export function calculateGratuity(input: GratuityInput): GratuityResult {
+export function calculateGratuity(input: GratuityInput, ruleSet: FinancialRuleSet<GratuityRules>): GratuityResult {
   validateAmount(input.eligibleMonthlyWage, "Eligible monthly wage");
   assertFiniteNumber(input.completedYears, "Completed years of service");
   assertInRange(input.completedYears, "Completed years of service", 0, 100);
@@ -105,8 +107,10 @@ export function calculateGratuity(input: GratuityInput): GratuityResult {
   assertFiniteNumber(input.additionalMonths, "Additional completed months");
   assertInRange(input.additionalMonths, "Additional completed months", 0, 11);
   if (!Number.isInteger(input.additionalMonths)) throw new Error("Additional completed months must be a whole number.");
-  const serviceYearsCounted = input.completedYears + (input.additionalMonths > 6 ? 1 : 0);
-  return { eligibleMonthlyWage: input.eligibleMonthlyWage, serviceYearsCounted, estimatedGratuity: input.eligibleMonthlyWage * 15 / 26 * serviceYearsCounted };
+  const serviceYearsCounted = input.completedYears + (input.additionalMonths > ruleSet.rules.additionalMonthsMustExceed ? 1 : 0);
+  const rawFormulaGratuity = input.eligibleMonthlyWage * ruleSet.rules.ordinaryMonthlyRatedNumerator / ruleSet.rules.ordinaryMonthlyRatedDenominator * serviceYearsCounted;
+  const estimatedGratuity = Math.min(rawFormulaGratuity, ruleSet.rules.statutoryCeiling);
+  return { eligibleMonthlyWage: input.eligibleMonthlyWage, serviceYearsCounted, rawFormulaGratuity, statutoryCeiling: ruleSet.rules.statutoryCeiling, estimatedGratuity, ceilingApplied: rawFormulaGratuity > ruleSet.rules.statutoryCeiling };
 }
 
 export interface SwpInput { initialInvestment: number; monthlyWithdrawal: number; annualReturnRate: number; withdrawalYears: number }

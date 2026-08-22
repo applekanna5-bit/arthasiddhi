@@ -29,7 +29,8 @@ describe("Batch B2 expanded calculator voice", () => {
   });
 
   it("keeps the gratuity legal-eligibility boundary", () => {
-    expect(source).toContain("This result does not establish legal eligibility.");
+    expect(source).toContain("This result does not establish legal eligibility or limit better terms");
+    expect(source).toContain("statutory estimate after the");
   });
 
   it("uses the accurate SWP month label and constant-return limitation", () => {

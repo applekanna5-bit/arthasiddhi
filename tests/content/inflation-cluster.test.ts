@@ -75,7 +75,7 @@ describe("Inflation cluster registry and discovery", () => {
     expect(getSupportingGuidesForCalculator("ppf").map(({ slug }) => slug)).toEqual(["ppf-interest-calculation", "ppf-calculator-projection-vs-actual-maturity"]);
     expect(getSupportingGuidesForCalculator("fd").map(({ slug }) => slug)).toEqual(["fd-interest-calculation", "fd-vs-rd"]);
     expect(getSupportingGuidesForCalculator("sip").map(({ slug }) => slug)).toEqual(["sip-return-calculation", "sip-projection-assumptions"]);
-    expect(getSupportingGuidesForCalculator("gratuity")).toEqual([]);
+    expect(getSupportingGuidesForCalculator("gratuity").map(({ slug }) => slug)).toEqual(["gratuity-calculation", "gratuity-calculator-vs-employer-settlement"]);
   });
 });
 
@@ -177,8 +177,8 @@ describe("Inflation cluster SEO and sitemap", () => {
 
   it("keeps all four URLs in the expanded unique sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(78);
-    expect(new Set(urls).size).toBe(78);
+    expect(urls).toHaveLength(82);
+    expect(new Set(urls).size).toBe(82);
     for (const slug of inflationSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(inflationArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/personal-finance"))).toHaveLength(1);
   });

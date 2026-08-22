@@ -97,6 +97,10 @@ describe("Batch C Learn discovery", () => {
       "/learn/retirement/epf-explained",
       "/learn/retirement/epf-contribution-calculation",
       "/learn/retirement/epf-calculator-projection-assumptions",
+      "/learn/retirement/gratuity-explained",
+      "/learn/retirement/gratuity-calculation",
+      "/learn/retirement/gratuity-calculator-vs-employer-settlement",
+      "/learn/retirement/gratuity-eligibility",
     ]);
   });
 });

@@ -59,6 +59,10 @@ export const articleSlugs = [
   "epf-explained",
   "epf-contribution-calculation",
   "epf-calculator-projection-assumptions",
+  "gratuity-explained",
+  "gratuity-calculation",
+  "gratuity-calculator-vs-employer-settlement",
+  "gratuity-eligibility",
 ] as const;
 
 export type ArticleSlug = (typeof articleSlugs)[number];
