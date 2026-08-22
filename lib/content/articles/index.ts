@@ -13,6 +13,7 @@ import { bankingArticles } from "./banking";
 import { investmentArticles } from "./investments";
 import { loanArticles } from "./loans";
 import { personalFinanceArticles } from "./personal-finance";
+import { retirementArticles } from "./retirement";
 import { taxArticles } from "./tax";
 
 export const categoryLabels: Record<ContentCategory, string> = {
@@ -30,7 +31,7 @@ export const categoryDescriptions: Record<ContentCategory, string> = {
   investments: "See how regular SIP contributions build over time, how projected growth is calculated and where the assumptions matter.",
   banking: "Understand deposits, savings products and Government-backed savings schemes such as PPF, including how contributions, rates and timing affect an estimate.",
   tax: "Understand taxable-income inputs, new-regime slabs, Section 87A, cess and the difference between annual tax estimates and payroll TDS.",
-  retirement: "Future guides will cover retirement contributions, corpus estimates and withdrawal assumptions.",
+  retirement: "Understand retirement contributions, corpus projections, annuity assumptions and how to interpret calculator estimates.",
 };
 
 export const articles: readonly Article[] = [
@@ -39,6 +40,7 @@ export const articles: readonly Article[] = [
   ...bankingArticles,
   ...personalFinanceArticles,
   ...taxArticles,
+  ...retirementArticles,
 ];
 
 export const publishedCategories = contentCategories.filter((category) => articles.some((article) => article.category === category));

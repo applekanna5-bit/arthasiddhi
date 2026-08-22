@@ -167,10 +167,10 @@ describe("Car Loan SEO, schema and sitemap", () => {
     expect(descriptions.size).toBe(3);
   });
 
-  it("keeps each Car Loan route once in the unique 70-URL sitemap", () => {
+  it("keeps each Car Loan route once in the unique 75-URL sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(70);
-    expect(new Set(urls).size).toBe(70);
+    expect(urls).toHaveLength(75);
+    expect(new Set(urls).size).toBe(75);
     for (const slug of carLoanSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(carLoanArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/loans"))).toHaveLength(1);
   });

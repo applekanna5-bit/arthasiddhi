@@ -12,16 +12,16 @@ import { absoluteUrl } from "../../lib/content/site";
 import { buildSitemap } from "../../lib/content/sitemap";
 
 describe("Batch C Learn discovery", () => {
-  const expectedCategories = ["personal-finance", "loans", "investments", "banking", "tax"];
+  const expectedCategories = ["personal-finance", "loans", "investments", "banking", "tax", "retirement"];
 
   it("shows only categories containing published articles", () => {
     expect(publishedCategories).toEqual(expectedCategories);
     expect(publishedCategories.every((category) => getArticlesByCategory(category).length > 0)).toBe(true);
   });
 
-  it("exposes Tax but not empty Retirement in primary discovery", () => {
+  it("exposes populated Tax and Retirement in primary discovery", () => {
     expect(publishedCategories).toContain("tax");
-    expect(publishedCategories).not.toContain("retirement");
+    expect(publishedCategories).toContain("retirement");
   });
 
   it("keeps every populated category discoverable", () => {
@@ -41,10 +41,10 @@ describe("Batch C Learn discovery", () => {
     expect(getFeaturedArticles().map(({ slug }) => slug)).toEqual(featuredArticleSlugs);
   });
 
-  it("adds populated Tax and keeps empty Retirement out of the sitemap", () => {
+  it("includes populated Tax and Retirement in the sitemap", () => {
     const sitemapUrls = new Set(buildSitemap().map(({ url }) => url));
     expect(sitemapUrls.has(absoluteUrl("/learn/tax"))).toBe(true);
-    expect(sitemapUrls.has(absoluteUrl("/learn/retirement"))).toBe(false);
+    expect(sitemapUrls.has(absoluteUrl("/learn/retirement"))).toBe(true);
   });
 
   it("keeps article relationships valid and public URLs unchanged", () => {
@@ -90,6 +90,10 @@ describe("Batch C Learn discovery", () => {
       "/learn/tax/health-education-cess-calculation",
       "/learn/tax/gross-income-vs-taxable-income",
       "/learn/tax/income-tax-calculator-vs-payroll-tds",
+      "/learn/retirement/nps-explained",
+      "/learn/retirement/nps-corpus-calculation",
+      "/learn/retirement/nps-lump-sum-and-annuity",
+      "/learn/retirement/nps-calculator-assumptions",
     ]);
   });
 });

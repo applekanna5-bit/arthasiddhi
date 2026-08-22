@@ -173,8 +173,8 @@ describe("SIP cluster search-intent and SEO protection", () => {
   it("keeps all four routes in the expanded unique sitemap", () => {
     const sitemap = buildSitemap();
     const urls = sitemap.map(({ url }) => url);
-    expect(urls).toHaveLength(70);
-    expect(new Set(urls).size).toBe(70);
+    expect(urls).toHaveLength(75);
+    expect(new Set(urls).size).toBe(75);
     for (const slug of sipSupportingSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(sipArticle(slug))));
   });
 });

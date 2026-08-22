@@ -80,7 +80,7 @@ describe("NPS calculator", () => {
   it("reconciles lump sum and annuity to corpus", () => { const result = nps({ currentCorpus: 12_345, annualReturnRate: 9.5 }); expect(result.lumpSumCorpus + result.annuityCorpus).toBe(result.retirementCorpus); });
   it("reconciles annual and monthly annuity estimates", () => { const result = nps(); expect(result.estimatedMonthlyAnnuity * 12).toBe(result.estimatedAnnualAnnuity); expect(result.estimatedAnnualAnnuity).toBe(result.annuityCorpus * result.assumedAnnuityRate / 100); });
   it("requires retirement age greater than current age", () => expect(() => nps({ retirementAge: 30 })).toThrow(/greater than/));
-  it("rejects retirement above 75", () => expect(() => nps({ retirementAge: 76 })).toThrow());
+  it("accepts retirement at 85 and rejects retirement above 85", () => { expect(nps({ currentAge: 84, retirementAge: 85 }).yearsUntilRetirement).toBe(1); expect(() => nps({ retirementAge: 86 })).toThrow(); });
   it("rejects annuity allocation outside 20% to 100%", () => { expect(() => nps({ annuityAllocation: 19.99 })).toThrow(); expect(() => nps({ annuityAllocation: 100.01 })).toThrow(); });
   it("rejects negative values", () => expect(() => nps({ monthlyContribution: -1 })).toThrow());
   it("rejects NaN and Infinity", () => { expect(() => nps({ currentCorpus: Number.NaN })).toThrow(/finite/); expect(() => nps({ annualReturnRate: Infinity })).toThrow(/finite/); });

@@ -177,10 +177,10 @@ describe("RD SEO, schema and sitemap", () => {
     expect(descriptions.size).toBe(3);
   });
 
-  it("adds each route once to a unique 70-URL sitemap without a new category", () => {
+  it("adds each route once to a unique 75-URL sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(70);
-    expect(new Set(urls).size).toBe(70);
+    expect(urls).toHaveLength(75);
+    expect(new Set(urls).size).toBe(75);
     for (const slug of rdSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(rdArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/banking"))).toHaveLength(1);
   });

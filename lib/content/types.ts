@@ -52,6 +52,10 @@ export const articleSlugs = [
   "health-education-cess-calculation",
   "gross-income-vs-taxable-income",
   "income-tax-calculator-vs-payroll-tds",
+  "nps-explained",
+  "nps-corpus-calculation",
+  "nps-lump-sum-and-annuity",
+  "nps-calculator-assumptions",
 ] as const;
 
 export type ArticleSlug = (typeof articleSlugs)[number];

@@ -190,8 +190,8 @@ describe("CAGR cluster SEO, schema and sitemap", () => {
 
   it("adds each article once to the 70-URL sitemap without a category duplicate", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(70);
-    expect(new Set(urls).size).toBe(70);
+    expect(urls).toHaveLength(75);
+    expect(new Set(urls).size).toBe(75);
     for (const slug of cagrSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(cagrArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/investments"))).toHaveLength(1);
   });

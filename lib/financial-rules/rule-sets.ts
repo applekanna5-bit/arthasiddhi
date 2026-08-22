@@ -103,17 +103,36 @@ export const epfRuleSet: FinancialRuleSet<EpfRules> = {
   ],
 };
 
-export type NpsRules = { minimumCurrentAge: number; maximumRetirementAge: number; minimumAnnuityAllocation: number; maximumAnnuityAllocation: number };
+export type NpsRules = {
+  subscriberModel: "all-citizen";
+  regulationTitle: string;
+  minimumCurrentAge: number;
+  maximumRetirementAge: number;
+  minimumAnnuityAllocation: number;
+  maximumAnnuityAllocation: number;
+  normalExit: { fullWithdrawalThreshold: number; intermediateCorpusThreshold: number; maximumDirectLumpSumInIntermediateBand: number; maximumLumpSumAllocation: number; minimumAnnuityAllocation: number };
+  prematureExit: { fullWithdrawalThreshold: number; maximumLumpSumAllocation: number; minimumAnnuityAllocation: number };
+};
 export const npsRuleSet: FinancialRuleSet<NpsRules> = {
-  id: "nps-normal-exit-illustration-2026-08",
-  label: "NPS All Citizen Model normal-exit illustration",
-  effectivePeriod: "Rules verified 16 August 2026",
-  lastVerified: "2026-08-16",
-  rules: { minimumCurrentAge: 18, maximumRetirementAge: 75, minimumAnnuityAllocation: 20, maximumAnnuityAllocation: 100 },
+  id: "nps-all-citizen-exits-2026-07",
+  label: "NPS All Citizen Model under current exit regulations",
+  effectivePeriod: "PFRDA Exits and Withdrawals Regulations, 2015, last amended 20 July 2026",
+  periodLabels: [{ label: "Applicable regulation", value: "PFRDA Exits and Withdrawals Regulations, 2015 (last amended 20 July 2026)" }],
+  lastVerified: "2026-08-22",
+  rules: {
+    subscriberModel: "all-citizen",
+    regulationTitle: "PFRDA Exits and Withdrawals Regulations, 2015, last amended 20 July 2026",
+    minimumCurrentAge: 18,
+    maximumRetirementAge: 85,
+    minimumAnnuityAllocation: 20,
+    maximumAnnuityAllocation: 100,
+    normalExit: { fullWithdrawalThreshold: 800_000, intermediateCorpusThreshold: 1_200_000, maximumDirectLumpSumInIntermediateBand: 600_000, maximumLumpSumAllocation: 80, minimumAnnuityAllocation: 20 },
+    prematureExit: { fullWithdrawalThreshold: 500_000, maximumLumpSumAllocation: 20, minimumAnnuityAllocation: 80 },
+  },
   sources: [
-    { title: "NPS All Citizen Model", authority: "Pension Fund Regulatory and Development Authority", reference: "https://www.pfrda.org.in/en/schemes/national-pension-system/nps-for-all-citizen-models" },
-    { title: "Current NPS Exits and Withdrawals Regulations", authority: "Pension Fund Regulatory and Development Authority", reference: "https://www.pfrda.org.in/w/pension-fund-regulatory-and-development-authority-exits-and-withdrawals-under-the-national-pension-system-regulations-2015-last-amended-on-20th-july-2026-." },
-    { title: "All Citizen Model exits and withdrawals FAQ", authority: "Pension Fund Regulatory and Development Authority", reference: "https://pfrda.org.in/w/faqs/exits-and-withdrawals-from-national-pension-system-nps-for-all-citizen-model" },
+    { title: "NPS All Citizen Model", authority: "Pension Fund Regulatory and Development Authority", reference: "https://www.pfrda.org.in/en/schemes/national-pension-system/nps-for-all-citizen-models", sourceType: "official", accessedAt: "2026-08-22" },
+    { title: "PFRDA Exits and Withdrawals Regulations, 2015, last amended 20 July 2026", authority: "Pension Fund Regulatory and Development Authority", reference: "https://www.pfrda.org.in/w/pension-fund-regulatory-and-development-authority-exits-and-withdrawals-under-the-national-pension-system-regulations-2015-last-amended-on-20th-july-2026-.", sourceType: "official", accessedAt: "2026-08-22", effectiveFrom: "2026-07-20" },
+    { title: "All Citizen Model exits and withdrawals FAQ, updated March 2026", authority: "Pension Fund Regulatory and Development Authority", reference: "https://www.pfrda.org.in/documents/33652/676426/Exits%2Band%2BWithdrawals%2Bunder%2BNPS%2Bfor%2BAll%2BCitizen%2BModel%2B%281%29.pdf", sourceType: "official", accessedAt: "2026-08-22" },
   ],
 };
 

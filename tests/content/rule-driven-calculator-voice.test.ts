@@ -61,6 +61,11 @@ describe("Batch B3 rule-driven calculator voice", () => {
     expect(source).toContain("Used only to estimate annuity income; it is not a guaranteed rate.");
   });
 
+  it("keeps the current NPS age ceiling synchronized in the UI", () => {
+    expect(source).toContain('id="currentAge" label="Current age" value={values.currentAge} onChange={set("currentAge")} min={18} max={84}');
+    expect(source).toContain('id="retirementAge" label="Retirement age" value={values.retirementAge} onChange={set("retirementAge")} min={19} max={85}');
+  });
+
   it("binds all NPS allocation values and rejects a pension guarantee", () => {
     expect(source).toContain("formatIndianCurrency(calculation.result.retirementCorpus)");
     expect(source).toContain("formatIndianCurrency(calculation.result.lumpSumCorpus)");
