@@ -101,6 +101,9 @@ describe("Batch C Learn discovery", () => {
       "/learn/retirement/gratuity-calculation",
       "/learn/retirement/gratuity-calculator-vs-employer-settlement",
       "/learn/retirement/gratuity-eligibility",
+      "/learn/tax/gst-explained",
+      "/learn/tax/gst-remove-from-inclusive-price",
+      "/learn/tax/gst-calculator-vs-invoice",
     ]);
   });
 });

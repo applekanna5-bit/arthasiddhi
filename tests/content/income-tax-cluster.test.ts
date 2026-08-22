@@ -26,7 +26,7 @@ function links(article: Article) {
 
 describe("Income Tax cluster registry and maintenance", () => {
   it("registers exactly five Tax articles with one core and four supporting guides", () => {
-    expect(getArticlesByCategory("tax").map(({ slug }) => slug)).toEqual(taxSlugs);
+    expect(getArticlesByCategory("tax").filter(({ primaryCalculator }) => primaryCalculator === "income-tax").map(({ slug }) => slug)).toEqual(taxSlugs);
     expect(new Set(taxSlugs).size).toBe(5);
     for (const slug of taxSlugs) { const article = taxArticle(slug); expect(article.category).toBe("tax"); expect(article.primaryCalculator).toBe("income-tax"); }
     expect(articles.filter(({ primaryCalculator, calculatorGuideRole }) => primaryCalculator === "income-tax" && calculatorGuideRole === "core")).toHaveLength(1);
@@ -54,7 +54,7 @@ describe("Income Tax discovery and relationships", () => {
     expect(getSupportingGuidesForCalculator("income-tax")).toHaveLength(2);
     expect(getSupportingGuidesForCalculator("income-tax").map(({ slug }) => slug)).not.toContain("health-education-cess-calculation");
     expect(getSupportingGuidesForCalculator("income-tax").map(({ slug }) => slug)).not.toContain("income-tax-calculator-vs-payroll-tds");
-    expect(getSupportingGuidesForCalculator("gst")).toEqual([]);
+    expect(getSupportingGuidesForCalculator("gst").map(({ slug }) => slug)).toEqual(["gst-remove-from-inclusive-price", "gst-calculator-vs-invoice"]);
   });
 
   it.each([
@@ -135,7 +135,7 @@ describe("Income Tax SEO and sitemap", () => {
 
   it("publishes the Tax category and five articles in the expanded unique sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(82); expect(new Set(urls).size).toBe(82); expect(urls).toContain(absoluteUrl("/learn/tax"));
+    expect(urls).toHaveLength(85); expect(new Set(urls).size).toBe(85); expect(urls).toContain(absoluteUrl("/learn/tax"));
     for (const slug of taxSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(taxArticle(slug))));
   });
 });

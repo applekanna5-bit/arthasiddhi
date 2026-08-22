@@ -63,6 +63,9 @@ export const articleSlugs = [
   "gratuity-calculation",
   "gratuity-calculator-vs-employer-settlement",
   "gratuity-eligibility",
+  "gst-explained",
+  "gst-remove-from-inclusive-price",
+  "gst-calculator-vs-invoice",
 ] as const;
 
 export type ArticleSlug = (typeof articleSlugs)[number];
