@@ -79,6 +79,9 @@ describe("SIP content cluster registry and discovery", () => {
       "cagr-vs-absolute-return",
       "cagr-and-year-to-year-volatility",
       "cagr-vs-average-annual-return",
+      "step-up-sip-explained",
+      "step-up-sip-calculation",
+      "step-up-sip-projection-assumptions",
     ]);
   });
 
@@ -173,8 +176,8 @@ describe("SIP cluster search-intent and SEO protection", () => {
   it("keeps all four routes in the expanded unique sitemap", () => {
     const sitemap = buildSitemap();
     const urls = sitemap.map(({ url }) => url);
-    expect(urls).toHaveLength(85);
-    expect(new Set(urls).size).toBe(85);
+    expect(urls).toHaveLength(88);
+    expect(new Set(urls).size).toBe(88);
     for (const slug of sipSupportingSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(sipArticle(slug))));
   });
 });

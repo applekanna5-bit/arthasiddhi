@@ -66,6 +66,9 @@ export const articleSlugs = [
   "gst-explained",
   "gst-remove-from-inclusive-price",
   "gst-calculator-vs-invoice",
+  "step-up-sip-explained",
+  "step-up-sip-calculation",
+  "step-up-sip-projection-assumptions",
 ] as const;
 
 export type ArticleSlug = (typeof articleSlugs)[number];

@@ -174,10 +174,10 @@ describe("Personal Loan cluster SEO and sitemap", () => {
     expect(descriptions.size).toBe(3);
   });
 
-  it("preserves Personal Loan URLs in the unique 85-URL sitemap without a new category", () => {
+  it("preserves Personal Loan URLs in the unique 88-URL sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(85);
-    expect(new Set(urls).size).toBe(85);
+    expect(urls).toHaveLength(88);
+    expect(new Set(urls).size).toBe(88);
     for (const slug of personalLoanSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(personalLoanArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/loans"))).toHaveLength(1);
   });

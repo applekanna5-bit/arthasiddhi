@@ -104,6 +104,9 @@ describe("Batch C Learn discovery", () => {
       "/learn/tax/gst-explained",
       "/learn/tax/gst-remove-from-inclusive-price",
       "/learn/tax/gst-calculator-vs-invoice",
+      "/learn/investments/step-up-sip-explained",
+      "/learn/investments/step-up-sip-calculation",
+      "/learn/investments/step-up-sip-projection-assumptions",
     ]);
   });
 });
