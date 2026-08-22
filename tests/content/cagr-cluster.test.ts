@@ -77,7 +77,7 @@ describe("CAGR cluster registry and discovery", () => {
     expect(getSupportingGuidesForCalculator("sip").map(({ slug }) => slug)).toEqual(["sip-return-calculation", "sip-projection-assumptions"]);
     expect(getSupportingGuidesForCalculator("inflation").map(({ slug }) => slug)).toEqual(["inflation-future-cost", "purchasing-power-explained"]);
     expect(getSupportingGuidesForCalculator("fd").map(({ slug }) => slug)).toEqual(["fd-interest-calculation", "fd-vs-rd"]);
-    expect(getSupportingGuidesForCalculator("lumpsum")).toEqual([]);
+    expect(getSupportingGuidesForCalculator("lumpsum").map(({ slug }) => slug)).toEqual(["lumpsum-projection-assumptions"]);
   });
 });
 
@@ -188,10 +188,10 @@ describe("CAGR cluster SEO, schema and sitemap", () => {
     expect(descriptions.size).toBe(4);
   });
 
-  it("keeps each article once in the 91-URL sitemap without a category duplicate", () => {
+  it("keeps each article once in the 93-URL sitemap without a category duplicate", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(91);
-    expect(new Set(urls).size).toBe(91);
+    expect(urls).toHaveLength(93);
+    expect(new Set(urls).size).toBe(93);
     for (const slug of cagrSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(cagrArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/investments"))).toHaveLength(1);
   });

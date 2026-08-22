@@ -72,6 +72,8 @@ export const articleSlugs = [
   "swp-explained",
   "swp-calculation",
   "swp-corpus-exhaustion",
+  "lumpsum-explained",
+  "lumpsum-projection-assumptions",
 ] as const;
 
 export type ArticleSlug = (typeof articleSlugs)[number];

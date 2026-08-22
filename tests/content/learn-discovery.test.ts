@@ -110,6 +110,8 @@ describe("Batch C Learn discovery", () => {
       "/learn/investments/swp-explained",
       "/learn/investments/swp-calculation",
       "/learn/investments/swp-corpus-exhaustion",
+      "/learn/investments/lumpsum-explained",
+      "/learn/investments/lumpsum-projection-assumptions",
     ]);
   });
 });
