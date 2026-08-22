@@ -1,4 +1,11 @@
+import { calculateCagr } from "../../calculator/expanded-calculators";
+import { formatIndianCurrency, formatPercentage } from "../../calculator/formatting";
 import type { Article } from "../types";
+
+const positiveCagrExample = calculateCagr({ beginningValue: 100_000, endingValue: 200_000, durationYears: 5 });
+const negativeCagrExample = calculateCagr({ beginningValue: 200_000, endingValue: 150_000, durationYears: 3 });
+const zeroEndingCagrExample = calculateCagr({ beginningValue: 100_000, endingValue: 0, durationYears: 5 });
+const absoluteReturnExample = ((positiveCagrExample.endingValue - positiveCagrExample.beginningValue) / positiveCagrExample.beginningValue) * 100;
 
 export const investmentArticles = [
   {
@@ -483,6 +490,307 @@ export const investmentArticles = [
       { question: "Are 8%, 10% or 12% expected SIP returns?", answer: "No. They are illustrative inputs used to show how the model changes. None is an expected, promised or recommended return." },
       { question: "Why can an actual SIP value differ from the projection?", answer: "Actual returns vary over time, while the projection uses a constant rate. Costs, taxes, transaction timing and changes to contributions can also alter the outcome." },
       { question: "Is the total contribution also uncertain?", answer: "The scheduled total is defined by the amount and number of contributions. It changes if contributions are increased, reduced, paused or missed." },
+    ],
+  },
+  {
+    title: "CAGR Explained: Beginning Value, Ending Value and Years",
+    slug: "cagr-explained",
+    description: "What CAGR means, how beginning value, ending value and whole years produce an annualized growth rate, and what the result leaves out.",
+    category: "investments",
+    publishedAt: "2026-08-22",
+    updatedAt: "2026-08-22",
+    readingTime: "8 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "cagr",
+    calculatorGuideRole: "core",
+    relatedCalculators: [],
+    relatedArticles: ["cagr-vs-absolute-return", "cagr-and-year-to-year-volatility", "cagr-vs-average-annual-return"],
+    sections: [
+      {
+        id: "meaning",
+        heading: "CAGR annualizes the change between two values",
+        paragraphs: [
+          "Compound annual growth rate, or CAGR, is the constant annualized rate that connects a beginning value to an ending value over a specified duration. It smooths the full endpoint change into one yearly equivalent; it is not a record of the return achieved in each individual year.",
+          "CAGR can make endpoint growth over periods of different lengths easier to compare on an annualized basis. That comparison still needs context because CAGR does not reveal volatility, cash flows, costs, taxes or the path taken between the endpoints.",
+        ],
+      },
+      {
+        id: "inputs",
+        heading: "Beginning value, ending value and duration define the result",
+        list: [
+          "Beginning value is the positive value at the start of the measured period.",
+          "Ending value is the value at the end of that period and may be zero or positive.",
+          "Duration is the number of whole years between the endpoints.",
+        ],
+      },
+      {
+        id: "formula",
+        heading: "How the CAGR formula connects the endpoints",
+        paragraphs: [
+          "The calculator uses: CAGR = ((ending value / beginning value)^(1 / duration in years) - 1) × 100. Dividing the ending value by the beginning value gives the full-period growth factor. Taking its whole-period annual root converts that factor into a constant yearly equivalent, and subtracting one expresses the growth rate before conversion to a percentage.",
+          [
+            { text: "This formula annualizes an endpoint relationship rather than teaching generic compounding mechanics. For that broader concept, see " },
+            { text: "What Is Compound Interest?", link: { kind: "article", slug: "compound-interest" } },
+            { text: "." },
+          ],
+        ],
+      },
+      {
+        id: "positive-example",
+        heading: "Worked example: value doubles over five years",
+        paragraphs: ["A beginning value of ₹1,00,000 and ending value of ₹2,00,000 over five whole years produce the following engine-calculated result."],
+        table: {
+          caption: "CAGR from ₹1,00,000 to ₹2,00,000 over five years",
+          headers: ["Beginning value", "Ending value", "Duration", "CAGR"],
+          rows: [[formatIndianCurrency(positiveCagrExample.beginningValue), formatIndianCurrency(positiveCagrExample.endingValue), "5 years", formatPercentage(positiveCagrExample.cagrPercentage)]],
+        },
+      },
+      {
+        id: "result-signs",
+        heading: "Positive, zero and negative CAGR describe endpoint direction",
+        paragraphs: [
+          "CAGR is positive when the ending value is above the beginning value and zero when the two values are equal. It is negative when the ending value is below the beginning value over the selected period; that description is mathematical, not investment advice.",
+          `The current engine returns ${formatPercentage(zeroEndingCagrExample.cagrPercentage)} when the ending value is zero. It does not support a zero or negative beginning value, or a negative ending value.`,
+        ],
+        table: {
+          caption: "Negative CAGR from ₹2,00,000 to ₹1,50,000 over three years",
+          headers: ["Beginning value", "Ending value", "Duration", "CAGR"],
+          rows: [[formatIndianCurrency(negativeCagrExample.beginningValue), formatIndianCurrency(negativeCagrExample.endingValue), "3 years", formatPercentage(negativeCagrExample.cagrPercentage)]],
+        },
+      },
+      {
+        id: "boundaries",
+        heading: "Calculator boundaries and assumptions",
+        list: [
+          "The beginning value must be greater than zero, while the ending value may be zero or positive.",
+          "Negative values are unsupported.",
+          "Duration must be a whole number from 1 to 100 years; fractional years are unsupported.",
+          "The calculation uses only the two endpoints and duration.",
+          "Periodic contributions, withdrawals, dividends and other interim cash flows are unsupported.",
+        ],
+      },
+      {
+        id: "limitations",
+        heading: "What CAGR does not show",
+        paragraphs: [
+          "CAGR does not show the sequence or volatility of values between the endpoints, and it does not prove that a constant return was actually realized each year. Two paths with identical endpoints and duration receive the same CAGR even when their interim movements differ.",
+          "CAGR is not a forecast, guarantee or complete assessment of investment quality. A higher CAGR alone does not establish that one investment is better, because risk, cash-flow timing, costs and other facts are outside this calculation.",
+          [
+            { text: "Compare CAGR with " },
+            { text: "absolute return", link: { kind: "article", slug: "cagr-vs-absolute-return" } },
+            { text: ", examine its " },
+            { text: "year-to-year volatility limitation", link: { kind: "article", slug: "cagr-and-year-to-year-volatility" } },
+            { text: ", or distinguish it from " },
+            { text: "average annual return", link: { kind: "article", slug: "cagr-vs-average-annual-return" } },
+            { text: "." },
+          ],
+        ],
+        callout: {
+          title: "Annualize your endpoints",
+          text: [
+            { text: "Enter a beginning value, ending value and whole-year duration in the " },
+            { text: "CAGR Calculator", link: { kind: "calculator", slug: "cagr" } },
+            { text: "." },
+          ],
+        },
+      },
+    ],
+    faq: [
+      { question: "Is CAGR the return earned in every year?", answer: "No. CAGR is one constant annualized rate connecting the beginning and ending values. Actual values may have changed unevenly between those endpoints." },
+      { question: "Can CAGR be negative?", answer: "Yes. When the ending value is below a positive beginning value, the calculator can produce a negative CAGR. An ending value of zero produces -100%." },
+      { question: "Does the CAGR Calculator include contributions or dividends?", answer: "No. It uses only beginning value, ending value and whole-year duration. Contributions, withdrawals, dividends and other interim cash flows are not modeled." },
+    ],
+  },
+  {
+    title: "CAGR vs Absolute Return: Annualized Growth and Total Change",
+    slug: "cagr-vs-absolute-return",
+    description: "How absolute return measures total endpoint change while CAGR expresses the same beginning and ending values as an annualized rate.",
+    category: "investments",
+    publishedAt: "2026-08-22",
+    updatedAt: "2026-08-22",
+    readingTime: "6 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "cagr",
+    calculatorGuideRole: "supporting",
+    calculatorDiscoveryPriority: 100,
+    relatedCalculators: [],
+    relatedArticles: ["cagr-explained", "cagr-vs-average-annual-return"],
+    sections: [
+      {
+        id: "different-questions",
+        heading: "Absolute return and CAGR answer different questions",
+        paragraphs: [
+          "Absolute return is the total percentage change from beginning value to ending value across the full period. It does not annualize that change or account for how long the change took.",
+          "CAGR is the constant annualized equivalent connecting the same endpoints over the stated number of whole years. It provides a per-year equivalent, but not the actual return for each year.",
+        ],
+      },
+      {
+        id: "worked-comparison",
+        heading: "Worked comparison: ₹1,00,000 becomes ₹2,00,000",
+        paragraphs: ["For absolute return, transparent endpoint arithmetic gives ((₹2,00,000 - ₹1,00,000) / ₹1,00,000) × 100. The CAGR shown below comes from the calculator engine."],
+        table: {
+          caption: "Absolute return and CAGR for the same five-year endpoint change",
+          headers: ["Measure", "Period covered", "Result"],
+          rows: [
+            ["Absolute return", "Full 5-year period", formatPercentage(absoluteReturnExample)],
+            ["CAGR", "Annualized across 5 years", formatPercentage(positiveCagrExample.cagrPercentage)],
+          ],
+        },
+      },
+      {
+        id: "interpretation",
+        heading: "Why 100% and 14.87% can both be correct",
+        paragraphs: [
+          "The 100% absolute return says the ending value is twice the beginning value over the complete five-year period. The CAGR expresses that same endpoint relationship as the constant yearly rate that would connect the two values across five years.",
+          "Neither measure is universally better. The useful measure depends on whether the question concerns total change or an annualized endpoint comparison. Neither shows volatility or interim cash flows.",
+          [
+            { text: "For the inputs, formula and supported boundaries, read " },
+            { text: "CAGR Explained", link: { kind: "article", slug: "cagr-explained" } },
+            { text: ". To avoid confusing annualization with arithmetic averaging, see " },
+            { text: "CAGR vs Average Annual Return", link: { kind: "article", slug: "cagr-vs-average-annual-return" } },
+            { text: "." },
+          ],
+        ],
+        callout: {
+          title: "Calculate the annualized measure",
+          text: [
+            { text: "Use the " },
+            { text: "CAGR Calculator", link: { kind: "calculator", slug: "cagr" } },
+            { text: " for the CAGR; absolute return remains a separate full-period calculation." },
+          ],
+        },
+      },
+    ],
+    faq: [
+      { question: "Is absolute return annualized?", answer: "No. Absolute return measures the total percentage change over the complete period without converting it to a yearly rate." },
+      { question: "Why is CAGR lower than absolute return in the five-year example?", answer: "The 100% absolute return covers all five years, while 14.87% is the annualized equivalent connecting the same endpoints across those years." },
+      { question: "Does either measure show volatility?", answer: "No. Both endpoint measures omit the path taken between the beginning and ending values." },
+    ],
+  },
+  {
+    title: "Why CAGR Can Hide Year-to-Year Volatility",
+    slug: "cagr-and-year-to-year-volatility",
+    description: "Why identical endpoints produce identical CAGR even when hypothetical paths differ, and why CAGR does not show volatility or interim cash flows.",
+    category: "investments",
+    publishedAt: "2026-08-22",
+    updatedAt: "2026-08-22",
+    readingTime: "6 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "cagr",
+    calculatorGuideRole: "supporting",
+    calculatorDiscoveryPriority: 50,
+    relatedCalculators: [],
+    relatedArticles: ["cagr-explained", "cagr-vs-absolute-return"],
+    sections: [
+      {
+        id: "endpoint-only",
+        heading: "CAGR knows the endpoints, not the path",
+        paragraphs: [
+          "The calculator receives beginning value, ending value and duration. It receives no year-by-year values, so it cannot observe the size, timing or frequency of movements between the endpoints.",
+          "Identical beginning values, ending values and durations therefore produce identical CAGR. The result remains the same even when one hypothetical path changes gradually and another hypothetical path rises and falls sharply before reaching the same endpoint.",
+        ],
+      },
+      {
+        id: "controlled-example",
+        heading: "Controlled hypothetical endpoint comparison",
+        paragraphs: ["Both hypothetical cases below begin at ₹1,00,000 and end at ₹2,00,000 after five years. No actual security, fund, index or market history is represented, and no intervening annual values are supplied to the engine."],
+        table: {
+          caption: "Hypothetical paths with identical engine inputs",
+          headers: ["Hypothetical path", "Beginning value", "Ending value", "Duration", "CAGR"],
+          rows: [
+            ["Path with smaller interim movements", formatIndianCurrency(positiveCagrExample.beginningValue), formatIndianCurrency(positiveCagrExample.endingValue), "5 years", formatPercentage(positiveCagrExample.cagrPercentage)],
+            ["Path with larger interim movements", formatIndianCurrency(positiveCagrExample.beginningValue), formatIndianCurrency(positiveCagrExample.endingValue), "5 years", formatPercentage(positiveCagrExample.cagrPercentage)],
+          ],
+        },
+      },
+      {
+        id: "limitations",
+        heading: "The shared CAGR does not establish shared volatility",
+        paragraphs: [
+          "Matching CAGR does not mean matching volatility, risk or year-by-year returns. CAGR is a smoothed endpoint rate and does not prove that its displayed percentage was actually realized in every year.",
+          "CAGR also does not model contributions, withdrawals, dividends or other interim or dated cash flows. It is not a forecast, guarantee or determination of investment quality.",
+          [
+            { text: "Return to " },
+            { text: "CAGR Explained", link: { kind: "article", slug: "cagr-explained" } },
+            { text: " for the complete boundaries, or compare the annualized result with " },
+            { text: "absolute return", link: { kind: "article", slug: "cagr-vs-absolute-return" } },
+            { text: "." },
+          ],
+        ],
+        callout: {
+          title: "Measure the endpoint rate only",
+          text: [
+            { text: "The " },
+            { text: "CAGR Calculator", link: { kind: "calculator", slug: "cagr" } },
+            { text: " annualizes endpoints; it cannot evaluate an unseen year-to-year path." },
+          ],
+        },
+      },
+    ],
+    faq: [
+      { question: "Can two different paths have the same CAGR?", answer: "Yes. If their beginning value, ending value and duration match, the calculator produces the same CAGR even if their hypothetical interim movements differ." },
+      { question: "Does CAGR measure volatility?", answer: "No. The calculator has no year-by-year value series and cannot measure movement between the endpoints." },
+      { question: "Is CAGR a forecast of future performance?", answer: "No. It annualizes the supplied endpoint relationship and does not predict or guarantee a future result." },
+    ],
+  },
+  {
+    title: "CAGR vs Average Annual Return",
+    slug: "cagr-vs-average-annual-return",
+    description: "Why CAGR is a geometric endpoint rate while an arithmetic average annual return requires actual period-by-period return observations.",
+    category: "investments",
+    publishedAt: "2026-08-22",
+    updatedAt: "2026-08-22",
+    readingTime: "6 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: "cagr",
+    calculatorGuideRole: "supporting",
+    relatedCalculators: [],
+    relatedArticles: ["cagr-explained", "cagr-and-year-to-year-volatility"],
+    sections: [
+      {
+        id: "distinction",
+        heading: "CAGR is not an arithmetic average annual return",
+        paragraphs: [
+          "CAGR is a geometric annualized rate connecting a beginning value and ending value across the specified duration. It answers what constant yearly rate is equivalent to that endpoint change.",
+          "An arithmetic average annual return adds actual period-by-period returns and divides by the number of periods. That calculation requires the individual annual returns; it is not produced by the CAGR calculator.",
+        ],
+      },
+      {
+        id: "insufficient-endpoints",
+        heading: "Endpoints alone cannot supply an arithmetic average",
+        paragraphs: [
+          `For ₹1,00,000 growing to ₹2,00,000 over five years, the engine calculates CAGR of ${formatPercentage(positiveCagrExample.cagrPercentage)}. Beginning value, ending value and years alone are not sufficient to calculate an arithmetic average of the actual annual returns because the intervening yearly observations are unknown.`,
+          "Different hypothetical annual-return sequences can connect the same endpoints. Presenting an arithmetic average without those observations would invent data that the calculator neither requests nor calculates.",
+        ],
+      },
+      {
+        id: "use-carefully",
+        heading: "Keep annualization separate from averaging",
+        paragraphs: [
+          "Use CAGR when the available question is limited to annualizing a beginning-to-ending relationship. Use the phrase average annual return only when the period-by-period returns and the averaging method are explicitly available.",
+          "Neither label by itself shows volatility, interim cash flows or future performance. CAGR does not equal the arithmetic average annual return and is not an actual constant yearly return or forecast.",
+          [
+            { text: "Review the endpoint formula in " },
+            { text: "CAGR Explained", link: { kind: "article", slug: "cagr-explained" } },
+            { text: " and the missing-path issue in " },
+            { text: "Why CAGR Can Hide Year-to-Year Volatility", link: { kind: "article", slug: "cagr-and-year-to-year-volatility" } },
+            { text: "." },
+          ],
+        ],
+        callout: {
+          title: "Calculate CAGR from endpoints",
+          text: [
+            { text: "Use the " },
+            { text: "CAGR Calculator", link: { kind: "calculator", slug: "cagr" } },
+            { text: " only for the annualized endpoint rate, not an arithmetic average of unknown yearly returns." },
+          ],
+        },
+      },
+    ],
+    faq: [
+      { question: "Is CAGR the average of annual returns?", answer: "No. CAGR is a geometric annualized endpoint rate. An arithmetic average requires the actual return for every included period." },
+      { question: "Can beginning value, ending value and years reveal the arithmetic average?", answer: "No. Those inputs determine CAGR but do not reveal the individual annual returns needed for an arithmetic average." },
+      { question: "Does the CAGR Calculator contain annual return history?", answer: "No. It receives only beginning value, ending value and whole-year duration." },
     ],
   },
 ] satisfies readonly Article[];

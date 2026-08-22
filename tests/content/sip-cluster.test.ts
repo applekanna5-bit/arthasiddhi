@@ -72,7 +72,14 @@ describe("SIP content cluster registry and discovery", () => {
   });
 
   it("lists all five SIP articles on the generic Investments category", () => {
-    expect(getArticlesByCategory("investments").map(({ slug }) => slug)).toEqual(["sip-explained", ...sipSupportingSlugs]);
+    expect(getArticlesByCategory("investments").map(({ slug }) => slug)).toEqual([
+      "sip-explained",
+      ...sipSupportingSlugs,
+      "cagr-explained",
+      "cagr-vs-absolute-return",
+      "cagr-and-year-to-year-volatility",
+      "cagr-vs-average-annual-return",
+    ]);
   });
 
   it("curates calculator discovery to the core guide and two intended supporting guides", () => {
@@ -166,8 +173,8 @@ describe("SIP cluster search-intent and SEO protection", () => {
   it("keeps all four routes in the expanded unique sitemap", () => {
     const sitemap = buildSitemap();
     const urls = sitemap.map(({ url }) => url);
-    expect(urls).toHaveLength(66);
-    expect(new Set(urls).size).toBe(66);
+    expect(urls).toHaveLength(70);
+    expect(new Set(urls).size).toBe(70);
     for (const slug of sipSupportingSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(sipArticle(slug))));
   });
 });
