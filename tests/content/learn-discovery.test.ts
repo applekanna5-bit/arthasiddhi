@@ -107,6 +107,9 @@ describe("Batch C Learn discovery", () => {
       "/learn/investments/step-up-sip-explained",
       "/learn/investments/step-up-sip-calculation",
       "/learn/investments/step-up-sip-projection-assumptions",
+      "/learn/investments/swp-explained",
+      "/learn/investments/swp-calculation",
+      "/learn/investments/swp-corpus-exhaustion",
     ]);
   });
 });

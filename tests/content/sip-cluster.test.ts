@@ -82,6 +82,9 @@ describe("SIP content cluster registry and discovery", () => {
       "step-up-sip-explained",
       "step-up-sip-calculation",
       "step-up-sip-projection-assumptions",
+      "swp-explained",
+      "swp-calculation",
+      "swp-corpus-exhaustion",
     ]);
   });
 
@@ -176,8 +179,8 @@ describe("SIP cluster search-intent and SEO protection", () => {
   it("keeps all four routes in the expanded unique sitemap", () => {
     const sitemap = buildSitemap();
     const urls = sitemap.map(({ url }) => url);
-    expect(urls).toHaveLength(88);
-    expect(new Set(urls).size).toBe(88);
+    expect(urls).toHaveLength(91);
+    expect(new Set(urls).size).toBe(91);
     for (const slug of sipSupportingSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(sipArticle(slug))));
   });
 });

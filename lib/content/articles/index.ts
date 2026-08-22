@@ -19,6 +19,7 @@ import { personalFinanceArticles } from "./personal-finance";
 import { retirementArticles } from "./retirement";
 import { taxArticles } from "./tax";
 import { stepUpSipArticles } from "./step-up-sip";
+import { swpArticles } from "./swp";
 
 export const categoryLabels: Record<ContentCategory, string> = {
   "personal-finance": "Personal Finance",
@@ -49,6 +50,7 @@ export const articles: readonly Article[] = [
   ...gratuityArticles,
   ...gstArticles,
   ...stepUpSipArticles,
+  ...swpArticles,
 ];
 
 export const publishedCategories = contentCategories.filter((category) => articles.some((article) => article.category === category));

@@ -190,10 +190,10 @@ describe("EPF SEO, schema and sitemap", () => {
     expect(descriptions.size).toBe(3);
   });
 
-  it("keeps the EPF articles in the 88-URL sitemap", () => {
+  it("keeps the EPF articles in the 91-URL sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(88);
-    expect(new Set(urls).size).toBe(88);
+    expect(urls).toHaveLength(91);
+    expect(new Set(urls).size).toBe(91);
     for (const slug of epfSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(epfArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/retirement"))).toHaveLength(1);
   });

@@ -143,10 +143,10 @@ describe("Gratuity relationships, SEO, schema and sitemap", () => {
     }
   });
 
-  it("keeps four article URLs in the unique 88-URL sitemap", () => {
+  it("keeps four article URLs in the unique 91-URL sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(88);
-    expect(new Set(urls).size).toBe(88);
+    expect(urls).toHaveLength(91);
+    expect(new Set(urls).size).toBe(91);
     for (const slug of gratuitySlugs) expect(urls.filter((url) => url === absoluteUrl(`/learn/retirement/${slug}`))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/retirement"))).toHaveLength(1);
   });

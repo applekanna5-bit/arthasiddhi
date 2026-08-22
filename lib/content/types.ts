@@ -69,6 +69,9 @@ export const articleSlugs = [
   "step-up-sip-explained",
   "step-up-sip-calculation",
   "step-up-sip-projection-assumptions",
+  "swp-explained",
+  "swp-calculation",
+  "swp-corpus-exhaustion",
 ] as const;
 
 export type ArticleSlug = (typeof articleSlugs)[number];
