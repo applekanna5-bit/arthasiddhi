@@ -90,16 +90,58 @@ export const gstRuleSet: FinancialRuleSet<GstRules> = {
   sources: [{ title: "GST goods and services rates", authority: "Central Board of Indirect Taxes and Customs", reference: "https://cbic-gst.gov.in/gst-goods-services-rates.html" }],
 };
 
-export type EpfRules = { standardEmployeeRate: number; standardEmployerRate: number; epsDiversionRate: number; epsWageCeiling: number; defaultInterestRate: number };
+export type EpfRules = {
+  schemeIdentity: string;
+  pensionSchemeIdentity: string;
+  standardEmployeeRate: number;
+  standardEmployerRate: number;
+  qualifyingReducedRate: number;
+  epsDiversionRate: number;
+  epsWageCeiling: number;
+  higherWageContributionRequiresJointRequest: boolean;
+  employerNeedNotMatchVoluntaryExcess: boolean;
+  ordinaryWageCeilingAppliesToInternationalWorkers: boolean;
+  defaultInterestRate: number;
+  approvedInterestPeriod: string;
+  approvedInterestRate: number;
+  recommendedInterestPeriod: string;
+  recommendedInterestRate: number;
+  recommendedInterestStatus: "cbt-recommendation-pending-government-notification";
+};
 export const epfRuleSet: FinancialRuleSet<EpfRules> = {
-  id: "epf-standard-contributions-2026-08",
-  label: "EPF/EPS standard contribution context",
-  effectivePeriod: "Rules verified 16 August 2026",
-  lastVerified: "2026-08-16",
-  rules: { standardEmployeeRate: 12, standardEmployerRate: 12, epsDiversionRate: 8.33, epsWageCeiling: 15_000, defaultInterestRate: 8.25 },
+  id: "epf-schemes-contributions-2026-08",
+  label: "EPF Scheme, 1952 and EPS, 1995 contribution context",
+  effectivePeriod: "EPF/EPS rules and interest status verified 22 August 2026",
+  periodLabels: [
+    { label: "Government-approved EPF interest", value: "8.25% for FY 2024–25" },
+    { label: "FY 2025–26 status", value: "CBT recommended 8.25%; Government notification not located as of verification" },
+  ],
+  lastVerified: "2026-08-22",
+  rules: {
+    schemeIdentity: "Employees' Provident Funds Scheme, 1952",
+    pensionSchemeIdentity: "Employees' Pension Scheme, 1995",
+    standardEmployeeRate: 12,
+    standardEmployerRate: 12,
+    qualifyingReducedRate: 10,
+    epsDiversionRate: 8.33,
+    epsWageCeiling: 15_000,
+    higherWageContributionRequiresJointRequest: true,
+    employerNeedNotMatchVoluntaryExcess: true,
+    ordinaryWageCeilingAppliesToInternationalWorkers: false,
+    defaultInterestRate: 8.25,
+    approvedInterestPeriod: "FY 2024–25",
+    approvedInterestRate: 8.25,
+    recommendedInterestPeriod: "FY 2025–26",
+    recommendedInterestRate: 8.25,
+    recommendedInterestStatus: "cbt-recommendation-pending-government-notification",
+  },
   sources: [
-    { title: "Present rates of contribution", authority: "Employees' Provident Fund Organisation", reference: "https://www.epfindia.gov.in/site_docs/PDFs/MiscPDFs/ContributionRate.pdf" },
-    { title: "EPFO frequently asked questions", authority: "Employees' Provident Fund Organisation", reference: "https://www.epfindia.gov.in/site_en/FAQ.php" },
+    { title: "Present Rates of Contribution", authority: "Employees' Provident Fund Organisation", reference: "https://www.epfindia.gov.in/site_docs/PDFs/MiscPDFs/ContributionRate.pdf", sourceType: "official", accessedAt: "2026-08-22" },
+    { title: "EPFO Frequently Asked Questions", authority: "Employees' Provident Fund Organisation", reference: "https://www.epfindia.gov.in/site_en/FAQ.php", sourceType: "official", accessedAt: "2026-08-22" },
+    { title: "Employees' Provident Funds Scheme, 1952", authority: "Employees' Provident Fund Organisation", reference: "https://www.epfindia.gov.in/site_en/Downloads.php", sourceType: "official", accessedAt: "2026-08-22" },
+    { title: "Employees' Pension Scheme, 1995", authority: "Employees' Provident Fund Organisation", reference: "https://www.epfindia.gov.in/site_docs/PDFs/Downloads_PDFs/EPS95_update102008.pdf", sourceType: "official", accessedAt: "2026-08-22" },
+    { title: "Declaration of Rate of Interest for EPF Members' Accounts for FY 2024–25", authority: "Employees' Provident Fund Organisation", reference: "https://www.epfindia.gov.in/site_docs/PDFs/Circulars/Y2025-2026/DeclarationOfROI_2024_25.pdf", sourceType: "official", accessedAt: "2026-08-22", effectiveFrom: "2024-04-01", effectiveTo: "2025-03-31" },
+    { title: "Central Board recommends 8.25% EPF interest for FY 2025–26", authority: "Ministry of Labour & Employment, Press Information Bureau", reference: "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2234502&lang=1&reg=3", sourceType: "official", accessedAt: "2026-08-22" },
   ],
 };
 

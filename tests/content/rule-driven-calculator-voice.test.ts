@@ -55,6 +55,12 @@ describe("Batch B3 rule-driven calculator voice", () => {
     expect(source).toContain("will not exactly reproduce EPFO passbook accounting");
   });
 
+  it("presents EPS diversion as a projection assumption rather than eligibility", () => {
+    expect(source).toContain('label="Include EPS diversion in projection"');
+    expect(source).toContain("it does not determine statutory EPS eligibility");
+    expect(source).not.toContain('label="EPS eligibility"');
+  });
+
   it("keeps the NPS 20% minimum without advisory language", () => {
     expect(source).toContain("The configured All Citizen Model normal-exit minimum is 20%, subject to the rules applicable at exit.");
     expect(source).not.toContain("conservative");

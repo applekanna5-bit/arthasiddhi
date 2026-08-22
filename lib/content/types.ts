@@ -56,6 +56,9 @@ export const articleSlugs = [
   "nps-corpus-calculation",
   "nps-lump-sum-and-annuity",
   "nps-calculator-assumptions",
+  "epf-explained",
+  "epf-contribution-calculation",
+  "epf-calculator-projection-assumptions",
 ] as const;
 
 export type ArticleSlug = (typeof articleSlugs)[number];

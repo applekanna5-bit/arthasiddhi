@@ -88,8 +88,9 @@ export function calculateEpf(input: EpfInput, ruleSet: FinancialRuleSet<EpfRules
   if (typeof input.epsEligible !== "boolean") throw new Error("EPS eligibility is invalid.");
   const monthlyEmployeeEpf = input.monthlyEpfWage * input.employeeContributionRate / 100;
   const monthlyEmployerTotal = input.monthlyEpfWage * input.employerContributionRate / 100;
-  const monthlyEmployerEps = input.epsEligible ? Math.min(input.monthlyEpfWage, ruleSet.rules.epsWageCeiling) * ruleSet.rules.epsDiversionRate / 100 : 0;
-  const monthlyEmployerEpf = Math.max(0, monthlyEmployerTotal - monthlyEmployerEps);
+  const monthlyEmployerEpsCandidate = input.epsEligible ? Math.min(input.monthlyEpfWage, ruleSet.rules.epsWageCeiling) * ruleSet.rules.epsDiversionRate / 100 : 0;
+  const monthlyEmployerEps = Math.min(monthlyEmployerTotal, monthlyEmployerEpsCandidate);
+  const monthlyEmployerEpf = monthlyEmployerTotal - monthlyEmployerEps;
   const months = input.projectionYears * 12;
   const monthlyRate = input.annualInterestRate / 12 / 100;
   let balance = input.currentEpfBalance;

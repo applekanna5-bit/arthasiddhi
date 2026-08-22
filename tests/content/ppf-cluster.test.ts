@@ -195,8 +195,8 @@ describe("PPF tenure, editorial and SEO safety", () => {
 
   it("keeps all four article URLs in the expanded unique sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(75);
-    expect(new Set(urls).size).toBe(75);
+    expect(urls).toHaveLength(78);
+    expect(new Set(urls).size).toBe(78);
     for (const slug of ppfSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(ppfArticle(slug))));
     expect(urls.filter((url) => url === absoluteUrl("/learn/banking"))).toHaveLength(1);
     expect(urls.filter((url) => /\/learn\/(government-savings|ppf)$/.test(url))).toEqual([]);

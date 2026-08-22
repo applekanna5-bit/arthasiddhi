@@ -94,6 +94,9 @@ describe("Batch C Learn discovery", () => {
       "/learn/retirement/nps-corpus-calculation",
       "/learn/retirement/nps-lump-sum-and-annuity",
       "/learn/retirement/nps-calculator-assumptions",
+      "/learn/retirement/epf-explained",
+      "/learn/retirement/epf-contribution-calculation",
+      "/learn/retirement/epf-calculator-projection-assumptions",
     ]);
   });
 });
