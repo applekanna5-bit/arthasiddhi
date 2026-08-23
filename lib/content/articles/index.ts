@@ -57,13 +57,6 @@ export const articles: readonly Article[] = [
 
 export const publishedCategories = contentCategories.filter((category) => articles.some((article) => article.category === category));
 
-export const featuredArticleSlugs = [
-  "home-loan-guide",
-  "sip-explained",
-  "fixed-deposit-explained",
-  "compound-interest",
-] as const satisfies readonly ArticleSlug[];
-
 const articleBySlug = new Map<ArticleSlug, Article>(articles.map((article) => [article.slug, article]));
 
 function getRuleSetById(id: string): FinancialRuleSet<unknown> | undefined {
@@ -95,10 +88,6 @@ export function getArticlesByCategory(category: string) {
 
 export function getRelatedArticles(article: Article) {
   return article.relatedArticles.map((slug) => articleBySlug.get(slug)).filter((candidate): candidate is Article => Boolean(candidate));
-}
-
-export function getFeaturedArticles() {
-  return featuredArticleSlugs.map((slug) => articleBySlug.get(slug)).filter((article): article is Article => Boolean(article));
 }
 
 export function getPrimaryGuideForCalculator(slug: CalculatorSlug) {
@@ -142,7 +131,6 @@ export function getArticleMaintenanceContext(article: Article): { applicablePeri
 
 export function getArticleRegistryIssues(
   candidateArticles: readonly Article[] = articles,
-  candidateFeaturedSlugs: readonly ArticleSlug[] = featuredArticleSlugs,
 ) {
   const issues: string[] = [];
   const seenSlugs = new Set<string>();
@@ -191,11 +179,6 @@ export function getArticleRegistryIssues(
       if (!candidateBySlug.has(slug)) issues.push(`Declared article slug does not resolve: ${slug}`);
     }
   }
-  for (const slug of candidateFeaturedSlugs) {
-    if (!candidateBySlug.has(slug)) issues.push(`Featured article slug does not resolve: ${slug}`);
-  }
-  if (new Set(candidateFeaturedSlugs).size !== candidateFeaturedSlugs.length) issues.push("Duplicate featured article slug");
-
   for (const calculator of Object.values(calculators)) {
     for (const relatedSlug of calculator.relatedCalculators) {
       if (!isCalculatorSlug(relatedSlug)) issues.push(`Invalid related calculator for ${calculator.slug}: ${relatedSlug}`);

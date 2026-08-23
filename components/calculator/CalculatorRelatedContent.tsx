@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { getPrimaryGuideForCalculator, getSupportingGuidesForCalculator } from "@/lib/content/articles";
+import { getCalculatorGuideCuration } from "@/lib/content/discovery";
 import { getArticlePath } from "@/lib/content/seo";
 import { getCalculator, getRelatedCalculators, type CalculatorSlug } from "@/lib/content/calculators";
 
 export function CalculatorRelatedContent({ slug }: { slug: CalculatorSlug }) {
   const calculator = getCalculator(slug);
-  const primaryGuide = getPrimaryGuideForCalculator(slug);
-  const supportingGuides = getSupportingGuidesForCalculator(slug, 2);
+  const { core: primaryGuide, supporting: supportingGuides } = getCalculatorGuideCuration(slug);
   const relatedCalculators = getRelatedCalculators(calculator.relatedCalculators);
 
   if (!primaryGuide && !supportingGuides.length && !relatedCalculators.length) return null;

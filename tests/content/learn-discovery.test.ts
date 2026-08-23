@@ -1,12 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
   articles,
-  featuredArticleSlugs,
   getArticleRegistryIssues,
   getArticlesByCategory,
-  getFeaturedArticles,
   publishedCategories,
 } from "../../lib/content/articles";
+import { featuredArticleSlugs, getDiscoveryRegistryIssues, getFeaturedArticles, learnCategoryHubs } from "../../lib/content/discovery";
 import { getArticlePath } from "../../lib/content/seo";
 import { absoluteUrl } from "../../lib/content/site";
 import { buildSitemap } from "../../lib/content/sitemap";
@@ -31,14 +30,34 @@ describe("Batch C Learn discovery", () => {
     }
   });
 
-  it("keeps featured-guide curation explicit and unchanged", () => {
+  it("keeps foundational-guide curation explicit and representative", () => {
     expect(featuredArticleSlugs).toEqual([
+      "compound-interest",
       "home-loan-guide",
       "sip-explained",
       "fixed-deposit-explained",
-      "compound-interest",
+      "new-tax-regime-slab-calculation",
+      "nps-explained",
     ]);
     expect(getFeaturedArticles().map(({ slug }) => slug)).toEqual(featuredArticleSlugs);
+    expect(new Set(getFeaturedArticles().map(({ category }) => category)).size).toBe(6);
+  });
+
+  it("gives every article exactly one principal category-hub placement", () => {
+    expect(getDiscoveryRegistryIssues()).toEqual([]);
+    const placements = Object.values(learnCategoryHubs).flatMap((hub) => [
+      ...hub.groups.flatMap((group) => [group.coreArticle, ...group.supportingArticles]),
+      ...(hub.comparisons ?? []),
+      ...(hub.broaderGuides ?? []),
+    ]);
+    expect(placements).toHaveLength(articles.length);
+    expect(new Set(placements).size).toBe(articles.length);
+  });
+
+  it("exposes concise topic previews without dumping the article registry", () => {
+    expect(Object.keys(learnCategoryHubs)).toEqual(expectedCategories);
+    expect(Object.values(learnCategoryHubs).every((hub) => hub.topicPreview.length > 0)).toBe(true);
+    expect(Object.values(learnCategoryHubs).flatMap((hub) => hub.topicPreview).length).toBeLessThan(articles.length);
   });
 
   it("includes populated Tax and Retirement in the sitemap", () => {

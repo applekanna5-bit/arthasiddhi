@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { categoryDescriptions, categoryLabels, getArticlesByCategory } from "@/lib/content/articles";
-import { getArticlePath, pageMetadata } from "@/lib/content/seo";
+import { categoryDescriptions, categoryLabels, getArticleBySlug, getArticlesByCategory } from "@/lib/content/articles";
+import { getLearnCategoryHub } from "@/lib/content/discovery";
+import { pageMetadata } from "@/lib/content/seo";
 import { Breadcrumbs } from "@/components/article/Breadcrumbs";
-import type { ContentCategory } from "@/lib/content/types";
+import type { Article, ArticleSlug, ContentCategory } from "@/lib/content/types";
+import { GuideCollection, LearnTopicGroup } from "@/components/learn/LearnTopicGroup";
 
 type Props = { params: Promise<{ category: string }> };
 
@@ -23,6 +24,8 @@ export default async function CategoryPage({ params }: Props) {
   const contentCategory = category as ContentCategory;
   const articles = getArticlesByCategory(contentCategory);
   if (!articles.length) notFound();
+  const hub = getLearnCategoryHub(contentCategory);
+  const resolve = (slugs: readonly ArticleSlug[]) => slugs.map((slug) => getArticleBySlug(slug)).filter((article): article is Article => Boolean(article));
 
   return (
     <main className="flex-1 bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
@@ -30,8 +33,14 @@ export default async function CategoryPage({ params }: Props) {
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Learn", href: "/learn" }, { label: categoryLabels[contentCategory] }]} />
         <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-950">{categoryLabels[contentCategory]}</h1>
         <p className="mt-3 max-w-2xl text-lg leading-8 text-slate-600">{categoryDescriptions[contentCategory]}</p>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {articles.map((article) => <Link key={article.slug} href={getArticlePath(article)} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100"><h2 className="text-lg font-semibold text-slate-950">{article.title}</h2><p className="mt-2 text-sm leading-6 text-slate-600">{article.description}</p><p className="mt-4 text-sm text-slate-500">{article.readingTime}</p></Link>)}
+        <div className="mt-10 space-y-12">
+          {hub.groups.map((group) => {
+            const core = getArticleBySlug(group.coreArticle);
+            if (!core) return null;
+            return <LearnTopicGroup key={group.id} group={group} core={core} supporting={resolve(group.supportingArticles)} />;
+          })}
+          {hub.comparisons && <GuideCollection id="comparisons" title="Compare approaches" articles={resolve(hub.comparisons)} />}
+          {hub.broaderGuides && <GuideCollection id="foundations" title="Broader foundations" articles={resolve(hub.broaderGuides)} />}
         </div>
       </div>
     </main>

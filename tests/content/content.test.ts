@@ -3,7 +3,7 @@ import * as articleBoundary from "../../lib/content/articles";
 import * as articleIndex from "../../lib/content/articles/index";
 import { articles, getArticle, getArticleMaintenanceContext, getArticleReferences, getArticleRegistryIssues, getPrimaryGuideForCalculator, getRelatedArticles, getSupportingGuidesForCalculator } from "../../lib/content/articles";
 import { getRelatedCalculators } from "../../lib/content/calculators";
-import { contentCategories, type Article, type ArticleSlug } from "../../lib/content/types";
+import { contentCategories, type Article } from "../../lib/content/types";
 import { articleJsonLd, articleMetadata, breadcrumbJsonLd, faqJsonLd, getArticlePath } from "../../lib/content/seo";
 import { absoluteUrl, siteUrl } from "../../lib/content/site";
 
@@ -42,19 +42,11 @@ describe("content registry", () => {
   it("rejects two core guides for the same calculator", () => {
     const first = { ...articles[0], primaryCalculator: "home-loan", calculatorGuideRole: "core", relatedCalculators: [], relatedArticles: [] } as Article;
     const second = { ...articles[1], primaryCalculator: "home-loan", calculatorGuideRole: "core", relatedCalculators: [], relatedArticles: [] } as Article;
-    expect(getArticleRegistryIssues([first, second], [first.slug, second.slug])).toContain("Multiple core guides for calculator: home-loan");
-  });
-  it("rejects an unresolved featured article", () => {
-    const unresolvedSlug = "missing-article" as ArticleSlug;
-    expect(getArticleRegistryIssues(articles, [...articleIndex.featuredArticleSlugs, unresolvedSlug])).toContain("Featured article slug does not resolve: missing-article");
-  });
-  it("rejects a duplicate featured article", () => {
-    const duplicate = articleIndex.featuredArticleSlugs[0];
-    expect(getArticleRegistryIssues(articles, [...articleIndex.featuredArticleSlugs, duplicate])).toContain("Duplicate featured article slug");
+    expect(getArticleRegistryIssues([first, second])).toContain("Multiple core guides for calculator: home-loan");
   });
   it("rejects missing rule-sensitive maintenance and official sources", () => {
     const candidate = { ...articles[0], primaryCalculator: null, calculatorGuideRole: null, relatedCalculators: [], relatedArticles: [], maintenance: { kind: "rule-sensitive", verifiedAt: "", applicablePeriod: "" }, references: [] } as Article;
-    const issues = getArticleRegistryIssues([candidate], [candidate.slug]);
+    const issues = getArticleRegistryIssues([candidate]);
     expect(issues).toContain(`Missing maintenance metadata for ${candidate.slug}`);
     expect(issues).toContain(`Rule-sensitive article lacks an official source: ${candidate.slug}`);
   });
@@ -63,17 +55,17 @@ describe("content registry", () => {
     expect(getArticleMaintenanceContext(candidate)).toEqual({ applicablePeriod: "FY 2025–26 / AY 2026–27", periodLabels: [{ label: "Applicable Financial Year", value: "FY 2025–26" }, { label: "Applicable Assessment Year", value: "AY 2026–27" }], verifiedAt: "2026-08-18" });
     expect(getArticleReferences(candidate).every((reference) => reference.sourceType === "official")).toBe(true);
     expect(getArticleReferences(candidate).every((reference) => reference.accessedAt === "2026-08-18")).toBe(true);
-    expect(getArticleRegistryIssues([candidate], [candidate.slug])).toEqual([]);
+    expect(getArticleRegistryIssues([candidate])).toEqual([]);
   });
   it("accepts explicit maintenance and an official source without a rule set", () => {
     const candidate = { ...articles[0], primaryCalculator: null, calculatorGuideRole: null, relatedCalculators: [], relatedArticles: [], maintenance: { kind: "rule-sensitive", verifiedAt: "2026-08-16", applicablePeriod: "Rate verified for July–September 2026" }, references: [{ title: "PPF rate notification", publisher: "Ministry of Finance", url: "https://dea.gov.in/", sourceType: "official" }] } as Article;
-    expect(getArticleRegistryIssues([candidate], [candidate.slug])).toEqual([]);
+    expect(getArticleRegistryIssues([candidate])).toEqual([]);
     expect(getArticleMaintenanceContext(candidate)).toEqual({ applicablePeriod: "Rate verified for July–September 2026", verifiedAt: "2026-08-16" });
     expect(getArticleReferences(candidate)).toEqual(candidate.references);
   });
   it("rejects an unknown rule set", () => {
     const candidate = { ...articles[0], primaryCalculator: null, calculatorGuideRole: null, relatedCalculators: [], relatedArticles: [], maintenance: { kind: "rule-sensitive", ruleSetId: "missing-rule-set" }, references: [] } as Article;
-    expect(getArticleRegistryIssues([candidate], [candidate.slug])).toContain(`Unknown rule set for ${candidate.slug}: missing-rule-set`);
+    expect(getArticleRegistryIssues([candidate])).toContain(`Unknown rule set for ${candidate.slug}: missing-rule-set`);
   });
 });
 

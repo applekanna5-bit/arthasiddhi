@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { articles, categoryDescriptions, categoryLabels, getArticlesByCategory } from "@/lib/content/articles";
+import { categoryDescriptions, categoryLabels, getArticlesByCategory } from "@/lib/content/articles";
+import { getHomeGuides } from "@/lib/content/discovery";
 import { calculators, type CalculatorSlug } from "@/lib/content/calculators";
 import { getArticlePath, pageMetadata } from "@/lib/content/seo";
 import type { ContentCategory } from "@/lib/content/types";
@@ -17,7 +18,7 @@ const calculatorCards = calculatorCardSlugs.map((slug) => calculators[slug]);
 const learnCategories = (Object.keys(categoryLabels) as ContentCategory[]).filter(
   (category) => getArticlesByCategory(category).length > 0
 );
-const popularGuides = articles.slice(0, 3);
+const popularGuides = getHomeGuides();
 
 export default function HomePage() {
   return (
