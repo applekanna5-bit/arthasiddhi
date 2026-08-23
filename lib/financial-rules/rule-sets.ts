@@ -13,11 +13,11 @@ export type IncomeTaxRules = {
 };
 
 export const incomeTaxRuleSet: FinancialRuleSet<IncomeTaxRules> = {
-  id: "income-tax-fy-2025-26-ay-2026-27",
-  label: "Income Tax — FY 2025–26 / AY 2026–27",
-  effectivePeriod: "FY 2025–26 / AY 2026–27",
-  periodLabels: [{ label: "Applicable Financial Year", value: "FY 2025–26" }, { label: "Applicable Assessment Year", value: "AY 2026–27" }],
-  lastVerified: "2026-08-18",
+  id: "income-tax-tax-year-2026-27",
+  label: "Income Tax — Tax Year 2026–27",
+  effectivePeriod: "Tax Year 2026–27 (FY 2026–27)",
+  periodLabels: [{ label: "Applicable Tax Year", value: "Tax Year 2026–27" }, { label: "Corresponding Financial Year", value: "FY 2026–27" }],
+  lastVerified: "2026-08-23",
   rules: {
     maximumSupportedIncome: 5_000_000,
     cessRate: 4,
@@ -38,9 +38,11 @@ export const incomeTaxRuleSet: FinancialRuleSet<IncomeTaxRules> = {
     },
   },
   sources: [
-    { title: "Finance Act 2025 — amendment of section 87A", authority: "Income Tax Department", effectiveFrom: "2026-04-01", reference: "https://www.incometaxindia.gov.in/w/section-20-111", sourceType: "official", accessedAt: "2026-08-18" },
-    { title: "Salaried Individuals for AY 2026–27", authority: "Income Tax Department", reference: "https://www.incometax.gov.in/iec/foportal/help/individual/return-applicable-1", sourceType: "official", accessedAt: "2026-08-18" },
-    { title: "Memorandum explaining the provisions of the Finance Bill, 2025", authority: "Ministry of Finance", reference: "https://www.indiabudget.gov.in/budget2025-26/doc/memo.pdf", sourceType: "official", accessedAt: "2026-08-18" },
+    { title: "Finance Act, 2026", authority: "Ministry of Law and Justice, Government of India", effectiveFrom: "2026-04-01", reference: "https://www.incometaxindia.gov.in/documents/d/guest/finance-act-2026-pdf-1", sourceType: "official", accessedAt: "2026-08-23" },
+    { title: "Income-tax Act, 2025 — section 202: new tax regime", authority: "Income Tax Department", effectiveFrom: "2026-04-01", reference: "https://www.incometaxindia.gov.in/w/section-202-78", sourceType: "official", accessedAt: "2026-08-23" },
+    { title: "Income-tax Act, 2025 — section 156: resident-individual rebate and marginal relief", authority: "Income Tax Department", effectiveFrom: "2026-04-01", reference: "https://www.incometaxindia.gov.in/Documents/Act/Income-tax-Act-2025.pdf", sourceType: "official", accessedAt: "2026-08-23" },
+    { title: "Budget 2026 FAQs — slabs, rebate, marginal relief and special-rate income", authority: "Income Tax Department", reference: "https://incometaxindia.gov.in/Documents/Budget2026/FAQs-Budget-2026.pdf", sourceType: "official", accessedAt: "2026-08-23" },
+    { title: "Memorandum explaining the provisions of the Finance Bill, 2026", authority: "Ministry of Finance", reference: "https://www.indiabudget.gov.in/doc/memo.pdf", sourceType: "official", accessedAt: "2026-08-23" },
   ],
 };
 

@@ -63,29 +63,29 @@ describe("deterministic age evaluation", () => {
 });
 
 describe("Income Tax period semantics", () => {
-  const policy = ruleSetMaintenancePolicies["income-tax-fy-2025-26-ay-2026-27"];
-  const periodFixture = { ...incomeTaxRuleSet, lastVerified: "2026-01-01" };
+  const policy = ruleSetMaintenancePolicies["income-tax-tax-year-2026-27"];
+  const periodFixture = { ...incomeTaxRuleSet, lastVerified: "2026-04-01" };
 
   it("uses current-calculation intent supported by the calculator UI", () => {
     expect(policy.period).toMatchObject({
-      financialYearEndsOn: "2026-03-31",
-      assessmentYearEndsOn: "2027-03-31",
+      kind: "tax-year",
+      taxYearEndsOn: "2027-03-31",
       intendedUse: "current-calculation",
     });
   });
 
-  it("does not roll over until the day after FY end, even while AY remains active", () => {
-    expect(getRuleSetMaintenanceStatus(periodFixture, policy, "2026-03-30").status).toBe("current");
-    expect(getRuleSetMaintenanceStatus(periodFixture, policy, "2026-03-31").status).toBe("current");
-    expect(getRuleSetMaintenanceStatus(periodFixture, policy, "2026-04-01").status).toBe("period-review-required");
-    expect(getRuleSetMaintenanceStatus(periodFixture, policy, "2026-08-23").status).toBe("period-review-required");
+  it("does not roll over until the day after the current tax year ends", () => {
+    expect(getRuleSetMaintenanceStatus(periodFixture, policy, "2027-03-30").status).toBe("review-overdue");
+    expect(getRuleSetMaintenanceStatus(periodFixture, policy, "2027-03-31").status).toBe("review-overdue");
+    expect(getRuleSetMaintenanceStatus(periodFixture, policy, "2027-04-01").status).toBe("period-review-required");
   });
 
-  it("flags the current rule set at the milestone reference date", () => {
+  it("keeps the actually verified current rule set current at the milestone reference date", () => {
     const result = getRuleSetMaintenanceStatus(incomeTaxRuleSet, policy, "2026-08-23");
-    expect(result.status).toBe("period-review-required");
-    expect(result.priority).toBe("P0");
-    expect(result.reasons.some(({ code }) => code === "financial-year-rollover")).toBe(true);
+    expect(result.status).toBe("current");
+    expect(result.priority).toBe("P3");
+    expect(result.ageDays).toBe(0);
+    expect(result.reasons.some(({ code }) => code === "financial-year-rollover")).toBe(false);
   });
 });
 

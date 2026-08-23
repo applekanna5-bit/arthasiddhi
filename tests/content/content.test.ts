@@ -51,10 +51,10 @@ describe("content registry", () => {
     expect(issues).toContain(`Rule-sensitive article lacks an official source: ${candidate.slug}`);
   });
   it("derives rule-sensitive dates and official references from a known rule set", () => {
-    const candidate = { ...articles[0], primaryCalculator: null, calculatorGuideRole: null, relatedCalculators: [], relatedArticles: [], maintenance: { kind: "rule-sensitive", ruleSetId: "income-tax-fy-2025-26-ay-2026-27" }, references: [] } as Article;
-    expect(getArticleMaintenanceContext(candidate)).toEqual({ applicablePeriod: "FY 2025–26 / AY 2026–27", periodLabels: [{ label: "Applicable Financial Year", value: "FY 2025–26" }, { label: "Applicable Assessment Year", value: "AY 2026–27" }], verifiedAt: "2026-08-18" });
+    const candidate = { ...articles[0], primaryCalculator: null, calculatorGuideRole: null, relatedCalculators: [], relatedArticles: [], maintenance: { kind: "rule-sensitive", ruleSetId: "income-tax-tax-year-2026-27" }, references: [] } as Article;
+    expect(getArticleMaintenanceContext(candidate)).toEqual({ applicablePeriod: "Tax Year 2026–27 (FY 2026–27)", periodLabels: [{ label: "Applicable Tax Year", value: "Tax Year 2026–27" }, { label: "Corresponding Financial Year", value: "FY 2026–27" }], verifiedAt: "2026-08-23" });
     expect(getArticleReferences(candidate).every((reference) => reference.sourceType === "official")).toBe(true);
-    expect(getArticleReferences(candidate).every((reference) => reference.accessedAt === "2026-08-18")).toBe(true);
+    expect(getArticleReferences(candidate).every((reference) => reference.accessedAt === "2026-08-23")).toBe(true);
     expect(getArticleRegistryIssues([candidate])).toEqual([]);
   });
   it("accepts explicit maintenance and an official source without a rule set", () => {

@@ -14,12 +14,18 @@ export type IncomeTaxIntendedUse = "current-calculation" | "filing-period" | "hi
 export type MaintenanceReason = { code: MaintenanceReasonCode; message: string };
 export type SourceAdvisory = { code: SourceAdvisoryCode; message: string; sourceReference: string };
 
-type PeriodPolicy = {
-  kind: "financial-and-assessment-year";
-  financialYearEndsOn: string;
-  assessmentYearEndsOn: string;
-  intendedUse: IncomeTaxIntendedUse;
-};
+type PeriodPolicy =
+  | {
+      kind: "financial-and-assessment-year";
+      financialYearEndsOn: string;
+      assessmentYearEndsOn: string;
+      intendedUse: IncomeTaxIntendedUse;
+    }
+  | {
+      kind: "tax-year";
+      taxYearEndsOn: string;
+      intendedUse: Exclude<IncomeTaxIntendedUse, "filing-period">;
+    };
 
 export type RuleSetMaintenancePolicy = {
   reviewAfterDays: number;
@@ -33,17 +39,16 @@ export type RuleSetMaintenancePolicy = {
 // Windows are intentionally rule-specific. They are maintenance cadence, not a
 // claim that a rule changed when the window elapses.
 export const ruleSetMaintenancePolicies = {
-  "income-tax-fy-2025-26-ay-2026-27": {
+  "income-tax-tax-year-2026-27": {
     reviewAfterDays: 90,
     overdueAfterDays: 120,
     priority: "P1",
     eventHints: ["finance-act-cycle", "financial-year-rollover"],
     calculators: ["income-tax"],
     period: {
-      kind: "financial-and-assessment-year",
-      financialYearEndsOn: "2026-03-31",
-      assessmentYearEndsOn: "2027-03-31",
-      // The UI estimates tax for the displayed FY; it is not a return-filing flow.
+      kind: "tax-year",
+      taxYearEndsOn: "2027-03-31",
+      // The 2025 Act uses one tax year for current-period income and rates.
       intendedUse: "current-calculation",
     },
   },
@@ -159,14 +164,18 @@ export function getRuleSetMaintenanceStatus(
   const period = policy.period;
   let periodReviewRequired = false;
   if (period) {
-    const financialYearEnd = parseIsoDate(period.financialYearEndsOn, "financialYearEndsOn");
-    const assessmentYearEnd = parseIsoDate(period.assessmentYearEndsOn, "assessmentYearEndsOn");
-    if (assessmentYearEnd <= financialYearEnd) throw new Error("assessmentYearEndsOn must follow financialYearEndsOn");
-    periodReviewRequired = period.intendedUse === "current-calculation" && referenceTimestamp > financialYearEnd;
-    if (period.intendedUse === "filing-period") periodReviewRequired = referenceTimestamp > assessmentYearEnd;
+    const currentPeriodEnd = period.kind === "tax-year"
+      ? parseIsoDate(period.taxYearEndsOn, "taxYearEndsOn")
+      : parseIsoDate(period.financialYearEndsOn, "financialYearEndsOn");
+    if (period.kind === "financial-and-assessment-year") {
+      const assessmentYearEnd = parseIsoDate(period.assessmentYearEndsOn, "assessmentYearEndsOn");
+      if (assessmentYearEnd <= currentPeriodEnd) throw new Error("assessmentYearEndsOn must follow financialYearEndsOn");
+      if (period.intendedUse === "filing-period") periodReviewRequired = referenceTimestamp > assessmentYearEnd;
+    }
+    if (period.intendedUse === "current-calculation") periodReviewRequired = referenceTimestamp > currentPeriodEnd;
     if (periodReviewRequired) reasons.push({
       code: "financial-year-rollover",
-      message: `The applicable financial year ended on ${period.financialYearEndsOn}; ${period.intendedUse} requires review after that period.`,
+      message: `The applicable ${period.kind === "tax-year" ? "tax year" : "financial year"} ended on ${period.kind === "tax-year" ? period.taxYearEndsOn : period.financialYearEndsOn}; ${period.intendedUse} requires review after that period.`,
     });
   }
 

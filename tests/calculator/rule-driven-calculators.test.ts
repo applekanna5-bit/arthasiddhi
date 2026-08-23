@@ -7,7 +7,12 @@ const tax = (overrides: Partial<IncomeTaxInput> = {}) => calculateIncomeTax({ re
 describe("Income Tax calculator", () => {
   it("returns zero for zero income", () => expect(tax()).toMatchObject({ taxBeforeRebate: 0, rebate: 0, cess: 0, totalTax: 0, effectiveTaxRate: 0 }));
   it.each([
-    [400_000, 0], [400_001, 0.05], [800_000, 20_000], [800_001, 20_000.1], [1_200_000, 60_000], [1_200_001, 60_000.15], [1_600_000, 120_000], [2_000_000, 200_000], [2_400_000, 300_000],
+    [399_999, 0], [400_000, 0], [400_001, 0.05],
+    [799_999, 19_999.95], [800_000, 20_000], [800_001, 20_000.1],
+    [1_199_999, 59_999.9], [1_200_000, 60_000], [1_200_001, 60_000.15],
+    [1_599_999, 119_999.85], [1_600_000, 120_000], [1_600_001, 120_000.2],
+    [1_999_999, 199_999.8], [2_000_000, 200_000], [2_000_001, 200_000.25],
+    [2_399_999, 299_999.75], [2_400_000, 300_000], [2_400_001, 300_000.3],
   ])("calculates the new-regime boundary at ₹%i progressively", (income, expectedSlabTax) => expect(tax({ taxableOrdinaryIncome: income }).taxBeforeRebate).toBeCloseTo(expectedSlabTax, 8));
   it("rebates the calculated tax below ₹12 lakh without exceeding the cap", () => expect(tax({ taxableOrdinaryIncome: 1_100_000 })).toMatchObject({ taxBeforeRebate: 50_000, rebate: 50_000, marginalRelief: 0, taxAfterRelief: 0, totalTax: 0 }));
   it("applies the full new-regime rebate at ₹12 lakh", () => expect(tax({ taxableOrdinaryIncome: 1_200_000 })).toMatchObject({ taxBeforeRebate: 60_000, rebate: 60_000, marginalRelief: 0, taxAfterRelief: 0, totalTax: 0 }));
@@ -16,7 +21,7 @@ describe("Income Tax calculator", () => {
     [1_200_100, 60_015, 59_915, 100, 4, 104],
     [1_250_000, 67_500, 17_500, 50_000, 2_000, 52_000],
     [1_270_588, 70_588.2, 0.2, 70_588, 2_823.52, 73_411.52],
-  ])("applies Section 87A marginal relief at ₹%i before cess", (income, taxBeforeRebate, marginalRelief, taxAfterRelief, cess, totalTax) => { const result = tax({ taxableOrdinaryIncome: income }); expect(result.rebate).toBe(0); expect(result.taxBeforeRebate).toBeCloseTo(taxBeforeRebate, 8); expect(result.marginalRelief).toBeCloseTo(marginalRelief, 8); expect(result.taxAfterRelief).toBeCloseTo(taxAfterRelief, 8); expect(result.cess).toBeCloseTo(cess, 8); expect(result.totalTax).toBeCloseTo(totalTax, 8); });
+  ])("applies section 156 marginal relief at ₹%i before cess", (income, taxBeforeRebate, marginalRelief, taxAfterRelief, cess, totalTax) => { const result = tax({ taxableOrdinaryIncome: income }); expect(result.rebate).toBe(0); expect(result.taxBeforeRebate).toBeCloseTo(taxBeforeRebate, 8); expect(result.marginalRelief).toBeCloseTo(marginalRelief, 8); expect(result.taxAfterRelief).toBeCloseTo(taxAfterRelief, 8); expect(result.cess).toBeCloseTo(cess, 8); expect(result.totalTax).toBeCloseTo(totalTax, 8); });
   it.each([[1_270_589, 70_588.35], [1_300_000, 75_000]])("ceases marginal relief at and beyond ₹%i", (income, taxAfterRelief) => expect(tax({ taxableOrdinaryIncome: income })).toMatchObject({ marginalRelief: 0, taxAfterRelief }));
   it("applies 4% cess after marginal relief ceases", () => expect(tax({ taxableOrdinaryIncome: 1_300_000 })).toMatchObject({ taxAfterRelief: 75_000, cess: 3_000, totalTax: 78_000 }));
   it("uses below-60 old-regime slabs", () => expect(tax({ regime: "old", taxableOrdinaryIncome: 1_100_000 }).taxBeforeRebate).toBe(142_500));
@@ -27,7 +32,19 @@ describe("Income Tax calculator", () => {
     ["60-to-below-80", 300_000, 0], ["60-to-below-80", 300_001, 0.05],
     ["80-or-above", 500_000, 0], ["80-or-above", 500_001, 0.2],
   ] as const)("respects the %s old-regime threshold at ₹%i", (ageCategory, taxableOrdinaryIncome, taxBeforeRebate) => expect(tax({ regime: "old", ageCategory, taxableOrdinaryIncome }).taxBeforeRebate).toBeCloseTo(taxBeforeRebate, 8));
+  it.each([
+    ["below-60", 249_999, 0], ["below-60", 250_000, 0], ["below-60", 250_001, 0.05], ["below-60", 499_999, 12_499.95], ["below-60", 500_000, 12_500], ["below-60", 500_001, 12_500.2], ["below-60", 999_999, 112_499.8], ["below-60", 1_000_000, 112_500], ["below-60", 1_000_001, 112_500.3],
+    ["60-to-below-80", 299_999, 0], ["60-to-below-80", 300_000, 0], ["60-to-below-80", 300_001, 0.05], ["60-to-below-80", 499_999, 9_999.95], ["60-to-below-80", 500_000, 10_000], ["60-to-below-80", 500_001, 10_000.2], ["60-to-below-80", 999_999, 109_999.8], ["60-to-below-80", 1_000_000, 110_000], ["60-to-below-80", 1_000_001, 110_000.3],
+    ["80-or-above", 499_999, 0], ["80-or-above", 500_000, 0], ["80-or-above", 500_001, 0.2], ["80-or-above", 999_999, 99_999.8], ["80-or-above", 1_000_000, 100_000], ["80-or-above", 1_000_001, 100_000.3],
+  ] as const)("checks every %s old-regime slab edge at ₹%i", (ageCategory, taxableOrdinaryIncome, taxBeforeRebate) => expect(tax({ regime: "old", ageCategory, taxableOrdinaryIncome }).taxBeforeRebate).toBeCloseTo(taxBeforeRebate, 8));
   it("applies the old-regime rebate through ₹5 lakh", () => expect(tax({ regime: "old", taxableOrdinaryIncome: 500_000 })).toMatchObject({ taxBeforeRebate: 12_500, rebate: 12_500, totalTax: 0 }));
+  it("ends the old-regime rebate immediately above ₹5 lakh and applies cess afterward", () => {
+    const result = tax({ regime: "old", taxableOrdinaryIncome: 500_001 });
+    expect(result.rebate).toBe(0);
+    expect(result.taxAfterRelief).toBeCloseTo(12_500.2, 8);
+    expect(result.cess).toBeCloseTo(500.008, 8);
+    expect(result.totalTax).toBeCloseTo(13_000.208, 8);
+  });
   it("ignores age category under the new regime", () => { const values = (["below-60", "60-to-below-80", "80-or-above"] as const).map((ageCategory) => tax({ ageCategory, taxableOrdinaryIncome: 1_500_000 }).totalTax); expect(new Set(values).size).toBe(1); });
   it("rejects income above ₹50 lakh", () => expect(() => tax({ taxableOrdinaryIncome: 5_000_001 })).toThrow(/up to 5000000/));
   it("accepts income exactly at the ₹50 lakh scope ceiling", () => expect(tax({ taxableOrdinaryIncome: 5_000_000 }).taxableIncome).toBe(5_000_000));

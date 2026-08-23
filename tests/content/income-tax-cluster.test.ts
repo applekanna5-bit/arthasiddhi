@@ -8,7 +8,7 @@ import { buildSitemap } from "../../lib/content/sitemap";
 import type { Article, ArticleInternalLink, ArticleSection, ArticleSlug } from "../../lib/content/types";
 
 const taxSlugs = ["new-tax-regime-slab-calculation", "section-87a-rebate", "health-education-cess-calculation", "gross-income-vs-taxable-income", "income-tax-calculator-vs-payroll-tds"] as const satisfies readonly ArticleSlug[];
-const ruleSetId = "income-tax-fy-2025-26-ay-2026-27";
+const ruleSetId = "income-tax-tax-year-2026-27";
 const money = (value: number) => `₹${new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 }).format(value)}`;
 const calculate = (income: number) => calculateIncomeTax({ regime: "new", ageCategory: "below-60", taxableOrdinaryIncome: income }, incomeTaxRuleSet);
 
@@ -34,12 +34,14 @@ describe("Income Tax cluster registry and maintenance", () => {
     expect(getPrimaryGuideForCalculator("income-tax")?.slug).toBe("new-tax-regime-slab-calculation");
   });
 
-  it("inherits FY, AY, verification date and official sources from the current rule set", () => {
+  it("inherits tax year, verification date and official sources from the current rule set", () => {
     expect(incomeTaxRuleSet.id).toBe(ruleSetId);
     for (const slug of taxSlugs) {
       const article = taxArticle(slug);
       expect(article.maintenance).toEqual({ kind: "rule-sensitive", ruleSetId });
-      expect(getArticleMaintenanceContext(article)).toEqual({ applicablePeriod: "FY 2025–26 / AY 2026–27", periodLabels: [{ label: "Applicable Financial Year", value: "FY 2025–26" }, { label: "Applicable Assessment Year", value: "AY 2026–27" }], verifiedAt: "2026-08-18" });
+      expect(article.publishedAt).toBe("2026-08-18");
+      expect(article.updatedAt).toBe("2026-08-23");
+      expect(getArticleMaintenanceContext(article)).toEqual({ applicablePeriod: "Tax Year 2026–27 (FY 2026–27)", periodLabels: [{ label: "Applicable Tax Year", value: "Tax Year 2026–27" }, { label: "Corresponding Financial Year", value: "FY 2026–27" }], verifiedAt: "2026-08-23" });
       const references = getArticleReferences(article);
       expect(references.length).toBeGreaterThan(0);
       expect(references.every(({ sourceType, url }) => sourceType === "official" && new URL(url).protocol === "https:")).toBe(true);
@@ -82,7 +84,7 @@ describe("Income Tax numerical integrity", () => {
     expect(incomeTaxRuleSet.rules.newRegime.slabs).toEqual([{ upTo: 400_000, rate: 0 }, { upTo: 800_000, rate: 5 }, { upTo: 1_200_000, rate: 10 }, { upTo: 1_600_000, rate: 15 }, { upTo: 2_000_000, rate: 20 }, { upTo: 2_400_000, rate: 25 }, { upTo: null, rate: 30 }]);
   });
 
-  it("binds every visible Section 87A boundary row to the corrected engine", () => {
+  it("binds every visible resident-individual rebate boundary row to the corrected engine", () => {
     const results = [1_200_000, 1_200_001, 1_250_000, 1_270_588].map(calculate);
     const rows = results.map((result) => [money(result.taxableIncome), money(result.taxBeforeRebate), money(result.rebate), money(result.marginalRelief), money(result.taxAfterRelief), money(result.cess), money(result.totalTax)]);
     expect(section(taxArticle("section-87a-rebate"), "examples").table?.rows).toEqual(rows);
@@ -127,7 +129,7 @@ describe("Income Tax SEO and sitemap", () => {
     for (const slug of taxSlugs) {
       const article = taxArticle(slug); const url = absoluteUrl(getArticlePath(article)); const metadata = articleMetadata(article);
       expect(url).toMatch(/^https:\/\/arthasiddhi\.com\/learn\/tax\//); expect(metadata.alternates?.canonical).toBe(url);
-      expect(articleJsonLd(article)).toMatchObject({ "@type": "Article", mainEntityOfPage: url, headline: article.title }); expect(breadcrumbJsonLd(article).itemListElement).toHaveLength(4); expect(faqJsonLd(article)).toMatchObject({ "@type": "FAQPage" });
+      expect(articleJsonLd(article)).toMatchObject({ "@type": "Article", mainEntityOfPage: url, headline: article.title, datePublished: "2026-08-18", dateModified: "2026-08-23" }); expect(breadcrumbJsonLd(article).itemListElement).toHaveLength(4); expect(faqJsonLd(article)).toMatchObject({ "@type": "FAQPage" });
       titles.add(article.title); descriptions.add(article.description);
     }
     expect(titles.size).toBe(5); expect(descriptions.size).toBe(5);
