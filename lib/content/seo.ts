@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { categoryLabels } from "./articles";
-import { absoluteUrl } from "./site";
+import { absoluteUrl, sitePublisher } from "./site";
 import type { Article } from "./types";
 
 export function pageMetadata({
@@ -48,7 +48,17 @@ export function websiteJsonLd() {
 }
 
 export function articleJsonLd(article: Article) {
-  return { "@context": "https://schema.org", "@type": "Article", headline: article.title, description: article.description, datePublished: article.publishedAt, dateModified: article.updatedAt, mainEntityOfPage: absoluteUrl(getArticlePath(article)) };
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.description,
+    author: { "@type": "Organization", name: sitePublisher.name, url: sitePublisher.aboutUrl },
+    publisher: { "@type": "Organization", name: sitePublisher.name, url: sitePublisher.url },
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt,
+    mainEntityOfPage: absoluteUrl(getArticlePath(article)),
+  };
 }
 
 export function breadcrumbJsonLd(article: Article) {

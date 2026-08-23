@@ -5,7 +5,7 @@ import { articles, getArticle, getArticleMaintenanceContext, getArticleReference
 import { getRelatedCalculators } from "../../lib/content/calculators";
 import { contentCategories, type Article } from "../../lib/content/types";
 import { articleJsonLd, articleMetadata, breadcrumbJsonLd, faqJsonLd, getArticlePath } from "../../lib/content/seo";
-import { absoluteUrl, siteUrl } from "../../lib/content/site";
+import { absoluteUrl, sitePublisher, siteUrl } from "../../lib/content/site";
 
 describe("content registry", () => {
   it("finds articles by their category and slug", () => { expect(getArticle("loans", "home-loan-guide")?.title).toBe("Home Loan Guide for Beginners"); expect(getArticle("loans", "missing")).toBeUndefined(); });
@@ -80,7 +80,7 @@ describe("article compatibility boundary", () => {
 describe("article SEO data", () => {
   const article = articles[0];
   it("builds a clean article path", () => { expect(getArticlePath(article)).toBe("/learn/loans/home-loan-guide"); });
-  it("produces serializable matching JSON-LD", () => { const articleSchema = articleJsonLd(article); const breadcrumbSchema = breadcrumbJsonLd(article); const faqSchema = faqJsonLd(article); expect(() => JSON.parse(JSON.stringify([articleSchema, breadcrumbSchema, faqSchema]))).not.toThrow(); expect(articleSchema.headline).toBe(article.title); expect(articleSchema).not.toHaveProperty("author"); expect(articleSchema).not.toHaveProperty("publisher"); expect(breadcrumbSchema.itemListElement).toHaveLength(4); expect(faqSchema?.["@type"]).toBe("FAQPage"); });
+  it("produces serializable matching JSON-LD", () => { const articleSchema = articleJsonLd(article); const breadcrumbSchema = breadcrumbJsonLd(article); const faqSchema = faqJsonLd(article); expect(() => JSON.parse(JSON.stringify([articleSchema, breadcrumbSchema, faqSchema]))).not.toThrow(); expect(articleSchema.headline).toBe(article.title); expect(articleSchema.author).toEqual({ "@type": "Organization", name: sitePublisher.name, url: sitePublisher.aboutUrl }); expect(articleSchema.publisher).toEqual({ "@type": "Organization", name: sitePublisher.name, url: sitePublisher.url }); expect(breadcrumbSchema.itemListElement).toHaveLength(4); expect(faqSchema?.["@type"]).toBe("FAQPage"); });
   it("keeps metadata dates aligned with article data", () => { const metadata = articleMetadata(article); expect(metadata.openGraph).toMatchObject({ publishedTime: article.publishedAt, modifiedTime: article.updatedAt }); });
 });
 

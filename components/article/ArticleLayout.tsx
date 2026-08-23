@@ -10,6 +10,7 @@ import { RelatedArticles, RelatedCalculators } from "./RelatedContent";
 import { TableOfContents } from "./TableOfContents";
 import { categoryLabels, getArticleReferences, getRelatedArticles } from "@/lib/content/articles";
 import { getRelatedCalculators } from "@/lib/content/calculators";
+import { sitePublisher } from "@/lib/content/site";
 import type { Article } from "@/lib/content/types";
 
 function formatDate(date: string) {
@@ -29,7 +30,7 @@ export function ArticleLayout({ article }: { article: Article }) {
             <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-5xl">{article.title}</h1>
             <p className="mt-4 text-lg leading-8 text-slate-600">{article.description}</p>
             <dl className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm text-slate-600">
-              {article.byline && <div><dt className="sr-only">Byline</dt><dd>{article.byline}</dd></div>}
+              <div><dt className="sr-only">Author</dt><dd>Published by <Link href="/about" className="rounded-sm font-semibold text-emerald-700 underline underline-offset-4 focus:outline-none focus:ring-3 focus:ring-emerald-100">{sitePublisher.name}</Link></dd></div>
               <div><dt className="sr-only">Published</dt><dd>Published <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time></dd></div>
               <div><dt className="sr-only">Updated</dt><dd>Updated <time dateTime={article.updatedAt}>{formatDate(article.updatedAt)}</time></dd></div>
               <div><dt className="sr-only">Reading time</dt><dd>{article.readingTime}</dd></div>

@@ -128,7 +128,6 @@ type ArticleBase = {
   slug: ArticleSlug;
   description: string;
   category: ContentCategory;
-  byline?: string;
   publishedAt: string;
   updatedAt: string;
   readingTime: string;
