@@ -34,10 +34,17 @@ describe("production URL regression protection", () => {
 });
 
 describe("public site routes", () => {
-  const trustRoutes = ["/about", "/contact", "/privacy", "/terms", "/disclaimer"];
+  const trustRoutes = ["/about", "/contact", "/editorial-policy", "/methodology", "/privacy", "/terms", "/disclaimer"];
 
   it("includes every trust route in the sitemap", () => {
     for (const route of trustRoutes) expect(staticSitemapRoutes).toContain(route);
+  });
+
+  it("keeps every approved trust route in a unique 95-URL sitemap", () => {
+    const sitemapUrls = buildSitemap().map(({ url }) => url);
+    for (const route of trustRoutes) expect(sitemapUrls).toContain(absoluteUrl(route));
+    expect(sitemapUrls).toHaveLength(95);
+    expect(new Set(sitemapUrls).size).toBe(95);
   });
 
   it("maps every footer link to a known public route", () => {

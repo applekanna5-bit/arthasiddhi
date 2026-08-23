@@ -12,6 +12,8 @@ export const footerLinkGroups: { title: string; links: SiteLink[] }[] = [
     title: "Information",
     links: [
       { href: "/about", label: "About" },
+      { href: "/editorial-policy", label: "Editorial Policy" },
+      { href: "/methodology", label: "Calculator Methodology" },
       { href: "/contact", label: "Contact" },
     ],
   },
@@ -31,6 +33,8 @@ export const staticSitemapRoutes = [
   "/learn",
   "/about",
   "/contact",
+  "/editorial-policy",
+  "/methodology",
   "/privacy",
   "/terms",
   "/disclaimer",
