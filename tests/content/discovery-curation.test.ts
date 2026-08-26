@@ -20,7 +20,7 @@ describe("explicit calculator guide curation", () => {
   });
 
   it("keeps the approved visible card sets stable", () => {
-    expect(calculatorGuideCuration["home-loan"].supporting).toEqual(["home-loan-emi-calculation", "home-loan-tenure-comparison"]);
+    expect(calculatorGuideCuration["home-loan"].supporting).toEqual(["home-loan-emi-calculation", "home-loan-tenure-comparison", "when-home-loan-emi-starts"]);
     expect(calculatorGuideCuration.sip.supporting).toEqual(["sip-return-calculation", "sip-projection-assumptions"]);
     expect(calculatorGuideCuration.lumpsum.supporting).toEqual(["lumpsum-projection-assumptions"]);
   });
@@ -33,6 +33,7 @@ describe("explicit calculator guide curation", () => {
     expect(getCalculatorGuideCuration("home-loan", syntheticArticles).supporting.map((article) => article.slug)).toEqual([
       "home-loan-emi-calculation",
       "home-loan-tenure-comparison",
+      "when-home-loan-emi-starts",
     ]);
     expect(syntheticArticles.at(-1)?.calculatorDiscoveryPriority).toBe(10_000);
   });

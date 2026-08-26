@@ -117,10 +117,10 @@ describe("Step-up SIP boundaries, relationships and SEO", () => {
     }
   });
 
-  it("adds exactly three Step-up SIP URLs to the unique 95-URL sitemap", () => {
+  it("keeps exactly three Step-up SIP URLs in the unique 96-URL sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(95);
-    expect(new Set(urls).size).toBe(95);
+    expect(urls).toHaveLength(96);
+    expect(new Set(urls).size).toBe(96);
     for (const slug of slugs) expect(urls.filter((url) => url === absoluteUrl(`/learn/investments/${slug}`))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/investments"))).toHaveLength(1);
   });

@@ -18,7 +18,7 @@ const identities = {
     title: "Home Loan Guide for Beginners",
     primaryCalculator: "home-loan",
     calculatorGuideRole: "core",
-    relatedArticles: ["home-loan-emi-calculation", "home-loan-tenure-comparison", "home-loan-prepayment"],
+    relatedArticles: ["home-loan-emi-calculation", "home-loan-tenure-comparison", "when-home-loan-emi-starts", "home-loan-prepayment"],
     relatedCalculators: [],
     description: "What EMI, tenure, interest and lender terms mean when you compare a home loan.",
   },
@@ -75,8 +75,8 @@ describe("core article identity and architecture", () => {
   });
 
   it("keeps every declared article route valid and the registry clean", () => {
-    expect(articles).toHaveLength(62);
-    expect(new Set(articles.map(getArticlePath)).size).toBe(62);
+    expect(articles).toHaveLength(63);
+    expect(new Set(articles.map(getArticlePath)).size).toBe(63);
     expect(getArticleRegistryIssues()).toEqual([]);
   });
 
@@ -159,7 +159,7 @@ describe("core article editorial boundaries", () => {
 
   it("resolves contextual article and calculator links through declared slugs", () => {
     const expectedArticleLinks: Record<keyof typeof identities, readonly ArticleSlug[]> = {
-      "home-loan-guide": ["home-loan-emi-calculation", "home-loan-tenure-comparison", "home-loan-prepayment"],
+      "home-loan-guide": ["home-loan-emi-calculation", "home-loan-tenure-comparison", "when-home-loan-emi-starts", "home-loan-prepayment"],
       "sip-explained": ["compound-interest", "sip-return-calculation", "sip-vs-lumpsum", "fixed-sip-vs-step-up-sip", "sip-projection-assumptions"],
       "fixed-deposit-explained": ["compound-interest", "fd-interest-calculation", "fd-vs-rd", "premature-fd-withdrawal"],
     };

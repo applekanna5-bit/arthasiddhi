@@ -58,7 +58,7 @@ describe("Personal Loan cluster registry and discovery", () => {
       expect(article.category).toBe("loans");
       expect(article.maintenance).toEqual({ kind: "evergreen" });
     }
-    expect(getArticlesByCategory("loans")).toHaveLength(10);
+    expect(getArticlesByCategory("loans")).toHaveLength(11);
   });
 
   it("keeps one core guide and two supporting guides", () => {
@@ -174,10 +174,10 @@ describe("Personal Loan cluster SEO and sitemap", () => {
     expect(descriptions.size).toBe(3);
   });
 
-  it("preserves Personal Loan URLs in the unique 95-URL sitemap without a new category", () => {
+  it("preserves Personal Loan URLs in the unique 96-URL sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(95);
-    expect(new Set(urls).size).toBe(95);
+    expect(urls).toHaveLength(96);
+    expect(new Set(urls).size).toBe(96);
     for (const slug of personalLoanSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(personalLoanArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/loans"))).toHaveLength(1);
   });

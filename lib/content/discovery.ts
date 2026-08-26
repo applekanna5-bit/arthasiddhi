@@ -8,7 +8,7 @@ export type CalculatorGuideCuration = {
 };
 
 export const calculatorGuideCuration = {
-  "home-loan": { core: "home-loan-guide", supporting: ["home-loan-emi-calculation", "home-loan-tenure-comparison"] },
+  "home-loan": { core: "home-loan-guide", supporting: ["home-loan-emi-calculation", "home-loan-tenure-comparison", "when-home-loan-emi-starts"] },
   "car-loan": { core: "car-loan-cost-guide", supporting: ["car-loan-down-payment-and-loan-amount", "car-loan-on-road-price-vs-loan-amount"] },
   "personal-loan": { core: "personal-loan-emi-explained", supporting: ["personal-loan-tenure-comparison", "personal-loan-calculator-vs-lender-quote"] },
   sip: { core: "sip-explained", supporting: ["sip-return-calculation", "sip-projection-assumptions"] },
@@ -55,7 +55,7 @@ export const learnCategoryHubs: Record<ContentCategory, LearnCategoryHub> = {
     category: "loans",
     topicPreview: ["Home loans", "Personal loans", "Car loans"],
     groups: [
-      { id: "home-loan", title: "Home loans", calculator: "home-loan", coreArticle: "home-loan-guide", supportingArticles: ["home-loan-emi-calculation", "home-loan-tenure-comparison", "home-loan-prepayment"] },
+      { id: "home-loan", title: "Home loans", calculator: "home-loan", coreArticle: "home-loan-guide", supportingArticles: ["home-loan-emi-calculation", "home-loan-tenure-comparison", "when-home-loan-emi-starts", "home-loan-prepayment"] },
       { id: "personal-loan", title: "Personal loans", calculator: "personal-loan", coreArticle: "personal-loan-emi-explained", supportingArticles: ["personal-loan-tenure-comparison", "personal-loan-calculator-vs-lender-quote"] },
       { id: "car-loan", title: "Car loans", calculator: "car-loan", coreArticle: "car-loan-cost-guide", supportingArticles: ["car-loan-down-payment-and-loan-amount", "car-loan-on-road-price-vs-loan-amount"] },
     ],

@@ -70,6 +70,7 @@ describe("Batch C Learn discovery", () => {
     expect(getArticleRegistryIssues()).toEqual([]);
     expect(articles.map(getArticlePath)).toEqual([
       "/learn/loans/home-loan-guide",
+      "/learn/loans/when-home-loan-emi-starts",
       "/learn/loans/home-loan-emi-calculation",
       "/learn/loans/home-loan-tenure-comparison",
       "/learn/loans/home-loan-prepayment",

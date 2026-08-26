@@ -54,7 +54,7 @@ describe("Car Loan cluster registry and discovery", () => {
     const registered = articles.filter(({ primaryCalculator }) => primaryCalculator === "car-loan");
     expect(registered.map(({ slug }) => slug)).toEqual(carLoanSlugs);
     expect(new Set(registered.map(getArticlePath)).size).toBe(3);
-    expect(getArticlesByCategory("loans")).toHaveLength(10);
+    expect(getArticlesByCategory("loans")).toHaveLength(11);
     for (const article of registered) {
       expect(article.category).toBe("loans");
       expect(article.primaryCalculator).toBe("car-loan");
@@ -167,10 +167,10 @@ describe("Car Loan SEO, schema and sitemap", () => {
     expect(descriptions.size).toBe(3);
   });
 
-  it("keeps each Car Loan route once in the unique 95-URL sitemap", () => {
+  it("keeps each Car Loan route once in the unique 96-URL sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(95);
-    expect(new Set(urls).size).toBe(95);
+    expect(urls).toHaveLength(96);
+    expect(new Set(urls).size).toBe(96);
     for (const slug of carLoanSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(carLoanArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/loans"))).toHaveLength(1);
   });

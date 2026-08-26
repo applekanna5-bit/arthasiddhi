@@ -188,10 +188,10 @@ describe("CAGR cluster SEO, schema and sitemap", () => {
     expect(descriptions.size).toBe(4);
   });
 
-  it("keeps each article once in the 95-URL sitemap without a category duplicate", () => {
+  it("keeps each article once in the 96-URL sitemap without a category duplicate", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(95);
-    expect(new Set(urls).size).toBe(95);
+    expect(urls).toHaveLength(96);
+    expect(new Set(urls).size).toBe(96);
     for (const slug of cagrSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(cagrArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/investments"))).toHaveLength(1);
   });

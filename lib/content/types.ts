@@ -13,6 +13,7 @@ export type ContentCategory = (typeof contentCategories)[number];
 
 export const articleSlugs = [
   "home-loan-guide",
+  "when-home-loan-emi-starts",
   "home-loan-emi-calculation",
   "home-loan-tenure-comparison",
   "home-loan-prepayment",
