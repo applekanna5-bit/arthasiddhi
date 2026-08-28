@@ -99,12 +99,12 @@ describe("rule-specific boundaries", () => {
   });
 
   it("reports EPF's encoded pending-notification context", () => {
-    const row = buildMaintenanceReport("2026-08-23").find(({ ruleSetId }) => ruleSetId === epfRuleSet.id);
+    const row = buildMaintenanceReport("2026-08-28").find(({ ruleSetId }) => ruleSetId === epfRuleSet.id);
     expect(row?.reasons.some(({ code }) => code === "pending-notification")).toBe(true);
   });
 
   it("treats GST's missing CBIC access date as advisory only", () => {
-    const row = buildMaintenanceReport("2026-08-23").find(({ ruleSetId }) => ruleSetId === gstRuleSet.id);
+    const row = buildMaintenanceReport("2026-08-28").find(({ ruleSetId }) => ruleSetId === gstRuleSet.id);
     expect(row?.status).toBe("current");
     expect(row?.sourceAdvisories).toEqual([expect.objectContaining({ code: "missing-source-access-date", sourceReference: gstRuleSet.sources[0].reference })]);
   });
@@ -112,10 +112,10 @@ describe("rule-specific boundaries", () => {
 
 describe("article inheritance, blast radius, and evergreen exclusion", () => {
   it("applies one shared status to every rule-sensitive dependent", () => {
-    const report = buildMaintenanceReport("2026-08-23");
+    const report = buildMaintenanceReport("2026-08-28");
     const sensitive = articles.filter(({ maintenance }) => maintenance.kind === "rule-sensitive");
     for (const article of sensitive) {
-      const result = getArticleMaintenanceStatus(article, "2026-08-23");
+      const result = getArticleMaintenanceStatus(article, "2026-08-28");
       const row = report.find(({ ruleSetId }) => ruleSetId === result?.ruleSetId);
       expect(result?.status).toBe(row?.status);
       expect(row?.articleSlugs).toContain(article.slug);
@@ -132,8 +132,8 @@ describe("article inheritance, blast radius, and evergreen exclusion", () => {
 describe("immutability", () => {
   it("does not mutate rules, articles, sources, or dates", () => {
     const before = structuredClone({ financialRuleSets, articles });
-    buildMaintenanceReport("2026-08-23");
-    getArticleMaintenanceStatus(articles.find(({ maintenance }) => maintenance.kind === "rule-sensitive")!, "2026-08-23");
+    buildMaintenanceReport("2026-08-28");
+    getArticleMaintenanceStatus(articles.find(({ maintenance }) => maintenance.kind === "rule-sensitive")!, "2026-08-28");
     expect({ financialRuleSets, articles }).toEqual(before);
   });
 });

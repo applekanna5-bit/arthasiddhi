@@ -63,9 +63,9 @@ describe("EPF cluster registry, maintenance and discovery", () => {
     for (const slug of ["epf-explained", "epf-contribution-calculation"] as const) {
       const article = epfArticle(slug);
       expect(article.maintenance).toEqual({ kind: "rule-sensitive", ruleSetId: epfRuleSet.id });
-      expect(getArticleMaintenanceContext(article)).toMatchObject({ applicablePeriod: epfRuleSet.effectivePeriod, verifiedAt: "2026-08-22" });
+      expect(getArticleMaintenanceContext(article)).toMatchObject({ applicablePeriod: epfRuleSet.effectivePeriod, verifiedAt: "2026-08-28" });
       expect(getArticleReferences(article)).toHaveLength(6);
-      expect(getArticleReferences(article).every(({ sourceType, accessedAt }) => sourceType === "official" && accessedAt === "2026-08-22")).toBe(true);
+      expect(getArticleReferences(article).every(({ sourceType, accessedAt }) => sourceType === "official" && Boolean(accessedAt))).toBe(true);
     }
     expect(epfArticle("epf-calculator-projection-assumptions").maintenance).toEqual({ kind: "evergreen" });
   });
@@ -140,6 +140,14 @@ describe("EPF employer allocation and projection integrity", () => {
     expect(uiSource).toContain('label="Include EPS diversion in projection"');
     expect(uiSource).toContain("it does not determine statutory EPS eligibility");
   });
+
+  it("qualifies reduced-rate eligibility and International Worker uncertainty without inferring jurisdiction", () => {
+    expect(uiSource).toContain("A 10% contribution rate applies only where the relevant establishment or class is legally eligible");
+    expect(uiSource).toContain("the Karnataka High Court invalidated the special provisions while the Delhi High Court upheld the framework");
+    expect(uiSource).toContain("Supreme Court proceedings remain pending");
+    expect(uiSource).toContain("does not determine an individual's statutory International Worker contribution liability");
+    expect(uiSource).not.toMatch(/label="[^"]*(?:nationality|jurisdiction|international worker)/i);
+  });
 });
 
 describe("EPF relationships and editorial safety", () => {
@@ -163,6 +171,9 @@ describe("EPF relationships and editorial safety", () => {
     const combined = epfSlugs.map((slug) => articleText(epfArticle(slug))).join(" ");
     for (const claim of ["epf is always 12%", "every employer contributes exactly 3.67%", "every employee is eligible for eps", "guaranteed epf balance", "exact epfo passbook forecast.", "the calculator determines withdrawal eligibility", "the calculator calculates tax", "the calculator calculates eps pension"] ) expect(combined).not.toContain(claim);
     expect(combined).toContain("12% is not universal");
+    expect(combined).toContain("the karnataka high court invalidated the special provisions while the delhi high court upheld the framework");
+    expect(combined).toContain("supreme court proceedings remain pending");
+    expect(combined).toContain("does not determine statutory international worker contribution liability");
     expect(combined).toContain("not a determination that eps does or does not legally apply");
     expect(combined).toContain("not an eps pension quote");
     expect(combined).toContain("does not determine withdrawal eligibility or tax treatment");

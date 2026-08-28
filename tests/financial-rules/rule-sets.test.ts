@@ -6,7 +6,22 @@ describe("financial rule registry", () => {
   it("uses the current Act's tax-year identity without inventing an assessment year", () => { expect(incomeTaxRuleSet.effectivePeriod).toBe("Tax Year 2026–27 (FY 2026–27)"); expect(incomeTaxRuleSet.periodLabels).toEqual([{ label: "Applicable Tax Year", value: "Tax Year 2026–27" }, { label: "Corresponding Financial Year", value: "FY 2026–27" }]); expect(JSON.stringify(incomeTaxRuleSet.periodLabels)).not.toContain("Assessment Year"); });
   it("records the Tax Year 2026–27 income-tax rules", () => expect(incomeTaxRuleSet.rules).toMatchObject({ maximumSupportedIncome: 5_000_000, cessRate: 4, newRegime: { rebateIncomeLimit: 1_200_000, maximumRebate: 60_000, marginalReliefAboveRebateLimit: true, slabs: [{ upTo: 400_000, rate: 0 }, { upTo: 800_000, rate: 5 }, { upTo: 1_200_000, rate: 10 }, { upTo: 1_600_000, rate: 15 }, { upTo: 2_000_000, rate: 20 }, { upTo: 2_400_000, rate: 25 }, { upTo: null, rate: 30 }] } }));
   it("configures the current All Citizen age and exit boundaries", () => expect(npsRuleSet.rules).toMatchObject({ subscriberModel: "all-citizen", minimumCurrentAge: 18, maximumRetirementAge: 85, minimumAnnuityAllocation: 20, maximumAnnuityAllocation: 100, normalExit: { fullWithdrawalThreshold: 800_000, intermediateCorpusThreshold: 1_200_000, maximumDirectLumpSumInIntermediateBand: 600_000, maximumLumpSumAllocation: 80, minimumAnnuityAllocation: 20 }, prematureExit: { fullWithdrawalThreshold: 500_000, maximumLumpSumAllocation: 20, minimumAnnuityAllocation: 80 } }));
-  it("records EPF standard, exception and interest-status boundaries", () => expect(epfRuleSet.rules).toMatchObject({ standardEmployeeRate: 12, standardEmployerRate: 12, qualifyingReducedRate: 10, epsDiversionRate: 8.33, epsWageCeiling: 15_000, higherWageContributionRequiresJointRequest: true, employerNeedNotMatchVoluntaryExcess: true, ordinaryWageCeilingAppliesToInternationalWorkers: false, approvedInterestPeriod: "FY 2024–25", approvedInterestRate: 8.25, recommendedInterestPeriod: "FY 2025–26", recommendedInterestRate: 8.25, recommendedInterestStatus: "cbt-recommendation-pending-government-notification" }));
+  it("records EPF standard, exception and interest-status boundaries", () => expect(epfRuleSet.rules).toMatchObject({ standardEmployeeRate: 12, standardEmployerRate: 12, qualifyingReducedRate: 10, epsDiversionRate: 8.33, epsWageCeiling: 15_000, higherWageContributionRequiresJointRequest: true, employerNeedNotMatchVoluntaryExcess: true, internationalWorkerLegalStatus: "judicially-contested", approvedInterestPeriod: "FY 2024–25", approvedInterestRate: 8.25, recommendedInterestPeriod: "FY 2025–26", recommendedInterestRate: 8.25, recommendedInterestStatus: "cbt-recommendation-pending-government-notification" }));
+  it("does not encode a settled nationwide International Worker wage-ceiling rule", () => {
+    expect(epfRuleSet.lastVerified).toBe("2026-08-28");
+    expect(epfRuleSet.rules).not.toHaveProperty("ordinaryWageCeilingAppliesToInternationalWorkers");
+  });
+  it("uses accessible official replacements for the retired EPFO source set", () => {
+    expect(epfRuleSet.sources.map(({ reference }) => reference)).toEqual([
+      "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1944361&lang=2&reg=48",
+      "https://www.labour.gov.in/static/uploads/2025/06/234a069a1beae3e3f9c3e8cc9ea69b1a.pdf",
+      "https://delhihighcourt.nic.in/app/showFileJudgment/68304112025CW29412012_155558.pdf",
+      "https://api.sci.gov.in/jonew/cl/2026-03-12/M_J_1.pdf",
+      "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2209767&lang=1&reg=1",
+      "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2234502&lang=1&reg=3",
+    ]);
+    expect(JSON.stringify(epfRuleSet.sources)).not.toMatch(/ContributionRate\.pdf|FAQ\.php|Downloads\.php|EPS95_update102008|DeclarationOfROI_2024_25/);
+  });
   it("records the narrow PPF scheme facts used by content", () => expect(ppfRuleSet.rules).toEqual({ schemeName: "Public Provident Fund Scheme, 2019", minimumAnnualContribution: 500, maximumAnnualContribution: 150_000, maturityYearsFromEndOfOpeningYear: 15, extensionBlockYears: 5, extensionOptionDeadlineYears: 1, interestEligibleBalanceFromDay: 5, interestCreditedAnnually: true }));
   it("records the operative Gratuity formula, boundary and ceiling", () => expect(gratuityRuleSet.rules).toMatchObject({ ordinaryMonthlyRatedNumerator: 15, ordinaryMonthlyRatedDenominator: 26, additionalMonthsMustExceed: 6, generalContinuousServiceYears: 5, deathException: true, disablementException: true, statutoryCeiling: 2_000_000, betterTermsMayApply: true }));
   it("uses the accessible official Gazette source for the Gratuity framework", () => {

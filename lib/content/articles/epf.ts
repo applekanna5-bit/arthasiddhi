@@ -38,7 +38,8 @@ export const epfArticles = [
         heading: "Employee EPF and employer allocation are separate result parts",
         paragraphs: [
           "Employee EPF is the entered wage multiplied by the entered employee rate. The modeled employer total is the same wage multiplied by the entered employer rate. When EPS diversion is included, the engine allocates no more than the available employer total to EPS and leaves the remainder as employer EPF.",
-          "Official EPFO material shows 12% as the standard contribution context, while qualifying establishments can have a 10% rate. EPS application, higher-wage contributions and international-worker treatment have additional conditions, so the calculator inputs are assumptions rather than legal classifications.",
+          "Official Government material shows 12% as the standard contribution context. A 10% rate applies only where the relevant establishment or class is legally eligible under applicable notifications and rules. EPS application and higher-wage contributions have additional conditions, so the calculator inputs are assumptions rather than legal classifications.",
+          "For International Workers, the Karnataka High Court invalidated the special provisions while the Delhi High Court upheld the framework; Supreme Court proceedings remain pending, and no final nationwide determination was located as of 28 August 2026. Treatment can also depend on an applicable Social Security Agreement and detached-worker circumstances. This calculator does not determine an individual's statutory International Worker contribution liability.",
           [
             { text: "See the allocation examples in " },
             { text: "How EPF Contributions Are Calculated", link: { kind: "article", slug: "epf-contribution-calculation" } },
@@ -81,7 +82,7 @@ export const epfArticles = [
       },
     ],
     faq: [
-      { question: "Is 12% the contribution rate in every EPF situation?", answer: "No. EPFO material identifies a standard 12% context and qualifying 10% cases, while coverage, higher-wage and other circumstances can change treatment." },
+      { question: "Is 12% the contribution rate in every EPF situation?", answer: "No. Official Government material identifies a standard 12% context. A 10% rate applies only where the relevant establishment or class is legally eligible under applicable notifications and rules; this calculator does not determine that eligibility." },
       { question: "Does the projected closing balance match an EPFO passbook exactly?", answer: "No. The calculator uses beginning-of-month additions and monthly projection compounding without reproducing payroll timing, statutory rounding or EPFO annual interest crediting." },
       { question: "Does the EPS amount calculate a pension?", answer: "No. It is only a modeled employer-contribution diversion. Pensionable salary, service and EPS pension rules are not calculated." },
     ],
@@ -106,7 +107,7 @@ export const epfArticles = [
         heading: "The employee amount and employer allocation use separate inputs",
         paragraphs: [
           "The calculator multiplies the entered monthly EPF wage by the entered employee rate for employee EPF. It separately multiplies that wage by the employer rate to obtain the total modeled employer contribution.",
-          "Those rates default to 12% for a standard illustration, but 12% is not universal. Official material also identifies qualifying reduced-rate contexts, and voluntary employee contributions do not automatically require an employer to match the excess.",
+          "Those rates default to 12% for a standard illustration, but 12% is not universal. A 10% rate applies only where the relevant establishment or class is legally eligible under applicable notifications and rules; the calculator does not determine that eligibility. Voluntary employee contributions do not automatically require an employer to match the excess.",
         ],
       },
       {
@@ -127,7 +128,7 @@ export const epfArticles = [
         heading: "A wage above ₹15,000 does not increase the modeled EPS candidate",
         paragraphs: [
           "In this controlled example, the entered wage is ₹30,000 but the EPS candidate continues to use the configured ₹15,000 ceiling. Employee and total employer contributions use the full entered EPF wage because the calculator treats it as the wage selected for projection.",
-          "That input does not establish permission or obligation to contribute on higher wages. Official material identifies joint-request, employer and international-worker caveats that the calculator does not decide.",
+          "That input does not establish permission or obligation to contribute on higher wages. The ordinary higher-wage framework includes a joint-request process and employer-specific circumstances that the calculator does not decide.",
         ],
         table: {
           caption: "Engine-derived allocation with entered wage above the EPS ceiling",
@@ -161,7 +162,8 @@ export const epfArticles = [
         id: "actual-payroll",
         heading: "Actual payroll allocation requires statutory and employment context",
         paragraphs: [
-          "The calculator does not determine EPF or EPS membership, qualifying reduced rates, higher-wage approvals, international-worker treatment, exempt-establishment treatment or statutory payroll rounding.",
+          "The calculator does not determine EPF or EPS membership, qualifying reduced-rate eligibility, higher-wage approvals, exempt-establishment treatment or statutory payroll rounding.",
+          "For International Workers, the Karnataka High Court invalidated the special provisions while the Delhi High Court upheld the framework; Supreme Court proceedings remain pending, and no final nationwide determination was located as of 28 August 2026. Social Security Agreement and detached-worker circumstances may also matter, so the calculator does not determine statutory International Worker contribution liability.",
           [
             { text: "For the wider model boundary, read " },
             { text: "Why an EPF Calculator Projection May Differ From Your Actual Balance", link: { kind: "article", slug: "epf-calculator-projection-assumptions" } },
@@ -215,7 +217,7 @@ export const epfArticles = [
           "Statutory contribution rounding is not reproduced; the engine retains floating-point precision and the UI formats currency to two decimals.",
           "Employer-specific payroll treatment and corrections are not modeled.",
           "EPS allocation depends on statutory context; the toggle is only a projection assumption.",
-          "Higher-wage arrangements, international-worker treatment and exempt establishments are outside scope.",
+          "Higher-wage arrangements and exempt establishments are outside scope. International Worker coverage and wage-base treatment are also outside scope: the Karnataka High Court invalidated the special provisions, the Delhi High Court upheld the framework, Supreme Court proceedings remain pending, and Social Security Agreement or detached-worker circumstances may affect the position.",
           "Withdrawals, transfers, taxes, EDLI, fees, charges and other account events are not calculated.",
         ],
       },
