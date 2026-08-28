@@ -9,6 +9,15 @@ describe("financial rule registry", () => {
   it("records EPF standard, exception and interest-status boundaries", () => expect(epfRuleSet.rules).toMatchObject({ standardEmployeeRate: 12, standardEmployerRate: 12, qualifyingReducedRate: 10, epsDiversionRate: 8.33, epsWageCeiling: 15_000, higherWageContributionRequiresJointRequest: true, employerNeedNotMatchVoluntaryExcess: true, ordinaryWageCeilingAppliesToInternationalWorkers: false, approvedInterestPeriod: "FY 2024–25", approvedInterestRate: 8.25, recommendedInterestPeriod: "FY 2025–26", recommendedInterestRate: 8.25, recommendedInterestStatus: "cbt-recommendation-pending-government-notification" }));
   it("records the narrow PPF scheme facts used by content", () => expect(ppfRuleSet.rules).toEqual({ schemeName: "Public Provident Fund Scheme, 2019", minimumAnnualContribution: 500, maximumAnnualContribution: 150_000, maturityYearsFromEndOfOpeningYear: 15, extensionBlockYears: 5, extensionOptionDeadlineYears: 1, interestEligibleBalanceFromDay: 5, interestCreditedAnnually: true }));
   it("records the operative Gratuity formula, boundary and ceiling", () => expect(gratuityRuleSet.rules).toMatchObject({ ordinaryMonthlyRatedNumerator: 15, ordinaryMonthlyRatedDenominator: 26, additionalMonthsMustExceed: 6, generalContinuousServiceYears: 5, deathException: true, disablementException: true, statutoryCeiling: 2_000_000, betterTermsMayApply: true }));
+  it("uses the accessible official Gazette source for the Gratuity framework", () => {
+    expect(gratuityRuleSet.sources[0]).toMatchObject({
+      authority: "Ministry of Labour & Employment, Government of India",
+      reference: "https://www.labour.gov.in/static/uploads/2025/07/b0620548445580767b5c0d18c95c26f7.pdf",
+      sourceType: "official",
+      accessedAt: "2026-08-28",
+    });
+    expect(gratuityRuleSet.sources[0].reference).not.toContain("indiacode.nic.in/show-data");
+  });
   it("records a verification date and official HTTPS sources for every rule set", () => { for (const ruleSet of Object.values(financialRuleSets)) { expect(ruleSet.lastVerified).toMatch(/^\d{4}-\d{2}-\d{2}$/); expect(ruleSet.sources.length).toBeGreaterThan(0); for (const source of ruleSet.sources) { expect(source.authority).toBeTruthy(); expect(source.reference).toMatch(/^https:\/\//); expect(source.reference).not.toMatch(/blog|newspaper|affiliate/i); } } });
   it("classifies and dates every income-tax source as official", () => { expect(incomeTaxRuleSet.lastVerified).toBe("2026-08-23"); for (const source of incomeTaxRuleSet.sources) { expect(source.sourceType).toBe("official"); expect(source.accessedAt).toBe("2026-08-23"); expect(new URL(source.reference).hostname).toMatch(/(?:incometaxindia|indiabudget)\.gov\.in$/); } });
 });

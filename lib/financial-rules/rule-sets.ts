@@ -218,7 +218,7 @@ export const gratuityRuleSet: FinancialRuleSet<GratuityRules> = {
     betterTermsMayApply: true,
   },
   sources: [
-    { title: "Code on Social Security, 2020 — section 53", authority: "India Code, Government of India", reference: "https://www.indiacode.nic.in/show-data?actid=AC_CEN_6_0_00036_202036_1623221080799&orderno=53&sectionId=54077&sectionno=53", sourceType: "official", accessedAt: "2026-08-22", effectiveFrom: "2025-11-21" },
+    { title: "Code on Social Security, 2020 — Gazette text including section 53", authority: "Ministry of Labour & Employment, Government of India", reference: "https://www.labour.gov.in/static/uploads/2025/07/b0620548445580767b5c0d18c95c26f7.pdf", sourceType: "official", accessedAt: "2026-08-28", effectiveFrom: "2025-11-21" },
     { title: "Key provisions under the Code on Social Security, 2020", authority: "Ministry of Labour & Employment", reference: "https://www.labour.gov.in/static/uploads/2026/03/d70bb9f7e87ec48bd64fde40329f9c09.pdf", sourceType: "official", accessedAt: "2026-08-22", effectiveFrom: "2025-11-21" },
     { title: "FAQs on Labour Codes", authority: "Ministry of Labour & Employment", reference: "https://labour.gov.in/sites/default/files/faqs_on_labour_codes.pdf", sourceType: "official", accessedAt: "2026-08-22" },
     { title: "Additional FAQs on Labour Codes", authority: "Ministry of Labour & Employment", reference: "https://www.labour.gov.in/static/uploads/2026/03/a4ccf4c6d97c4f1f36a6d83f8c64213d.pdf", sourceType: "official", accessedAt: "2026-08-22" },

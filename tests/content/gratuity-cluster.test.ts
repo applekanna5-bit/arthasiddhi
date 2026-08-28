@@ -49,7 +49,7 @@ describe("Gratuity registry, maintenance and discovery", () => {
       expect(value.maintenance).toEqual({ kind: "rule-sensitive", ruleSetId: gratuityRuleSet.id });
       expect(getArticleMaintenanceContext(value)).toMatchObject({ applicablePeriod: gratuityRuleSet.effectivePeriod, verifiedAt: "2026-08-22" });
       expect(getArticleReferences(value)).toHaveLength(5);
-      expect(getArticleReferences(value).every(({ sourceType, accessedAt }) => sourceType === "official" && accessedAt === "2026-08-22")).toBe(true);
+      expect(getArticleReferences(value).every(({ sourceType, accessedAt }) => sourceType === "official" && /^2026-08-(22|28)$/.test(accessedAt ?? ""))).toBe(true);
     }
     expect(article("gratuity-calculator-vs-employer-settlement").maintenance).toEqual({ kind: "evergreen" });
   });
