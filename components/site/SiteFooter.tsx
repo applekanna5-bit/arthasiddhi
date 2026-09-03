@@ -37,7 +37,7 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="border-t border-slate-800">
-        <p className="mx-auto max-w-6xl px-4 py-4 text-xs leading-5 text-slate-500 sm:px-6 lg:px-8">
+        <p className="mx-auto max-w-6xl px-4 py-4 text-xs leading-5 text-slate-400 sm:px-6 lg:px-8">
           Calculator outputs are illustrative estimates and are not financial advice.
         </p>
       </div>
