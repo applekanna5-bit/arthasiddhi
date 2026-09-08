@@ -138,6 +138,25 @@ describe("Home Loan search cluster", () => {
     expect(getArticle("loans", "home-loan-emi-calculation")?.relatedArticles).toContain(emiStart.slug);
   });
 
+  it("keeps decision links in the relevant explanation and comparison CTA", () => {
+    for (const [slug, sectionId, target] of [
+      ["when-home-loan-emi-starts", "pre-emi-vs-regular-emi", "home-loan-emi-calculation"],
+      ["home-loan-tenure-comparison", "why-interest-rises", "home-loan-emi-calculation"],
+      ["home-loan-emi-calculation", "tenure-and-rate", "home-loan-tenure-comparison"],
+    ] as const) {
+      const paragraphs = section(getArticle("loans", slug)!, sectionId).paragraphs ?? [];
+      const links = paragraphs.flatMap((paragraph) => typeof paragraph === "string" ? [] : paragraph).flatMap(({ link }) => link ? [link] : []);
+      expect(links).toContainEqual({ kind: "article", slug: target });
+    }
+    const tenure = getArticle("loans", "home-loan-tenure-comparison")!;
+    expect(tenure.sections[0].id).toBe("tenure-meaning");
+    const callout = section(tenure, "compare-own-numbers").callout!;
+    expect(typeof callout.text).not.toBe("string");
+    if (typeof callout.text !== "string") {
+      expect(callout.text.some(({ link }) => link?.kind === "calculator" && link.slug === "home-loan")).toBe(true);
+    }
+  });
+
   it("places the EMI-start guide once in Loans and leaves homepage curation unchanged", () => {
     const placements = learnCategoryHubs.loans.groups.flatMap((group) => [group.coreArticle, ...group.supportingArticles]);
     expect(placements.filter((slug) => slug === "when-home-loan-emi-starts")).toHaveLength(1);
@@ -193,5 +212,27 @@ describe("Home Loan article numeric examples", () => {
     ]);
     expect(section(article, "worked-example").table?.rows).toEqual(expectedRows);
     expect(section(article, "worked-example").paragraphs?.join(" ")).toContain(`the EMI is ${formatWholeRupees(result.monthlyEmi)}`);
+  });
+
+  it("reconciles the first-payment walkthrough with the same unrounded schedule", () => {
+    const article = getArticle("loans", "home-loan-emi-calculation")!;
+    const first = calculateLoanDetails({ principal: 1_000_000, annualInterestRate: 8.5, tenureMonths: 240 }).amortizationSchedule[0];
+    const formatter = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const steps = section(article, "first-payment-walkthrough").list!;
+    expect(steps).toHaveLength(4);
+    expect(steps[0]).toContain(formatter.format(1_000_000));
+    expect(steps[1]).toContain(formatter.format(first.interestComponent));
+    for (const value of [first.emi, first.interestComponent, first.principalComponent]) expect(steps[2]).toContain(formatter.format(value));
+    for (const value of [1_000_000, first.principalComponent, first.remainingBalance]) expect(steps[3]).toContain(formatter.format(value));
+    expect(first.emi - first.interestComponent).toBeCloseTo(first.principalComponent, 8);
+    expect(1_000_000 - first.principalComponent).toBeCloseTo(first.remainingBalance, 8);
+  });
+
+  it("verifies both additional displayed tenure EMI reductions", () => {
+    const article = getArticle("loans", "home-loan-tenure-comparison")!;
+    const emis = [15, 20, 25, 30].map((years) => calculateLoanDetails({ principal: 5_000_000, annualInterestRate: 8.5, tenureMonths: years * 12 }).monthlyEmi);
+    const text = section(article, "why-emi-falls").paragraphs?.join(" ") ?? "";
+    expect(text).toContain(formatWholeRupees(Math.round(emis[0]) - Math.round(emis[1])));
+    expect(text).toContain(formatWholeRupees(Math.round(emis[2]) - Math.round(emis[3])));
   });
 });

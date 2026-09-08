@@ -1,4 +1,8 @@
+import { formatIndianCurrency } from "../../calculator/formatting";
+import { calculateLoanDetails } from "../../engine/loan";
 import type { Article } from "../types";
+
+const homeLoanFirstPayment = calculateLoanDetails({ principal: 1_000_000, annualInterestRate: 8.5, tenureMonths: 240 }).amortizationSchedule[0];
 
 export const loanArticles = [
   {
@@ -120,7 +124,7 @@ export const loanArticles = [
     description: "Understand how sanction, full or partial disbursement, pre-EMI and lender terms determine when regular Home Loan EMI payments begin.",
     category: "loans",
     publishedAt: "2026-08-26",
-    updatedAt: "2026-08-26",
+    updatedAt: "2026-09-07",
     readingTime: "8 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "home-loan",
@@ -133,16 +137,27 @@ export const loanArticles = [
         id: "short-answer",
         heading: "The EMI start date comes from disbursement and the repayment terms",
         paragraphs: [
-          "A Home Loan sanction and the start of regular EMI are not the same event. The actual commencement date depends on when funds are disbursed, whether the loan is released fully or in stages, the repayment arrangement, and the dates recorded by the lender.",
-          "There is no safe universal answer such as the next month or exactly 30 days after disbursement. Check the sanction letter, loan agreement, Key Facts Statement where applicable, disbursement communication and repayment schedule for the dates that apply to the loan.",
+          "Home Loan EMI generally starts according to the lender's repayment schedule after funds are disbursed, rather than simply on the sanction date. With partial or staged disbursement, interim interest or pre-EMI may apply under the loan arrangement before regular EMI begins.",
+          "Confirm the actual first debit date in the lender's repayment schedule and disbursement communication. It is not universally the next month or exactly 30 days after disbursement.",
         ],
+        table: {
+          caption: "What your loan stage means for the first payment",
+          headers: ["Situation", "What has happened?", "What payment may apply?", "What confirms the treatment?"],
+          rows: [
+            ["Sanctioned, not disbursed", "Approval exists; funds have not been released.", "Sanction alone does not start interest on undisbursed funds; separate agreed fees may apply.", "Sanction terms and disbursement record."],
+            ["Fully disbursed", "The loan funds have been released in full.", "Regular EMI under the agreed repayment schedule.", "Repayment schedule and first-debit instructions."],
+            ["Partially disbursed", "Only part of the loan has been released.", "Pre-EMI interest on released funds or another agreed repayment arrangement.", "Loan agreement and each disbursement communication."],
+            ["Under-construction property", "Funds can be released as construction progresses.", "Interim payments or regular EMI, according to the arrangement.", "Construction-linked release terms and repayment schedule."],
+            ["Ready property after disbursement", "Funds have been released for the purchase.", "EMI on the documented date; property readiness alone does not set it.", "Disbursement advice and repayment schedule."],
+          ],
+        },
       },
       {
         id: "sanction-vs-disbursement",
         heading: "Sanction and disbursement are different events",
         paragraphs: [
           "Sanction is the lender's approval or offer subject to its stated terms, conditions and further documentation. Disbursement is the actual release of some or all of the approved funds. A sanctioned amount may therefore exist before any money is released.",
-          "RBI's fair-practices direction identifies charging interest from sanction or execution of the agreement instead of the actual disbursement of funds as an unfair practice. That principle connects interest to funds actually released; it does not prescribe one universal first-EMI date for every Home Loan.",
+          "RBI's April 29, 2024 fair-practices circular identifies charging interest from sanction or execution of the agreement instead of actual disbursement as an unfair practice for the banks, co-operative banks and NBFCs, including housing finance companies, it addresses. That principle concerns interest charging; it does not prescribe a universal first-EMI date.",
         ],
       },
       {
@@ -171,7 +186,7 @@ export const loanArticles = [
             { text: "how a Home Loan EMI is calculated", link: { kind: "article", slug: "home-loan-emi-calculation" } },
             { text: " for the formula, reducing-balance mechanics and amortization example." },
           ],
-          "Do not assume that an interim payment reduces principal. Some lender arrangements may allow an amount above interest to be applied towards principal, but availability and treatment must be confirmed from the lender and account records.",
+          "An interest-only interim payment does not reduce principal. Before paying an additional amount, ask whether it can be applied towards principal and how that will appear in the account records.",
         ],
       },
       {
@@ -214,10 +229,10 @@ export const loanArticles = [
           [
             { text: "The " },
             { text: "ArthaSiddhi Home Loan EMI Calculator", link: { kind: "calculator", slug: "home-loan" } },
-            { text: " models a principal, annual rate and tenure as a regular monthly reducing-balance loan. It estimates EMI, total interest, total repayment and an amortization schedule for those inputs." },
+            { text: " estimates scheduled EMI from principal, an assumed annual interest rate and tenure using a monthly reducing-balance model. It also shows scheduled interest, scheduled repayment and an amortization schedule. Scheduled repayment includes principal and modeled interest, excluding fees and other charges." },
           ],
           [
-            { text: "It does not determine sanction, disbursement, pre-EMI, the first EMI date, construction-stage releases, possession timing or lender eligibility. Read the " },
+            { text: "It does not determine the sanction date, disbursement date, first debit date, construction-stage disbursement timing or lender-specific pre-EMI treatment. It also does not determine possession timing or lender eligibility. Read the " },
             { text: "Home Loan Guide for Beginners", link: { kind: "article", slug: "home-loan-guide" } },
             { text: " for the wider offer and cost checks." },
           ],
@@ -232,10 +247,11 @@ export const loanArticles = [
       { question: "Where can I find my first EMI date?", answer: "Check the sanction letter, loan agreement, Key Facts Statement where applicable, disbursement communication, repayment schedule and auto-debit instructions. Ask the lender for written clarification if the dates do not align." },
     ],
     references: [
-      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://rbi.org.in/CommonPerson/english/scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-08-26" },
-      { title: "Fair Practices Code — Charging of Interest", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/scripts/bs_circularindexdisplay.aspx/BS_CircularIndexDisplay.aspx?Id=12678", sourceType: "official", accessedAt: "2026-08-26" },
-      { title: "Key Facts Statement (KFS) for Loans & Advances", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12663&Mode=0", sourceType: "official", accessedAt: "2026-08-26" },
-      { title: "SBI Home Loan — Most Important Terms and Conditions", publisher: "State Bank of India", url: "https://www.sbi.co.in/webfiles/uploads/files/1377606055343_HOME_LOAN_MITC.pdf", sourceType: "official", accessedAt: "2026-08-26" },
+      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-09-07" },
+      { title: "Fair Practices Code — Charging of Interest", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/scripts/bs_circularindexdisplay.aspx/BS_CircularIndexDisplay.aspx?Id=12678", sourceType: "official", accessedAt: "2026-09-07" },
+      { title: "Key Facts Statement (KFS) for Loans & Advances", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12663&Mode=0", sourceType: "official", accessedAt: "2026-09-07" },
+      { title: "Commercial Banks - Responsible Business Conduct Directions, 2025 (updated July 1, 2026), Chapter VIII", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13140", sourceType: "official", accessedAt: "2026-09-07" },
+      { title: "SBI Home Loan MITC (historical; repayment-date example only)", publisher: "State Bank of India", url: "https://www.sbi.co.in/webfiles/uploads/files/1377606055343_HOME_LOAN_MITC.pdf", sourceType: "official", accessedAt: "2026-09-07" },
     ],
   },
   {
@@ -244,7 +260,7 @@ export const loanArticles = [
     description: "How the home-loan EMI formula works, why the principal and interest split changes each month, and what an amortization schedule shows.",
     category: "loans",
     publishedAt: "2026-08-16",
-    updatedAt: "2026-08-16",
+    updatedAt: "2026-09-07",
     readingTime: "8 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "home-loan",
@@ -253,21 +269,34 @@ export const loanArticles = [
     relatedArticles: ["home-loan-guide", "home-loan-tenure-comparison", "when-home-loan-emi-starts"],
     sections: [
       { id: "what-an-emi-contains", heading: "What a home-loan EMI contains", paragraphs: ["A home-loan EMI has two parts: interest for the period and repayment of principal. The EMI may stay constant when the rate and tenure stay constant, but the split between those two parts changes each month.", "Under a monthly reducing-balance loan, the month’s interest is calculated on the outstanding principal. The rest of the EMI reduces that principal, so the next month starts with a slightly lower balance."] },
-      { id: "emi-formula", heading: "The EMI formula", paragraphs: ["For a standard monthly amortizing loan, EMI = [P × r × (1 + r)^n] ÷ [(1 + r)^n − 1].", "Here, P is the loan principal, r is the monthly interest rate, and n is the total number of monthly instalments. The formula sets one regular payment that repays the principal and calculated interest over the selected tenure, subject to the stated assumptions."] },
+      { id: "emi-formula", heading: "The EMI formula", paragraphs: ["For a standard monthly amortizing loan at a positive constant rate, EMI = [P × r × (1 + r)^n] ÷ [(1 + r)^n − 1].", "Here, P is the loan principal, r is the monthly interest rate, and n is the total number of monthly instalments. The formula sets one regular payment that repays the principal and calculated interest over the selected tenure, subject to the stated assumptions. At zero interest, EMI is simply P ÷ n."] },
       { id: "monthly-rate-and-instalments", heading: "Monthly rate and number of instalments", paragraphs: ["If the annual interest rate is R per cent, the monthly rate used by this model is r = R ÷ 12 ÷ 100. A 20-year tenure has 240 monthly instalments, so n is 240.", "The monthly rate is a decimal in the formula. For example, 8.5% a year becomes 0.085 ÷ 12, or about 0.0070833 per month."] },
-      { id: "reducing-balance", heading: "What monthly reducing balance means", paragraphs: ["Interest is not repeatedly calculated on the original loan amount. It is calculated on the principal still outstanding for that month. After the principal component of an EMI is deducted, the lower balance is used for the next month’s interest.", "This is why the interest component normally falls and the principal component normally rises over the schedule when the EMI and rate do not change."] },
+      { id: "reducing-balance", heading: "How monthly interest and principal are calculated", paragraphs: ["For each modeled payment period: monthly interest = opening outstanding principal × annual interest rate ÷ 12 ÷ 100. Use the annual rate as a percentage, such as 8.5.", "Principal component = EMI − interest component. Closing balance = opening outstanding principal − principal component. That closing balance becomes the next month's opening balance.", "This monthly model does not calculate interest using actual days between lender debit dates. Check the lender's schedule for its accrual convention."] },
       { id: "worked-example", heading: "Worked example: the first three EMIs", paragraphs: ["Consider a ₹10,00,000 loan at 8.5% a year for 20 years. Using the same monthly reducing-balance convention as the ArthaSiddhi Home Loan EMI Calculator, the EMI is ₹8,678 when rounded to the nearest rupee. Each value in the table is rounded separately, so the displayed principal and interest may differ from the displayed EMI by ₹1."], table: { caption: "First three months of the illustrative ₹10 lakh loan", headers: ["Month", "EMI", "Interest", "Principal", "Balance after EMI"], rows: [["1", "₹8,678", "₹7,083", "₹1,595", "₹9,98,405"], ["2", "₹8,678", "₹7,072", "₹1,606", "₹9,96,799"], ["3", "₹8,678", "₹7,061", "₹1,618", "₹9,95,181"]] } },
-      { id: "early-emis", heading: "Why early EMIs contain more interest", paragraphs: ["At the start, almost the full principal is outstanding. Applying the monthly rate to that larger balance produces a larger interest amount, leaving less of the EMI for principal.", "Later in the loan, the outstanding principal is lower. Monthly interest is then lower too, so more of the same EMI can reduce principal."] },
+      {
+        id: "first-payment-walkthrough",
+        heading: "Read the first payment from opening to closing balance",
+        paragraphs: ["Using the same example, follow month 1 before moving to the later rows. These amounts show paise; the table above rounds to whole rupees."],
+        list: [
+          `Opening outstanding principal: ${formatIndianCurrency(1_000_000)}.`,
+          `Interest component: ${formatIndianCurrency(1_000_000)} × 8.5 ÷ 12 ÷ 100 = ${formatIndianCurrency(homeLoanFirstPayment.interestComponent)}.`,
+          `Principal component: EMI of ${formatIndianCurrency(homeLoanFirstPayment.emi)} − interest of ${formatIndianCurrency(homeLoanFirstPayment.interestComponent)} = ${formatIndianCurrency(homeLoanFirstPayment.principalComponent)}.`,
+          `Closing balance: ${formatIndianCurrency(1_000_000)} − principal repaid of ${formatIndianCurrency(homeLoanFirstPayment.principalComponent)} = ${formatIndianCurrency(homeLoanFirstPayment.remainingBalance)}.`,
+        ],
+      },
+      { id: "early-emis", heading: "Why the interest share falls over the schedule", paragraphs: ["At the start, almost the full principal is outstanding. In this example, that makes interest the larger part of the early EMIs. The split depends on the rate and tenure; interest need not exceed principal in every loan's first payment.", "In a standard constant-rate reducing-balance schedule, each principal payment lowers the balance used for the next month's interest. As the interest component declines, more of the same scheduled EMI goes towards principal."] },
+      { id: "tenure-and-rate", heading: "How tenure and the assumed rate change the result", paragraphs: [[{ text: "At the same principal and positive annual rate, a longer repayment period lowers monthly EMI but increases scheduled interest. See the " }, { text: "Home Loan tenure comparison", link: { kind: "article", slug: "home-loan-tenure-comparison" } }, { text: " for the 15, 20, 25 and 30-year trade-off." }], "Changing the assumed constant rate also changes EMI and scheduled interest. Each calculator scenario holds its rate constant throughout; comparing two rates does not predict future RBI rates or simulate a lender's floating-rate resets."] },
       { id: "amortization-schedule", heading: "What the amortization schedule shows", paragraphs: ["An amortization schedule lists each EMI, its principal and interest components, and the outstanding balance after payment. It lets you see the shift in the EMI split rather than treating the EMI as one unexplained number.", "A floating-rate reset, a missed payment, a prepayment, lender rounding or a different interest-accrual convention can change the actual schedule."] },
-      { id: "costs-outside-emi", heading: "What the EMI formula does not include", paragraphs: ["The formula above covers principal and interest under its assumptions. It does not automatically include processing fees, legal or valuation charges, insurance, switching charges, penalties or every other borrowing cost.", "For applicable retail term loans, the lender’s Key Facts Statement should show key terms and the annual percentage rate, which reflects the all-in cost covered by the KFS rules. Check the KFS, sanction letter and loan agreement for the actual costs attached to an offer.", [{ text: "The formula also does not determine the contractual first due date. Read " }, { text: "when a Home Loan EMI starts", link: { kind: "article", slug: "when-home-loan-emi-starts" } }, { text: " for the distinction between sanction, disbursement, possible pre-EMI and regular repayment." }]], callout: { title: "Calculate the full schedule", text: [{ text: "Enter your loan amount, rate and tenure in the " }, { text: "Home Loan EMI Calculator", link: { kind: "calculator", slug: "home-loan" } }, { text: " to see the EMI, total interest and month-by-month schedule." }] } },
+      { id: "costs-outside-emi", heading: "What the EMI formula does not include", paragraphs: ["The formula above covers principal and interest under its assumptions. It does not automatically include processing fees, legal or valuation charges, insurance, switching charges, penalties or every other borrowing cost.", "For retail term loans covered by RBI's KFS requirements, use the Key Facts Statement to compare the annual percentage rate and disclosed charges, as well as the repayment schedule. The calculator's principal plus scheduled interest is not an APR or a complete borrowing-cost figure. RBI's current commercial-bank directions retain KFS requirements for covered loans.", [{ text: "The formula also does not determine the contractual first due date. Read " }, { text: "when a Home Loan EMI starts", link: { kind: "article", slug: "when-home-loan-emi-starts" } }, { text: " for the distinction between sanction, disbursement, possible pre-EMI and regular repayment." }]], callout: { title: "Calculate the full schedule", text: [{ text: "Enter your loan amount, rate and tenure in the " }, { text: "Home Loan EMI Calculator", link: { kind: "calculator", slug: "home-loan" } }, { text: " to see EMI, scheduled interest and the month-by-month schedule. Choose Compare another scenario to model a second tenure or constant-rate assumption." }] } },
     ],
     faq: [
       { question: "Why does the interest part fall even when the EMI stays the same?", answer: "Each principal payment reduces the outstanding balance. Under a monthly reducing-balance model, the next month’s interest is calculated on that lower balance." },
       { question: "Will a lender’s schedule always match a calculator exactly?", answer: "Not always. Payment dates, rate resets, daily or monthly accrual, rounding and lender-specific terms can create differences. Use the lender’s repayment schedule for the contractual figures." },
     ],
     references: [
-      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://rbi.org.in/CommonPerson/english/scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-08-16" },
-      { title: "Key Facts Statement (KFS) for Loans & Advances", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12663&Mode=0", sourceType: "official", accessedAt: "2026-08-16" },
+      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-09-07" },
+      { title: "Key Facts Statement (KFS) for Loans & Advances", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12663&Mode=0", sourceType: "official", accessedAt: "2026-09-07" },
+      { title: "Commercial Banks - Responsible Business Conduct Directions, 2025 (updated July 1, 2026), Chapter VIII", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13140", sourceType: "official", accessedAt: "2026-09-07" },
     ],
   },
   {
@@ -276,7 +305,7 @@ export const loanArticles = [
     description: "A ₹50 lakh home-loan comparison showing how 15, 20, 25 and 30-year tenures change the EMI and total interest at the same rate.",
     category: "loans",
     publishedAt: "2026-08-16",
-    updatedAt: "2026-08-16",
+    updatedAt: "2026-09-07",
     readingTime: "7 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "home-loan",
@@ -284,23 +313,24 @@ export const loanArticles = [
     relatedCalculators: [],
     relatedArticles: ["home-loan-guide", "home-loan-emi-calculation", "home-loan-prepayment"],
     sections: [
-      { id: "comparison", heading: "The 15, 20, 25 and 30-year comparison", paragraphs: ["This example keeps the loan amount and rate unchanged: ₹50,00,000 at 8.5% a year on a monthly reducing balance. It assumes a constant rate, regular monthly EMIs, no prepayment, no missed payments and no fees or charges."], table: { caption: "₹50 lakh home loan at 8.5% a year", headers: ["Tenure", "Monthly EMI", "Total interest"], rows: [["15 years", "₹49,237", "₹38,62,656 (₹38.63 lakh)"], ["20 years", "₹43,391", "₹54,13,879 (₹54.14 lakh)"], ["25 years", "₹40,261", "₹70,78,406 (₹70.78 lakh)"], ["30 years", "₹38,446", "₹88,40,443 (₹88.40 lakh)"]] } },
+      { id: "tenure-meaning", heading: "Home Loan tenure is the repayment period", paragraphs: ["Home Loan tenure is the period over which you repay the loan. A 20-year tenure means 240 scheduled monthly payments in this model.", "For the same principal and positive annual interest rate, a longer tenure lowers monthly EMI but increases scheduled interest. A shorter tenure raises EMI but reduces scheduled interest. The choice is a trade-off between the monthly commitment and how long interest continues to accrue."] },
+      { id: "comparison", heading: "The 15, 20, 25 and 30-year comparison", paragraphs: ["This example keeps the loan amount and rate unchanged: ₹50,00,000 at 8.5% a year on a monthly reducing balance. It assumes a constant rate, regular monthly EMIs, no prepayment, no missed payments and no fees or charges. Figures are rounded for display; total interest means modeled scheduled interest, not all borrowing costs."], table: { caption: "₹50 lakh home loan at 8.5% a year", headers: ["Tenure", "Monthly EMI", "Total interest"], rows: [["15 years", "₹49,237", "₹38,62,656 (₹38.63 lakh)"], ["20 years", "₹43,391", "₹54,13,879 (₹54.14 lakh)"], ["25 years", "₹40,261", "₹70,78,406 (₹70.78 lakh)"], ["30 years", "₹38,446", "₹88,40,443 (₹88.40 lakh)"]] } },
       { id: "why-emi-falls", heading: "Why a longer tenure lowers the EMI", paragraphs: ["The same principal is spread over more monthly instalments. That reduces the amount due each month, although interest continues to be charged while the balance remains outstanding.", "The EMI reduction becomes progressively smaller in this example. Moving from 15 to 20 years lowers the displayed EMI by ₹5,846, while moving from 25 to 30 years lowers it by ₹1,815."] },
-      { id: "why-interest-rises", heading: "Why total interest rises", paragraphs: ["A longer tenure keeps principal outstanding for more months. Even though each EMI is lower, interest is calculated over a longer period, so the total can rise substantially.", "The 30-year option in this example has a displayed EMI ₹4,945 lower than the 20-year option. Its total interest is ₹34,26,564 higher, or about ₹34.27 lakh. The monthly reduction and the lifetime increase need to be read together."] },
-      { id: "rate-reset", heading: "A floating rate can change the comparison", paragraphs: ["The table assumes 8.5% throughout. A floating-rate home loan may reset during its tenure, changing the EMI, the number of instalments, or both.", "For applicable EMI-based floating-rate loans, RBI instructions require the regulated entity to communicate the impact of a reset and provide the applicable options. These can include a higher EMI, longer tenure, a combination, switching to a fixed rate under the lender’s policy, and part or full prepayment. Do not assume the lender will apply the same outcome in every case."] },
-      { id: "maximum-available-tenure", heading: "Maximum advertised tenure is not the same as your eligible tenure", paragraphs: ["In this context, tenure, repayment period, loan duration and loan period generally describe the horizon over which scheduled repayments run. They are query variants of the same decision, not separate loan features.", "Some lender products advertise Home Loan tenure of up to 30 years. That advertised ceiling is not automatically available to every borrower and is not the same as a universal RBI-mandated maximum. The tenure offered in an individual case can depend on the lender's product rules, repayment assessment, age-at-final-repayment condition and other documented underwriting criteria.", "Product type, property or transaction conditions and the terms recorded in the sanction and loan documents can also constrain the available tenure. The 30-year row in this article is an illustrative cost comparison, not a statement that every borrower is eligible for 30 years.", "The ArthaSiddhi calculator accepts a model tenure up to 50 years so users can test mathematical scenarios. That input range is not evidence that a lender offers or will approve that tenure." ] },
-      { id: "choosing-tenure", heading: "There is no single correct tenure", paragraphs: ["A shorter tenure needs a higher monthly payment but reduces the time over which interest accrues. A longer tenure lowers the required EMI but can leave less room for future rate increases and can materially raise total interest.", "The suitable tenure depends on cash flow, other essential commitments and the loan terms. This comparison does not recommend one tenure for every borrower."] },
-      { id: "compare-own-numbers", heading: "Compare your own amount and rate", paragraphs: ["A ₹50 lakh example cannot represent every loan. Changing the amount or rate can materially change both the EMI and the gap between tenures."], callout: { title: "Test another tenure", text: [{ text: "Use the " }, { text: "Home Loan EMI Calculator", link: { kind: "calculator", slug: "home-loan" } }, { text: " to compare the EMI, total interest and repayment schedule for your own inputs." }] } },
+      { id: "why-interest-rises", heading: "Why total interest rises", paragraphs: ["A longer tenure keeps principal outstanding for more months. Even though each EMI is lower, interest is calculated over a longer period, so the total can rise substantially.", "The 30-year option in this example has a displayed EMI ₹4,945 lower than the 20-year option. Its total interest is ₹34,26,564 higher, or about ₹34.27 lakh. The monthly reduction and the lifetime increase need to be read together.", [{ text: "For how each month's interest is calculated on outstanding principal, see " }, { text: "how Home Loan EMI is calculated", link: { kind: "article", slug: "home-loan-emi-calculation" } }, { text: " and its worked amortization example." }]] },
+      { id: "rate-reset", heading: "A floating rate can change the comparison", paragraphs: ["The table assumes 8.5% throughout. A floating-rate home loan may reset during its tenure, changing the EMI, the number of instalments, or both.", "For an EMI-based floating-rate loan within the scope of a commercial bank's applicable RBI directions, the bank must communicate reset-related EMI or tenure increases and provide the prescribed choices of higher EMI, longer tenure or both, and part or full prepayment. A fixed-rate switch is available where the bank offers it under its policy. These directions have a defined scope; other lender categories and loan types have their own applicable directions. Do not assume the lender will apply the same outcome in every case."] },
+      { id: "maximum-available-tenure", heading: "Maximum advertised tenure is not the same as your eligible tenure", paragraphs: ["SBI's YONO Home Loan page, for example, advertises tenure up to 30 years and lists age conditions. This is a product ceiling, not a universal maximum across lenders or an entitlement for every borrower. The offered repayment period depends on the product, the lender's assessment of repayment capacity and applicable age conditions.", "The tenure recorded in your sanction and loan agreement is the offer to assess. The 30-year row here illustrates scheduled interest; it does not establish eligibility.", "The ArthaSiddhi calculator accepts a model tenure up to 50 years so users can test mathematical scenarios. That input range is not evidence that a lender offers or will approve that tenure." ] },
+      { id: "choosing-tenure", heading: "There is no single correct tenure", paragraphs: ["A shorter tenure needs a higher monthly payment but reduces the time over which interest accrues. A longer tenure lowers the required EMI but raises scheduled interest at the same positive rate. If the offered tenure is already near a lender limit, extending it further after a rate increase may not be available.", "The suitable tenure depends on cash flow, other essential commitments and the loan terms. This comparison does not recommend one tenure for every borrower."] },
+      { id: "compare-own-numbers", heading: "Compare your own amount and rate", paragraphs: ["A ₹50 lakh example cannot represent every loan. Changing the amount or rate can materially change both the EMI and the gap between tenures."], callout: { title: "Compare your own tenure and rate assumptions", text: [{ text: "Use the " }, { text: "Home Loan EMI Calculator", link: { kind: "calculator", slug: "home-loan" } }, { text: " and choose Compare another scenario to open the Home Loan Tenure & Rate Comparison. Keep the shared loan amount, then change tenure or the assumed annual rate to compare EMI, scheduled interest and scheduled repayment. Each scenario holds its entered rate constant; it does not simulate future lender resets." }] } },
     ],
     faq: [
       { question: "Does the lowest EMI mean the lowest-cost tenure?", answer: "No. A lower EMI commonly comes from spreading repayment over more months, which can increase total interest. Compare both figures." },
       { question: "Does the table predict what a floating-rate loan will cost?", answer: "No. It holds the rate at 8.5% for the full tenure. Actual floating rates and the resulting repayment schedule can change." },
-      { question: "Is 30 years the maximum Home Loan tenure in India?", answer: "Some lender products advertise tenure of up to 30 years, but this is not a universal RBI-mandated entitlement. The offered tenure may be shorter under the lender's product rules, age-at-final-repayment condition, repayment assessment and other documented underwriting criteria." },
+      { question: "Is 30 years the maximum Home Loan tenure in India?", answer: "SBI's YONO page advertises up to 30 years for its product. That is not proof of an India-wide maximum or of your eligibility. Check the applicable product and borrower conditions; the calculator's 50-year modeling limit is not a lending offer." },
     ],
     references: [
-      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://rbi.org.in/CommonPerson/english/scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-08-16" },
-      { title: "FAQs on Reset of Floating Interest Rate on EMI-based Personal Loans", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonman/Upload/English/FAQs/PDFs/FAQRFIR10012025.pdf", sourceType: "official", accessedAt: "2026-08-16" },
-      { title: "SBI Home Loan — Most Important Terms and Conditions", publisher: "State Bank of India", url: "https://www.sbi.co.in/webfiles/uploads/files/1377606055343_HOME_LOAN_MITC.pdf", sourceType: "official", accessedAt: "2026-08-26" },
+      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-09-07" },
+      { title: "Commercial Banks - Responsible Business Conduct Directions, 2025 (updated July 1, 2026), Chapter VIII", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13140", sourceType: "official", accessedAt: "2026-09-07" },
+      { title: "YONO Home Loan - Eligibility and tenure", publisher: "State Bank of India", url: "https://sbi.bank.in/web/yono/home-loan", sourceType: "official", accessedAt: "2026-09-07" },
     ],
   },
   {
