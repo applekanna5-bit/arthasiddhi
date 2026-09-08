@@ -79,7 +79,9 @@ try {
   await send("Page.navigate", { url: `${base}/calculators/home-loan` });
   await waitFor("document.getElementById('principal') && document.readyState === 'complete'");
   await waitFor("Object.keys(document.getElementById('principal')).some(key => key.startsWith('__reactProps$'))");
+  await evaluate("window.__loanEvents = []; window.gtag = (...args) => window.__loanEvents.push(args)");
   await check("!document.getElementById('comparison-rate')", "comparison initially closed");
+  await check("window.__loanEvents.length === 0", "comparison emits no event on initial render");
   // Deliberate keyboard activation checks the native disclosure control after hydration.
   await send("Page.bringToFront");
   await evaluate("[...document.querySelectorAll('button')].find(b => b.textContent === 'Compare another scenario').focus()");
@@ -88,11 +90,13 @@ try {
   await send("Input.dispatchKeyEvent", { type: "keyUp", key: "Enter", code: "Enter", windowsVirtualKeyCode: 13 });
   await waitFor("document.getElementById('comparison-rate')");
   await check("document.querySelector('[aria-expanded=true]') !== null", "keyboard opens disclosure");
+  await check("window.__loanEvents.filter(event => event[1] === 'loan_comparison_open').length === 1 && window.__loanEvents[0][2].calculator_slug === 'home-loan' && window.__loanEvents[0][2].comparison_mode === 'tenure_rate'", "comparison open sends fixed metadata once");
   await check("[...document.querySelectorAll('#home-loan-comparison dd')].filter(x => x.textContent === '₹0.00 difference').length === 3", "initial currency differences are zero");
   await check("document.getElementById('home-loan-comparison').textContent.includes('0 months difference')", "initial tenure difference is zero");
   await check("document.querySelectorAll('#principal').length === 1 && document.querySelectorAll('#home-loan-comparison input').length === 2", "principal is shared with exactly two alternative inputs");
   await input("comparison-tenure", "25");
   await check("document.getElementById('home-loan-comparison').textContent.includes('60 months longer')", "tenure comparison updates");
+  await check("window.__loanEvents.filter(event => event[1] === 'loan_comparison_used').length === 1", "meaningful comparison use sends once");
   await select("comparison");
   await check("document.querySelector('table caption').textContent.startsWith('Comparison') && document.querySelector('tbody tr th').textContent === '1'", "comparison schedule selected at first month");
   const comparisonRow = await evaluate("document.querySelector('tbody tr').textContent");
@@ -104,6 +108,7 @@ try {
   await select("comparison");
   await input("comparison-rate", "-1");
   await check("document.getElementById('comparison-error')?.getAttribute('role') === 'alert' && !document.querySelector('#home-loan-comparison dl')", "invalid alternative shows error and withholds differences");
+  await check("window.__loanEvents.filter(event => event[1] === 'loan_comparison_used').length === 1", "invalid edits do not repeat comparison use");
   await check("document.querySelector('[aria-labelledby=loan-results]').textContent.includes('₹43,391.16') && !document.querySelector('table')", "valid baseline survives invalid selected alternative without stale rows");
   await select("current");
   await check("document.querySelector('tbody tr th').textContent === '1'", "baseline schedule remains available");
@@ -117,8 +122,11 @@ try {
     await check("document.documentElement.scrollWidth <= window.innerWidth", `no page overflow at ${width}px`);
   }
   await button("Close comparison");
+  await check("window.__loanEvents.filter(event => event[1] === 'loan_comparison_open').length === 1", "closing comparison sends no open event");
   await input("annualInterestRate", "9");
   await button("Compare another scenario");
+  await check("window.__loanEvents.filter(event => event[1] === 'loan_comparison_open').length === 2", "deliberate reopen sends another open event");
+  await check("window.__loanEvents.filter(event => event[1] === 'loan_comparison_used').length === 1", "reopen does not reset comparison use guard");
   await check("document.getElementById('comparison-rate').value === '9' && document.getElementById('comparison-tenure').value === '20'", "reopening initializes from current baseline");
   for (const route of ["car-loan", "personal-loan"]) {
     await send("Page.navigate", { url: `${base}/calculators/${route}` });

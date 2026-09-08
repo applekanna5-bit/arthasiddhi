@@ -40,7 +40,7 @@ export function ArticleLayout({ article }: { article: Article }) {
               This article is for education and general information. See the <Link href="/disclaimer" className="font-semibold underline underline-offset-2 focus:outline-none focus:ring-3 focus:ring-amber-200">Financial Disclaimer</Link> before using it for an important decision.
             </p>
           </header>
-          {article.primaryCalculator && <PrimaryCalculatorCallout slug={article.primaryCalculator} />}
+          {article.primaryCalculator && <PrimaryCalculatorCallout slug={article.primaryCalculator} articleSlug={article.slug} />}
           <div className="mt-10 grid gap-8 lg:grid-cols-[15rem_minmax(0,1fr)]">
             <aside className="lg:sticky lg:top-6 lg:self-start"><TableOfContents sections={article.sections} /></aside>
             <div className="min-w-0 space-y-10">
