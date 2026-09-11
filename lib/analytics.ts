@@ -94,6 +94,15 @@ function isAllowedEventParameters(eventName: AnalyticsEventName, parameters: Rec
   return EVENT_PARAMETER_KEYS[eventName].every((key) => isAllowedEventParameter(eventName, String(key), parameters[String(key)]));
 }
 
+function getClientGoogleAnalyticsMeasurementId() {
+  if (process.env.NODE_ENV !== "production") return null;
+
+  const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+  return measurementId && GA4_MEASUREMENT_ID.test(measurementId)
+    ? measurementId
+    : null;
+}
+
 declare global {
   interface Window {
     gtag?: (command: "event", eventName: AnalyticsEventName, parameters: Record<string, string>) => void;
@@ -104,7 +113,7 @@ export function trackEvent<Name extends AnalyticsEventName>(
   eventName: Name,
   parameters: AnalyticsEventParameters[Name],
 ) {
-  if (process.env.NODE_ENV !== "production" || !getGoogleAnalyticsMeasurementId() || typeof window === "undefined" || typeof window.gtag !== "function") return false;
+  if (!getClientGoogleAnalyticsMeasurementId() || typeof window === "undefined" || typeof window.gtag !== "function") return false;
 
   const source = parameters as unknown as Record<string, unknown>;
   if (!isAllowedEventParameters(eventName, source)) return false;
