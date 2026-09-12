@@ -17,7 +17,7 @@ export const incomeTaxRuleSet: FinancialRuleSet<IncomeTaxRules> = {
   label: "Income Tax — Tax Year 2026–27",
   effectivePeriod: "Tax Year 2026–27 (FY 2026–27)",
   periodLabels: [{ label: "Applicable Tax Year", value: "Tax Year 2026–27" }, { label: "Corresponding Financial Year", value: "FY 2026–27" }],
-  lastVerified: "2026-08-23",
+  lastVerified: "2026-09-12",
   rules: {
     maximumSupportedIncome: 5_000_000,
     cessRate: 4,

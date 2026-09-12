@@ -41,7 +41,7 @@ describe("Income Tax cluster registry and maintenance", () => {
       expect(article.maintenance).toEqual({ kind: "rule-sensitive", ruleSetId });
       expect(article.publishedAt).toBe("2026-08-18");
       expect(article.updatedAt).toBe("2026-08-23");
-      expect(getArticleMaintenanceContext(article)).toEqual({ applicablePeriod: "Tax Year 2026–27 (FY 2026–27)", periodLabels: [{ label: "Applicable Tax Year", value: "Tax Year 2026–27" }, { label: "Corresponding Financial Year", value: "FY 2026–27" }], verifiedAt: "2026-08-23" });
+      expect(getArticleMaintenanceContext(article)).toEqual({ applicablePeriod: "Tax Year 2026–27 (FY 2026–27)", periodLabels: [{ label: "Applicable Tax Year", value: "Tax Year 2026–27" }, { label: "Corresponding Financial Year", value: "FY 2026–27" }], verifiedAt: "2026-09-12" });
       const references = getArticleReferences(article);
       expect(references.length).toBeGreaterThan(0);
       expect(references.every(({ sourceType, url }) => sourceType === "official" && new URL(url).protocol === "https:")).toBe(true);
@@ -103,6 +103,42 @@ describe("Income Tax numerical integrity", () => {
 });
 
 describe("Income Tax scope, intent and editorial safety", () => {
+  it("puts direct answers and calculator boundaries near each canonical intent", () => {
+    expect(section(taxArticle("new-tax-regime-slab-calculation"), "answer").heading).toContain("progressively");
+    expect(text(taxArticle("new-tax-regime-slab-calculation"))).toContain("does not derive that taxable amount");
+    expect(section(taxArticle("section-87a-rebate"), "eligibility").heading).toContain("eligible resident individual");
+    expect(text(taxArticle("section-87a-rebate"))).toContain("marginal relief softens the threshold");
+    expect(section(taxArticle("gross-income-vs-taxable-income"), "input").heading.toLowerCase()).toContain("what should you enter");
+    expect(text(taxArticle("gross-income-vs-taxable-income"))).toContain("old-regime and new-regime taxable income can differ");
+    expect(section(taxArticle("health-education-cess-calculation"), "base").heading).toContain("4% of tax");
+    expect(text(taxArticle("health-education-cess-calculation"))).toContain("does not model surcharge");
+  });
+
+  it("keeps the deliberate four-way contextual navigation", () => {
+    expect(links(taxArticle("new-tax-regime-slab-calculation"))).toEqual(expect.arrayContaining([
+      { kind: "calculator", slug: "income-tax" },
+      { kind: "article", slug: "section-87a-rebate" },
+      { kind: "article", slug: "health-education-cess-calculation" },
+      { kind: "article", slug: "gross-income-vs-taxable-income" },
+    ]));
+    expect(links(taxArticle("section-87a-rebate"))).toEqual(expect.arrayContaining([
+      { kind: "calculator", slug: "income-tax" },
+      { kind: "article", slug: "new-tax-regime-slab-calculation" },
+      { kind: "article", slug: "gross-income-vs-taxable-income" },
+    ]));
+    expect(links(taxArticle("gross-income-vs-taxable-income"))).toEqual(expect.arrayContaining([
+      { kind: "calculator", slug: "income-tax" },
+      { kind: "article", slug: "new-tax-regime-slab-calculation" },
+      { kind: "article", slug: "section-87a-rebate" },
+    ]));
+    expect(links(taxArticle("health-education-cess-calculation"))).toEqual(expect.arrayContaining([
+      { kind: "calculator", slug: "income-tax" },
+      { kind: "article", slug: "new-tax-regime-slab-calculation" },
+      { kind: "article", slug: "section-87a-rebate" },
+      { kind: "article", slug: "gross-income-vs-taxable-income" },
+    ]));
+  });
+
   it("preserves required scope boundaries", () => {
     const combined = taxSlugs.map((slug) => text(taxArticle(slug))).join(" ");
     for (const phrase of ["ordinary slab-rate", "resident individual", "special-rate income", "surcharge", "payroll tds", "does not derive", "statutory filing and payment rounding"]) expect(combined).toContain(phrase);

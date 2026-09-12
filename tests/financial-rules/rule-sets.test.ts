@@ -34,5 +34,5 @@ describe("financial rule registry", () => {
     expect(gratuityRuleSet.sources[0].reference).not.toContain("indiacode.nic.in/show-data");
   });
   it("records a verification date and official HTTPS sources for every rule set", () => { for (const ruleSet of Object.values(financialRuleSets)) { expect(ruleSet.lastVerified).toMatch(/^\d{4}-\d{2}-\d{2}$/); expect(ruleSet.sources.length).toBeGreaterThan(0); for (const source of ruleSet.sources) { expect(source.authority).toBeTruthy(); expect(source.reference).toMatch(/^https:\/\//); expect(source.reference).not.toMatch(/blog|newspaper|affiliate/i); } } });
-  it("classifies and dates every income-tax source as official", () => { expect(incomeTaxRuleSet.lastVerified).toBe("2026-08-23"); for (const source of incomeTaxRuleSet.sources) { expect(source.sourceType).toBe("official"); expect(source.accessedAt).toBe("2026-08-23"); expect(new URL(source.reference).hostname).toMatch(/(?:incometaxindia|indiabudget)\.gov\.in$/); } });
+  it("classifies and dates every income-tax source as official", () => { expect(incomeTaxRuleSet.lastVerified).toBe("2026-09-12"); for (const source of incomeTaxRuleSet.sources) { expect(source.sourceType).toBe("official"); expect(source.accessedAt).toBe("2026-08-23"); expect(new URL(source.reference).hostname).toMatch(/(?:incometaxindia|indiabudget)\.gov\.in$/); } });
 });
