@@ -10,9 +10,9 @@ describe("Batch B3 rule-driven calculator voice", () => {
     expect(source).toContain(">Financial Disclaimer</Link>.");
   });
 
-  it("retains official-source verification guidance and one live region", () => {
+  it("retains official-source guidance and live regions for the primary result and optional tax comparison", () => {
     expect(source).toContain("verify current rules before making an actual decision");
-    expect(source.match(/aria-live="polite"/g)).toHaveLength(1);
+    expect(source.match(/aria-live="polite"/g)).toHaveLength(2);
   });
 
   it("keeps the shortened income label beside complete scope help", () => {
@@ -85,5 +85,38 @@ describe("Batch B3 rule-driven calculator voice", () => {
     expect(source).toContain("NPS is market-linked");
     expect(source).toContain("Small-corpus or full-withdrawal exceptions may exist");
     expect(source).toContain("Tax treatment and legal exit eligibility are outside scope.");
+  });
+});
+
+describe("Income Tax comparison semantics", () => {
+  const comparison = source.slice(source.indexOf('<section aria-labelledby="income-tax-comparison-heading"'), source.indexOf('function GstCalculator'));
+
+  it("makes the same-income assumption and material exclusions visible beside the comparison", () => {
+    expect(comparison).toContain("same already-determined taxable ordinary income under both regimes");
+    expect(comparison).toContain("Actual taxable income may differ between Old and New regimes");
+    expect(comparison).toContain("does not derive deductions, exemptions, HRA, or standard deduction");
+    expect(comparison).toContain("does not calculate special-rate income or surcharge");
+    expect(comparison).toContain("educational estimate, not personalized tax advice or a filing computation");
+    expect(comparison).toContain("Age affects the Old Regime calculation; current New Regime slabs are age-independent");
+    expect(comparison).toContain("regardless of the selected tax regime");
+  });
+
+  it.each(["best regime", "recommended regime", "choose this regime", "guaranteed savings", "personalized recommendation", "you should choose", "you save"])("rejects advisory wording: %s", (phrase) => {
+    expect(comparison.toLowerCase()).not.toContain(phrase);
+  });
+
+  it("provides optional disclosure and replaces invalid comparison results", () => {
+    expect(source).toContain("const [comparisonOpen, setComparisonOpen] = useState(false)");
+    expect(comparison).toContain('aria-expanded={comparisonOpen} aria-controls="income-tax-comparison"');
+    expect(comparison).toContain("<IncomeTaxComparison result={calculation.result} />");
+    expect(comparison).toContain("Enter valid taxable ordinary income and age details above to compare both regimes.");
+    expect(comparison).toContain('scope="col"');
+    expect(comparison).toContain('scope="row"');
+  });
+
+  it("links deliberately to the existing input and rebate guides", () => {
+    expect(comparison).toContain('href="/learn/tax/gross-income-vs-taxable-income"');
+    expect(comparison).toContain('href="/learn/tax/section-87a-rebate"');
+    expect(comparison).not.toContain("old-vs-new-tax-regime");
   });
 });

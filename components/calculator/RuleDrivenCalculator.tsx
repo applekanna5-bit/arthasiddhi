@@ -2,7 +2,7 @@
 
 import { useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
-import { calculateEpf, calculateGst, calculateIncomeTax, calculateNps, type GstMode, type GstTransactionType, type TaxAgeCategory, type TaxRegime } from "@/lib/calculator/rule-driven-calculators";
+import { calculateEpf, calculateGst, calculateIncomeTax, calculateNps, compareIncomeTaxRegimes, type GstMode, type GstTransactionType, type TaxAgeCategory, type TaxRegime } from "@/lib/calculator/rule-driven-calculators";
 import { formatIndianCurrency, formatNumber, formatPercentage } from "@/lib/calculator/formatting";
 import { epfRuleSet, gstRuleSet, incomeTaxRuleSet, npsRuleSet } from "@/lib/financial-rules/rule-sets";
 import type { FinancialRuleSet } from "@/lib/financial-rules/types";
@@ -35,6 +35,7 @@ function RuleInformation({ slug, ruleSet, methodTitle, how, disclosures }: { slu
 }
 
 function IncomeTaxCalculator() {
+  const [comparisonOpen, setComparisonOpen] = useState(false);
   const [values, setValues] = useState<Values>({ income: "1200000" });
   const [regime, setRegime] = useState<TaxRegime>("new");
   const [age, setAge] = useState<TaxAgeCategory>("below-60");
@@ -44,8 +45,42 @@ function IncomeTaxCalculator() {
   const interpretation = calculation.result ? `On taxable income of ${formatIndianCurrency(calculation.result.taxableIncome)} under the ${calculation.result.regime === "new" ? "new" : "old"} regime, estimated total tax including cess is ${formatIndianCurrency(calculation.result.totalTax)}.` : null;
   return <CalculatorShell slug="income-tax" error={calculation.error} results={results} resultsTitle="Estimated income tax" interpretation={interpretation} inputs={<><p className="rounded-lg bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-900">Tax Year 2026–27 (FY 2026–27)</p><SelectField id="taxRegime" label="Tax regime" value={regime} onChange={(value) => setRegime(value as TaxRegime)}><option value="new">New regime</option><option value="old">Old regime</option></SelectField><SelectField id="ageCategory" label="Age category" value={age} onChange={(value) => setAge(value as TaxAgeCategory)}><option value="below-60">Below 60</option><option value="60-to-below-80">60 to below 80</option><option value="80-or-above">80 or above</option></SelectField><CalculatorInput id="income" label="Taxable ordinary income (INR)" value={values.income} onChange={set("income")} min={0} max={5_000_000} step={1000} prefix="₹" error={Boolean(calculation.error)} errorId="income-tax-error" hint="Enter the amount after applicable deductions and exemptions. This calculator does not determine them. Income above ₹50,00,000 is outside scope because surcharge is not supported." /></>}>
     {calculation.result && <section aria-labelledby="income-tax-breakdown" className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"><h2 id="income-tax-breakdown" className="border-b border-slate-200 px-5 py-4 text-lg font-semibold text-slate-950">Slab-by-slab calculation</h2><div className="overflow-x-auto"><table className="min-w-[680px] w-full text-right text-sm"><thead className="bg-slate-50"><tr><th className="px-5 py-3 text-left">Slab</th><th className="px-5 py-3">Rate</th><th className="px-5 py-3">Income in slab</th><th className="px-5 py-3">Tax</th></tr></thead><tbody className="divide-y divide-slate-100">{calculation.result.breakdown.map((row) => <tr key={`${row.lowerBound}-${row.upperBound}`}><th scope="row" className="px-5 py-3 text-left font-medium">{formatIndianCurrency(row.lowerBound)} to {row.upperBound === null ? "above" : formatIndianCurrency(row.upperBound)}</th><td className="px-5 py-3">{formatPercentage(row.rate)}</td><td className="px-5 py-3">{formatIndianCurrency(row.taxableAmount)}</td><td className="px-5 py-3">{formatIndianCurrency(row.tax)}</td></tr>)}</tbody></table></div></section>}
+    <section aria-labelledby="income-tax-comparison-heading" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+      <h2 id="income-tax-comparison-heading" className="text-lg font-semibold text-slate-950">Compare Old and New Regime</h2>
+      <p className="mt-2 text-sm leading-6 text-slate-700">Test the same already-determined taxable ordinary income under both regimes. Actual taxable income may differ between Old and New regimes.</p>
+      <button type="button" aria-expanded={comparisonOpen} aria-controls="income-tax-comparison" onClick={() => setComparisonOpen((open) => !open)} className="mt-4 rounded-lg border border-emerald-700 px-4 py-2 text-sm font-semibold text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">
+        {comparisonOpen ? "Hide comparison" : "Compare both regimes"}
+      </button>
+      <div id="income-tax-comparison" hidden={!comparisonOpen}>
+        {comparisonOpen && <>
+          <p className="mt-4 rounded-lg bg-amber-50 p-4 text-sm leading-6 text-slate-800">ArthaSiddhi does not derive deductions, exemptions, HRA, or standard deduction, and does not calculate special-rate income or surcharge. This is an educational estimate, not personalized tax advice or a filing computation. It does not determine which regime is universally best.</p>
+          <p className="mt-3 text-sm leading-6 text-slate-700">Both results use the taxable ordinary income and age category entered above, regardless of the selected tax regime. Age affects the Old Regime calculation; current New Regime slabs are age-independent.</p>
+          <IncomeTaxComparison result={calculation.result} />
+          <p className="mt-4 text-sm leading-6 text-slate-700">Read about <Link href="/learn/tax/gross-income-vs-taxable-income" className="font-semibold text-emerald-700 underline underline-offset-4">gross versus taxable income</Link> and <Link href="/learn/tax/section-87a-rebate" className="font-semibold text-emerald-700 underline underline-offset-4">resident-individual rebate and marginal relief</Link>.</p>
+        </>}
+      </div>
+    </section>
     <RuleInformation slug="income-tax" ruleSet={incomeTaxRuleSet} methodTitle="How tax is applied across the slabs" how="Tax is calculated progressively across the applicable slabs, followed by the eligible resident-individual rebate or marginal relief and then 4% Health & Education Cess." disclosures={["This calculator covers ordinary slab-rate taxable income of a resident individual.", "Applicable deductions and exemptions must already be reflected in the entered taxable income.", "Special-rate income, agricultural-income aggregation, surcharge, treaty relief, salary-arrears relief, AMT, and return-filing liability are not supported.", "Displayed arithmetic does not reproduce every statutory filing or payment rounding rule.", "Results are educational estimates; official Income Tax Department rules prevail."]} />
   </CalculatorShell>;
+}
+
+function IncomeTaxComparison({ result }: { result: ReturnType<typeof calculateIncomeTax> | null }) {
+  const comparison = result ? compareIncomeTaxRegimes({ taxableOrdinaryIncome: result.taxableIncome, ageCategory: result.ageCategory }, incomeTaxRuleSet) : null;
+  const rows = [
+    { label: "Slab tax", key: "taxBeforeRebate", format: formatIndianCurrency },
+    { label: "Resident-individual rebate", key: "rebate", format: formatIndianCurrency },
+    { label: "Marginal relief", key: "marginalRelief", format: formatIndianCurrency },
+    { label: "Health & Education Cess", key: "cess", format: formatIndianCurrency },
+    { label: "Total modeled tax", key: "totalTax", format: formatIndianCurrency },
+    { label: "Effective tax rate", key: "effectiveTaxRate", format: formatPercentage },
+  ] as const;
+  return <div aria-live="polite" className="mt-4">
+    {comparison ? <div className="overflow-x-auto"><table className="w-full text-right text-sm">
+      <caption className="pb-3 text-left text-sm text-slate-700">Same taxable ordinary income: {formatIndianCurrency(comparison.newRegime.taxableIncome)}. {comparison.newRegime.applicablePeriod}. Values are rounded only for display.</caption>
+      <thead className="bg-slate-50"><tr><th scope="col" className="p-3 text-left">Output</th><th scope="col" className="p-3">New Regime</th><th scope="col" className="p-3">Old Regime</th></tr></thead>
+      <tbody className="divide-y divide-slate-100">{rows.map(({ label, key, format }) => <tr key={key} className={key === "totalTax" ? "bg-emerald-50 font-semibold" : undefined}><th scope="row" className="p-3 text-left font-medium">{label}</th><td className="whitespace-nowrap p-3">{format(comparison.newRegime[key])}</td><td className="whitespace-nowrap p-3">{format(comparison.oldRegime[key])}</td></tr>)}</tbody>
+    </table></div> : <p className="rounded-lg bg-slate-50 p-4 text-sm text-slate-700">Enter valid taxable ordinary income and age details above to compare both regimes.</p>}
+  </div>;
 }
 
 function GstCalculator() {

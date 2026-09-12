@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculateEpf, calculateGst, calculateIncomeTax, calculateNps, type IncomeTaxInput } from "../../lib/calculator/rule-driven-calculators";
+import { calculateEpf, calculateGst, calculateIncomeTax, calculateNps, compareIncomeTaxRegimes, type IncomeTaxInput } from "../../lib/calculator/rule-driven-calculators";
 import { epfRuleSet, gstRuleSet, incomeTaxRuleSet, npsRuleSet } from "../../lib/financial-rules/rule-sets";
 
 const tax = (overrides: Partial<IncomeTaxInput> = {}) => calculateIncomeTax({ regime: "new", ageCategory: "below-60", taxableOrdinaryIncome: 0, ...overrides }, incomeTaxRuleSet);
@@ -52,6 +52,66 @@ describe("Income Tax calculator", () => {
   it("rejects an invalid age category", () => expect(() => tax({ ageCategory: "invalid" as never })).toThrow(/Age category/));
   it("rejects NaN and Infinity", () => { expect(() => tax({ taxableOrdinaryIncome: Number.NaN })).toThrow(/finite/); expect(() => tax({ taxableOrdinaryIncome: Infinity })).toThrow(/finite/); });
   it("reconciles the breakdown with slab tax", () => { const result = tax({ taxableOrdinaryIncome: 3_250_000 }); expect(result.breakdown.reduce((sum, row) => sum + row.tax, 0)).toBe(result.taxBeforeRebate); });
+});
+
+describe("Income Tax same-income comparison", () => {
+  const ages = ["below-60", "60-to-below-80", "80-or-above"] as const;
+  const incomes = [0, 500_000, 500_001, 600_000, 1_200_000, 1_200_001, 1_250_000, 1_270_588, 1_270_589, 1_300_000, 1_500_000.25, incomeTaxRuleSet.rules.maximumSupportedIncome];
+
+  it.each(ages.flatMap((ageCategory) => incomes.map((taxableOrdinaryIncome) => ({ ageCategory, taxableOrdinaryIncome }))))("reuses complete engine results for $taxableOrdinaryIncome and $ageCategory", (input) => {
+    const before = structuredClone({ input, incomeTaxRuleSet });
+    const comparison = compareIncomeTaxRegimes(input, incomeTaxRuleSet);
+    expect(comparison.newRegime).toEqual(calculateIncomeTax({ ...input, regime: "new" }, incomeTaxRuleSet));
+    expect(comparison.oldRegime).toEqual(calculateIncomeTax({ ...input, regime: "old" }, incomeTaxRuleSet));
+    for (const result of Object.values(comparison)) {
+      expect(result.taxableIncome).toBe(input.taxableOrdinaryIncome);
+      expect(result.ruleSetId).toBe(incomeTaxRuleSet.id);
+      expect(result.applicablePeriod).toBe(incomeTaxRuleSet.effectivePeriod);
+      expect(result.totalTax).toBe(result.taxAfterRelief + result.cess);
+      expect(result.cess).toBe(result.taxAfterRelief * incomeTaxRuleSet.rules.cessRate / 100);
+    }
+    expect({ input, incomeTaxRuleSet }).toEqual(before);
+  });
+
+  it.each(incomes)("keeps every New Regime output except age metadata age-independent at %s", (taxableOrdinaryIncome) => {
+    const results = ages.map((ageCategory) => compareIncomeTaxRegimes({ ageCategory, taxableOrdinaryIncome }, incomeTaxRuleSet));
+    const { ageCategory: firstAge, ...first } = results[0].newRegime;
+    expect(firstAge).toBe(ages[0]);
+    results.forEach(({ newRegime }, index) => {
+      const { ageCategory, ...remaining } = newRegime;
+      expect(ageCategory).toBe(ages[index]);
+      expect(remaining).toEqual(first);
+    });
+  });
+
+  it("preserves Old Regime age-sensitive slab treatment", () => {
+    const results = ages.map((ageCategory) => compareIncomeTaxRegimes({ ageCategory, taxableOrdinaryIncome: 600_000 }, incomeTaxRuleSet).oldRegime);
+    expect(results[0].taxBeforeRebate).toBeGreaterThan(results[1].taxBeforeRebate);
+    expect(results[1].taxBeforeRebate).toBeGreaterThan(results[2].taxBeforeRebate);
+    expect(new Set(results.map(({ totalTax }) => totalTax)).size).toBe(3);
+  });
+
+  it.each([-1, incomeTaxRuleSet.rules.maximumSupportedIncome + 1, NaN, Infinity, -Infinity])("uses the existing validation error for income %s", (taxableOrdinaryIncome) => {
+    const input = { ageCategory: "below-60" as const, taxableOrdinaryIncome };
+    expect(() => calculateIncomeTax({ ...input, regime: "new" }, incomeTaxRuleSet)).toThrow();
+    try { calculateIncomeTax({ ...input, regime: "new" }, incomeTaxRuleSet); } catch (error) {
+      expect(() => compareIncomeTaxRegimes(input, incomeTaxRuleSet)).toThrow((error as Error).message);
+    }
+  });
+
+  it.each(["invalid", "", undefined, null])("rejects invalid runtime age category %s", (ageCategory) => {
+    expect(() => compareIncomeTaxRegimes({ ageCategory: ageCategory as never, taxableOrdinaryIncome: 1_200_000 }, incomeTaxRuleSet)).toThrow("Age category is invalid.");
+  });
+
+  it("uses the supplied rule set without hardcoded comparison arithmetic", () => {
+    const fixture = structuredClone(incomeTaxRuleSet);
+    fixture.id = "comparison-test-fixture";
+    fixture.rules.cessRate = 3;
+    const input = { ageCategory: "below-60" as const, taxableOrdinaryIncome: 1_500_000.25 };
+    const result = compareIncomeTaxRegimes(input, fixture);
+    expect(result.newRegime).toEqual(calculateIncomeTax({ ...input, regime: "new" }, fixture));
+    expect(result.oldRegime).toEqual(calculateIncomeTax({ ...input, regime: "old" }, fixture));
+  });
 });
 
 describe("GST calculator", () => {

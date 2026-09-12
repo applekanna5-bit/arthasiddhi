@@ -55,6 +55,17 @@ export function calculateIncomeTax(input: IncomeTaxInput, ruleSet: FinancialRule
   return { ruleSetId: ruleSet.id, applicablePeriod: ruleSet.effectivePeriod, regime: input.regime, ageCategory: input.ageCategory, taxableIncome: input.taxableOrdinaryIncome, taxBeforeRebate: slabResult.tax, rebate, marginalRelief, taxAfterRelief, cess, totalTax, effectiveTaxRate: input.taxableOrdinaryIncome === 0 ? 0 : totalTax / input.taxableOrdinaryIncome * 100, breakdown: slabResult.breakdown };
 }
 
+export type IncomeTaxComparisonInput = Omit<IncomeTaxInput, "regime">;
+export type IncomeTaxComparisonResult = { newRegime: IncomeTaxResult; oldRegime: IncomeTaxResult };
+
+/** Tests the same already-determined taxable ordinary income under both regimes. */
+export function compareIncomeTaxRegimes(input: IncomeTaxComparisonInput, ruleSet: FinancialRuleSet<IncomeTaxRules>): IncomeTaxComparisonResult {
+  return {
+    newRegime: calculateIncomeTax({ ...input, regime: "new" }, ruleSet),
+    oldRegime: calculateIncomeTax({ ...input, regime: "old" }, ruleSet),
+  };
+}
+
 export type GstMode = "exclusive" | "inclusive";
 export type GstTransactionType = "intra-state" | "inter-state";
 export type GstInput = { mode: GstMode; transactionType: GstTransactionType; amount: number; gstRate: number };
