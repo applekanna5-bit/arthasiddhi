@@ -13,7 +13,34 @@ export type HomeLoanGuideCardSlug =
   | "home-loan-tenure-comparison"
   | "when-home-loan-emi-starts";
 
+const TAX_ARTICLE_SLUGS = [
+  "new-tax-regime-slab-calculation",
+  "section-87a-rebate",
+  "gross-income-vs-taxable-income",
+  "health-education-cess-calculation",
+  "income-tax-calculator-vs-payroll-tds",
+] as const;
+export type TaxArticleSlug = typeof TAX_ARTICLE_SLUGS[number];
+
 export type AnalyticsEventParameters = {
+  tax_guide_calculator_click: {
+    article_slug: TaxArticleSlug;
+    calculator_slug: "income-tax";
+    placement: "primary_callout";
+  };
+  tax_calculator_guide_click: {
+    calculator_slug: "income-tax";
+    article_slug: TaxArticleSlug;
+    placement: "guide_card" | "comparison_context";
+  };
+  tax_comparison_open: {
+    calculator_slug: "income-tax";
+    comparison_mode: "regime";
+  };
+  tax_comparison_used: {
+    calculator_slug: "income-tax";
+    comparison_mode: "regime";
+  };
   guide_calculator_click: {
     article_slug: HomeLoanPrimaryArticleSlug;
     calculator_slug: "home-loan";
@@ -37,6 +64,8 @@ export type AnalyticsEventParameters = {
 export type AnalyticsEventName = keyof AnalyticsEventParameters;
 
 export type TrackedLinkMetadata =
+  | { eventName: "tax_guide_calculator_click"; parameters: AnalyticsEventParameters["tax_guide_calculator_click"] }
+  | { eventName: "tax_calculator_guide_click"; parameters: AnalyticsEventParameters["tax_calculator_guide_click"] }
   | { eventName: "guide_calculator_click"; parameters: AnalyticsEventParameters["guide_calculator_click"] }
   | { eventName: "calculator_guide_click"; parameters: AnalyticsEventParameters["calculator_guide_click"] };
 
@@ -57,6 +86,10 @@ export function getGoogleAnalyticsMeasurementId(
 }
 
 const EVENT_PARAMETER_KEYS: { [Name in AnalyticsEventName]: readonly (keyof AnalyticsEventParameters[Name])[] } = {
+  tax_guide_calculator_click: ["article_slug", "calculator_slug", "placement"],
+  tax_calculator_guide_click: ["calculator_slug", "article_slug", "placement"],
+  tax_comparison_open: ["calculator_slug", "comparison_mode"],
+  tax_comparison_used: ["calculator_slug", "comparison_mode"],
   guide_calculator_click: ["article_slug", "calculator_slug", "placement"],
   calculator_guide_click: ["calculator_slug", "article_slug", "placement"],
   loan_comparison_open: ["calculator_slug", "comparison_mode"],
@@ -82,6 +115,13 @@ function isAllowedValue(key: string, value: unknown): value is string {
 }
 
 function isAllowedEventParameter(eventName: AnalyticsEventName, key: string, value: unknown) {
+  if (eventName === "tax_guide_calculator_click" || eventName === "tax_calculator_guide_click" || eventName === "tax_comparison_open" || eventName === "tax_comparison_used") {
+    if (key === "calculator_slug") return value === "income-tax";
+    if (key === "comparison_mode") return value === "regime";
+    if (key === "article_slug") return typeof value === "string" && isTaxArticleSlug(value);
+    if (key === "placement") return eventName === "tax_guide_calculator_click" ? value === "primary_callout" : value === "guide_card" || value === "comparison_context";
+    return false;
+  }
   if (key === "article_slug") {
     return eventName === "guide_calculator_click"
       ? isHomeLoanPrimaryArticleSlug(String(value))
@@ -91,6 +131,10 @@ function isAllowedEventParameter(eventName: AnalyticsEventName, key: string, val
 }
 
 function isAllowedEventParameters(eventName: AnalyticsEventName, parameters: Record<string, unknown>) {
+  if (!Object.hasOwn(EVENT_PARAMETER_KEYS, eventName)) return false;
+  // Tax events reject extra keys entirely, including accidental financial data.
+  // The established Home Loan filtering behavior stays unchanged.
+  if (eventName.startsWith("tax_") && Object.keys(parameters).some((key) => !(EVENT_PARAMETER_KEYS[eventName] as readonly string[]).includes(key))) return false;
   return EVENT_PARAMETER_KEYS[eventName].every((key) => isAllowedEventParameter(eventName, String(key), parameters[String(key)]));
 }
 
@@ -125,6 +169,10 @@ export function trackEvent<Name extends AnalyticsEventName>(
 
 export function isHomeLoanPrimaryArticleSlug(value: string): value is HomeLoanPrimaryArticleSlug {
   return ALLOWED_EVENT_VALUES.article_slug.has(value as never);
+}
+
+export function isTaxArticleSlug(value: string): value is TaxArticleSlug {
+  return (TAX_ARTICLE_SLUGS as readonly string[]).includes(value);
 }
 
 export function isHomeLoanGuideCardSlug(value: string): value is HomeLoanGuideCardSlug {

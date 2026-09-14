@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
+import { trackEvent } from "@/lib/analytics";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { calculateEpf, calculateGst, calculateIncomeTax, calculateNps, compareIncomeTaxRegimes, type GstMode, type GstTransactionType, type TaxAgeCategory, type TaxRegime } from "@/lib/calculator/rule-driven-calculators";
 import { formatIndianCurrency, formatNumber, formatPercentage } from "@/lib/calculator/formatting";
 import { epfRuleSet, gstRuleSet, incomeTaxRuleSet, npsRuleSet } from "@/lib/financial-rules/rule-sets";
@@ -36,10 +38,26 @@ function RuleInformation({ slug, ruleSet, methodTitle, how, disclosures }: { slu
 
 function IncomeTaxCalculator() {
   const [comparisonOpen, setComparisonOpen] = useState(false);
+  const comparisonUsedSent = useRef(false);
+  const comparisonInitialInput = useRef<{ income: string; age: TaxAgeCategory } | null>(null);
   const [values, setValues] = useState<Values>({ income: "1200000" });
   const [regime, setRegime] = useState<TaxRegime>("new");
   const [age, setAge] = useState<TaxAgeCategory>("below-60");
+  const toggleComparison = () => {
+    if (!comparisonOpen) {
+      comparisonInitialInput.current = { income: values.income, age };
+      trackEvent("tax_comparison_open", { calculator_slug: "income-tax", comparison_mode: "regime" });
+    }
+    setComparisonOpen(!comparisonOpen);
+  };
   const calculation = useMemo(() => { try { return { result: calculateIncomeTax({ regime, ageCategory: age, taxableOrdinaryIncome: numberValue(values, "income", "Taxable ordinary income") }, incomeTaxRuleSet), error: null }; } catch (error) { return { result: null, error: error instanceof Error ? error.message : "Unable to calculate." }; } }, [values, regime, age]);
+  useEffect(() => {
+    const initial = comparisonInitialInput.current;
+    if (comparisonUsedSent.current || !comparisonOpen || !initial || !calculation.result) return;
+    // Input changes and successful rendering establish use; no outcome comparison.
+    if (values.income === initial.income && age === initial.age) return;
+    if (trackEvent("tax_comparison_used", { calculator_slug: "income-tax", comparison_mode: "regime" })) comparisonUsedSent.current = true;
+  }, [comparisonOpen, calculation.result, values.income, age]);
   const set = (key: string) => (value: string) => setValues((current) => ({ ...current, [key]: value }));
   const results = calculation.result ? [{ label: "Applicable period", value: calculation.result.applicablePeriod }, { label: "Regime", value: calculation.result.regime === "new" ? "New regime" : "Old regime" }, { label: "Taxable income", value: formatIndianCurrency(calculation.result.taxableIncome) }, { label: "Tax before relief", value: formatIndianCurrency(calculation.result.taxBeforeRebate) }, { label: "Resident-individual rebate", value: formatIndianCurrency(calculation.result.rebate) }, { label: "New-regime marginal relief", value: formatIndianCurrency(calculation.result.marginalRelief) }, { label: "Tax after relief", value: formatIndianCurrency(calculation.result.taxAfterRelief) }, { label: "Health & Education Cess", value: formatIndianCurrency(calculation.result.cess) }, { label: "Estimated total income tax", value: formatIndianCurrency(calculation.result.totalTax), emphasis: true }, { label: "Effective tax rate", value: formatPercentage(calculation.result.effectiveTaxRate) }] : null;
   const interpretation = calculation.result ? `On taxable income of ${formatIndianCurrency(calculation.result.taxableIncome)} under the ${calculation.result.regime === "new" ? "new" : "old"} regime, estimated total tax including cess is ${formatIndianCurrency(calculation.result.totalTax)}.` : null;
@@ -48,7 +66,7 @@ function IncomeTaxCalculator() {
     <section aria-labelledby="income-tax-comparison-heading" className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
       <h2 id="income-tax-comparison-heading" className="text-lg font-semibold text-slate-950">Compare Old and New Regime</h2>
       <p className="mt-2 text-sm leading-6 text-slate-700">Test the same already-determined taxable ordinary income under both regimes. Actual taxable income may differ between Old and New regimes.</p>
-      <button type="button" aria-expanded={comparisonOpen} aria-controls="income-tax-comparison" onClick={() => setComparisonOpen((open) => !open)} className="mt-4 rounded-lg border border-emerald-700 px-4 py-2 text-sm font-semibold text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">
+      <button type="button" aria-expanded={comparisonOpen} aria-controls="income-tax-comparison" onClick={toggleComparison} className="mt-4 rounded-lg border border-emerald-700 px-4 py-2 text-sm font-semibold text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">
         {comparisonOpen ? "Hide comparison" : "Compare both regimes"}
       </button>
       <div id="income-tax-comparison" hidden={!comparisonOpen}>
@@ -56,7 +74,7 @@ function IncomeTaxCalculator() {
           <p className="mt-4 rounded-lg bg-amber-50 p-4 text-sm leading-6 text-slate-800">ArthaSiddhi does not derive deductions, exemptions, HRA, or standard deduction, and does not calculate special-rate income or surcharge. This is an educational estimate, not personalized tax advice or a filing computation. It does not determine which regime is universally best.</p>
           <p className="mt-3 text-sm leading-6 text-slate-700">Both results use the taxable ordinary income and age category entered above, regardless of the selected tax regime. Age affects the Old Regime calculation; current New Regime slabs are age-independent.</p>
           <IncomeTaxComparison result={calculation.result} />
-          <p className="mt-4 text-sm leading-6 text-slate-700">Read about <Link href="/learn/tax/gross-income-vs-taxable-income" className="font-semibold text-emerald-700 underline underline-offset-4">gross versus taxable income</Link> and <Link href="/learn/tax/section-87a-rebate" className="font-semibold text-emerald-700 underline underline-offset-4">resident-individual rebate and marginal relief</Link>.</p>
+          <p className="mt-4 text-sm leading-6 text-slate-700">Read about <TrackedLink href="/learn/tax/gross-income-vs-taxable-income" analytics={{ eventName: "tax_calculator_guide_click", parameters: { calculator_slug: "income-tax", article_slug: "gross-income-vs-taxable-income", placement: "comparison_context" } }} className="font-semibold text-emerald-700 underline underline-offset-4">gross versus taxable income</TrackedLink> and <TrackedLink href="/learn/tax/section-87a-rebate" analytics={{ eventName: "tax_calculator_guide_click", parameters: { calculator_slug: "income-tax", article_slug: "section-87a-rebate", placement: "comparison_context" } }} className="font-semibold text-emerald-700 underline underline-offset-4">resident-individual rebate and marginal relief</TrackedLink>.</p>
         </>}
       </div>
     </section>
