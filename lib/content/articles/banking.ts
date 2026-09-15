@@ -7,7 +7,7 @@ export const bankingArticles = [
     description: "How principal, rate, tenure and compounding determine an FD’s maturity amount, with terms to compare before opening one.",
     category: "banking",
     publishedAt: "2026-08-15",
-    updatedAt: "2026-08-17",
+    updatedAt: "2026-09-15",
     readingTime: "5 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "fd",
@@ -15,6 +15,14 @@ export const bankingArticles = [
     relatedCalculators: [],
     relatedArticles: ["fd-interest-calculation", "fd-vs-rd", "premature-fd-withdrawal", "compound-interest"],
     sections: [
+      {
+        id: "maturity-meaning",
+        heading: "What does FD maturity mean?",
+        paragraphs: [
+          "An FD matures when its agreed deposit tenure ends. The maturity date is that end date; the maturity amount is the amount payable then under the deposit's terms. The date tells you when, while the amount tells you how much.",
+          "The ArthaSiddhi FD Calculator projects a maturity amount from the principal, entered annual interest rate, tenure and selected compounding frequency. It assumes interest stays invested for the full tenure. This cumulative estimate does not determine the institution's contractual payout or model a non-cumulative deposit that pays interest out along the way.",
+        ],
+      },
       {
         id: "maturity-factors",
         heading: "What determines your maturity amount",
@@ -116,7 +124,7 @@ export const bankingArticles = [
     description: "How principal, rate, tenure and compounding periods produce an FD's interest earned and maturity amount.",
     category: "banking",
     publishedAt: "2026-08-18",
-    updatedAt: "2026-08-18",
+    updatedAt: "2026-09-15",
     readingTime: "8 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "fd",
@@ -125,6 +133,14 @@ export const bankingArticles = [
     relatedCalculators: [],
     relatedArticles: ["fixed-deposit-explained", "premature-fd-withdrawal"],
     sections: [
+      {
+        id: "simple-or-compound",
+        heading: "Is FD interest simple or compound?",
+        paragraphs: [
+          "The answer depends on the deposit's terms. ArthaSiddhi's FD calculator uses compound growth: interest remains in the modeled deposit and earns further interest. You can select monthly, quarterly, half-yearly or yearly compounding. Actual institution and product terms can differ; non-cumulative or payout deposits are not modeled by this calculator.",
+          "Yearly compounding is not a general simple-interest mode. With yearly compounding, earlier interest joins the balance for later years; simple interest is calculated only on the original principal. The calculator has no simple-interest mode.",
+        ],
+      },
       {
         id: "calculation-parts",
         heading: "An FD calculation connects four inputs",
@@ -145,7 +161,7 @@ export const bankingArticles = [
         id: "periodic-rate",
         heading: "How the annual rate becomes a periodic rate",
         paragraphs: [
-          "The annual rate is divided by the number of compounding periods. A 7% annual rate becomes 7% for yearly compounding, 3.5% for each half-year, 1.75% for each quarter or about 0.5833% for each month under this convention.",
+          "The calculator treats the entered percentage as a nominal annual rate: it divides that rate by the number of compounding periods per year—12 for monthly, 4 for quarterly, 2 for half-yearly or 1 for yearly. An illustrative 7% annual rate becomes about 0.5833% per month, 1.75% per quarter, 3.5% per half-year or 7% per year under this convention.",
           "The number of periods changes with both frequency and tenure. Over three years there are 3 yearly, 6 half-yearly, 12 quarterly or 36 monthly compounding periods.",
         ],
       },
@@ -286,10 +302,10 @@ export const bankingArticles = [
   {
     title: "What Premature FD Withdrawal Can Change",
     slug: "premature-fd-withdrawal",
-    description: "Why closing an FD early can change the applicable rate, interest and proceeds compared with the original maturity estimate.",
+    description: "The FD calculator estimates a normal full-tenure cumulative deposit. It does not calculate the actual amount payable if you close an FD early.",
     category: "banking",
     publishedAt: "2026-08-18",
-    updatedAt: "2026-08-18",
+    updatedAt: "2026-09-15",
     readingTime: "7 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "fd",
@@ -301,6 +317,7 @@ export const bankingArticles = [
         id: "original-vs-early",
         heading: "Closing early changes the scenario being calculated",
         paragraphs: [
+          "Premature withdrawal and premature closure generally mean taking money out of a fixed deposit before its agreed maturity. Institutions may use different terms or procedures, including for partial withdrawals; check the conditions for your product.",
           "An original FD maturity estimate assumes the principal remains deposited for the full entered tenure at the stated rate and compounding frequency. Closing the deposit after 18 months instead of three years breaks that original set of assumptions.",
           "The amount paid on premature closure depends on the institution's terms. The rate applicable to the completed tenure, any permitted reduction or penalty, prior interest payments and the final closure calculation can all matter.",
         ],
@@ -332,22 +349,32 @@ export const bankingArticles = [
         },
       },
       {
+        id: "rate-and-penalty",
+        heading: "An adjusted rate and a cash charge are different",
+        paragraphs: [
+          "The institution may first consider a rate for the period the deposit actually remained open, or apply another contractual rule. That applicable rate can differ from the original contracted rate even before a penalty is considered.",
+          "A penalty may be expressed as a percentage-point reduction in the applicable interest rate. That is not the same as deducting a percentage of principal or maturity. Do not assume a fixed cash charge either: the specific terms determine the adjustment. Ask whether a quoted rate is already after any reduction so you do not count it twice.",
+        ],
+      },
+      {
         id: "not-withdrawal-result",
         heading: "The original estimate is not the withdrawal proceeds",
         paragraphs: [
           "The ₹2,46,288 figure is the original three-year maturity estimate. It is not an 18-month withdrawal amount and should not be reduced by an assumed universal percentage.",
           "The current FD Calculator does not calculate premature-withdrawal proceeds. It does not model a completed-tenure rate, institution-specific reduction, closure-specific rounding or interest already paid.",
+          "Subtracting early-closure proceeds from the original full-term maturity does not isolate a penalty or loss. The amounts relate to different dates, and the gap also includes future interest that would have accrued only if the deposit had stayed open.",
         ],
       },
       {
         id: "documents-to-check",
-        heading: "What to check before requesting closure",
+        heading: "What to check in an early-closure quote",
         list: [
-          "Deposit receipt or advice showing principal, start date, maturity date and contracted terms.",
+          "Deposit receipt or advice showing principal, original contracted rate and tenure, start date and maturity date.",
           "Premature-closure terms for the specific deposit and institution.",
-          "The rate the institution says applies to the completed tenure.",
-          "Any reduction, penalty or adjustment permitted by those terms.",
-          "A final closure statement showing the institution's calculation.",
+          "Proposed closure date, actual completed tenure and the rate considered for that period.",
+          "Any reduction or penalty, how it is applied, and whether the quoted rate already includes it.",
+          "Any previous interest payouts and how they are accounted for in the closure calculation.",
+          "The final amount quoted as payable and the statement explaining how the institution arrived at it.",
         ],
         paragraphs: [
           [
@@ -698,7 +725,7 @@ export const bankingArticles = [
     description: "How recurring monthly deposits, the entered rate and tenure build total deposits, estimated interest and RD maturity in the calculator.",
     category: "banking",
     publishedAt: "2026-08-21",
-    updatedAt: "2026-08-21",
+    updatedAt: "2026-09-15",
     readingTime: "7 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "rd",
@@ -710,7 +737,7 @@ export const bankingArticles = [
         id: "what-an-rd-models",
         heading: "An RD builds maturity through recurring monthly deposits",
         paragraphs: [
-          "A recurring deposit adds a fixed amount month by month rather than placing the full principal into the model at once. The RD Calculator uses the monthly deposit, entered annual interest rate and whole-year tenure to estimate total deposits, interest and maturity.",
+          "RD stands for Recurring Deposit. In the calculator's modeled scenario, you contribute a fixed monthly installment over the selected tenure. The RD Calculator uses that monthly amount, entered annual interest rate and whole-year tenure to estimate total deposits, interest and maturity.",
           "The result is a controlled projection under the calculator's timing and constant-rate assumptions. It is not a bank recommendation, a guaranteed return or a promise of the amount an institution will pay.",
         ],
       },
@@ -718,10 +745,10 @@ export const bankingArticles = [
         id: "inputs-and-results",
         heading: "Read the inputs and results together",
         list: [
-          "Monthly deposit: the fixed contribution added in every modeled month.",
+          "Monthly installment: the amount deposited each month, entered as Monthly deposit in the calculator.",
+          "Number of installments: the number of modeled monthly contributions, equal to the whole-year tenure multiplied by 12.",
           "Entered annual interest rate: an illustrative constant percentage converted to a monthly equivalent by the engine.",
-          "Tenure: a whole number of years; years multiplied by 12 gives the number of monthly deposits.",
-          "Total deposits: the monthly deposit multiplied by the number of deposits.",
+          "Total deposits: the monthly installment multiplied by the number of installments. This is your contributed capital, before modeled interest.",
           "Estimated interest: the projected maturity amount minus total deposits.",
           "Estimated maturity: total deposits plus modeled interest under the stated assumptions.",
         ],

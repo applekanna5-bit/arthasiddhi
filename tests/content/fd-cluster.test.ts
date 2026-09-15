@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { calculateFd } from "../../lib/calculator/fd-calculator";
 import { calculateRd } from "../../lib/calculator/expanded-calculators";
@@ -53,6 +54,69 @@ function inlineLinks(article: Article): ArticleInternalLink[] {
 function articleText(article: Article) {
   return JSON.stringify(article).toLowerCase();
 }
+
+describe("FD search answers and calculator boundaries", () => {
+  it("defines maturity date and amount before the core guide's examples", () => {
+    const article = fdArticle("fixed-deposit-explained");
+    expect(article.sections[0].id).toBe("maturity-meaning");
+    const text = JSON.stringify(article.sections[0]).toLowerCase();
+    expect(text).toContain("maturity date is that end date");
+    expect(text).toContain("maturity amount is the amount payable then under the deposit's terms");
+    expect(text).toContain("principal, entered annual interest rate, tenure and selected compounding frequency");
+    expect(text).toContain("does not determine the institution's contractual payout");
+    expect(article.primaryCalculator).toBe("fd");
+    expect(articles.filter(({ slug }) => /^fd-matur(?:e|ity)/.test(slug))).toEqual([]);
+  });
+
+  it("answers simple versus compound before the formula without generalizing to all deposits", () => {
+    const article = fdArticle("fd-interest-calculation");
+    expect(article.sections[0].id).toBe("simple-or-compound");
+    const text = JSON.stringify(article.sections[0]).toLowerCase();
+    expect(text).toContain("depends on the deposit's terms");
+    expect(text).toContain("uses compound growth");
+    expect(text).toContain("interest remains in the modeled deposit and earns further interest");
+    expect(text).toContain("monthly, quarterly, half-yearly or yearly compounding");
+    expect(text).toContain("non-cumulative or payout deposits are not modeled");
+    expect(text).toContain("yearly compounding is not a general simple-interest mode");
+    expect(text).toContain("calculator has no simple-interest mode");
+    const rate = JSON.stringify(section(article, "periodic-rate")).toLowerCase();
+    expect(rate).toContain("nominal annual rate");
+    expect(rate).toContain("12 for monthly, 4 for quarterly, 2 for half-yearly or 1 for yearly");
+    expect(articleText(article)).not.toMatch(/(?:all|every) fds? (?:use|uses) compound/);
+  });
+
+  it("places the closure limitation in the description rendered before the primary calculator invitation", () => {
+    const article = fdArticle("premature-fd-withdrawal");
+    expect(article.description).toContain("full-tenure cumulative deposit");
+    expect(article.description).toContain("does not calculate the actual amount payable if you close an FD early");
+    const layout = readFileSync("components/article/ArticleLayout.tsx", "utf8");
+    const descriptionPosition = layout.indexOf("{article.description}");
+    const calloutPosition = layout.indexOf("<PrimaryCalculatorCallout");
+    expect(descriptionPosition).toBeGreaterThan(-1);
+    expect(calloutPosition).toBeGreaterThan(descriptionPosition);
+    expect(articleMetadata(article).description).toBe(article.description);
+    expect(articleJsonLd(article).description).toBe(article.description);
+  });
+
+  it("explains closure terms and adjustments without inventing a penalty or proceeds calculation", () => {
+    const article = fdArticle("premature-fd-withdrawal");
+    expect(JSON.stringify(article.sections[0])).toContain("Premature withdrawal and premature closure generally mean");
+    const rate = JSON.stringify(section(article, "rate-and-penalty"));
+    expect(rate).toContain("percentage-point reduction in the applicable interest rate");
+    expect(rate).toContain("not the same as deducting a percentage of principal or maturity");
+    expect(rate).toContain("Do not assume a fixed cash charge");
+    expect(rate).toContain("already after any reduction");
+    expect(rate).not.toMatch(/\d|₹|%/);
+    const boundary = JSON.stringify(section(article, "not-withdrawal-result"));
+    expect(boundary).toContain("does not isolate a penalty or loss");
+    expect(boundary).toContain("different dates");
+    expect(boundary).toContain("future interest");
+    const checklist = section(article, "documents-to-check").list!.join(" ");
+    for (const term of ["original contracted rate and tenure", "closure date", "completed tenure", "quoted rate already includes it", "previous interest payouts", "final amount quoted as payable"]) expect(checklist).toContain(term);
+    expect(inlineLinks(article).filter(({ kind }) => kind === "calculator")).toEqual([{ kind: "calculator", slug: "fd" }]);
+    expect(buildSitemap().some(({ url }) => /\/calculators\/.*(?:withdrawal|closure)/.test(url))).toBe(false);
+  });
+});
 
 describe("FD content cluster registry and discovery", () => {
   it("registers exactly three unique FD supporting articles in Banking", () => {

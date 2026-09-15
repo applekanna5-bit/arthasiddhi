@@ -49,6 +49,27 @@ function text(article: Article) {
   return JSON.stringify(article).toLowerCase();
 }
 
+describe("RD full form and installment definitions", () => {
+  it("answers the full form first and distinguishes installment amount, count, deposits and maturity", () => {
+    const article = rdArticle("rd-explained");
+    expect(article.sections[0].paragraphs?.[0]).toMatch(/^RD stands for Recurring Deposit\./);
+    const definitions = section(article, "inputs-and-results").list!;
+    expect(definitions).toContain("Monthly installment: the amount deposited each month, entered as Monthly deposit in the calculator.");
+    expect(definitions).toContain("Number of installments: the number of modeled monthly contributions, equal to the whole-year tenure multiplied by 12.");
+    expect(definitions).toContain("Total deposits: the monthly installment multiplied by the number of installments. This is your contributed capital, before modeled interest.");
+    expect(definitions).toContain("Estimated maturity: total deposits plus modeled interest under the stated assumptions.");
+  });
+
+  it("keeps detailed timing with the existing calculation guide and preserves the model boundaries", () => {
+    const article = rdArticle("rd-explained");
+    expect(inlineLinks(article)).toContainEqual({ kind: "article", slug: "rd-interest-calculation" });
+    expect(article.primaryCalculator).toBe("rd");
+    const boundaries = JSON.stringify(section(article, "calculator-boundaries"));
+    for (const assumption of ["fixed monthly contribution", "constant entered annual rate", "beginning-of-month timing", "whole-year tenure"]) expect(boundaries).toContain(assumption);
+    expect(section(article, "inputs-and-results").list!.join(" ")).toContain("monthly equivalent by the engine");
+  });
+});
+
 describe("RD cluster registry and discovery", () => {
   it("registers exactly three unique evergreen Banking articles", () => {
     const registered = articles.filter(({ primaryCalculator }) => primaryCalculator === "rd");
