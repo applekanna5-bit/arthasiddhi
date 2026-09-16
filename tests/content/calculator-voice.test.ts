@@ -35,6 +35,11 @@ describe("Batch B1 calculator voice", () => {
     expect(fd).toContain("taking the maturity amount to {formatIndianCurrency(calculation.result.maturityAmount)}.");
   });
 
+  it("explains the FD cumulative full-tenure scope locally", () => {
+    expect(fd).toContain("Assumes interest stays invested for the full tenure at the entered rate and selected compounding frequency.");
+    expect(fd).toContain("Early closure and interest payouts are not modeled.");
+  });
+
   it("keeps one live result region in each shared calculator", () => {
     for (const source of [loan, sip, fd]) {
       expect(source.match(/aria-live="polite"/g)).toHaveLength(1);

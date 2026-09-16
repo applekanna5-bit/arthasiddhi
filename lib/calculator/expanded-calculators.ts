@@ -49,7 +49,8 @@ export function calculateRd(input: RdInput): RdResult {
   const months = input.tenureYears * 12;
   const rate = input.annualInterestRate / 12 / 100;
   const totalDeposits = input.monthlyDeposit * months;
-  const maturityAmount = rate === 0 ? totalDeposits : input.monthlyDeposit * ((Math.pow(1 + rate, months) - 1) / rate) * (1 + rate);
+  const stableMaturity = rate === 0 ? totalDeposits : input.monthlyDeposit * (Math.expm1(months * Math.log1p(rate)) / rate) * (1 + rate);
+  const maturityAmount = Math.max(totalDeposits, stableMaturity);
   return { totalDeposits, interestEarned: maturityAmount - totalDeposits, maturityAmount };
 }
 

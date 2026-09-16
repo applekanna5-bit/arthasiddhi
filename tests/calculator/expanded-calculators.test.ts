@@ -23,6 +23,54 @@ describe("PPF calculator", () => {
 });
 
 describe("RD calculator", () => {
+  it.each([1e-7, 1e-10, 1e-13, 1e-14, 1e-20])("approaches contributions continuously at %s percent", (annualInterestRate) => {
+    const result = calculateRd({ monthlyDeposit: 10000, annualInterestRate, tenureYears: 1 });
+    // First-order annuity-due interest: D * N(N + 1)/2 * i.
+    // For these rates the omitted terms are below 1e-12 rupees.
+    const referenceInterest = 10000 * 78 * (annualInterestRate / 12 / 100);
+    expect(Number.isFinite(result.maturityAmount)).toBe(true);
+    expect(result.maturityAmount).toBeGreaterThanOrEqual(result.totalDeposits);
+    expect(result.interestEarned).toBeGreaterThanOrEqual(0);
+    expect(Math.abs(result.interestEarned - referenceInterest)).toBeLessThan(1e-9);
+  });
+  it("preserves genuine tiny-rate interest instead of merely clamping an unstable result", () => {
+    const result = calculateRd({ monthlyDeposit: 100_000_000_000, annualInterestRate: 1e-10, tenureYears: 1 });
+    // Analytic interest is approximately 0.6500000000002; allow binary64 subtraction at this scale.
+    expect(Math.abs(result.interestEarned - 0.6500000000002)).toBeLessThan(0.001);
+    expect(Math.abs(result.maturityAmount - 1_200_000_000_000.65)).toBeLessThan(0.001);
+  });
+  it("uses the zero branch when monthly rate conversion underflows", () => {
+    expect(Number.MIN_VALUE / 12 / 100).toBe(0);
+    expect(calculateRd({ monthlyDeposit: 10000, annualInterestRate: Number.MIN_VALUE, tenureYears: 1 })).toEqual({ totalDeposits: 120000, maturityAmount: 120000, interestEarned: 0 });
+  });
+  it("respects nonnegative model bounds across amount, rate and tenure boundaries", () => {
+    for (const monthlyDeposit of [0, 10000, 100_000_000_000]) {
+      for (const annualInterestRate of [0, 1e-20, 1e-13, 7, 100]) {
+        for (const tenureYears of [1, 40, 100]) {
+          const result = calculateRd({ monthlyDeposit, annualInterestRate, tenureYears });
+          expect(Number.isFinite(result.maturityAmount)).toBe(true);
+          expect(result.maturityAmount).toBeGreaterThanOrEqual(result.totalDeposits);
+          expect(result.interestEarned).toBeGreaterThanOrEqual(0);
+          if (annualInterestRate === 0) expect(result.maturityAmount).toBe(result.totalDeposits);
+        }
+      }
+    }
+  });
+  it.each([
+    [1000, 0, 2, "24000.00"],
+    [5000, 7, 5, "360052.63"],
+    [10000, 7, 3, "401630.26"],
+    [1000, 8, 40, "3514281.22"],
+    [0, 7, 5, "0.00"],
+  ])("preserves displayed maturity for %s/month at %s percent over %s years", (monthlyDeposit, annualInterestRate, tenureYears, displayed) => {
+    const result = calculateRd({ monthlyDeposit, annualInterestRate, tenureYears });
+    expect(result.maturityAmount.toFixed(2)).toBe(displayed);
+    let accumulated = 0;
+    for (let month = 0; month < tenureYears * 12; month++) {
+      accumulated = (accumulated + monthlyDeposit) * (1 + annualInterestRate / 12 / 100);
+    }
+    expect(Math.abs(result.maturityAmount - accumulated)).toBeLessThan(Math.max(1e-9, accumulated * 1e-12));
+  });
   it("calculates beginning-of-month recurring deposits", () => { const result = calculateRd({ monthlyDeposit: 5000, annualInterestRate: 7, tenureYears: 5 }); expect(result.totalDeposits).toBe(300000); expect(result.maturityAmount).toBeCloseTo(360_052.63, 2); });
   it("handles zero rate", () => { const result = calculateRd({ monthlyDeposit: 1000, annualInterestRate: 0, tenureYears: 2 }); expect(result.maturityAmount).toBe(24000); expect(result.interestEarned).toBe(0); });
   it("handles zero deposit", () => expect(calculateRd({ monthlyDeposit: 0, annualInterestRate: 7, tenureYears: 5 }).maturityAmount).toBe(0));
