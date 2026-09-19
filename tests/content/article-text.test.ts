@@ -5,6 +5,8 @@ import { describe, expect, it, vi } from "vitest";
 vi.mock("@/lib/content/articles", async () => import("../../lib/content/articles"));
 vi.mock("@/lib/content/calculators", async () => import("../../lib/content/calculators"));
 vi.mock("@/lib/content/seo", async () => import("../../lib/content/seo"));
+vi.mock("@/lib/analytics", async () => import("../../lib/analytics"));
+vi.mock("@/components/analytics/TrackedLink", async () => import("../../components/analytics/TrackedLink"));
 
 import { ArticleText } from "../../components/article/ArticleText";
 

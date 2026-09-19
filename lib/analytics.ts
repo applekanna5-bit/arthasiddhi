@@ -22,7 +22,74 @@ const TAX_ARTICLE_SLUGS = [
 ] as const;
 export type TaxArticleSlug = typeof TAX_ARTICLE_SLUGS[number];
 
+const BANKING_GUIDE_TUPLES = [
+  { article_slug: "fixed-deposit-explained", calculator_slug: "fd", placement: "primary_callout" },
+  { article_slug: "fixed-deposit-explained", calculator_slug: "fd", placement: "article_callout" },
+  { article_slug: "fd-interest-calculation", calculator_slug: "fd", placement: "primary_callout" },
+  { article_slug: "fd-interest-calculation", calculator_slug: "fd", placement: "article_callout" },
+  { article_slug: "fd-vs-rd", calculator_slug: "fd", placement: "primary_callout" },
+  { article_slug: "fd-vs-rd", calculator_slug: "fd", placement: "article_callout" },
+  { article_slug: "fd-vs-rd", calculator_slug: "rd", placement: "article_callout" },
+  { article_slug: "fd-vs-rd", calculator_slug: "rd", placement: "related_calculator_card" },
+  { article_slug: "premature-fd-withdrawal", calculator_slug: "fd", placement: "primary_callout" },
+  { article_slug: "premature-fd-withdrawal", calculator_slug: "fd", placement: "article_callout" },
+  { article_slug: "rd-explained", calculator_slug: "rd", placement: "primary_callout" },
+  { article_slug: "rd-explained", calculator_slug: "rd", placement: "article_body" },
+  { article_slug: "rd-interest-calculation", calculator_slug: "rd", placement: "primary_callout" },
+  { article_slug: "rd-interest-calculation", calculator_slug: "rd", placement: "article_body" },
+  { article_slug: "rd-calculator-projection-vs-actual-maturity", calculator_slug: "rd", placement: "primary_callout" },
+  { article_slug: "rd-calculator-projection-vs-actual-maturity", calculator_slug: "rd", placement: "article_body" },
+] as const;
+
+const BANKING_CALCULATOR_TUPLES = [
+  { article_slug: "fixed-deposit-explained", calculator_slug: "fd", placement: "guide_card" },
+  { article_slug: "fd-interest-calculation", calculator_slug: "fd", placement: "guide_card" },
+  { article_slug: "fd-vs-rd", calculator_slug: "fd", placement: "guide_card" },
+  { article_slug: "rd-explained", calculator_slug: "rd", placement: "guide_card" },
+  { article_slug: "rd-interest-calculation", calculator_slug: "rd", placement: "guide_card" },
+  { article_slug: "rd-calculator-projection-vs-actual-maturity", calculator_slug: "rd", placement: "guide_card" },
+] as const;
+
+type BankingGuideParameters = typeof BANKING_GUIDE_TUPLES[number];
+type BankingCalculatorParameters = typeof BANKING_CALCULATOR_TUPLES[number];
+export type BankingArticleSlug = BankingGuideParameters["article_slug"];
+type BankingGuidePlacement = BankingGuideParameters["placement"];
+
+export function isBankingArticleSlug(value: string): value is BankingArticleSlug {
+  return BANKING_GUIDE_TUPLES.some((tuple) => tuple.article_slug === value);
+}
+
+// Validate complete tuples, never the independent article/calculator cross-product.
+// Banking rejects the entire payload on any missing or unexpected own key.
+function isBankingParameters<T extends BankingGuideParameters | BankingCalculatorParameters>(
+  parameters: unknown,
+  tuples: readonly T[],
+): parameters is T {
+  if (!parameters || typeof parameters !== "object") return false;
+  const keys = Reflect.ownKeys(parameters);
+  const source = parameters as Record<string, unknown>;
+  const required = ["article_slug", "calculator_slug", "placement"] as const;
+  if (keys.length !== required.length || !required.every((key) => Object.hasOwn(source, key) && typeof source[key] === "string")) return false;
+  return tuples.some((tuple) => required.every((key) => source[key] === tuple[key]));
+}
+
+export function getBankingGuideLink(articleSlug: BankingArticleSlug | undefined, calculatorSlug: string, placement: BankingGuidePlacement) {
+  const parameters = { article_slug: articleSlug, calculator_slug: calculatorSlug, placement };
+  return isBankingParameters(parameters, BANKING_GUIDE_TUPLES)
+    ? { eventName: "banking_guide_calculator_click" as const, parameters }
+    : undefined;
+}
+
+export function getBankingCalculatorLink(calculatorSlug: string, articleSlug: string) {
+  const parameters = { article_slug: articleSlug, calculator_slug: calculatorSlug, placement: "guide_card" };
+  return isBankingParameters(parameters, BANKING_CALCULATOR_TUPLES)
+    ? { eventName: "banking_calculator_guide_click" as const, parameters }
+    : undefined;
+}
+
 export type AnalyticsEventParameters = {
+  banking_guide_calculator_click: BankingGuideParameters;
+  banking_calculator_guide_click: BankingCalculatorParameters;
   tax_guide_calculator_click: {
     article_slug: TaxArticleSlug;
     calculator_slug: "income-tax";
@@ -64,6 +131,8 @@ export type AnalyticsEventParameters = {
 export type AnalyticsEventName = keyof AnalyticsEventParameters;
 
 export type TrackedLinkMetadata =
+  | { eventName: "banking_guide_calculator_click"; parameters: BankingGuideParameters }
+  | { eventName: "banking_calculator_guide_click"; parameters: BankingCalculatorParameters }
   | { eventName: "tax_guide_calculator_click"; parameters: AnalyticsEventParameters["tax_guide_calculator_click"] }
   | { eventName: "tax_calculator_guide_click"; parameters: AnalyticsEventParameters["tax_calculator_guide_click"] }
   | { eventName: "guide_calculator_click"; parameters: AnalyticsEventParameters["guide_calculator_click"] }
@@ -86,6 +155,8 @@ export function getGoogleAnalyticsMeasurementId(
 }
 
 const EVENT_PARAMETER_KEYS: { [Name in AnalyticsEventName]: readonly (keyof AnalyticsEventParameters[Name])[] } = {
+  banking_guide_calculator_click: ["article_slug", "calculator_slug", "placement"],
+  banking_calculator_guide_click: ["article_slug", "calculator_slug", "placement"],
   tax_guide_calculator_click: ["article_slug", "calculator_slug", "placement"],
   tax_calculator_guide_click: ["calculator_slug", "article_slug", "placement"],
   tax_comparison_open: ["calculator_slug", "comparison_mode"],
@@ -132,6 +203,8 @@ function isAllowedEventParameter(eventName: AnalyticsEventName, key: string, val
 
 function isAllowedEventParameters(eventName: AnalyticsEventName, parameters: Record<string, unknown>) {
   if (!Object.hasOwn(EVENT_PARAMETER_KEYS, eventName)) return false;
+  if (eventName === "banking_guide_calculator_click") return isBankingParameters(parameters, BANKING_GUIDE_TUPLES);
+  if (eventName === "banking_calculator_guide_click") return isBankingParameters(parameters, BANKING_CALCULATOR_TUPLES);
   // Tax events reject extra keys entirely, including accidental financial data.
   // The established Home Loan filtering behavior stays unchanged.
   if (eventName.startsWith("tax_") && Object.keys(parameters).some((key) => !(EVENT_PARAMETER_KEYS[eventName] as readonly string[]).includes(key))) return false;

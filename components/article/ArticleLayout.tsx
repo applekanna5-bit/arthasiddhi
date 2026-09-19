@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { isBankingArticleSlug } from "@/lib/analytics";
 import { ArticleCallout } from "./ArticleCallout";
 import { ArticleFAQ } from "./ArticleFAQ";
 import { ArticleReferences } from "./ArticleReferences";
@@ -19,6 +20,7 @@ function formatDate(date: string) {
 
 export function ArticleLayout({ article }: { article: Article }) {
   const category = categoryLabels[article.category];
+  const bankingArticleSlug = isBankingArticleSlug(article.slug) ? article.slug : undefined;
 
   return (
     <main className="flex-1 bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
@@ -48,16 +50,16 @@ export function ArticleLayout({ article }: { article: Article }) {
                 {article.sections.map((section) => (
                   <section key={section.id} id={section.id} className="scroll-mt-6">
                     <h2 className="text-2xl font-bold tracking-tight text-slate-950">{section.heading}</h2>
-                    {section.paragraphs?.map((paragraph, index) => <p key={`${section.id}-${index}`} className="mt-4 leading-7 text-slate-700"><ArticleText content={paragraph} /></p>)}
+                    {section.paragraphs?.map((paragraph, index) => <p key={`${section.id}-${index}`} className="mt-4 leading-7 text-slate-700"><ArticleText content={paragraph} bankingArticleSlug={bankingArticleSlug} /></p>)}
                     {section.list && <ul className="mt-4 list-disc space-y-2 pl-5 leading-7 text-slate-700">{section.list.map((item) => <li key={item}>{item}</li>)}</ul>}
                     {section.table && <div className="mt-5 max-w-full overflow-x-auto rounded-xl border border-slate-200"><table className="min-w-full text-left text-sm"><caption className="border-b border-slate-200 bg-slate-50 px-4 py-3 text-left font-medium text-slate-700">{section.table.caption}</caption><thead className="bg-slate-50 text-slate-700"><tr>{section.table.headers.map((header) => <th key={header} scope="col" className="px-4 py-3 font-semibold">{header}</th>)}</tr></thead><tbody className="divide-y divide-slate-200 bg-white text-slate-700">{section.table.rows.map((row) => <tr key={row.join("-")}>{row.map((cell) => <td key={cell} className="px-4 py-3 align-top leading-6">{cell}</td>)}</tr>)}</tbody></table></div>}
-                    {section.callout && <div className="mt-5"><ArticleCallout {...section.callout} /></div>}
+                    {section.callout && <div className="mt-5"><ArticleCallout {...section.callout} bankingArticleSlug={bankingArticleSlug} /></div>}
                   </section>
                 ))}
               </div>
               {article.faq && <ArticleFAQ items={article.faq} />}
               <ArticleReferences references={getArticleReferences(article)} />
-              <RelatedCalculators calculators={getRelatedCalculators(article.relatedCalculators)} />
+              <RelatedCalculators calculators={getRelatedCalculators(article.relatedCalculators)} bankingArticleSlug={bankingArticleSlug} />
               <RelatedArticles articles={getRelatedArticles(article)} />
               <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Learn", href: "/learn" }, { label: category, href: `/learn/${article.category}` }, { label: article.title }]} />
             </div>
