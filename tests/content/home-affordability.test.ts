@@ -47,13 +47,13 @@ describe("Home affordability planning article", () => {
     expect(article.relatedCalculators).toEqual(["home-loan"]);
     const owners = ["home-loan-guide", "home-loan-tenure-comparison", "home-loan-emi-calculation", "when-home-loan-emi-starts"];
     expect(article.relatedArticles).toEqual(owners);
-    expect(links.filter(({ kind }) => kind === "article").map(({ slug }) => slug)).toEqual(owners);
+    expect(links.filter(({ kind }) => kind === "article").map(({ slug }) => slug)).toEqual(["emergency-fund-before-home-loan", "home-buying-costs-beyond-property-price", "home-loan-down-payment", ...owners]);
     expect(links.filter(({ kind }) => kind === "calculator")).toEqual([{ kind: "calculator", slug: "home-loan" }]);
     for (const link of links) {
       if (link.kind === "article") expect(getArticleBySlug(link.slug)).toBeDefined();
       else expect(calculators[link.slug]).toBeDefined();
     }
-    // An exhaustive destination allowlist also excludes uncreated V2.1C pages.
+    // An exhaustive destination allowlist excludes unpublished planning pages.
     expect(JSON.stringify(article)).not.toMatch(/\/learn\//);
     expect(Object.keys(calculators)).toHaveLength(17);
     expect(Object.keys(calculators)).not.toContain(slug);

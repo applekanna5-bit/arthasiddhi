@@ -13,6 +13,9 @@ export type ContentCategory = (typeof contentCategories)[number];
 
 export const articleSlugs = [
   "how-much-house-can-i-afford",
+  "home-loan-down-payment",
+  "home-buying-costs-beyond-property-price",
+  "emergency-fund-before-home-loan",
   "home-loan-guide",
   "when-home-loan-emi-starts",
   "home-loan-emi-calculation",

@@ -48,7 +48,7 @@ function section(article: Article, id: string) {
 describe("Home Loan search cluster", () => {
   it("registers one new EMI-start owner while preserving existing public paths", () => {
     expect(supportingArticles().map(({ slug }) => slug)).toEqual(supportingSlugs);
-    expect(articles).toHaveLength(64);
+    expect(articles).toHaveLength(67);
     expect(articles.filter(({ slug }) => slug === "when-home-loan-emi-starts")).toHaveLength(1);
     expect(getArticleRegistryIssues()).toEqual([]);
     expect([
@@ -69,7 +69,7 @@ describe("Home Loan search cluster", () => {
   it("keeps one Home Loan core guide and four supporting guides in the expanded Loans category", () => {
     const loanArticles = getArticlesByCategory("loans");
     const homeLoanGuides = articles.filter(({ primaryCalculator }) => primaryCalculator === "home-loan");
-    expect(loanArticles).toHaveLength(12);
+    expect(loanArticles).toHaveLength(15);
     expect(homeLoanGuides.filter(({ calculatorGuideRole }) => calculatorGuideRole === "core")).toHaveLength(1);
     expect(getPrimaryGuideForCalculator("home-loan")?.slug).toBe("home-loan-guide");
     expect(homeLoanGuides.filter(({ calculatorGuideRole }) => calculatorGuideRole === "supporting")).toHaveLength(4);

@@ -53,7 +53,7 @@ export const learnCategoryHubs: Record<ContentCategory, LearnCategoryHub> = {
   },
   loans: {
     category: "loans",
-    broaderGuides: ["how-much-house-can-i-afford"],
+    broaderGuides: ["how-much-house-can-i-afford", "home-loan-down-payment", "home-buying-costs-beyond-property-price", "emergency-fund-before-home-loan"],
     topicPreview: ["Home loans", "Personal loans", "Car loans"],
     groups: [
       { id: "home-loan", title: "Home loans", calculator: "home-loan", coreArticle: "home-loan-guide", supportingArticles: ["home-loan-emi-calculation", "home-loan-tenure-comparison", "when-home-loan-emi-starts", "home-loan-prepayment"] },

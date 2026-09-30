@@ -75,8 +75,8 @@ describe("core article identity and architecture", () => {
   });
 
   it("keeps every declared article route valid and the registry clean", () => {
-    expect(articles).toHaveLength(64);
-    expect(new Set(articles.map(getArticlePath)).size).toBe(64);
+    expect(articles).toHaveLength(67);
+    expect(new Set(articles.map(getArticlePath)).size).toBe(67);
     expect(getArticleRegistryIssues()).toEqual([]);
   });
 

@@ -889,7 +889,7 @@ export const loanArticles = [
         paragraphs: [
           "List savings that will actually be available when payments fall due. Keep money needed for other purposes separate, rather than treating every account balance as a down payment.",
           "Available savings minus liquidity and reserves intentionally retained, minus other near-term commitments, minus purchase-related costs paid separately equals cash potentially available toward the property price. This is a planning framework, not a regulatory formula.",
-          "Decide what liquidity to retain before choosing a property. Consider how you would meet essential spending during an income interruption and how quickly you could access that money. There is no emergency-fund amount prescribed here. Money reserved for education, healthcare or another near-term commitment is not also available for the purchase.",
+          [{ text: "Decide what " }, { text: "liquidity to retain before choosing a property", link: { kind: "article", slug: "emergency-fund-before-home-loan" } }, { text: ". Consider how you would meet essential spending during an income interruption and how quickly you could access that money. There is no emergency-fund amount prescribed here. Money reserved for education, healthcare or another near-term commitment is not also available for the purchase." }],
           "Count each reservation once. If a repair budget is already included among separate purchase costs, do not subtract it again as another commitment. Increasing your own contribution reduces the financing gap, but also leaves less cash available afterwards.",
         ],
       },
@@ -899,7 +899,7 @@ export const loanArticles = [
         paragraphs: [
           "Check which costs apply to the specific transaction: stamp duty, registration-related costs, lender charges, and legal, technical or other transaction-related fees. Ask for itemised amounts and payment dates rather than estimating them from a blanket percentage. Not every charge applies to every purchase.",
           "Separately allow for the moving, setup and repair work you actually expect. Distinguish work needed before moving in from purchases that can wait. These are buyer-specific planning allowances, not standard transaction charges.",
-          "Write down what the quoted price includes, what is payable separately and when each payment is due. Do not count the same cost twice or assume a loan will cover it. A budget can look workable in total while leaving a cash shortfall at an earlier payment date.",
+          [{ text: "Write down what the quoted price includes, " }, { text: "what is payable separately", link: { kind: "article", slug: "home-buying-costs-beyond-property-price" } }, { text: " and when each payment is due. Do not count the same cost twice or assume a loan will cover it. A budget can look workable in total while leaving a cash shortfall at an earlier payment date." }],
         ],
       },
       {
@@ -922,7 +922,7 @@ export const loanArticles = [
         id: "price-contribution-and-borrowing",
         heading: "Connect the property price to the borrowing required",
         paragraphs: [
-          "For each candidate property price, subtract the own contribution you plan to put toward that price. The difference is the amount that may need financing. Keep separately paid costs outside this subtraction; they have already reduced the cash available for your contribution.",
+          [{ text: "For each candidate property price, subtract the " }, { text: "own contribution you plan to put toward that price", link: { kind: "article", slug: "home-loan-down-payment" } }, { text: ". The difference is the amount that may need financing. Keep separately paid costs outside this subtraction; they have already reduced the cash available for your contribution." }],
           "This arithmetic identifies a financing requirement, not a sanction. The lender's assessment can depend on your borrower profile, repayment capacity, the property and applicable rules and policies. Confirm the actual amount offered and which components can be financed; do not assume every price component or transaction cost is covered.",
           "Try a lower and a higher candidate price using the same retained-cash plan. Record the own contribution, separate costs, financing gap and eventual EMI estimate for each. If the required borrowing is unavailable, or its payments displace essential commitments, revisit the price range, timing or contribution rather than assuming the gap will resolve itself.",
         ],
@@ -965,6 +965,230 @@ export const loanArticles = [
     ],
     references: [
       { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-09-30" },
+    ],
+  },
+  {
+    title: "Home Loan Down Payment: How Much Should You Keep?",
+    slug: "home-loan-down-payment",
+    description: "Decide how much cash to contribute to a home purchase by weighing the borrowing required against the liquidity you want to retain.",
+    category: "loans",
+    publishedAt: "2026-09-30",
+    updatedAt: "2026-09-30",
+    readingTime: "5 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: null,
+    calculatorGuideRole: null,
+    relatedCalculators: ["home-loan"],
+    relatedArticles: ["how-much-house-can-i-afford", "home-buying-costs-beyond-property-price", "emergency-fund-before-home-loan"],
+    sections: [
+      {
+        id: "contribution-decision",
+        heading: "Decide what to contribute and what to keep",
+        paragraphs: [
+          "Choose a proposed down payment by looking at the loan it leaves you needing and the cash it leaves you holding. Down payment is both a borrowing decision and a liquidity decision. Putting more money into the purchase can reduce the loan, but that same money is no longer available for household needs.",
+          "Here, down payment means your own contribution toward the property price. Keep separately paid purchase costs outside that figure. The purpose is to choose a contribution you can explain, not to find a percentage that every buyer should use.",
+        ],
+      },
+      {
+        id: "desired-vs-required",
+        heading: "Your preferred contribution and the required margin are different",
+        paragraphs: [
+          "A personal desired contribution is the amount you would choose after considering your finances. A lender's required margin or minimum contribution is a financing constraint to confirm for the actual loan and property. Ask which current lender conditions and applicable regulatory requirements determine it; this guide does not quote a universal Indian minimum.",
+          "Do not treat an advertised loan amount as confirmation of what will be sanctioned. Obtain the actual financing terms before committing your cash. If the required own contribution exceeds what your plan can release, revisit the price or timing instead of treating your reserve as automatically available.",
+        ],
+      },
+      {
+        id: "cash-for-contribution",
+        heading: "Identify the money available for the contribution",
+        paragraphs: [
+          "Start with savings accessible by the purchase payment dates. Mark what is already assigned to existing obligations, near-term commitments and the liquidity you intend to retain. The balance is a candidate contribution, not an instruction to spend it all.",
+          [{ text: "Set aside the " }, { text: "costs beyond the property price", link: { kind: "article", slug: "home-buying-costs-beyond-property-price" } }, { text: " separately. Otherwise a contribution that looks available on paper may also be needed to pay transaction or setup bills." }],
+          [{ text: "Before increasing the contribution, review your " }, { text: "emergency reserve before a home loan", link: { kind: "article", slug: "emergency-fund-before-home-loan" } }, { text: ". Income stability, existing debt payments and the cash you want after moving affect how much can be released now." }],
+        ],
+      },
+      {
+        id: "compare-contributions",
+        heading: "Compare contributions at the same property price",
+        paragraphs: [
+          "Property price minus own contribution equals the amount that may require financing. This is planning arithmetic, not a loan approval or a statement that every transaction component is financeable.",
+          "At the same property price, a larger contribution reduces the financing requirement and leaves less liquidity. A smaller contribution preserves more liquidity and increases the financing requirement. With the same positive rate, tenure and repayment assumptions, a smaller principal produces a lower modeled EMI and lower scheduled interest; a larger principal produces higher figures.",
+          "Write down two candidate contributions. Beside each, record the financing requirement, cash left after separate costs, and the modeled monthly payment. Hold the property price and loan assumptions unchanged so that you can see the effect of the contribution itself.",
+        ],
+        callout: { title: "Read both consequences", text: "A reduction in EMI does not by itself justify releasing more cash. Equally, retaining cash does not remove the need to carry a larger monthly payment. Review both columns of the decision before choosing a contribution." },
+      },
+      {
+        id: "model-principal",
+        heading: "Model each loan amount separately",
+        paragraphs: [
+          "Enter the first financing requirement in the Home Loan calculator and note its EMI and scheduled interest. Change the principal for the second run, keeping rate and tenure unchanged. The built-in Compare another scenario feature shares one principal between scenarios; it compares tenure and rate, not two down payments.",
+          "The calculator assumes a constant rate and regular monthly reducing-balance repayments without fees, missed payments or prepayments. It models the borrowing consequence only. It cannot select the correct contribution, confirm eligibility or establish the cash required to complete the purchase.",
+        ],
+        callout: { title: "Test the borrowing consequence", text: [{ text: "Use the " }, { text: "Home Loan Calculator", link: { kind: "calculator", slug: "home-loan" } }, { text: " for each candidate principal, then bring both results back to your contribution comparison." }] },
+      },
+      {
+        id: "record-choice",
+        heading: "Record why the contribution works for you",
+        paragraphs: [
+          "Before finalising the amount, record the cash remaining, the obligations it must still cover, the EMI you tested and the lender terms still awaiting confirmation. Include when your own payments are due; future savings cannot meet a payment due before those savings arrive.",
+          [{ text: "If neither candidate leaves workable cash and repayments, return to " }, { text: "how much house you can afford", link: { kind: "article", slug: "how-much-house-can-i-afford" } }, { text: " and reconsider the property-price range. Changing the down payment alone may not resolve a purchase that stretches both sides of the budget." }],
+        ],
+      },
+    ],
+    references: [
+      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-09-30" },
+    ],
+  },
+  {
+    title: "Costs of Buying a Home Beyond the Property Price",
+    slug: "home-buying-costs-beyond-property-price",
+    description: "Build an itemised home-buying cash plan for applicable transaction, financing and property-process costs, plus your own moving and setup needs.",
+    category: "loans",
+    publishedAt: "2026-09-30",
+    updatedAt: "2026-09-30",
+    readingTime: "5 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: null,
+    calculatorGuideRole: null,
+    relatedCalculators: [],
+    relatedArticles: ["home-loan-down-payment", "emergency-fund-before-home-loan", "how-much-house-can-i-afford"],
+    sections: [
+      {
+        id: "itemise-costs",
+        heading: "Build a cash plan beyond the quoted price",
+        paragraphs: [
+          "Property price is not necessarily the total cash requirement. Start with an itemised list of what the quote includes and what you would have to pay separately. Then give each separate item an amount to verify, a payment date and a funding source.",
+          "The categories below are prompts for your actual transaction, not a claim that every buyer pays every cost. Avoid adding a standard percentage to the price and assuming that covers everything. An unresolved item should stay marked as unknown rather than disappear from the plan.",
+        ],
+      },
+      {
+        id: "government-transaction-costs",
+        heading: "Government and transaction-related costs",
+        paragraphs: [
+          "Check applicable stamp duty and registration-related charges. Verify the current amount for your actual transaction with the relevant official state registration or stamps authority. This guide supplies no state rates or universal percentage.",
+          "Record the official basis for the amount and the date you checked it. If an estimate from another party differs, resolve the difference before treating it as a confirmed cash requirement. Keep statutory payments separate from service charges on your worksheet.",
+        ],
+      },
+      {
+        id: "financing-costs",
+        heading: "Financing-related costs",
+        paragraphs: [
+          "Ask the lender for the applicable processing, administrative or documentation charges and their payment timing. Use the written loan documents and fee details for your offer. An EMI estimate is not an itemised fee quotation.",
+          "For each quoted charge, note who receives it, whether it has already been paid and whether it is included elsewhere. Ask what happens to an upfront payment if the transaction does not proceed; do not assume a refund or waiver.",
+        ],
+      },
+      {
+        id: "property-process-costs",
+        heading: "Property and process-related costs",
+        paragraphs: [
+          "Check whether legal review, valuation, technical inspection or other transaction services involve separate charges in your case. Request the scope and fee from the party providing or arranging each service.",
+          "A service may appear in a lender's quotation and in a separate transaction estimate. Find out whether these describe the same work before budgeting twice. Keep optional services distinguishable from requirements stated in the documents for your purchase.",
+        ],
+      },
+      {
+        id: "moving-setup",
+        heading: "Moving and ownership setup",
+        paragraphs: [
+          "Make a separate household list for moving, immediate repairs, essential furnishing and setup. These are buyer-specific allowances, not statutory charges. Obtain estimates for the work or purchases you actually intend to undertake.",
+          "Separate what must be ready before occupation from what can wait. An essential repair and a later furnishing upgrade need not share the same payment deadline. Record recurring maintenance in the ongoing household budget instead of treating every future ownership expense as a one-time purchase cost.",
+        ],
+      },
+      {
+        id: "payment-ledger",
+        heading: "Turn the list into a payment plan",
+        paragraphs: [
+          "For each item, record: description, payee, estimate or confirmed amount, supporting document, due date, amount already paid, amount still due, and how it will be funded. Keep a note of whether it is included in the quoted property price.",
+          "Group the outstanding payments by when they fall due. Compare them with cash accessible on those dates, rather than only with total savings. When an estimate becomes a confirmed amount, replace it instead of adding it as another cost.",
+          "Do not assume every purchase-related cost is financed by the home loan. Confirm what the sanctioned borrowing covers and when funds will be available. Until that is clear, show the item's funding as unresolved; do not silently count the same loan proceeds against both the property price and separate bills.",
+        ],
+        callout: { title: "A useful cost plan has evidence and dates", text: "A total without payment dates can hide an early cash gap. A total without itemised evidence can hide omissions or duplicate charges. Recheck both before committing to the transaction." },
+      },
+      {
+        id: "use-cost-total",
+        heading: "Use the verified costs in the wider purchase plan",
+        paragraphs: [
+          [{ text: "Separate costs reduce the cash available for your " }, { text: "home-loan down payment", link: { kind: "article", slug: "home-loan-down-payment" } }, { text: ". Update that contribution plan when a quote or payment deadline changes." }],
+          [{ text: "Keep known moving and repair bills distinct from the " }, { text: "emergency money you retain", link: { kind: "article", slug: "emergency-fund-before-home-loan" } }, { text: ". Money already assigned to a bill cannot also serve as an untouched reserve." }],
+          [{ text: "Once the separate cash requirements are clearer, revisit " }, { text: "how much house you can afford", link: { kind: "article", slug: "how-much-house-can-i-afford" } }, { text: ". This cost plan supplies an input to that decision; it does not select a property or establish loan eligibility." }],
+        ],
+      },
+    ],
+    references: [
+      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-09-30" },
+    ],
+  },
+  {
+    title: "Emergency Fund Before Taking a Home Loan",
+    slug: "emergency-fund-before-home-loan",
+    description: "Plan the accessible money you retain after a home purchase around income interruptions, essential commitments and unexpected expenses.",
+    category: "loans",
+    publishedAt: "2026-09-30",
+    updatedAt: "2026-09-30",
+    readingTime: "5 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: null,
+    calculatorGuideRole: null,
+    relatedCalculators: ["home-loan"],
+    relatedArticles: ["home-buying-costs-beyond-property-price", "home-loan-down-payment", "how-much-house-can-i-afford"],
+    sections: [
+      {
+        id: "different-jobs",
+        heading: "Give emergency money a separate job",
+        paragraphs: [
+          "Down-payment money and emergency money perform different financial jobs. The first contributes to the purchase; the second remains accessible for disruption after the purchase. Decide what that retained money needs to cover before assigning the rest of your savings to the property.",
+          "The useful question is what cash your household would need if income stopped arriving as expected or an urgent expense arose. This guide offers planning questions, not a prescribed number of months, EMIs or a share of salary.",
+        ],
+      },
+      {
+        id: "essential-commitments",
+        heading: "Map the commitments that would continue",
+        paragraphs: [
+          "Build a picture of essential post-purchase spending during an interruption. Include food, utilities, dependants' needs, the proposed home-loan payment, existing debt obligations and other commitments that would continue even if earnings fell. Distinguish expenses you could defer from payments that still need cash.",
+          "List foreseeable near-term obligations separately. A known education payment, planned treatment or scheduled repair needs its own funding plan; calling it an emergency does not make that money available twice.",
+          [{ text: "Use the " }, { text: "home-buying costs guide", link: { kind: "article", slug: "home-buying-costs-beyond-property-price" } }, { text: " to separate known moving and setup bills from the reserve left after those bills are paid." }],
+        ],
+      },
+      {
+        id: "disruption-scenarios",
+        heading: "Choose disruptions relevant to your household",
+        paragraphs: [
+          "Work through a temporary income interruption and an unexpected major expense separately, then consider whether they could overlap. Choose your own assumptions about how long income might take to recover and what essential payments would fall due in that time. Write down the cash shortfall under each assumption rather than applying a standard duration.",
+        ],
+        list: [
+          "Income stability: how variable are receipts, and what could delay the next payment?",
+          "Income sources: could one source continue if another stopped, or could both be affected by the same event?",
+          "Dependants and commitments: which needs would remain even if discretionary spending stopped?",
+          "Medical or household expenses: what urgent spending could require accessible cash?",
+          "Insurance context: what does your actual cover address, what would you still have to pay, and when would money be needed? Check the policy rather than assuming every expense will be covered immediately.",
+          "Repairs and maintenance: which costs are already foreseeable, and what unplanned work could be difficult to postpone?",
+        ],
+      },
+      {
+        id: "accessible-reserve",
+        heading: "Check whether the reserve would actually be accessible",
+        paragraphs: [
+          "For each amount you count as emergency money, ask when you could use it and what might reduce the amount available. Money committed to a purchase payment cannot also cover a household interruption. Do not assume you could quickly reverse a down payment or raise a new loan when cash is needed.",
+          "If the plan depends on selling an investment or receiving help, record the timing and amount as assumptions to verify. This is an accessibility check, not a recommendation of a savings or investment product.",
+          "Compare the reserve left after completion with the shortfalls in your scenarios. If it does not cover a scenario you want to prepare for, revise the retained amount, the purchase plan or another commitment. There is no universal pass/fail reserve in this framework.",
+        ],
+      },
+      {
+        id: "liquidity-borrowing-tradeoff",
+        heading: "Understand the borrowing cost of retaining cash",
+        paragraphs: [
+          "Consider two fictional buyers with the same total savings, property price and separately budgeted purchase costs. Buyer A directs more of the remaining money to the purchase, leaving less liquidity and a lower financing requirement. Buyer B retains more liquidity and therefore needs more borrowing. Neither choice is declared the winner.",
+          "At the same positive interest rate and tenure, the higher principal produces a higher modeled EMI and scheduled interest. That larger payment also belongs in Buyer B's interruption scenario. Retaining more money today can therefore increase the recurring obligation the reserve may need to support.",
+          [{ text: "For the contribution decision itself, see " }, { text: "how to choose a home-loan down payment", link: { kind: "article", slug: "home-loan-down-payment" } }, { text: ". Here the test is whether the retained money can do its intended job when income or expenses change." }],
+        ],
+        callout: { title: "Model borrowing, then review the reserve", text: [{ text: "Run each candidate loan amount separately in the " }, { text: "Home Loan Calculator", link: { kind: "calculator", slug: "home-loan" } }, { text: " using the same rate and tenure. Its constant-rate, regular monthly reducing-balance schedule excludes fees, missed payments and prepayments. It models the borrowing consequence only; it cannot judge the correct emergency reserve or predict lender approval." }] },
+      },
+      {
+        id: "reserve-plan",
+        heading: "Write down the reserve plan before releasing the money",
+        paragraphs: [
+          "Record the amount you intend to retain, the scenarios it addresses, how it can be accessed and which known bills have separate funding. Agree what would trigger its use and how you would rebuild it from future cash flow after a withdrawal. Revisit the plan when income sources, dependants or loan payments change.",
+          [{ text: "If retaining the money you need makes the purchase difficult to fund, revisit " }, { text: "the property-price range your finances can support", link: { kind: "article", slug: "how-much-house-can-i-afford" } }, { text: ". The answer may involve the timing or price of the purchase, rather than using the reserve simply to close the financing gap." }],
+        ],
+      },
     ],
   },
 ] satisfies readonly Article[];
