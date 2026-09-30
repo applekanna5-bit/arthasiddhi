@@ -80,6 +80,7 @@ describe("Batch C Learn discovery", () => {
       "/learn/loans/car-loan-cost-guide",
       "/learn/loans/car-loan-down-payment-and-loan-amount",
       "/learn/loans/car-loan-on-road-price-vs-loan-amount",
+      "/learn/loans/how-much-house-can-i-afford",
       "/learn/investments/sip-explained",
       "/learn/investments/sip-return-calculation",
       "/learn/investments/sip-vs-lumpsum",

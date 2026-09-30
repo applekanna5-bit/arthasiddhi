@@ -855,4 +855,116 @@ export const loanArticles = [
       { question: "Can the calculator tell which add-ons a lender will finance?", answer: "No. Check the applicable transaction and lender documents, then enter the principal you intend to model." },
     ],
   },
+  {
+    title: "How Much House Can I Afford?",
+    slug: "how-much-house-can-i-afford",
+    description: "Build a property-price range around usable savings, retained liquidity and household cash flow before testing a home-loan EMI.",
+    category: "loans",
+    publishedAt: "2026-09-30",
+    updatedAt: "2026-09-30",
+    readingTime: "7 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: null,
+    calculatorGuideRole: null,
+    relatedCalculators: ["home-loan"],
+    relatedArticles: ["home-loan-guide", "home-loan-tenure-comparison", "home-loan-emi-calculation", "when-home-loan-emi-starts"],
+    sections: [
+      {
+        id: "affordability-eligibility-and-emi",
+        heading: "Start with a property budget your household can carry",
+        paragraphs: [
+          "The house you can afford is one whose upfront cash requirement and ongoing payments leave room for living expenses, important goals and uncertainty. Start with the cash you can use, then test the borrowing needed at several property prices. The result is a range to investigate, not a universal salary multiple or EMI percentage.",
+          "Keep three different questions separate from the beginning:",
+        ],
+        list: [
+          "Personal affordability: your household's planning judgment about income, expenses, existing obligations, retained liquidity, goals and uncertainty.",
+          "Lender eligibility: the amount and terms a lender may approve under its assessment, policies and applicable requirements.",
+          "Mathematical EMI projection: the payment produced by a chosen principal, interest rate and tenure under the model's assumptions.",
+        ],
+        callout: { title: "Approval and an EMI estimate are not a household budget", text: "A lender's willingness to lend does not establish personal affordability. An EMI that fits today's monthly surplus does not establish that the upfront purchase costs and future commitments are manageable." },
+      },
+      {
+        id: "usable-cash",
+        heading: "Start with the cash you can actually use",
+        paragraphs: [
+          "List savings that will actually be available when payments fall due. Keep money needed for other purposes separate, rather than treating every account balance as a down payment.",
+          "Available savings minus liquidity and reserves intentionally retained, minus other near-term commitments, minus purchase-related costs paid separately equals cash potentially available toward the property price. This is a planning framework, not a regulatory formula.",
+          "Decide what liquidity to retain before choosing a property. Consider how you would meet essential spending during an income interruption and how quickly you could access that money. There is no emergency-fund amount prescribed here. Money reserved for education, healthcare or another near-term commitment is not also available for the purchase.",
+          "Count each reservation once. If a repair budget is already included among separate purchase costs, do not subtract it again as another commitment. Increasing your own contribution reduces the financing gap, but also leaves less cash available afterwards.",
+        ],
+      },
+      {
+        id: "costs-beyond-price",
+        heading: "The quoted property price is not the entire cash plan",
+        paragraphs: [
+          "Check which costs apply to the specific transaction: stamp duty, registration-related costs, lender charges, and legal, technical or other transaction-related fees. Ask for itemised amounts and payment dates rather than estimating them from a blanket percentage. Not every charge applies to every purchase.",
+          "Separately allow for the moving, setup and repair work you actually expect. Distinguish work needed before moving in from purchases that can wait. These are buyer-specific planning allowances, not standard transaction charges.",
+          "Write down what the quoted price includes, what is payable separately and when each payment is due. Do not count the same cost twice or assume a loan will cover it. A budget can look workable in total while leaving a cash shortfall at an earlier payment date.",
+        ],
+      },
+      {
+        id: "monthly-cash-flow",
+        heading: "Examine the monthly cash flow after purchase",
+        paragraphs: [
+          "Use regular household income available for spending, rather than gross salary alone. Separate dependable income from bonuses or variable receipts, and consider whether both incomes in a two-income household are likely to continue. A strong recent month may not represent a normal year.",
+          "Build a post-purchase spending plan with the following commitments visible:",
+        ],
+        list: [
+          "Essential living expenses, dependants' needs and existing EMIs or other debt payments.",
+          "Recurring commitments, including anticipated home maintenance and other ongoing ownership costs.",
+          "Savings and investments for goals you intend to continue funding.",
+          "Foreseeable obligations, including irregular annual bills and any period of overlapping rent and home payments.",
+          "Room for spending changes, income variability and expenses you cannot yet predict.",
+        ],
+        callout: { title: "Keep the trade-offs visible", text: "Ask what would have to stop or shrink to make room for the proposed EMI. If the plan depends on cancelling a goal, record that decision explicitly. The remaining cash is a planning input, not an ArthaSiddhi eligibility formula or a universal EMI-to-income threshold." },
+      },
+      {
+        id: "price-contribution-and-borrowing",
+        heading: "Connect the property price to the borrowing required",
+        paragraphs: [
+          "For each candidate property price, subtract the own contribution you plan to put toward that price. The difference is the amount that may need financing. Keep separately paid costs outside this subtraction; they have already reduced the cash available for your contribution.",
+          "This arithmetic identifies a financing requirement, not a sanction. The lender's assessment can depend on your borrower profile, repayment capacity, the property and applicable rules and policies. Confirm the actual amount offered and which components can be financed; do not assume every price component or transaction cost is covered.",
+          "Try a lower and a higher candidate price using the same retained-cash plan. Record the own contribution, separate costs, financing gap and eventual EMI estimate for each. If the required borrowing is unavailable, or its payments displace essential commitments, revisit the price range, timing or contribution rather than assuming the gap will resolve itself.",
+        ],
+      },
+      {
+        id: "stress-test",
+        heading: "Test what happens when the plan is disrupted",
+        paragraphs: [
+          "Before settling on the upper end of your search range, work through changes that would matter to your household. Choose scenarios relevant to your work, dependants and commitments; these questions do not produce a pass/fail score.",
+        ],
+        list: [
+          "If borrowing costs rise, where would the extra payment come from?",
+          "If income temporarily falls, which commitments would still need to be paid and from what money?",
+          "If a major unexpected expense occurs soon after purchase, what cash would remain accessible?",
+          "Would the household retain meaningful liquidity, or would the purchase consume nearly all liquid savings?",
+          "Could important financial goals continue without relying on an uncertain bonus or future salary increase?",
+          "Is the planned EMI comfortable only under today's exact conditions?",
+        ],
+        callout: { title: "Turn concerns into changes to the plan", text: "For each pressure point, write down a possible response: consider a lower price, retain more cash, postpone the purchase or revise a discretionary expense. Recheck both the upfront cash and the monthly plan after each change. A larger reserve can mean a smaller contribution and therefore more borrowing at the same price." },
+      },
+      {
+        id: "test-loan-scenarios",
+        heading: "Now test a loan amount, rate and tenure",
+        paragraphs: [
+          "Once you have a financing amount to investigate, use the Home Loan calculator to model scheduled EMI, interest, total repayment and the monthly repayment schedule over a chosen tenure. Its comparison feature keeps the principal shared while you change tenure or the assumed rate.",
+          "Each scenario uses a monthly reducing balance and holds the entered rate constant, with regular monthly payments and no fees, missed payments or prepayments. Trying another rate is a sensitivity check, not a forecast of future floating-rate resets.",
+          "The calculator does not determine personal affordability, lender eligibility, approval, the first EMI debit date, property value, purchase costs or prepayment outcomes. Bring its payment estimate back into your household plan and repeat the stress questions before narrowing the property-price range.",
+        ],
+        callout: { title: "Model the borrowing your plan requires", text: [{ text: "Open the " }, { text: "Home Loan Calculator", link: { kind: "calculator", slug: "home-loan" } }, { text: " with a candidate loan amount, rate and tenure. Use Compare another scenario to examine the tenure and rate trade-offs, then review the results alongside your retained cash and other commitments." }] },
+      },
+      {
+        id: "next-steps",
+        heading: "Use the range to guide your next questions",
+        paragraphs: [
+          "Keep a written range of property prices worth investigating, with the assumptions behind it. Revisit it when actual purchase costs, loan terms or household circumstances become clearer. The upper end is a boundary to review, not a target you must spend up to.",
+          [{ text: "For the basic borrowing terms and offer checklist, read the " }, { text: "Home Loan Guide", link: { kind: "article", slug: "home-loan-guide" } }, { text: ". For the payment and lifetime-interest trade-off, use the " }, { text: "Home Loan Tenure Comparison", link: { kind: "article", slug: "home-loan-tenure-comparison" } }, { text: "." }],
+          [{ text: "If you want to understand the payment arithmetic, see " }, { text: "Home Loan EMI Calculation", link: { kind: "article", slug: "home-loan-emi-calculation" } }, { text: ". For cash-flow timing around disbursement, read " }, { text: "When Home Loan EMI Starts", link: { kind: "article", slug: "when-home-loan-emi-starts" } }, { text: " and confirm the actual schedule with the lender." }],
+        ],
+      },
+    ],
+    references: [
+      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-09-30" },
+    ],
+  },
 ] satisfies readonly Article[];
