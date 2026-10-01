@@ -50,6 +50,39 @@ const BANKING_CALCULATOR_TUPLES = [
   { article_slug: "rd-calculator-projection-vs-actual-maturity", calculator_slug: "rd", placement: "guide_card" },
 ] as const;
 
+export const HOME_BUYING_JOURNEY_TUPLES = [
+  { source_slug: "how-much-house-can-i-afford", destination_slug: "home-loan-down-payment", placement: "article_body" },
+  { source_slug: "how-much-house-can-i-afford", destination_slug: "home-buying-costs-beyond-property-price", placement: "article_body" },
+  { source_slug: "how-much-house-can-i-afford", destination_slug: "emergency-fund-before-home-loan", placement: "article_body" },
+  { source_slug: "how-much-house-can-i-afford", destination_slug: "home-loan-tenure-comparison", placement: "article_body" },
+  { source_slug: "how-much-house-can-i-afford", destination_slug: "home-loan", placement: "article_callout" },
+  { source_slug: "home-loan-down-payment", destination_slug: "home-loan", placement: "article_callout" },
+  { source_slug: "emergency-fund-before-home-loan", destination_slug: "home-loan", placement: "article_callout" },
+  { source_slug: "home-loan-tenure-comparison", destination_slug: "home-loan-emi-calculation", placement: "article_body" },
+  { source_slug: "home-loan-emi-calculation", destination_slug: "when-home-loan-emi-starts", placement: "article_body" },
+] as const;
+
+type HomeBuyingJourneyParameters = typeof HOME_BUYING_JOURNEY_TUPLES[number];
+type HomeBuyingJourneyPlacement = HomeBuyingJourneyParameters["placement"];
+
+function isHomeBuyingJourneyParameters(parameters: unknown): parameters is HomeBuyingJourneyParameters {
+  if (!parameters || typeof parameters !== "object") return false;
+  const keys = Reflect.ownKeys(parameters);
+  const source = parameters as Record<string, unknown>;
+  const required = ["source_slug", "destination_slug", "placement"] as const;
+  if (keys.length !== required.length || !required.every((key) => Object.hasOwn(source, key) && typeof source[key] === "string")) return false;
+  return HOME_BUYING_JOURNEY_TUPLES.some((tuple) => required.every((key) => source[key] === tuple[key]));
+}
+
+export function getHomeBuyingJourneyLink(sourceSlug: string, destinationSlug: string, placement: HomeBuyingJourneyPlacement) {
+  const parameters = { source_slug: sourceSlug, destination_slug: destinationSlug, placement };
+  if (!isHomeBuyingJourneyParameters(parameters)) return undefined;
+  return {
+    eventName: "home_buying_journey_click" as const,
+    parameters: { source_slug: parameters.source_slug, destination_slug: parameters.destination_slug, placement: parameters.placement } as HomeBuyingJourneyParameters,
+  };
+}
+
 type BankingGuideParameters = typeof BANKING_GUIDE_TUPLES[number];
 type BankingCalculatorParameters = typeof BANKING_CALCULATOR_TUPLES[number];
 export type BankingArticleSlug = BankingGuideParameters["article_slug"];
@@ -88,6 +121,7 @@ export function getBankingCalculatorLink(calculatorSlug: string, articleSlug: st
 }
 
 export type AnalyticsEventParameters = {
+  home_buying_journey_click: HomeBuyingJourneyParameters;
   banking_guide_calculator_click: BankingGuideParameters;
   banking_calculator_guide_click: BankingCalculatorParameters;
   tax_guide_calculator_click: {
@@ -131,6 +165,7 @@ export type AnalyticsEventParameters = {
 export type AnalyticsEventName = keyof AnalyticsEventParameters;
 
 export type TrackedLinkMetadata =
+  | { eventName: "home_buying_journey_click"; parameters: HomeBuyingJourneyParameters }
   | { eventName: "banking_guide_calculator_click"; parameters: BankingGuideParameters }
   | { eventName: "banking_calculator_guide_click"; parameters: BankingCalculatorParameters }
   | { eventName: "tax_guide_calculator_click"; parameters: AnalyticsEventParameters["tax_guide_calculator_click"] }
@@ -155,6 +190,7 @@ export function getGoogleAnalyticsMeasurementId(
 }
 
 const EVENT_PARAMETER_KEYS: { [Name in AnalyticsEventName]: readonly (keyof AnalyticsEventParameters[Name])[] } = {
+  home_buying_journey_click: ["source_slug", "destination_slug", "placement"],
   banking_guide_calculator_click: ["article_slug", "calculator_slug", "placement"],
   banking_calculator_guide_click: ["article_slug", "calculator_slug", "placement"],
   tax_guide_calculator_click: ["article_slug", "calculator_slug", "placement"],
@@ -203,6 +239,7 @@ function isAllowedEventParameter(eventName: AnalyticsEventName, key: string, val
 
 function isAllowedEventParameters(eventName: AnalyticsEventName, parameters: Record<string, unknown>) {
   if (!Object.hasOwn(EVENT_PARAMETER_KEYS, eventName)) return false;
+  if (eventName === "home_buying_journey_click") return isHomeBuyingJourneyParameters(parameters);
   if (eventName === "banking_guide_calculator_click") return isBankingParameters(parameters, BANKING_GUIDE_TUPLES);
   if (eventName === "banking_calculator_guide_click") return isBankingParameters(parameters, BANKING_CALCULATOR_TUPLES);
   // Tax events reject extra keys entirely, including accidental financial data.
