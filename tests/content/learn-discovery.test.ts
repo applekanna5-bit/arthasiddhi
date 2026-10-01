@@ -107,6 +107,8 @@ describe("Batch C Learn discovery", () => {
       "/learn/personal-finance/how-to-build-a-personal-financial-plan",
       "/learn/personal-finance/understand-household-cash-flow",
       "/learn/personal-finance/emergency-fund-planning",
+      "/learn/personal-finance/prioritize-debt-financial-commitments",
+      "/learn/personal-finance/risk-return-time-horizon",
       "/learn/personal-finance/compound-interest",
       "/learn/personal-finance/inflation-explained",
       "/learn/personal-finance/inflation-future-cost",

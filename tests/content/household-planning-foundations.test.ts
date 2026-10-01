@@ -18,8 +18,8 @@ function links(article: Article) {
 
 describe("V2.2C household planning foundations", () => {
   it("adds exactly three declared, unique Personal Finance articles and no calculators", () => {
-    expect(articles).toHaveLength(67 + 3);
-    expect(getArticlesByCategory("personal-finance")).toHaveLength(5 + 3);
+    expect(articles).toHaveLength(70 + 2);
+    expect(getArticlesByCategory("personal-finance")).toHaveLength(8 + 2);
     expect(Object.keys(calculators)).toHaveLength(17);
     expect(getArticleRegistryIssues()).toEqual([]);
     expect(getDiscoveryRegistryIssues()).toEqual([]);
@@ -34,9 +34,9 @@ describe("V2.2C household planning foundations", () => {
 
   it("provides contextual planning progression and return paths", () => {
     const destinations = slugs.map((_, index) => links(foundation(index)).map(({ slug }) => slug));
-    expect(destinations[0]).toEqual([slugs[1], slugs[2], "how-much-house-can-i-afford", "premature-fd-withdrawal"]);
-    expect(destinations[1]).toEqual([slugs[2], slugs[0], "how-much-house-can-i-afford"]);
-    expect(destinations[2]).toEqual([slugs[1], "emergency-fund-before-home-loan", slugs[0]]);
+    expect(destinations[0]).toEqual([slugs[1], slugs[2], "prioritize-debt-financial-commitments", "risk-return-time-horizon", "how-much-house-can-i-afford", "premature-fd-withdrawal"]);
+    expect(destinations[1]).toEqual(["prioritize-debt-financial-commitments", slugs[2], slugs[0], "how-much-house-can-i-afford"]);
+    expect(destinations[2]).toEqual([slugs[1], "prioritize-debt-financial-commitments", "emergency-fund-before-home-loan", slugs[0]]);
     expect(foundation(0).relatedArticles).toEqual([slugs[1], slugs[2]]);
     expect(foundation(1).relatedArticles).toEqual([slugs[0], slugs[2]]);
     expect(foundation(2).relatedArticles).toEqual([slugs[1], slugs[0], "emergency-fund-before-home-loan"]);
@@ -63,7 +63,7 @@ describe("V2.2C household planning foundations", () => {
 
   it("has stable canonical routes once each in the expanded sitemap and unique metadata", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(100 + 3);
+    expect(urls).toHaveLength(103 + 2);
     expect(new Set(urls).size).toBe(urls.length);
     expect(new Set(articles.map(({ title }) => title)).size).toBe(articles.length);
     expect(new Set(articles.map(({ description }) => description)).size).toBe(articles.length);

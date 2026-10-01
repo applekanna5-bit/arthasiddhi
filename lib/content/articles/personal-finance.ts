@@ -53,6 +53,7 @@ export const personalFinanceArticles = [
         paragraphs: [
           "Existing debt payments and other recurring commitments affect what can be assigned to new goals. Include their amounts, dates and expected duration in the plan, and check the actual terms before considering a change.",
           "A change that releases money for one purpose can alter another obligation. Compare those effects in your household context rather than applying a universal debt payoff order. Loan terms and product-specific processes belong with the relevant Loans guide and lender information.",
+          [{ text: "Use " }, { text: "How to Prioritize Debt and Financial Commitments", link: { kind: "article", slug: "prioritize-debt-financial-commitments" } }, { text: " to consider existing obligations alongside cash flow, retained liquidity and competing goals." }],
         ],
       },
       {
@@ -61,6 +62,7 @@ export const personalFinanceArticles = [
         paragraphs: [
           "Identify money that may need to be available for bills, near-term goals or disruption before considering longer-horizon uses. An asset's stated value is not enough if its money cannot be accessed when required.",
           "Money considered for a longer horizon raises a different set of questions about the specific investment and its assumptions. The household plan frames those questions; it does not select products, recommend investments or allocate assets.",
+          [{ text: "Before comparing products, read " }, { text: "Risk, Return and Time Horizon: Foundations for Investing", link: { kind: "article", slug: "risk-return-time-horizon" } }, { text: " to consider uncertainty alongside the purpose and timing of that money." }],
         ],
       },
       {
@@ -117,6 +119,7 @@ export const personalFinanceArticles = [
         paragraphs: [
           "Note payments the household is already obliged or committed to make, such as rent, debt instalments and agreed recurring payments. Their due dates and expected duration matter alongside the amount.",
           "If income arrives after an obligation falls due, review how that gap will be covered. A positive total across a period can still hide a shortfall on an earlier date.",
+          [{ text: "When deciding how existing obligations compete for available money, use " }, { text: "How to Prioritize Debt and Financial Commitments", link: { kind: "article", slug: "prioritize-debt-financial-commitments" } }, { text: " to examine more than the payment amount alone." }],
         ],
       },
       {
@@ -223,6 +226,7 @@ export const personalFinanceArticles = [
         heading: "Compare liquidity with other uses of the same money",
         paragraphs: [
           "Keeping money accessible can compete with paying a known cost, reducing borrowing or funding a longer-term goal. Releasing it for another use may leave less flexibility during disruption; retaining it may delay that other use. The appropriate balance depends on the household rather than a universal amount.",
+          [{ text: "If existing debt is part of that trade-off, " }, { text: "How to Prioritize Debt and Financial Commitments", link: { kind: "article", slug: "prioritize-debt-financial-commitments" } }, { text: " considers obligations together with liquidity and other household priorities." }],
           [{ text: "When the decision is specifically about buying a home, use " }, { text: "Emergency Fund Before Taking a Home Loan", link: { kind: "article", slug: "emergency-fund-before-home-loan" } }, { text: ". That Home Buying guide owns the trade-off between retained liquidity, down payment, borrowing and purchase-related commitments. This page covers general household emergency liquidity." }],
         ],
       },
@@ -232,6 +236,152 @@ export const personalFinanceArticles = [
         paragraphs: [
           "Record why you want money to remain accessible and check that it is not also assigned to a known bill. If you choose to retain liquidity, check the actual access arrangements rather than relying only on a balance on paper.",
           [{ text: "Reconsider the decision when income sources, dependants, essential spending, debt obligations, insurance context or near-term commitments materially change. Return to " }, { text: "How to Build a Personal Financial Plan", link: { kind: "article", slug: "how-to-build-a-personal-financial-plan" } }, { text: " to review how it fits with the household's other priorities. No fixed review interval is prescribed." }],
+        ],
+      },
+    ],
+  },
+  {
+    title: "How to Prioritize Debt and Financial Commitments",
+    slug: "prioritize-debt-financial-commitments",
+    description: "Compare existing debt obligations with household cash flow, retained liquidity and competing goals without a universal repayment order.",
+    category: "personal-finance",
+    publishedAt: "2026-10-02",
+    updatedAt: "2026-10-02",
+    readingTime: "4 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: null,
+    calculatorGuideRole: null,
+    relatedCalculators: [],
+    relatedArticles: ["understand-household-cash-flow", "emergency-fund-planning", "how-to-build-a-personal-financial-plan"],
+    sections: [
+      {
+        id: "household-decision",
+        heading: "Consider debt within the household's wider commitments",
+        paragraphs: [
+          "Prioritizing debt means considering existing obligations alongside the household's cash flow, access needs and competing goals. This ArthaSiddhi educational planning framework helps you evaluate those trade-offs and plan what to review next. It is not a universal repayment method, a regulatory requirement or individualized financial advice.",
+          "Separate payments already required from decisions about using additional money. Choosing a purpose for unassigned cash does not make a required payment disappear. A debt's balance or cost alone does not describe all the constraints around that choice.",
+        ],
+      },
+      {
+        id: "cash-flow-and-obligations",
+        heading: "Identify the payments and the resources available on their dates",
+        paragraphs: [
+          "Map each obligation's required payment, due date and remaining term. Include essential spending and known near-term commitments so money assigned to those needs does not also appear available for a debt decision.",
+          [{ text: "Use " }, { text: "Understand Your Household Cash Flow", link: { kind: "article", slug: "understand-household-cash-flow" } }, { text: " to see whether resources arrive before payments fall due. A positive total across a period can still leave pressure on a particular date." }],
+        ],
+      },
+      {
+        id: "compare-obligations",
+        heading: "Compare several factors rather than applying one ranking",
+        table: {
+          caption: "A household comparison framework, without recommended thresholds",
+          headers: ["Factor", "Why it matters", "What to check"],
+          rows: [
+            ["Required payment and due date", "The amount and timing shape immediate cash-flow pressure.", "What must be paid, when it is due and which resources arrive beforehand."],
+            ["Cost of debt and remaining term", "Cost and duration describe different parts of the continuing obligation.", "The stated cost, relevant charges and how long payments are expected to continue."],
+            ["Consequences of missed payment", "Different obligations may have different consequences if payment is delayed.", "The actual agreement and lender information rather than an assumed common outcome."],
+            ["Prepayment conditions", "Conditions can affect a proposed change to the payment plan.", "Whether the agreement permits the change and what conditions apply; this is not a recommendation to prepay."],
+            ["Liquidity impact", "Using cash for one obligation can reduce money accessible for other needs.", "What would remain available, including emergency liquidity."],
+            ["Known commitments and competing goals", "The same money may already have a purpose or several possible uses.", "Near-term bills, essential needs and which goals could change if money is reassigned."],
+          ],
+        },
+        paragraphs: [
+          "Use the factors below as questions to check together. They have no assigned weights and do not produce a score or ranking formula. The actual agreement and current lender information are the places to check product-specific conditions and consequences.",
+          "For an illustrative comparison, one debt might cost more over its remaining term while another has a payment due before the next reliable inflow. Comparing only cost misses timing; comparing only the next payment misses the continuing cost. Neither fact by itself supplies an unconditional repayment order.",
+        ],
+      },
+      {
+        id: "liquidity-and-competing-goals",
+        heading: "Examine what a proposed use of cash would leave available",
+        paragraphs: [
+          "Consider how a change would affect the household's ability to meet ongoing obligations, known bills and other goals. Avoid treating money as both released for a debt decision and still available for another purpose.",
+          [{ text: "Review " }, { text: "Emergency Fund Planning", link: { kind: "article", slug: "emergency-fund-planning" } }, { text: " when the decision would use money retained for disruption. The trade-off depends on household circumstances; this page does not decide an emergency reserve or say debt must always come before liquidity or another goal." }],
+        ],
+      },
+      {
+        id: "loan-specific-questions",
+        heading: "Hand loan-specific questions to Loans",
+        paragraphs: [
+          "Once the question concerns an EMI calculation, tenure mechanics, eligibility or conditions attached to a particular loan, use the relevant Loans owner and actual lender terms. Household prioritization does not replace those details or establish whether a proposed change is available.",
+          [{ text: "For example, if you need to understand what a personal-loan payment represents, read " }, { text: "Personal Loan EMI Explained", link: { kind: "article", slug: "personal-loan-emi-explained" } }, { text: ". This framework does not recommend a lender, refinancing, consolidation or a loan-specific action." }],
+        ],
+      },
+      {
+        id: "plan-and-review",
+        heading: "Record the trade-off and revisit it when circumstances change",
+        paragraphs: [
+          [{ text: "Return to " }, { text: "How to Build a Personal Financial Plan", link: { kind: "article", slug: "how-to-build-a-personal-financial-plan" } }, { text: " to place the debt decision alongside the household's other priorities. Record the reason for the chosen order, the information still needed and the effect on accessible money." }],
+          "Review that reasoning when income, required payments, debt terms, known commitments or goals materially change. Two debts with different characteristics may warrant different consideration as the household's circumstances change; no fixed review interval or universal payoff sequence is prescribed.",
+          [{ text: "If the next decision is whether unassigned money can take longer-term investment risk, review " }, { text: "Risk, Return and Time Horizon", link: { kind: "article", slug: "risk-return-time-horizon" } }, { text: " before comparing products. This is a possible next question, not a requirement to invest after a debt decision." }],
+        ],
+      },
+    ],
+  },
+  {
+    title: "Risk, Return and Time Horizon: Foundations for Investing",
+    slug: "risk-return-time-horizon",
+    description: "Understand uncertainty, potential return, timing and access needs before comparing investment products, without a risk score or allocation recommendation.",
+    category: "personal-finance",
+    publishedAt: "2026-10-02",
+    updatedAt: "2026-10-02",
+    readingTime: "4 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: null,
+    calculatorGuideRole: null,
+    relatedCalculators: [],
+    relatedArticles: ["how-to-build-a-personal-financial-plan", "emergency-fund-planning", "inflation-explained", "compound-interest"],
+    references: [
+      { title: "Factors to Consider Before Investing", publisher: "Securities and Exchange Board of India", url: "https://investor.sebi.gov.in/investment-thingsbeforeinv.html", sourceType: "official", accessedAt: "2026-10-02" },
+      { title: "How to Manage Investment Risks", publisher: "Securities and Exchange Board of India", url: "https://investor.sebi.gov.in/investment_risk_managment.html", sourceType: "official", accessedAt: "2026-10-02" },
+    ],
+    sections: [
+      {
+        id: "decision-context",
+        heading: "Understand the decision before comparing products",
+        paragraphs: [
+          "Before comparing investment products, consider what uncertainty would mean for the money's purpose and when it may be needed. This ArthaSiddhi educational framework connects risk, potential return and time horizon; it does not classify you into a risk profile or provide individualized financial advice.",
+          [{ text: "Identifying and ordering household goals belongs in " }, { text: "How to Build a Personal Financial Plan", link: { kind: "article", slug: "how-to-build-a-personal-financial-plan" } }, { text: ". Here, use the goal's timing and access needs as context for understanding investment uncertainty." }],
+        ],
+      },
+      {
+        id: "risk-and-return",
+        heading: "Consider potential return together with uncertainty",
+        paragraphs: [
+          "Return describes an investment's gain or loss over a period. A past gain does not guarantee a future gain. Risk concerns uncertainty about the outcome: an appealing return history does not remove that uncertainty, and taking more risk does not ensure a higher realized return.",
+          "Ask what could differ from the outcome you are hoping for. Possible uncertainties include changes in value, whether payments arrive as expected and whether money can be accessed when needed. These are different kinds of uncertainty, and their extent can differ between investments. Consider potential return together with those uncertainties rather than choosing from a return figure alone.",
+        ],
+      },
+      {
+        id: "time-horizon",
+        heading: "Relate the time horizon to when money may be needed",
+        paragraphs: [
+          "Time horizon is the period before money may be needed for its intended use. A nearer payment date can leave less room to wait through changes in value or delays in access. Money intended for a longer-term goal has a different timing constraint, but a longer horizon does not guarantee recovery or eliminate loss.",
+          "Consider whether the date is fixed, whether the amount needed can change and what would happen if the money were unavailable then. There is no universal number of months or years that makes investment risk appropriate for everyone, and time horizon alone does not determine a suitable product.",
+        ],
+      },
+      {
+        id: "liquidity-and-access",
+        heading: "Keep access needs visible alongside the horizon",
+        paragraphs: [
+          "Liquidity concerns how readily an investment can become usable money. Being able to access an investment does not mean its value will be unchanged when you do. Consider both the timing of access and the possibility of receiving less than expected.",
+          [{ text: "Money assigned to a known near-term bill or retained for disruption has access needs that differ from money being considered for longer-term investment risk. Review " }, { text: "Emergency Fund Planning", link: { kind: "article", slug: "emergency-fund-planning" } }, { text: " for general household liquidity. This distinction is not a rigid saving-versus-investing time threshold." }],
+        ],
+      },
+      {
+        id: "diversification-boundary",
+        heading: "Understand the limited role of diversification",
+        paragraphs: [
+          "Diversification spreads exposure so one investment does not carry the whole outcome. It can reduce concentration, but it does not eliminate the possibility of loss. Different holdings can still be affected by shared conditions.",
+          "This principle does not specify how many holdings to choose or how to allocate money. Detailed diversification, asset allocation and implementation belong with Investments; this page provides no model portfolio or product ranking.",
+        ],
+      },
+      {
+        id: "concept-and-product-handoffs",
+        heading: "Take the next question to its existing owner",
+        paragraphs: [
+          [{ text: "If the question is what a future amount may buy, use " }, { text: "Inflation Explained", link: { kind: "article", slug: "inflation-explained" } }, { text: ". If it is how growth on earlier growth works, use " }, { text: "What Is Compound Interest?", link: { kind: "article", slug: "compound-interest" } }, { text: ". Those pages own the detailed explanations and mathematics." }],
+          "Once the purpose, uncertainty and access constraints are clear, a specific product or implementation question belongs with Investments. Understanding this context comes before product selection; it does not identify a product that is suitable for you.",
+          [{ text: "For an existing example of a product-specific question, " }, { text: "SIP Projection Assumptions", link: { kind: "article", slug: "sip-projection-assumptions" } }, { text: " owns the interpretation of a SIP projection. The handoff is not a recommendation to use a SIP. This foundation supplies no return forecast, expected-return assumption, allocation or market-timing guidance." }],
         ],
       },
     ],

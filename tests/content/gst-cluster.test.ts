@@ -122,10 +122,10 @@ describe("GST editorial boundaries and relationships", () => {
     }
   });
 
-  it("keeps exactly three GST URLs in the unique 103-URL sitemap", () => {
+  it("keeps exactly three GST URLs in the unique 105-URL sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(103);
-    expect(new Set(urls).size).toBe(103);
+    expect(urls).toHaveLength(105);
+    expect(new Set(urls).size).toBe(105);
     for (const slug of gstSlugs) expect(urls.filter((url) => url === absoluteUrl(`/learn/tax/${slug}`))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/tax"))).toHaveLength(1);
   });

@@ -15,6 +15,8 @@ export const articleSlugs = [
   "how-to-build-a-personal-financial-plan",
   "understand-household-cash-flow",
   "emergency-fund-planning",
+  "prioritize-debt-financial-commitments",
+  "risk-return-time-horizon",
   "how-much-house-can-i-afford",
   "home-loan-down-payment",
   "home-buying-costs-beyond-property-price",

@@ -52,7 +52,7 @@ describe("category hub structure", () => {
   it("places comparisons and broader guides only in their principal sections", () => {
     expect(learnCategoryHubs.investments.comparisons).toEqual(["sip-vs-lumpsum", "fixed-sip-vs-step-up-sip"]);
     expect(learnCategoryHubs.banking.comparisons).toEqual(["fd-vs-rd"]);
-    expect(learnCategoryHubs["personal-finance"].broaderGuides).toEqual(["compound-interest", "how-to-build-a-personal-financial-plan", "understand-household-cash-flow", "emergency-fund-planning"]);
+    expect(learnCategoryHubs["personal-finance"].broaderGuides).toEqual(["compound-interest", "how-to-build-a-personal-financial-plan", "understand-household-cash-flow", "emergency-fund-planning", "prioritize-debt-financial-commitments", "risk-return-time-horizon"]);
   });
 
   it("makes calculator-hidden guides intentionally discoverable", () => {

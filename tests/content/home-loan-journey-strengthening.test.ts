@@ -31,8 +31,8 @@ function links(value: Article): ArticleInternalLink[] {
 
 describe("V2.1D Home Loan journey strengthening", () => {
   it("keeps the published owner URLs and article inventory unchanged", () => {
-    expect(articles).toHaveLength(70);
-    expect(new Set(articles.map(({ slug }) => slug)).size).toBe(70);
+    expect(articles).toHaveLength(72);
+    expect(new Set(articles.map(({ slug }) => slug)).size).toBe(72);
     expect(articles.filter(({ slug }) => slug === "home-loan-tenure-comparison")).toHaveLength(1);
     expect(articles.filter(({ slug }) => slug === "when-home-loan-emi-starts")).toHaveLength(1);
     expect(article("home-loan-tenure-comparison").category).toBe("loans");
@@ -40,7 +40,7 @@ describe("V2.1D Home Loan journey strengthening", () => {
     expect(getArticleRegistryIssues()).toEqual([]);
     expect(getArticlePath(article("home-loan-tenure-comparison"))).toBe(paths.tenure);
     expect(getArticlePath(article("when-home-loan-emi-starts"))).toBe(paths.emiStart);
-    expect(buildSitemap()).toHaveLength(103);
+    expect(buildSitemap()).toHaveLength(105);
     for (const value of [article("home-loan-tenure-comparison"), article("when-home-loan-emi-starts")]) {
       const canonical = absoluteUrl(getArticlePath(value));
       expect(articleMetadata(value).alternates?.canonical).toBe(canonical);
@@ -99,7 +99,7 @@ describe("V2.1D Home Loan journey strengthening", () => {
         if (link.kind === "article") expect(getArticle("loans", link.slug) ?? articles.find(({ slug }) => slug === link.slug)).toBeDefined();
       }
     }
-    expect(before).toHaveLength(70);
+    expect(before).toHaveLength(72);
     expect(Object.keys(calculators)).toHaveLength(17);
     expect(article("home-loan-tenure-comparison").relatedCalculators).toEqual([]);
     expect(article("when-home-loan-emi-starts").relatedCalculators).toEqual([]);

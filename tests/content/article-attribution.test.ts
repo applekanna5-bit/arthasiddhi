@@ -17,8 +17,8 @@ describe("truthful organization article attribution", () => {
     });
   });
 
-  it("attributes all 70 articles to the organization in JSON-LD", () => {
-    expect(articles).toHaveLength(70);
+  it("attributes all 72 articles to the organization in JSON-LD", () => {
+    expect(articles).toHaveLength(72);
     for (const article of articles) {
       const schema = articleJsonLd(article);
       expect(schema.author).toEqual({ "@type": "Organization", name: sitePublisher.name, url: sitePublisher.aboutUrl });
@@ -62,11 +62,11 @@ describe("truthful organization article attribution", () => {
     }
   });
 
-  it("preserves article routes, discovery, and the unique 103-URL sitemap", () => {
-    expect(new Set(articles.map(getArticlePath)).size).toBe(70);
+  it("preserves article routes, discovery, and the unique 105-URL sitemap", () => {
+    expect(new Set(articles.map(getArticlePath)).size).toBe(72);
     expect(getDiscoveryRegistryIssues()).toEqual([]);
     const sitemapUrls = buildSitemap().map(({ url }) => url);
-    expect(sitemapUrls).toHaveLength(103);
-    expect(new Set(sitemapUrls).size).toBe(103);
+    expect(sitemapUrls).toHaveLength(105);
+    expect(new Set(sitemapUrls).size).toBe(105);
   });
 });
