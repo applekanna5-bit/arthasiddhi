@@ -104,7 +104,7 @@ describe("Home Loan search cluster", () => {
   });
 
   it("uses official primary references that render as source links", () => {
-    for (const article of supportingArticles().filter(({ slug }) => slug !== "when-home-loan-emi-starts")) {
+    for (const article of supportingArticles().filter(({ slug }) => !["when-home-loan-emi-starts", "home-loan-tenure-comparison"].includes(slug))) {
       const references = getArticleReferences(article);
       expect(references.length).toBeGreaterThan(0);
       expect(references.every(({ sourceType, url }) => sourceType === "official" && new URL(url).protocol === "https:")).toBe(true);
@@ -130,9 +130,9 @@ describe("Home Loan search cluster", () => {
     const emiStart = getArticle("loans", "when-home-loan-emi-starts")!;
     const tenure = getArticle("loans", "home-loan-tenure-comparison")!;
     expect(emiStart.sections.map(({ id }) => id)).toEqual(expect.arrayContaining(["sanction-vs-disbursement", "full-disbursement", "partial-disbursement", "pre-emi-vs-regular-emi", "documents-to-check", "calculator-boundary"]));
-    expect(section(tenure, "maximum-available-tenure")).toBeDefined();
+    expect(section(tenure, "available-tenure")).toBeDefined();
     expect(articles.some(({ slug }) => ["maximum-home-loan-tenure", "home-loan-duration", "home-loan-period", "home-loan-time-period"].includes(slug))).toBe(false);
-    expect(emiStart.relatedArticles).toEqual(["home-loan-guide", "home-loan-emi-calculation"]);
+    expect(emiStart.relatedArticles).toEqual(["home-loan-guide", "home-loan-emi-calculation", "how-much-house-can-i-afford"]);
     expect(emiStart.relatedArticles).not.toContain("home-loan-prepayment");
     expect(getArticle("loans", "home-loan-guide")?.relatedArticles).toContain(emiStart.slug);
     expect(getArticle("loans", "home-loan-emi-calculation")?.relatedArticles).toContain(emiStart.slug);

@@ -119,25 +119,25 @@ export const loanArticles = [
     ],
   },
   {
-    title: "When Does a Home Loan EMI Start? Disbursement and Pre-EMI Explained",
+    title: "When Does a Home Loan EMI Start? Disbursement and First Payment",
     slug: "when-home-loan-emi-starts",
-    description: "Understand how sanction, full or partial disbursement, pre-EMI and lender terms determine when regular Home Loan EMI payments begin.",
+    description: "Understand the sequence from Home Loan sanction to disbursement and why the first EMI date depends on the actual repayment terms.",
     category: "loans",
     publishedAt: "2026-08-26",
-    updatedAt: "2026-09-07",
+    updatedAt: "2026-10-01",
     readingTime: "8 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "home-loan",
     calculatorGuideRole: "supporting",
     calculatorDiscoveryPriority: -1,
     relatedCalculators: [],
-    relatedArticles: ["home-loan-guide", "home-loan-emi-calculation"],
+    relatedArticles: ["home-loan-guide", "home-loan-emi-calculation", "how-much-house-can-i-afford"],
     sections: [
       {
         id: "short-answer",
         heading: "The EMI start date comes from disbursement and the repayment terms",
         paragraphs: [
-          "Home Loan EMI generally starts according to the lender's repayment schedule after funds are disbursed, rather than simply on the sanction date. With partial or staged disbursement, interim interest or pre-EMI may apply under the loan arrangement before regular EMI begins.",
+          "The exact first EMI or debit date depends on the loan agreement, when funds are disbursed, the repayment cycle and the lender's terms. Sanction alone does not establish that date. With partial or staged disbursement, an interim payment arrangement may apply before regular EMI, if the loan terms provide for it.",
           "Confirm the actual first debit date in the lender's repayment schedule and disbursement communication. It is not universally the next month or exactly 30 days after disbursement.",
         ],
         table: {
@@ -194,15 +194,15 @@ export const loanArticles = [
         heading: "Construction-linked and ready-property transactions can follow different paths",
         paragraphs: [
           "Construction-linked cases may involve several releases tied to construction progress and lender verification. A ready-property transaction may involve a more concentrated or full release, but the timing still depends on transaction documents, lender checks and the disbursement instructions.",
-          "Possession, registration, disbursement and the first EMI are separate concepts. They should not be described as automatically occurring together in every transaction.",
+          "Possession, registration, disbursement and the first EMI are separate events. Possession does not itself set a universal EMI start date; in some transactions funds may be released before possession, and the documented disbursement and repayment terms determine the payment schedule.",
         ],
       },
       {
         id: "illustrative-timeline",
-        heading: "Illustrative sequence, not a universal timetable",
+        heading: "From application to the first repayment",
         paragraphs: [
-          "A possible sequence is: sanction → first disbursement → possible staged disbursements and documented interim payments → regular EMI commencement under the lender's schedule.",
-          "A particular loan may omit, combine or arrange these stages differently. This sequence explains the concepts only; it does not calculate a due date or interpret an individual agreement.",
+          "The broad sequence is application and assessment → sanction → documentation and any stated conditions → disbursement → repayment under the actual loan terms.",
+          "A particular loan may omit, combine or arrange stages differently. Sanction is an approval or offer subject to its terms; disbursement is the release of funds. This sequence explains the concepts only and does not calculate a due date or interpret an individual agreement.",
         ],
       },
       {
@@ -210,7 +210,7 @@ export const loanArticles = [
         heading: "Verify the dates and payment treatment in the loan documents",
         paragraphs: [
           "Review the sanction letter, loan agreement, Key Facts Statement where applicable, each disbursement communication, the repayment or amortization schedule, and the auto-debit mandate or account statement where relevant.",
-          "If documents or communications appear inconsistent, ask the lender for written clarification. This guide cannot decide which contractual document controls an individual dispute.",
+          [{ text: "If documents or communications appear inconsistent, ask the lender for written clarification. Before committing to a repayment schedule, revisit the household cash-flow questions in " }, { text: "How Much House Can I Afford?", link: { kind: "article", slug: "how-much-house-can-i-afford" } }, { text: ". This guide cannot decide which contractual document controls an individual dispute." }],
         ],
         list: [
           "What amount was disbursed, and on what date?",
@@ -247,11 +247,9 @@ export const loanArticles = [
       { question: "Where can I find my first EMI date?", answer: "Check the sanction letter, loan agreement, Key Facts Statement where applicable, disbursement communication, repayment schedule and auto-debit instructions. Ask the lender for written clarification if the dates do not align." },
     ],
     references: [
-      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-09-07" },
-      { title: "Fair Practices Code — Charging of Interest", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/scripts/bs_circularindexdisplay.aspx/BS_CircularIndexDisplay.aspx?Id=12678", sourceType: "official", accessedAt: "2026-09-07" },
-      { title: "Key Facts Statement (KFS) for Loans & Advances", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12663&Mode=0", sourceType: "official", accessedAt: "2026-09-07" },
-      { title: "Commercial Banks - Responsible Business Conduct Directions, 2025 (updated July 1, 2026), Chapter VIII", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13140", sourceType: "official", accessedAt: "2026-09-07" },
-      { title: "SBI Home Loan MITC (historical; repayment-date example only)", publisher: "State Bank of India", url: "https://www.sbi.co.in/webfiles/uploads/files/1377606055343_HOME_LOAN_MITC.pdf", sourceType: "official", accessedAt: "2026-09-07" },
+      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-10-01" },
+      { title: "Fair Practices Code — Charging of Interest", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/scripts/bs_circularindexdisplay.aspx/BS_CircularIndexDisplay.aspx?Id=12678", sourceType: "official", accessedAt: "2026-10-01" },
+      { title: "Key Facts Statement (KFS) for Loans & Advances", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12663&Mode=0", sourceType: "official", accessedAt: "2026-10-01" },
     ],
   },
   {
@@ -300,38 +298,33 @@ export const loanArticles = [
     ],
   },
   {
-    title: "Home Loan Tenure: 15 vs 20 vs 25 vs 30 Years",
+    title: "How to Choose a Home Loan Tenure",
     slug: "home-loan-tenure-comparison",
-    description: "A ₹50 lakh home-loan comparison showing how 15, 20, 25 and 30-year tenures change the EMI and total interest at the same rate.",
+    description: "Compare shorter and longer Home Loan tenures, their scheduled EMI and interest trade-offs, and the household factors to weigh before choosing.",
     category: "loans",
     publishedAt: "2026-08-16",
-    updatedAt: "2026-09-07",
+    updatedAt: "2026-10-01",
     readingTime: "7 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "home-loan",
     calculatorGuideRole: "supporting",
     relatedCalculators: [],
-    relatedArticles: ["home-loan-guide", "home-loan-emi-calculation", "home-loan-prepayment"],
+    relatedArticles: ["home-loan-guide", "home-loan-emi-calculation", "home-loan-prepayment", "how-much-house-can-i-afford", "emergency-fund-before-home-loan"],
     sections: [
-      { id: "tenure-meaning", heading: "Home Loan tenure is the repayment period", paragraphs: ["Home Loan tenure is the period over which you repay the loan. A 20-year tenure means 240 scheduled monthly payments in this model.", "For the same principal and positive annual interest rate, a longer tenure lowers monthly EMI but increases scheduled interest. A shorter tenure raises EMI but reduces scheduled interest. The choice is a trade-off between the monthly commitment and how long interest continues to accrue."] },
+      { id: "tenure-meaning", heading: "What Home Loan tenure means", paragraphs: ["There is no universally best tenure. Home Loan tenure is the period over which scheduled repayments are made; in this calculator model, a 20-year tenure means 240 monthly payments.", "Under the same principal and positive rate assumptions, a shorter tenure generally means a higher scheduled EMI, faster scheduled principal repayment and lower modeled total interest. A longer tenure generally means a lower EMI, slower scheduled principal repayment and higher modeled total interest. These are model comparisons, not a claim that either option is better for every household."] },
       { id: "comparison", heading: "The 15, 20, 25 and 30-year comparison", paragraphs: ["This example keeps the loan amount and rate unchanged: ₹50,00,000 at 8.5% a year on a monthly reducing balance. It assumes a constant rate, regular monthly EMIs, no prepayment, no missed payments and no fees or charges. Figures are rounded for display; total interest means modeled scheduled interest, not all borrowing costs."], table: { caption: "₹50 lakh home loan at 8.5% a year", headers: ["Tenure", "Monthly EMI", "Total interest"], rows: [["15 years", "₹49,237", "₹38,62,656 (₹38.63 lakh)"], ["20 years", "₹43,391", "₹54,13,879 (₹54.14 lakh)"], ["25 years", "₹40,261", "₹70,78,406 (₹70.78 lakh)"], ["30 years", "₹38,446", "₹88,40,443 (₹88.40 lakh)"]] } },
       { id: "why-emi-falls", heading: "Why a longer tenure lowers the EMI", paragraphs: ["The same principal is spread over more monthly instalments. That reduces the amount due each month, although interest continues to be charged while the balance remains outstanding.", "The EMI reduction becomes progressively smaller in this example. Moving from 15 to 20 years lowers the displayed EMI by ₹5,846, while moving from 25 to 30 years lowers it by ₹1,815."] },
       { id: "why-interest-rises", heading: "Why total interest rises", paragraphs: ["A longer tenure keeps principal outstanding for more months. Even though each EMI is lower, interest is calculated over a longer period, so the total can rise substantially.", "The 30-year option in this example has a displayed EMI ₹4,945 lower than the 20-year option. Its total interest is ₹34,26,564 higher, or about ₹34.27 lakh. The monthly reduction and the lifetime increase need to be read together.", [{ text: "For how each month's interest is calculated on outstanding principal, see " }, { text: "how Home Loan EMI is calculated", link: { kind: "article", slug: "home-loan-emi-calculation" } }, { text: " and its worked amortization example." }]] },
-      { id: "rate-reset", heading: "A floating rate can change the comparison", paragraphs: ["The table assumes 8.5% throughout. A floating-rate home loan may reset during its tenure, changing the EMI, the number of instalments, or both.", "For an EMI-based floating-rate loan within the scope of a commercial bank's applicable RBI directions, the bank must communicate reset-related EMI or tenure increases and provide the prescribed choices of higher EMI, longer tenure or both, and part or full prepayment. A fixed-rate switch is available where the bank offers it under its policy. These directions have a defined scope; other lender categories and loan types have their own applicable directions. Do not assume the lender will apply the same outcome in every case."] },
-      { id: "maximum-available-tenure", heading: "Maximum advertised tenure is not the same as your eligible tenure", paragraphs: ["SBI's YONO Home Loan page, for example, advertises tenure up to 30 years and lists age conditions. This is a product ceiling, not a universal maximum across lenders or an entitlement for every borrower. The offered repayment period depends on the product, the lender's assessment of repayment capacity and applicable age conditions.", "The tenure recorded in your sanction and loan agreement is the offer to assess. The 30-year row here illustrates scheduled interest; it does not establish eligibility.", "The ArthaSiddhi calculator accepts a model tenure up to 50 years so users can test mathematical scenarios. That input range is not evidence that a lender offers or will approve that tenure." ] },
-      { id: "choosing-tenure", heading: "There is no single correct tenure", paragraphs: ["A shorter tenure needs a higher monthly payment but reduces the time over which interest accrues. A longer tenure lowers the required EMI but raises scheduled interest at the same positive rate. If the offered tenure is already near a lender limit, extending it further after a rate increase may not be available.", "The suitable tenure depends on cash flow, other essential commitments and the loan terms. This comparison does not recommend one tenure for every borrower."] },
+      { id: "rate-reset", heading: "The comparison holds the entered rate constant", paragraphs: ["The example assumes 8.5% throughout. If an actual floating rate changes, the real repayment outcome can differ from this constant-rate illustration.", "The calculator compares scenarios using each entered rate as a constant assumption. It does not forecast future rates or simulate a lender's reset decisions. For current repayment terms or available choices, read the lender's communications and loan documents."] },
+      { id: "available-tenure", heading: "Minimum and maximum tenure depend on the actual offer", paragraphs: ["Do not assume a single minimum or maximum tenure applies to every home loan. The period available for a particular borrowing decision is the one stated in the relevant product offer and loan documents; ask the lender to clarify any conditions that affect it.", "The ArthaSiddhi calculator accepts a model tenure up to 50 years so users can test mathematical scenarios. That input range is not evidence that a lender offers or will approve that tenure."] },
+      { id: "choosing-tenure", heading: "How to choose a tenure", paragraphs: ["There is no universally best or ideal number of years. The choice balances the monthly cash-flow commitment against total interest modeled under the same principal and rate assumptions, while leaving room for other obligations, retained liquidity and financial goals.", [{ text: "The household budget and property-price decision come first; revisit the " }, { text: "Home affordability guide", link: { kind: "article", slug: "how-much-house-can-i-afford" } }, { text: " when setting the borrowing scenario. If preserving cash after purchase matters to your choice, read about the " }, { text: "emergency fund before a Home Loan", link: { kind: "article", slug: "emergency-fund-before-home-loan" } }, { text: ". This framework does not score or approve a tenure." }]], list: ["Start with a realistic loan amount and an interest-rate assumption.", "Compare several tenure scenarios at the same amount and rate.", "Read the scheduled EMI and modeled total interest together.", "Consider how each payment fits with essential spending, existing obligations and ongoing goals.", "Consider income stability, unexpected expenses and the liquidity you want to retain.", "Check the actual terms and available tenure in the lender's offer before deciding."] },
       { id: "compare-own-numbers", heading: "Compare your own amount and rate", paragraphs: ["A ₹50 lakh example cannot represent every loan. Changing the amount or rate can materially change both the EMI and the gap between tenures."], callout: { title: "Compare your own tenure and rate assumptions", text: [{ text: "Use the " }, { text: "Home Loan EMI Calculator", link: { kind: "calculator", slug: "home-loan" } }, { text: " and choose Compare another scenario to open the Home Loan Tenure & Rate Comparison. Keep the shared loan amount, then change tenure or the assumed annual rate to compare EMI, scheduled interest and scheduled repayment. Each scenario holds its entered rate constant; it does not simulate future lender resets." }] } },
     ],
     faq: [
       { question: "Does the lowest EMI mean the lowest-cost tenure?", answer: "No. A lower EMI commonly comes from spreading repayment over more months, which can increase total interest. Compare both figures." },
       { question: "Does the table predict what a floating-rate loan will cost?", answer: "No. It holds the rate at 8.5% for the full tenure. Actual floating rates and the resulting repayment schedule can change." },
-      { question: "Is 30 years the maximum Home Loan tenure in India?", answer: "SBI's YONO page advertises up to 30 years for its product. That is not proof of an India-wide maximum or of your eligibility. Check the applicable product and borrower conditions; the calculator's 50-year modeling limit is not a lending offer." },
-    ],
-    references: [
-      { title: "Housing Loans — FAQs", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/commonperson/English/Scripts/FAQs.aspx?Id=701", sourceType: "official", accessedAt: "2026-09-07" },
-      { title: "Commercial Banks - Responsible Business Conduct Directions, 2025 (updated July 1, 2026), Chapter VIII", publisher: "Reserve Bank of India", url: "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13140", sourceType: "official", accessedAt: "2026-09-07" },
-      { title: "YONO Home Loan - Eligibility and tenure", publisher: "State Bank of India", url: "https://sbi.bank.in/web/yono/home-loan", sourceType: "official", accessedAt: "2026-09-07" },
-    ],
+      { question: "Is there one best, minimum or maximum Home Loan tenure?", answer: "No single tenure is best for every borrower, and one universal minimum or maximum should not be assumed. Compare the cash-flow and modeled-interest trade-off, then confirm what the actual lender offer and loan documents allow. The calculator's input range is not a lending offer." },
+    ]
   },
   {
     title: "How Home Loan Prepayment Changes Principal, Tenure and Interest",

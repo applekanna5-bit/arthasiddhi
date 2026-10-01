@@ -140,7 +140,7 @@ describe("core article editorial boundaries", () => {
 
     expect(articleText(compoundInterest)).toContain("The example shows how compounding works; it is not a forecast of investment returns.");
     expect(section(compoundInterest, "using-calculators").heading).toBe("How compounding applies to an FD or SIP");
-    expect(articleText(tenure)).toContain("Do not assume the lender will apply the same outcome in every case.");
+    expect(articleText(tenure)).toContain("It does not forecast future rates or simulate a lender's reset decisions.");
     expect(section(prepayment, "calculator-scope").heading).toBe("Start with the original loan schedule");
     expect(articleText(prepayment)).toContain("The Home Loan EMI Calculator shows the original EMI, total interest and schedule for the amount, rate and tenure entered. It does not estimate the saving from a later part-prepayment.");
     expect(changedText).not.toContain("The example is mathematics, not an investment forecast.");
