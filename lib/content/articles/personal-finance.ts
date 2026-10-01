@@ -2,6 +2,241 @@ import type { Article } from "../types";
 
 export const personalFinanceArticles = [
   {
+    title: "How to Build a Personal Financial Plan",
+    slug: "how-to-build-a-personal-financial-plan",
+    description: "Turn your household's resources, commitments, goals and access needs into an ordered plan, with clear next steps for each decision.",
+    category: "personal-finance",
+    publishedAt: "2026-10-02",
+    updatedAt: "2026-10-02",
+    readingTime: "5 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: null,
+    calculatorGuideRole: null,
+    relatedCalculators: [],
+    relatedArticles: ["understand-household-cash-flow", "emergency-fund-planning"],
+    sections: [
+      {
+        id: "current-position",
+        heading: "Start with your current financial position",
+        paragraphs: [
+          "A personal financial plan connects what your household has today with the decisions it needs to make next. This ArthaSiddhi educational planning framework offers a sequence of questions to work through; it is not a regulatory requirement or individualized financial advice.",
+          "Begin with a lightweight snapshot of income and other resources, existing assets, debts, recurring commitments and money already assigned to known goals. Approximate values can help you see the position without requiring an exact valuation of every asset. Net worth, a broad comparison of assets and debts, is one possible snapshot; it does not show when money will be available.",
+        ],
+      },
+      {
+        id: "cash-flow",
+        heading: "Understand what comes in and what is already committed",
+        paragraphs: [
+          "Before making a larger decision, consider the resources arriving, the obligations they must cover and the flexibility left over. Timing matters: an expected inflow after a bill falls due cannot meet that bill on its own.",
+          [{ text: "Use " }, { text: "Understand Your Household Cash Flow", link: { kind: "article", slug: "understand-household-cash-flow" } }, { text: " to map those commitments and their timing before assigning money to another priority." }],
+        ],
+      },
+      {
+        id: "known-costs-and-emergencies",
+        heading: "Separate known costs from emergency liquidity",
+        paragraphs: [
+          "Money needed for a known upcoming obligation has a different job from money retained for an unexpected disruption. A planned school fee or repair should remain visible as a commitment rather than also being counted as an untouched emergency reserve.",
+          [{ text: "Consider " }, { text: "Emergency Fund Planning: What Money Should Stay Accessible?", link: { kind: "article", slug: "emergency-fund-planning" } }, { text: " for the household factors that can shape this decision. This framework does not prescribe an emergency-fund amount." }],
+        ],
+      },
+      {
+        id: "goals-and-timing",
+        heading: "Identify competing goals and their timing",
+        paragraphs: [
+          "List the decisions the household is trying to fund and when each may need money. Different goals compete for limited resources. A near-term payment and a longer-term ambition may need different treatment because their dates and room for adjustment differ.",
+          "Compare what is already committed, what can be changed and the consequences of delaying a goal. The order depends on household circumstances; no goal is objectively first for everyone. Record the priority you choose and the reason so you can revisit it when circumstances change.",
+        ],
+      },
+      {
+        id: "debt-and-commitments",
+        heading: "Consider existing debt and recurring commitments",
+        paragraphs: [
+          "Existing debt payments and other recurring commitments affect what can be assigned to new goals. Include their amounts, dates and expected duration in the plan, and check the actual terms before considering a change.",
+          "A change that releases money for one purpose can alter another obligation. Compare those effects in your household context rather than applying a universal debt payoff order. Loan terms and product-specific processes belong with the relevant Loans guide and lender information.",
+        ],
+      },
+      {
+        id: "access-and-investing",
+        heading: "Distinguish access needs from longer-term investing decisions",
+        paragraphs: [
+          "Identify money that may need to be available for bills, near-term goals or disruption before considering longer-horizon uses. An asset's stated value is not enough if its money cannot be accessed when required.",
+          "Money considered for a longer horizon raises a different set of questions about the specific investment and its assumptions. The household plan frames those questions; it does not select products, recommend investments or allocate assets.",
+        ],
+      },
+      {
+        id: "specialist-questions",
+        heading: "Take specific questions to the relevant specialist guide",
+        paragraphs: [
+          "Once a question becomes about a product, eligibility, current rules, a calculation or a process, use the vertical that owns that detail. Banking owns deposit and access mechanics; Loans owns borrowing mechanics; Investments, Tax and Retirement own their respective product and rule questions.",
+          [{ text: "For example, a decision about a property price belongs in " }, { text: "How Much House Can I Afford?", link: { kind: "article", slug: "how-much-house-can-i-afford" } }, { text: ". If your question concerns accessing an existing fixed deposit before its term ends, use " }, { text: "Premature FD Withdrawal", link: { kind: "article", slug: "premature-fd-withdrawal" } }, { text: " for the product-specific considerations. Neither link is a product recommendation." }],
+        ],
+      },
+      {
+        id: "review-plan",
+        heading: "Review the plan when something meaningful changes",
+        paragraphs: [
+          "Turn the chosen order into practical next steps: identify which commitment or decision needs attention, what information is missing and what can wait. The plan can remain a short record of priorities and reasons rather than an exhaustive financial document.",
+          "Revisit it when income, dependants, debts, commitments or goals materially change. Check whether earlier allocations still serve their intended purpose and whether the timing has shifted. A review can change the order without treating the earlier plan as a failure; there is no fixed review interval prescribed here.",
+        ],
+      },
+    ],
+  },
+  {
+    title: "Understand Your Household Cash Flow",
+    slug: "understand-household-cash-flow",
+    description: "Map household resources, committed and flexible spending, periodic costs and payment timing before assigning money to competing priorities.",
+    category: "personal-finance",
+    publishedAt: "2026-10-02",
+    updatedAt: "2026-10-02",
+    readingTime: "4 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: null,
+    calculatorGuideRole: null,
+    relatedCalculators: [],
+    relatedArticles: ["how-to-build-a-personal-financial-plan", "emergency-fund-planning"],
+    sections: [
+      {
+        id: "why-cash-flow-matters",
+        heading: "Cash flow shows what money needs to do and when",
+        paragraphs: [
+          "Household cash flow is the movement of resources into and out of the household over time. It helps distinguish what is already needed from what remains flexible for competing priorities. This is an ArthaSiddhi educational planning framework, not a required budget method or individualized financial advice.",
+          "A total account balance is not automatically the money available for a decision on a particular date. Part of that balance may already be assigned to a bill, while another expected payment may arrive too late to cover it.",
+        ],
+      },
+      {
+        id: "resources-and-timing",
+        heading: "Map resources and the timing of inflows",
+        paragraphs: [
+          "Identify income and other resources the household expects to use, along with when they may become available. Distinguish dependable inflows from variable business receipts, irregular work or payments whose arrival remains uncertain.",
+          "Existing accessible money can help bridge timing gaps, but it is a stock of money rather than a new recurring income source. Keep its existing assignments visible. An expected future receipt should not silently become money available today.",
+        ],
+      },
+      {
+        id: "required-commitments",
+        heading: "Identify required or committed obligations",
+        paragraphs: [
+          "Note payments the household is already obliged or committed to make, such as rent, debt instalments and agreed recurring payments. Their due dates and expected duration matter alongside the amount.",
+          "If income arrives after an obligation falls due, review how that gap will be covered. A positive total across a period can still hide a shortfall on an earlier date.",
+        ],
+      },
+      {
+        id: "essential-and-flexible-spending",
+        heading: "Separate essential recurring spending from flexible spending",
+        paragraphs: [
+          "Essential recurring spending may include food, utilities, transport and routine care. These costs can vary even when their purpose is essential. Variable spending is therefore not automatically discretionary.",
+          "Identify spending whose amount or timing the household can adjust, including discretionary purchases. The distinction depends on your circumstances; it does not require a universal budget ratio or savings percentage. Classify overlapping items once so the same cost is not counted twice.",
+        ],
+      },
+      {
+        id: "periodic-costs",
+        heading: "Keep irregular and periodic commitments visible",
+        paragraphs: [
+          "Annual fees, scheduled maintenance, planned travel and other known periodic costs can be missed by a view focused only on a typical month. Record when they are due and whether money has already been assigned to them.",
+          "A known future bill is still a commitment even if no payment leaves the account today. The same money should not simultaneously be treated as allocated to that bill and retained for another purpose.",
+        ],
+        table: {
+          caption: "Illustrative cash-flow map: purposes and dates, not a budget template",
+          headers: ["Item", "What to identify", "Why timing matters"],
+          rows: [
+            ["Income or other resources", "Expected arrival and uncertainty", "A receipt after a due date cannot cover the earlier payment by itself."],
+            ["Committed and essential costs", "Due dates and amounts that may vary", "Recurring needs use money before a new priority can claim it."],
+            ["Known periodic bill", "Date due and money already assigned", "An account balance may include money reserved for this bill."],
+            ["Flexible spending or a new goal", "What can change and when money is needed", "Flexibility depends on the other assignments and their dates."],
+          ],
+        },
+      },
+      {
+        id: "remaining-flexibility",
+        heading: "Understand what remains and when it is available",
+        paragraphs: [
+          "Read the map across dates, not just as one total. Check which resources are accessible before each commitment, what is assigned already and what remains unassigned. If a receipt or cost is uncertain, keep that uncertainty visible rather than treating the remaining flexibility as assured.",
+          [{ text: "Unassigned money can still have competing jobs. " }, { text: "Emergency Fund Planning", link: { kind: "article", slug: "emergency-fund-planning" } }, { text: " explains why retaining access for disruption is a separate decision from covering known bills. This view does not produce a safe-to-spend formula." }],
+        ],
+      },
+      {
+        id: "later-decisions",
+        heading: "Use the view to frame later decisions",
+        paragraphs: [
+          [{ text: "Take the resulting view back to " }, { text: "How to Build a Personal Financial Plan", link: { kind: "article", slug: "how-to-build-a-personal-financial-plan" } }, { text: " to compare goals and decide which questions need attention next. Revisit the cash-flow view when inflows or commitments change." }],
+          [{ text: "If the next question is about buying a home, " }, { text: "How Much House Can I Afford?", link: { kind: "article", slug: "how-much-house-can-i-afford" } }, { text: " owns the property-price decision. Household cash flow supplies context; this page does not calculate home affordability or lender approval." }],
+        ],
+      },
+    ],
+  },
+  {
+    title: "Emergency Fund Planning: What Money Should Stay Accessible?",
+    slug: "emergency-fund-planning",
+    description: "Understand the purpose of emergency liquidity, the household factors that affect it and why access needs differ from known future bills.",
+    category: "personal-finance",
+    publishedAt: "2026-10-02",
+    updatedAt: "2026-10-02",
+    readingTime: "4 min read",
+    maintenance: { kind: "evergreen" },
+    primaryCalculator: null,
+    calculatorGuideRole: null,
+    relatedCalculators: [],
+    relatedArticles: ["understand-household-cash-flow", "how-to-build-a-personal-financial-plan", "emergency-fund-before-home-loan"],
+    sections: [
+      {
+        id: "purpose-and-known-bills",
+        heading: "Separate emergency liquidity from known future bills",
+        paragraphs: [
+          "Emergency liquidity is money kept accessible to help the household respond to an unexpected disruption or essential cost. This ArthaSiddhi educational planning framework explains the decision factors; it does not prescribe an amount, a universal reserve or individualized financial advice.",
+          "A known upcoming expense is not automatically an emergency. Money assigned to a scheduled fee, planned repair or other foreseeable bill already has a job and should not also be counted as an untouched reserve.",
+          [{ text: "Start with " }, { text: "Understand Your Household Cash Flow", link: { kind: "article", slug: "understand-household-cash-flow" } }, { text: " to distinguish known commitments from money available for other purposes." }],
+        ],
+      },
+      {
+        id: "possible-disruption",
+        heading: "Consider the kinds of disruption the household may need to handle",
+        paragraphs: [
+          "An interruption in employment or business receipts, or an unexpected essential repair, may change when the household needs money. These are examples of possible disruption, not predictions that such events will occur.",
+          "Consider which essential costs and recurring obligations would continue, and what other resources could realistically be available at the time. The purpose is to understand the household's dependence on uninterrupted inflows, rather than to plan from fear.",
+        ],
+      },
+      {
+        id: "household-factors",
+        heading: "Review the factors that affect the access decision",
+        paragraphs: [
+          "Households differ in how much uncertainty they face and how quickly they can respond. These factors are planning variables to discuss together, not inputs to a formula or a financial-health score.",
+        ],
+        list: [
+          "Income stability and variability: whether job or business receipts are dependable and how a delay would affect ongoing costs.",
+          "Number of income sources: whether one source could continue if another pauses, including whether the sources depend on the same circumstances.",
+          "Essential spending, recurring commitments and debt obligations: what would still need payment during a disruption.",
+          "Dependants and care responsibilities: whose needs rely on the household's available resources.",
+          "Insurance context: what the actual cover, exclusions and claim process mean for a particular situation; do not assume every unexpected cost will be covered or paid immediately.",
+          "Access constraints and speed: what can actually become usable money before an urgent payment is due.",
+          "Foreseeable near-term commitments: money already needed for known obligations that cannot also serve as an unassigned reserve.",
+        ],
+      },
+      {
+        id: "accessibility",
+        heading: "Consider availability as well as the amount",
+        paragraphs: [
+          "A resource may have value without being usable on the required date. Consider how quickly money can be accessed, any conditions that could delay access and who in the household can complete the necessary steps.",
+          "Banking owns the mechanics and terms of particular accounts and deposits. Check the relevant product information when an access question reaches that level. This framework does not recommend a banking product or treat every asset as immediately accessible cash.",
+        ],
+      },
+      {
+        id: "competing-uses",
+        heading: "Compare liquidity with other uses of the same money",
+        paragraphs: [
+          "Keeping money accessible can compete with paying a known cost, reducing borrowing or funding a longer-term goal. Releasing it for another use may leave less flexibility during disruption; retaining it may delay that other use. The appropriate balance depends on the household rather than a universal amount.",
+          [{ text: "When the decision is specifically about buying a home, use " }, { text: "Emergency Fund Before Taking a Home Loan", link: { kind: "article", slug: "emergency-fund-before-home-loan" } }, { text: ". That Home Buying guide owns the trade-off between retained liquidity, down payment, borrowing and purchase-related commitments. This page covers general household emergency liquidity." }],
+        ],
+      },
+      {
+        id: "review-liquidity",
+        heading: "Review the decision when household circumstances change",
+        paragraphs: [
+          "Record why you want money to remain accessible and check that it is not also assigned to a known bill. If you choose to retain liquidity, check the actual access arrangements rather than relying only on a balance on paper.",
+          [{ text: "Reconsider the decision when income sources, dependants, essential spending, debt obligations, insurance context or near-term commitments materially change. Return to " }, { text: "How to Build a Personal Financial Plan", link: { kind: "article", slug: "how-to-build-a-personal-financial-plan" } }, { text: " to review how it fits with the household's other priorities. No fixed review interval is prescribed." }],
+        ],
+      },
+    ],
+  },
+  {
     title: "What Is Compound Interest?",
     slug: "compound-interest",
     description: "How compound interest adds interest to both the original amount and earlier interest, with a simple two-year example.",

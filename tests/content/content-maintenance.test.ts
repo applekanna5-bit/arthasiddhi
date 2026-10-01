@@ -28,15 +28,15 @@ describe("maintenance inventory and policy coverage", () => {
     const local = ruleSensitive.filter(({ maintenance }) => maintenance.kind === "rule-sensitive" && !maintenance.ruleSetId);
     const unresolved = ruleSensitive.filter(({ maintenance }) => maintenance.kind === "rule-sensitive" && maintenance.ruleSetId && !Object.values(financialRuleSets).some(({ id }) => id === maintenance.ruleSetId));
     expect(Object.keys(calculators)).toHaveLength(17);
-    expect(articles).toHaveLength(67);
+    expect(articles).toHaveLength(70);
     expect(publishedCategories).toHaveLength(6);
-    expect(evergreen).toHaveLength(51);
+    expect(evergreen).toHaveLength(54);
     expect(ruleSensitive).toHaveLength(16);
     expect(Object.values(financialRuleSets)).toHaveLength(6);
     expect(local).toHaveLength(0);
     expect(unresolved).toHaveLength(0);
     expect(Object.keys(ruleSetMaintenancePolicies).toSorted()).toEqual(Object.values(financialRuleSets).map(({ id }) => id).toSorted());
-    expect(new Set(buildSitemap().map(({ url }) => url)).size).toBe(100);
+    expect(new Set(buildSitemap().map(({ url }) => url)).size).toBe(103);
   });
 
   it("uses distinct valid review windows", () => {

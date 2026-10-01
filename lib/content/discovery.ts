@@ -49,7 +49,7 @@ export const learnCategoryHubs: Record<ContentCategory, LearnCategoryHub> = {
     category: "personal-finance",
     topicPreview: ["Inflation", "Purchasing power", "Compound growth"],
     groups: [{ id: "inflation", title: "Inflation and purchasing power", calculator: "inflation", coreArticle: "inflation-explained", supportingArticles: ["inflation-future-cost", "purchasing-power-explained", "inflation-calculator-projection-assumptions"] }],
-    broaderGuides: ["compound-interest"],
+    broaderGuides: ["compound-interest", "how-to-build-a-personal-financial-plan", "understand-household-cash-flow", "emergency-fund-planning"],
   },
   loans: {
     category: "loans",

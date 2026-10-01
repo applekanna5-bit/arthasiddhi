@@ -40,11 +40,11 @@ describe("public site routes", () => {
     for (const route of trustRoutes) expect(staticSitemapRoutes).toContain(route);
   });
 
-  it("keeps every approved trust route in a unique 100-URL sitemap", () => {
+  it("keeps every approved trust route in a unique 103-URL sitemap", () => {
     const sitemapUrls = buildSitemap().map(({ url }) => url);
     for (const route of trustRoutes) expect(sitemapUrls).toContain(absoluteUrl(route));
-    expect(sitemapUrls).toHaveLength(100);
-    expect(new Set(sitemapUrls).size).toBe(100);
+    expect(sitemapUrls).toHaveLength(103);
+    expect(new Set(sitemapUrls).size).toBe(103);
   });
 
   it("maps every footer link to a known public route", () => {

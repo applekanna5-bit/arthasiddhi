@@ -20,7 +20,7 @@ function links(article: Article) {
 
 describe("Home Buying planning cluster", () => {
   it("registers exactly the three intended additions with unique Loans routes", () => {
-    expect(articles).toHaveLength(67);
+    expect(articles).toHaveLength(70);
     expect(planning.map(({ slug }) => slug)).toEqual(slugs);
     expect(getArticleRegistryIssues()).toEqual([]);
     for (const article of planning) {
@@ -35,7 +35,7 @@ describe("Home Buying planning cluster", () => {
 
   it("uses evergreen metadata, existing canonical helpers and native discovery", () => {
     expect(getDiscoveryRegistryIssues()).toEqual([]);
-    expect(buildSitemap()).toHaveLength(100);
+    expect(buildSitemap()).toHaveLength(103);
     for (const article of planning) {
       const url = absoluteUrl(getArticlePath(article));
       expect(article.maintenance).toEqual({ kind: "evergreen" });

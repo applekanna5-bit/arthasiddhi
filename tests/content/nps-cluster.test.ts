@@ -196,10 +196,10 @@ describe("NPS SEO, schema and sitemap", () => {
     expect(descriptions.size).toBe(4);
   });
 
-  it("keeps four NPS articles and one Retirement route in the 100-URL sitemap", () => {
+  it("keeps four NPS articles and one Retirement route in the 103-URL sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(100);
-    expect(new Set(urls).size).toBe(100);
+    expect(urls).toHaveLength(103);
+    expect(new Set(urls).size).toBe(103);
     for (const slug of npsSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(npsArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/retirement"))).toHaveLength(1);
   });
