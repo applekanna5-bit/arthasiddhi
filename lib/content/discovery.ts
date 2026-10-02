@@ -33,6 +33,7 @@ export type LearnTopicGroup = {
   description?: string;
   calculator?: CalculatorSlug;
   coreArticle: ArticleSlug;
+  corePresentation?: "start-here" | "overview";
   supportingArticles: readonly ArticleSlug[];
 };
 
@@ -47,9 +48,13 @@ export type LearnCategoryHub = {
 export const learnCategoryHubs: Record<ContentCategory, LearnCategoryHub> = {
   "personal-finance": {
     category: "personal-finance",
-    topicPreview: ["Inflation", "Purchasing power", "Compound growth"],
-    groups: [{ id: "inflation", title: "Inflation and purchasing power", calculator: "inflation", coreArticle: "inflation-explained", supportingArticles: ["inflation-future-cost", "purchasing-power-explained", "inflation-calculator-projection-assumptions"] }],
-    broaderGuides: ["compound-interest", "how-to-build-a-personal-financial-plan", "understand-household-cash-flow", "emergency-fund-planning", "prioritize-debt-financial-commitments", "risk-return-time-horizon"],
+    topicPreview: ["Financial planning", "Cash flow", "Risk and return", "Inflation and growth"],
+    groups: [
+      { id: "household-planning", title: "Plan your household finances", description: "Start with an overview, or go directly to the household decision you are considering.", coreArticle: "how-to-build-a-personal-financial-plan", corePresentation: "start-here", supportingArticles: ["understand-household-cash-flow", "emergency-fund-planning", "prioritize-debt-financial-commitments"] },
+      { id: "investment-readiness", title: "Before you invest", coreArticle: "risk-return-time-horizon", corePresentation: "overview", supportingArticles: [] },
+      { id: "inflation", title: "Inflation and purchasing power", calculator: "inflation", coreArticle: "inflation-explained", corePresentation: "overview", supportingArticles: ["inflation-future-cost", "purchasing-power-explained", "inflation-calculator-projection-assumptions"] },
+      { id: "compound-growth", title: "Understand compound growth", coreArticle: "compound-interest", corePresentation: "overview", supportingArticles: [] },
+    ],
   },
   loans: {
     category: "loans",

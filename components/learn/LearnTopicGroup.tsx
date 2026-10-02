@@ -4,10 +4,11 @@ import { getCalculator } from "@/lib/content/calculators";
 import type { Article } from "@/lib/content/types";
 import type { LearnTopicGroup as LearnTopicGroupDefinition } from "@/lib/content/discovery";
 
-function GuideCard({ article, kind }: { article: Article; kind: "core" | "supporting" }) {
+function GuideCard({ article, kind, corePresentation = "start-here" }: { article: Article; kind: "core" | "supporting"; corePresentation?: LearnTopicGroupDefinition["corePresentation"] }) {
+  const isEntry = kind === "core" && corePresentation === "start-here";
   return (
-    <Link href={getArticlePath(article)} className={kind === "core" ? "rounded-xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100" : "rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100"}>
-      <p className="text-xs font-semibold tracking-wide text-emerald-700 uppercase">{kind === "core" ? "Start here" : "Guide"}</p>
+    <Link href={getArticlePath(article)} className={isEntry ? "rounded-xl border border-emerald-200 bg-emerald-50 p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100" : "rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-300 hover:shadow-md focus:outline-none focus:ring-3 focus:ring-emerald-100"}>
+      <p className="text-xs font-semibold tracking-wide text-emerald-700 uppercase">{kind === "core" ? (isEntry ? "Start here" : "Overview") : "Guide"}</p>
       <h3 className="mt-2 text-lg font-semibold text-slate-950">{article.title}</h3>
       <p className="mt-2 text-sm leading-6 text-slate-600">{article.description}</p>
       <p className="mt-4 text-sm text-slate-500">{article.readingTime}</p>
@@ -27,7 +28,7 @@ export function LearnTopicGroup({ group, core, supporting }: { group: LearnTopic
         {calculator && <Link href={calculator.href} className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 focus:outline-none focus:ring-3 focus:ring-emerald-100">Open {calculator.shortName} calculator <span aria-hidden="true">→</span></Link>}
       </div>
       <div className="mt-4 grid gap-4 md:grid-cols-2">
-        <GuideCard article={core} kind="core" />
+        <GuideCard article={core} kind="core" corePresentation={group.corePresentation} />
         {supporting.map((article) => <GuideCard key={article.slug} article={article} kind="supporting" />)}
       </div>
     </section>

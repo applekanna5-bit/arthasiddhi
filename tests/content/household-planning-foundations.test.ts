@@ -28,7 +28,7 @@ describe("V2.2C household planning foundations", () => {
       expect(articleSlugs.filter((declared) => declared === slug)).toHaveLength(1);
       expect(foundation(index)).toMatchObject({ title: titles[index], category: "personal-finance", maintenance: { kind: "evergreen" }, primaryCalculator: null, calculatorGuideRole: null, relatedCalculators: [] });
       expect(links(foundation(index)).every((link) => link.kind === "article")).toBe(true);
-      expect(getLearnCategoryHub("personal-finance").broaderGuides?.filter((entry) => entry === slug)).toHaveLength(1);
+      expect(getLearnCategoryHub("personal-finance").groups.flatMap((group) => [group.coreArticle, ...group.supportingArticles]).filter((entry) => entry === slug)).toHaveLength(1);
     }
   });
 

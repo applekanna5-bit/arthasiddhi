@@ -135,8 +135,8 @@ describe("V2.2D debt and investment-readiness foundations", () => {
     expect(new Set(urls).size).toBe(urls.length);
     for (const slug of newSlugs) {
       expect(urls.filter((url) => url === absoluteUrl(`/learn/personal-finance/${slug}`))).toHaveLength(1);
-      expect(getLearnCategoryHub("personal-finance").broaderGuides?.filter((entry) => entry === slug)).toHaveLength(1);
+      expect(getLearnCategoryHub("personal-finance").groups.flatMap((group) => [group.coreArticle, ...group.supportingArticles]).filter((entry) => entry === slug)).toHaveLength(1);
     }
-    expect(getLearnCategoryHub("personal-finance").groups.map(({ id }) => id)).toEqual(["inflation"]);
+    expect(getLearnCategoryHub("personal-finance").groups.map(({ id }) => id)).toEqual(["household-planning", "investment-readiness", "inflation", "compound-growth"]);
   });
 });

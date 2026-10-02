@@ -32,7 +32,7 @@ export const categoryLabels: Record<ContentCategory, string> = {
 };
 
 export const categoryDescriptions: Record<ContentCategory, string> = {
-  "personal-finance": "Understand compound growth, inflation, future costs and how purchasing power can change over time.",
+  "personal-finance": "Understand household cash flow, financial priorities, debt and access needs, then explore risk, inflation and compounding before comparing products.",
   loans: "Understand how loan EMIs, tenure, interest and lender-specific costs affect monthly payments and total repayment.",
   investments: "See how regular SIP contributions build over time, how projected growth is calculated and where the assumptions matter.",
   banking: "Understand deposits, savings products and Government-backed savings schemes such as PPF, including how contributions, rates and timing affect an estimate.",
