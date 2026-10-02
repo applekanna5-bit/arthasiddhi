@@ -87,12 +87,12 @@ describe("Personal Finance hub integration", () => {
   });
 
   it("preserves inventories and all ten canonical article paths", () => {
-    expect(articles).toHaveLength(72);
+    expect(articles).toHaveLength(74);
     expect(getArticlesByCategory("personal-finance")).toHaveLength(10);
     expect(Object.keys(calculators)).toHaveLength(17);
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(105);
-    expect(new Set(urls).size).toBe(105);
+    expect(urls).toHaveLength(107);
+    expect(new Set(urls).size).toBe(107);
     for (const slug of membership.flat()) {
       const article = getArticleBySlug(slug)!;
       expect(getArticlePath(article)).toBe(`/learn/personal-finance/${slug}`);

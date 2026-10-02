@@ -75,8 +75,8 @@ describe("core article identity and architecture", () => {
   });
 
   it("keeps every declared article route valid and the registry clean", () => {
-    expect(articles).toHaveLength(72);
-    expect(new Set(articles.map(getArticlePath)).size).toBe(72);
+    expect(articles).toHaveLength(74);
+    expect(new Set(articles.map(getArticlePath)).size).toBe(74);
     expect(getArticleRegistryIssues()).toEqual([]);
   });
 
@@ -161,7 +161,7 @@ describe("core article editorial boundaries", () => {
     const expectedArticleLinks: Record<keyof typeof identities, readonly ArticleSlug[]> = {
       "home-loan-guide": ["home-loan-emi-calculation", "home-loan-tenure-comparison", "when-home-loan-emi-starts", "home-loan-prepayment"],
       "sip-explained": ["compound-interest", "sip-return-calculation", "sip-vs-lumpsum", "fixed-sip-vs-step-up-sip", "sip-projection-assumptions"],
-      "fixed-deposit-explained": ["compound-interest", "fd-interest-calculation", "fd-vs-rd", "premature-fd-withdrawal"],
+      "fixed-deposit-explained": ["choosing-bank-deposit", "deposit-insurance-explained", "compound-interest", "fd-interest-calculation", "fd-vs-rd", "premature-fd-withdrawal"],
     };
     for (const slug of Object.keys(identities) as (keyof typeof identities)[]) {
       const article = target(slug);

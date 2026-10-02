@@ -39,6 +39,13 @@ export type RuleSetMaintenancePolicy = {
 // Windows are intentionally rule-specific. They are maintenance cadence, not a
 // claim that a rule changed when the window elapses.
 export const ruleSetMaintenancePolicies = {
+  "dicgc-deposit-insurance-2026-10": {
+    reviewAfterDays: 180,
+    overdueAfterDays: 240,
+    priority: "P1",
+    eventHints: ["regulation-amendment"],
+    calculators: [],
+  },
   "income-tax-tax-year-2026-27": {
     reviewAfterDays: 90,
     overdueAfterDays: 120,

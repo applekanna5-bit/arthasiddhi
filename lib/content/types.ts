@@ -42,6 +42,8 @@ export const articleSlugs = [
   "cagr-and-year-to-year-volatility",
   "cagr-vs-average-annual-return",
   "fixed-deposit-explained",
+  "choosing-bank-deposit",
+  "deposit-insurance-explained",
   "fd-interest-calculation",
   "fd-vs-rd",
   "premature-fd-withdrawal",

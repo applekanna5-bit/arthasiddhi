@@ -48,7 +48,7 @@ function section(article: Article, id: string) {
 describe("Home Loan search cluster", () => {
   it("registers one new EMI-start owner while preserving existing public paths", () => {
     expect(supportingArticles().map(({ slug }) => slug)).toEqual(supportingSlugs);
-    expect(articles).toHaveLength(72);
+    expect(articles).toHaveLength(74);
     expect(articles.filter(({ slug }) => slug === "when-home-loan-emi-starts")).toHaveLength(1);
     expect(getArticleRegistryIssues()).toEqual([]);
     expect([

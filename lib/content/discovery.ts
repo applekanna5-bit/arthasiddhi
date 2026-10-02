@@ -80,6 +80,7 @@ export const learnCategoryHubs: Record<ContentCategory, LearnCategoryHub> = {
   },
   banking: {
     category: "banking",
+    broaderGuides: ["choosing-bank-deposit", "deposit-insurance-explained"],
     topicPreview: ["Fixed deposits", "Recurring deposits", "PPF"],
     groups: [
       { id: "fixed-deposits", title: "Fixed deposits", calculator: "fd", coreArticle: "fixed-deposit-explained", supportingArticles: ["fd-interest-calculation", "premature-fd-withdrawal"] },

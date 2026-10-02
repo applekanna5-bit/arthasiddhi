@@ -104,6 +104,8 @@ describe("Batch C Learn discovery", () => {
       "/learn/banking/rd-explained",
       "/learn/banking/rd-interest-calculation",
       "/learn/banking/rd-calculator-projection-vs-actual-maturity",
+      "/learn/banking/choosing-bank-deposit",
+      "/learn/banking/deposit-insurance-explained",
       "/learn/personal-finance/how-to-build-a-personal-financial-plan",
       "/learn/personal-finance/understand-household-cash-flow",
       "/learn/personal-finance/emergency-fund-planning",

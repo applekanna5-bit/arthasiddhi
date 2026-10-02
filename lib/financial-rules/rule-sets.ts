@@ -226,4 +226,19 @@ export const gratuityRuleSet: FinancialRuleSet<GratuityRules> = {
   ],
 };
 
-export const financialRuleSets = { incomeTax: incomeTaxRuleSet, ppf: ppfRuleSet, gst: gstRuleSet, epf: epfRuleSet, nps: npsRuleSet, gratuity: gratuityRuleSet } as const;
+export const dicgcRuleSet = {
+  id: "dicgc-deposit-insurance-2026-10",
+  label: "DICGC deposit insurance",
+  effectivePeriod: "DICGC deposit-insurance rules verified on 2 October 2026",
+  lastVerified: "2026-10-02",
+  rules: { coverageCeilingRupees: 500_000, includesPrincipalAndInterest: true, aggregationBasis: "per depositor per bank in the same right and capacity" },
+  sources: [
+      { title: "FAQs — coverage, aggregation, joint accounts and claims", authority: "Deposit Insurance and Credit Guarantee Corporation", reference: "https://www.dicgc.org.in/FAQs", sourceType: "official", accessedAt: "2026-10-02" },
+      { title: "A Guide to Deposit Insurance", authority: "Deposit Insurance and Credit Guarantee Corporation", reference: "https://www.dicgc.org.in/guide-to-deposit-insurance", sourceType: "official", accessedAt: "2026-10-02" },
+      { title: "DICGC Information Booklet", authority: "Deposit Insurance and Credit Guarantee Corporation", reference: "https://www.dicgc.org.in/sites/default/files/2025-02/dicgc-information-booklet.pdf", sourceType: "official", accessedAt: "2026-10-02" },
+      { title: "List of Insured Banks", authority: "Deposit Insurance and Credit Guarantee Corporation", reference: "https://www.dicgc.org.in/insured-banks", sourceType: "official", accessedAt: "2026-10-02" },
+    ],
+} satisfies FinancialRuleSet<{ coverageCeilingRupees: number; includesPrincipalAndInterest: boolean; aggregationBasis: string }>;
+
+export const financialRuleSets = {
+  dicgc: dicgcRuleSet, incomeTax: incomeTaxRuleSet, ppf: ppfRuleSet, gst: gstRuleSet, epf: epfRuleSet, nps: npsRuleSet, gratuity: gratuityRuleSet } as const;

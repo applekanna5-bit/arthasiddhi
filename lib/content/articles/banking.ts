@@ -24,6 +24,17 @@ export const bankingArticles = [
         ],
       },
       {
+        id: "deposit-decision-context",
+        heading: "Before choosing the deposit",
+        paragraphs: [[
+          { text: "For access needs and the terms to compare, start with " },
+          { text: "choosing a bank deposit", link: { kind: "article", slug: "choosing-bank-deposit" } },
+          { text: ". For the separate safety question, check " },
+          { text: "what DICGC deposit insurance covers", link: { kind: "article", slug: "deposit-insurance-explained" } },
+          { text: "; a maturity projection does not establish insurance coverage." },
+        ]],
+      },
+      {
         id: "maturity-factors",
         heading: "What determines your maturity amount",
         paragraphs: [
@@ -740,6 +751,17 @@ export const bankingArticles = [
           "RD stands for Recurring Deposit. In the calculator's modeled scenario, you contribute a fixed monthly installment over the selected tenure. The RD Calculator uses that monthly amount, entered annual interest rate and whole-year tenure to estimate total deposits, interest and maturity.",
           "The result is a controlled projection under the calculator's timing and constant-rate assumptions. It is not a bank recommendation, a guaranteed return or a promise of the amount an institution will pay.",
         ],
+      },
+      {
+        id: "deposit-decision-context",
+        heading: "Before committing to recurring deposits",
+        paragraphs: [[
+          { text: "For contribution commitments and access needs, read " },
+          { text: "choosing a bank deposit", link: { kind: "article", slug: "choosing-bank-deposit" } },
+          { text: ". Check " },
+          { text: "DICGC deposit insurance", link: { kind: "article", slug: "deposit-insurance-explained" } },
+          { text: " separately from the projected maturity amount." },
+        ]],
       },
       {
         id: "inputs-and-results",

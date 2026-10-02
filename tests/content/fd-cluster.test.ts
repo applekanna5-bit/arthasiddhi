@@ -136,7 +136,7 @@ describe("FD content cluster registry and discovery", () => {
   });
 
   it("lists the core guide and all three supporting guides in Banking", () => {
-    expect(getArticlesByCategory("banking").map(({ slug }) => slug)).toEqual(["fixed-deposit-explained", ...fdSupportingSlugs, "ppf-explained", "ppf-interest-calculation", "ppf-tenure-extension", "ppf-calculator-projection-vs-actual-maturity", "rd-explained", "rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity"]);
+    expect(getArticlesByCategory("banking").map(({ slug }) => slug)).toEqual(["fixed-deposit-explained", ...fdSupportingSlugs, "ppf-explained", "ppf-interest-calculation", "ppf-tenure-extension", "ppf-calculator-projection-vs-actual-maturity", "rd-explained", "rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity", "choosing-bank-deposit", "deposit-insurance-explained"]);
   });
 
   it("curates exactly the approved two FD calculator cards", () => {
@@ -252,8 +252,8 @@ describe("FD cluster search-intent and SEO protection", () => {
 
   it("keeps all three article routes in the expanded unique sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(105);
-    expect(new Set(urls).size).toBe(105);
+    expect(urls).toHaveLength(107);
+    expect(new Set(urls).size).toBe(107);
     for (const slug of fdSupportingSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(fdArticle(slug))));
   });
 });

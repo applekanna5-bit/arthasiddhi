@@ -75,7 +75,7 @@ describe("RD cluster registry and discovery", () => {
     const registered = articles.filter(({ primaryCalculator }) => primaryCalculator === "rd");
     expect(registered.map(({ slug }) => slug)).toEqual(rdSlugs);
     expect(new Set(registered.map(getArticlePath)).size).toBe(3);
-    expect(getArticlesByCategory("banking")).toHaveLength(11);
+    expect(getArticlesByCategory("banking")).toHaveLength(13);
     for (const article of registered) {
       expect(article.category).toBe("banking");
       expect(article.primaryCalculator).toBe("rd");
@@ -198,10 +198,10 @@ describe("RD SEO, schema and sitemap", () => {
     expect(descriptions.size).toBe(3);
   });
 
-  it("keeps each route once in the unique 105-URL sitemap without a new category", () => {
+  it("keeps each route once in the unique 107-URL sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(105);
-    expect(new Set(urls).size).toBe(105);
+    expect(urls).toHaveLength(107);
+    expect(new Set(urls).size).toBe(107);
     for (const slug of rdSlugs) expect(urls.filter((url) => url === absoluteUrl(getArticlePath(rdArticle(slug))))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/banking"))).toHaveLength(1);
   });

@@ -65,6 +65,7 @@ describe("PPF cluster registry and maintenance", () => {
     expect(getArticlesByCategory("banking").map(({ slug }) => slug)).toEqual([
       "fixed-deposit-explained", "fd-interest-calculation", "fd-vs-rd", "premature-fd-withdrawal", ...ppfSlugs,
       "rd-explained", "rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity",
+      "choosing-bank-deposit", "deposit-insurance-explained",
     ]);
   });
 
@@ -195,8 +196,8 @@ describe("PPF tenure, editorial and SEO safety", () => {
 
   it("keeps all four article URLs in the expanded unique sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(105);
-    expect(new Set(urls).size).toBe(105);
+    expect(urls).toHaveLength(107);
+    expect(new Set(urls).size).toBe(107);
     for (const slug of ppfSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(ppfArticle(slug))));
     expect(urls.filter((url) => url === absoluteUrl("/learn/banking"))).toHaveLength(1);
     expect(urls.filter((url) => /\/learn\/(government-savings|ppf)$/.test(url))).toEqual([]);

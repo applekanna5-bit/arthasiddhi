@@ -128,10 +128,10 @@ describe("SWP relationships, editorial boundaries and SEO", () => {
     }
   });
 
-  it("keeps exactly three SWP URLs in the unique 105-URL sitemap", () => {
+  it("keeps exactly three SWP URLs in the unique 107-URL sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(105);
-    expect(new Set(urls).size).toBe(105);
+    expect(urls).toHaveLength(107);
+    expect(new Set(urls).size).toBe(107);
     for (const slug of slugs) expect(urls.filter((url) => url === absoluteUrl(`/learn/investments/${slug}`))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/investments"))).toHaveLength(1);
   });

@@ -10,6 +10,7 @@ import {
   type ContentCategory,
 } from "../types";
 import { bankingArticles } from "./banking";
+import { depositDecisionArticles } from "./deposit-decisions";
 import { epfArticles } from "./epf";
 import { gratuityArticles } from "./gratuity";
 import { gstArticles } from "./gst";
@@ -44,6 +45,7 @@ export const articles: readonly Article[] = [
   ...loanArticles,
   ...investmentArticles,
   ...bankingArticles,
+  ...depositDecisionArticles,
   ...personalFinanceArticles,
   ...taxArticles,
   ...retirementArticles,
