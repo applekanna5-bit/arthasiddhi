@@ -63,11 +63,11 @@ describe("bank deposit decision and insurance owners", () => {
     for (const concept of ["principal plus interest", "same right and capacity", "same holders in the same order", "different holder combination", "does not mean each holder", "sole proprietor", "set off", "not guaranteed to be immediately available"]) expect(text).toContain(concept);
     expect(article.sections.map(({ id }) => id)).toContain("different-banks");
   });
-  it("adds only temporary placements while preserving existing Banking groups and curation", () => {
+  it("places the decision owners once in the integrated Banking hub and preserves curation", () => {
     const hub = learnCategoryHubs.banking;
-    expect(hub.groups.map(({ id }) => id)).toEqual(["fixed-deposits", "recurring-deposits", "ppf"]);
-    expect(hub.topicPreview).toEqual(["Fixed deposits", "Recurring deposits", "PPF"]);
-    expect(hub.broaderGuides).toEqual([...slugs, "fd-maturity-and-renewal", "manage-recurring-deposit"]);
+    expect(hub.groups.map(({ id }) => id)).toEqual(["choose-deposit", "fixed-deposits", "recurring-deposits", "deposit-safety", "ppf"]);
+    expect(hub.topicPreview).toEqual(["Deposit choices", "FD & RD management", "Deposit safety", "PPF"]);
+    expect(hub.broaderGuides).toBeUndefined();
     const placements = [...hub.groups.flatMap(({ coreArticle, supportingArticles }) => [coreArticle, ...supportingArticles]), ...(hub.comparisons ?? []), ...(hub.broaderGuides ?? [])];
     expect(placements).toHaveLength(15);
     expect(new Set(placements).size).toBe(15);

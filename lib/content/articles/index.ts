@@ -37,7 +37,7 @@ export const categoryDescriptions: Record<ContentCategory, string> = {
   "personal-finance": "Understand household cash flow, financial priorities, debt and access needs, then explore risk, inflation and compounding before comparing products.",
   loans: "Understand how loan EMIs, tenure, interest and lender-specific costs affect monthly payments and total repayment.",
   investments: "See how regular SIP contributions build over time, how projected growth is calculated and where the assumptions matter.",
-  banking: "Understand deposits, savings products and Government-backed savings schemes such as PPF, including how contributions, rates and timing affect an estimate.",
+  banking: "Choose and manage bank deposits by understanding access, contribution patterns, maturity, protection and product terms, then use calculators to explore FD, RD and PPF projections.",
   tax: "Understand taxable-income inputs, income-tax calculations and GST arithmetic while keeping calculator assumptions clear.",
   retirement: "Understand retirement contributions, corpus projections, annuity assumptions and how to interpret calculator estimates.",
 };

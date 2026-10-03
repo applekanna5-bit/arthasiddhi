@@ -68,7 +68,7 @@ describe("Personal Finance hub integration", () => {
   });
 
   it("preserves Start here and highlighted cores in every untouched category", () => {
-    for (const other of Object.values(learnCategoryHubs).filter(({ category }) => category !== "personal-finance")) {
+    for (const other of Object.values(learnCategoryHubs).filter(({ category }) => category !== "personal-finance" && category !== "banking")) {
       for (const group of other.groups) {
         expect(group.corePresentation).toBeUndefined();
         const html = renderGroup(group);

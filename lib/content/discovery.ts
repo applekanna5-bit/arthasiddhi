@@ -80,12 +80,13 @@ export const learnCategoryHubs: Record<ContentCategory, LearnCategoryHub> = {
   },
   banking: {
     category: "banking",
-    broaderGuides: ["choosing-bank-deposit", "deposit-insurance-explained", "fd-maturity-and-renewal", "manage-recurring-deposit"],
-    topicPreview: ["Fixed deposits", "Recurring deposits", "PPF"],
+    topicPreview: ["Deposit choices", "FD & RD management", "Deposit safety", "PPF"],
     groups: [
-      { id: "fixed-deposits", title: "Fixed deposits", calculator: "fd", coreArticle: "fixed-deposit-explained", supportingArticles: ["fd-interest-calculation", "premature-fd-withdrawal"] },
-      { id: "recurring-deposits", title: "Recurring deposits", calculator: "rd", coreArticle: "rd-explained", supportingArticles: ["rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity"] },
-      { id: "ppf", title: "Public Provident Fund", calculator: "ppf", coreArticle: "ppf-explained", supportingArticles: ["ppf-interest-calculation", "ppf-tenure-extension", "ppf-calculator-projection-vs-actual-maturity"] },
+      { id: "choose-deposit", title: "Choose a deposit", coreArticle: "choosing-bank-deposit", corePresentation: "start-here", supportingArticles: [] },
+      { id: "fixed-deposits", title: "Fixed deposits: understand and manage", calculator: "fd", coreArticle: "fixed-deposit-explained", corePresentation: "overview", supportingArticles: ["fd-interest-calculation", "premature-fd-withdrawal", "fd-maturity-and-renewal"] },
+      { id: "recurring-deposits", title: "Recurring deposits: understand and manage", calculator: "rd", coreArticle: "rd-explained", corePresentation: "overview", supportingArticles: ["rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity", "manage-recurring-deposit"] },
+      { id: "deposit-safety", title: "Deposit safety", coreArticle: "deposit-insurance-explained", corePresentation: "overview", supportingArticles: [] },
+      { id: "ppf", title: "PPF", calculator: "ppf", coreArticle: "ppf-explained", corePresentation: "overview", supportingArticles: ["ppf-interest-calculation", "ppf-tenure-extension", "ppf-calculator-projection-vs-actual-maturity"] },
     ],
     comparisons: ["fd-vs-rd"],
   },

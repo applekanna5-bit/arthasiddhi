@@ -89,11 +89,11 @@ describe("deposit lifecycle ownership and safety", () => {
       for (const link of links(article)) expect(link.kind === "article" ? getArticleBySlug(link.slug) : calculators[link.slug]).toBeDefined();
     }
   });
-  it("uses temporary broader placements without implementing V2.3D or changing calculator curation", () => {
+  it("integrates lifecycle owners once without changing calculator curation", () => {
     const hub = learnCategoryHubs.banking;
-    expect(hub.groups.map(({ id }) => id)).toEqual(["fixed-deposits", "recurring-deposits", "ppf"]);
-    expect(hub.topicPreview).toEqual(["Fixed deposits", "Recurring deposits", "PPF"]);
-    expect(hub.broaderGuides).toEqual(["choosing-bank-deposit", "deposit-insurance-explained", ...slugs]);
+    expect(hub.groups.map(({ id }) => id)).toEqual(["choose-deposit", "fixed-deposits", "recurring-deposits", "deposit-safety", "ppf"]);
+    expect(hub.topicPreview).toEqual(["Deposit choices", "FD & RD management", "Deposit safety", "PPF"]);
+    expect(hub.broaderGuides).toBeUndefined();
     const placed = [...hub.groups.flatMap(({ coreArticle, supportingArticles }) => [coreArticle, ...supportingArticles]), ...(hub.comparisons ?? []), ...(hub.broaderGuides ?? [])];
     expect(placed).toHaveLength(15);
     expect(new Set(placed).size).toBe(15);
