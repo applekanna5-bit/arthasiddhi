@@ -7,7 +7,7 @@ export const depositDecisionArticles = [
     description: "Examine access needs, contribution timing, tenure, payout terms and deposit protection before choosing how to hold money in a bank deposit.",
     category: "banking",
     publishedAt: "2026-10-02",
-    updatedAt: "2026-10-02",
+    updatedAt: "2026-10-03",
     readingTime: "6 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: null,
@@ -40,6 +40,7 @@ export const depositDecisionArticles = [
       {
         id: "tenure", heading: "Read tenure against the expected use date",
         paragraphs: [
+          [{ text: "For the later operational decision, see " }, { text: "FD maturity and renewal", link: { kind: "article", slug: "fd-maturity-and-renewal" } }, { text: " or " }, { text: "managing an RD", link: { kind: "article", slug: "manage-recurring-deposit" } }, { text: ". These guides address what to check after opening." }],
           "Compare the contractual maturity date with when the money may be needed. A reasonably known use date can help frame the comparison, but plans may change. A longer tenure is not automatically better, and there is no universal optimal tenure.",
           "Check maturity instructions as well as tenure: whether money is paid out or renewed, what is renewed and which terms apply next. A present rate or projection does not settle the terms available for a later renewal or reinvestment.",
           [{ text: "For the broader relationship between uncertainty and goal timing, read " }, { text: "risk, return and time horizon", link: { kind: "article", slug: "risk-return-time-horizon" } }, { text: ". Deposit-specific terms remain the question here." }],

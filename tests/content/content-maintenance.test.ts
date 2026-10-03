@@ -28,15 +28,15 @@ describe("maintenance inventory and policy coverage", () => {
     const local = ruleSensitive.filter(({ maintenance }) => maintenance.kind === "rule-sensitive" && !maintenance.ruleSetId);
     const unresolved = ruleSensitive.filter(({ maintenance }) => maintenance.kind === "rule-sensitive" && maintenance.ruleSetId && !Object.values(financialRuleSets).some(({ id }) => id === maintenance.ruleSetId));
     expect(Object.keys(calculators)).toHaveLength(17);
-    expect(articles).toHaveLength(74);
+    expect(articles).toHaveLength(76);
     expect(publishedCategories).toHaveLength(6);
     expect(evergreen).toHaveLength(57);
-    expect(ruleSensitive).toHaveLength(17);
-    expect(Object.values(financialRuleSets)).toHaveLength(7);
+    expect(ruleSensitive).toHaveLength(19);
+    expect(Object.values(financialRuleSets)).toHaveLength(8);
     expect(local).toHaveLength(0);
     expect(unresolved).toHaveLength(0);
     expect(Object.keys(ruleSetMaintenancePolicies).toSorted()).toEqual(Object.values(financialRuleSets).map(({ id }) => id).toSorted());
-    expect(new Set(buildSitemap().map(({ url }) => url)).size).toBe(107);
+    expect(new Set(buildSitemap().map(({ url }) => url)).size).toBe(109);
   });
 
   it("uses distinct valid review windows", () => {
@@ -99,12 +99,12 @@ describe("rule-specific boundaries", () => {
   });
 
   it("reports EPF's encoded pending-notification context", () => {
-    const row = buildMaintenanceReport("2026-10-02").find(({ ruleSetId }) => ruleSetId === epfRuleSet.id);
+    const row = buildMaintenanceReport("2026-10-03").find(({ ruleSetId }) => ruleSetId === epfRuleSet.id);
     expect(row?.reasons.some(({ code }) => code === "pending-notification")).toBe(true);
   });
 
   it("treats GST's missing CBIC access date as advisory only", () => {
-    const row = buildMaintenanceReport("2026-10-02").find(({ ruleSetId }) => ruleSetId === gstRuleSet.id);
+    const row = buildMaintenanceReport("2026-10-03").find(({ ruleSetId }) => ruleSetId === gstRuleSet.id);
     expect(row?.status).toBe("current");
     expect(row?.sourceAdvisories).toEqual([expect.objectContaining({ code: "missing-source-access-date", sourceReference: gstRuleSet.sources[0].reference })]);
   });
@@ -112,15 +112,15 @@ describe("rule-specific boundaries", () => {
 
 describe("article inheritance, blast radius, and evergreen exclusion", () => {
   it("applies one shared status to every rule-sensitive dependent", () => {
-    const report = buildMaintenanceReport("2026-10-02");
+    const report = buildMaintenanceReport("2026-10-03");
     const sensitive = articles.filter(({ maintenance }) => maintenance.kind === "rule-sensitive");
     for (const article of sensitive) {
-      const result = getArticleMaintenanceStatus(article, "2026-10-02");
+      const result = getArticleMaintenanceStatus(article, "2026-10-03");
       const row = report.find(({ ruleSetId }) => ruleSetId === result?.ruleSetId);
       expect(result?.status).toBe(row?.status);
       expect(row?.articleSlugs).toContain(article.slug);
     }
-    expect(report.filter(({ ruleSetId }) => ruleSetId !== "dicgc-deposit-insurance-2026-10").every(({ calculators: dependents }) => dependents.length > 0)).toBe(true);
+    expect(report.filter(({ ruleSetId }) => !["dicgc-deposit-insurance-2026-10", "rbi-commercial-bank-domestic-deposits-2026-10"].includes(ruleSetId)).every(({ calculators: dependents }) => dependents.length > 0)).toBe(true);
     expect(report.find(({ ruleSetId }) => ruleSetId === "dicgc-deposit-insurance-2026-10")?.calculators).toEqual([]);
   });
 
@@ -133,7 +133,7 @@ describe("article inheritance, blast radius, and evergreen exclusion", () => {
 describe("immutability", () => {
   it("does not mutate rules, articles, sources, or dates", () => {
     const before = structuredClone({ financialRuleSets, articles });
-    buildMaintenanceReport("2026-10-02");
+    buildMaintenanceReport("2026-10-03");
     getArticleMaintenanceStatus(articles.find(({ maintenance }) => maintenance.kind === "rule-sensitive")!, "2026-09-12");
     expect({ financialRuleSets, articles }).toEqual(before);
   });

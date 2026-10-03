@@ -25,13 +25,13 @@ describe("bank deposit decision and insurance owners", () => {
     }
   });
   it("preserves inventory and gives each new route one sitemap entry", () => {
-    expect(articles).toHaveLength(74);
-    expect(getArticlesByCategory("banking")).toHaveLength(13);
+    expect(articles).toHaveLength(76);
+    expect(getArticlesByCategory("banking")).toHaveLength(15);
     expect(getArticlesByCategory("personal-finance")).toHaveLength(10);
     expect(Object.keys(calculators)).toHaveLength(17);
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(107);
-    expect(new Set(urls).size).toBe(107);
+    expect(urls).toHaveLength(109);
+    expect(new Set(urls).size).toBe(109);
     for (const slug of slugs) expect(urls.filter((url) => url === absoluteUrl(`/learn/banking/${slug}`))).toHaveLength(1);
   });
   it("keeps both owners outside primary calculator and frozen analytics contracts", () => {
@@ -67,10 +67,10 @@ describe("bank deposit decision and insurance owners", () => {
     const hub = learnCategoryHubs.banking;
     expect(hub.groups.map(({ id }) => id)).toEqual(["fixed-deposits", "recurring-deposits", "ppf"]);
     expect(hub.topicPreview).toEqual(["Fixed deposits", "Recurring deposits", "PPF"]);
-    expect(hub.broaderGuides).toEqual(slugs);
+    expect(hub.broaderGuides).toEqual([...slugs, "fd-maturity-and-renewal", "manage-recurring-deposit"]);
     const placements = [...hub.groups.flatMap(({ coreArticle, supportingArticles }) => [coreArticle, ...supportingArticles]), ...(hub.comparisons ?? []), ...(hub.broaderGuides ?? [])];
-    expect(placements).toHaveLength(13);
-    expect(new Set(placements).size).toBe(13);
+    expect(placements).toHaveLength(15);
+    expect(new Set(placements).size).toBe(15);
     expect(calculatorGuideCuration.fd).toEqual({ core: "fixed-deposit-explained", supporting: ["fd-interest-calculation", "fd-vs-rd"] });
     expect(calculatorGuideCuration.ppf.supporting).toEqual(["ppf-interest-calculation", "ppf-calculator-projection-vs-actual-maturity"]);
   });

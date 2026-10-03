@@ -240,5 +240,43 @@ export const dicgcRuleSet = {
     ],
 } satisfies FinancialRuleSet<{ coverageCeilingRupees: number; includesPrincipalAndInterest: boolean; aggregationBasis: string }>;
 
+// Shared content-only facts: no calculator consumes this rule set. Read the
+// official archived consolidated HTML with the later effective amendments;
+// the challenged 153MD.PDF is not a verified source.
+export const domesticDepositRuleSet = {
+  id: "rbi-commercial-bank-domestic-deposits-2026-10",
+  label: "RBI commercial-bank domestic term deposits",
+  effectivePeriod: "Ordinary resident domestic rupee FD/RD; RBI commercial-bank framework with amendments effective by 1 October 2026",
+  lastVerified: "2026-10-03",
+  rules: {
+    applicability: "Ordinary resident domestic rupee term deposits at commercial banks within paragraph 4; excludes foreign-branch operations",
+    excludedContexts: ["Regional Rural Banks", "Small Finance Banks", "Payments Banks", "Local Area Banks", "co-operative banks", "NRE", "NRO", "FCNR(B)", "foreign-branch operations"],
+    termDepositIncludesRecurringDeposit: true,
+    ordinaryUnpaidMaturityInterest: "Lower of applicable savings-account rate and contracted rate on matured term deposit; paragraph 16",
+    overdueRenewalFramework: "Paragraph 15 subject to paragraph 7, including approved bank interest-rate policy",
+    prematureWithdrawalRate: "Rate applicable to amount and actual period held, not contracted rate; paragraph 11(1)",
+    prematurePenaltyPolicy: "Board or delegated Board committee approved policy; paragraph 22",
+    penaltyDisclosure: "Components disclosed at acceptance; otherwise no penalty; paragraph 23",
+  },
+  sources: [
+    { title: "Commercial Banks – Interest Rate on Deposits Directions, 2025 — current version landing page (1 October 2026)", authority: "Reserve Bank of India", reference: "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=13157", sourceType: "official", accessedAt: "2026-10-03" },
+    { title: "Original direction (28 November 2025) — commencement, applicability and repeal", authority: "Reserve Bank of India", reference: "https://www.rbi.org.in/Scripts/NotificationPreVersion.aspx?Histid=129&id=13157", sourceType: "official", accessedAt: "2026-10-03" },
+    { title: "Consolidated direction (25 August 2026) — paragraphs 6, 7, 11, 15–16 and 22–23; read with subsequent effective amendment", authority: "Reserve Bank of India", reference: "https://www.rbi.org.in/Scripts/NotificationPreVersion.aspx?Histid=324&id=13157", sourceType: "official", accessedAt: "2026-10-03" },
+    { title: "First Amendment (17 June 2026) — NRE/FCNR(B) provisions outside this article scope", authority: "Reserve Bank of India", reference: "https://rbi.org.in/scripts/NotificationUser.aspx?Id=13509&Mode=0", sourceType: "official", accessedAt: "2026-10-03", effectiveFrom: "2026-06-17" },
+    { title: "Second Amendment (30 July 2026) — disclosure and bulk-deposit changes, effective 1 October 2026", authority: "Reserve Bank of India", reference: "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13656&Mode=0", sourceType: "official", accessedAt: "2026-10-03", effectiveFrom: "2026-10-01" },
+    { title: "Third Amendment (25 August 2026) — temporary NRE/FCNR(B) relaxation period outside this article scope", authority: "Reserve Bank of India", reference: "https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=13685&Mode=0", sourceType: "official", accessedAt: "2026-10-03", effectiveFrom: "2026-08-25" },
+  ],
+} satisfies FinancialRuleSet<{
+  applicability: string;
+  excludedContexts: string[];
+  termDepositIncludesRecurringDeposit: boolean;
+  ordinaryUnpaidMaturityInterest: string;
+  overdueRenewalFramework: string;
+  prematureWithdrawalRate: string;
+  prematurePenaltyPolicy: string;
+  penaltyDisclosure: string;
+}>;
+
 export const financialRuleSets = {
+  domesticDeposits: domesticDepositRuleSet,
   dicgc: dicgcRuleSet, incomeTax: incomeTaxRuleSet, ppf: ppfRuleSet, gst: gstRuleSet, epf: epfRuleSet, nps: npsRuleSet, gratuity: gratuityRuleSet } as const;

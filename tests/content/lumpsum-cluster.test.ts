@@ -104,10 +104,10 @@ describe("Lumpsum relationships, boundaries and SEO", () => {
     }
   });
 
-  it("keeps exactly two Lumpsum URLs in the unique 107-URL sitemap", () => {
+  it("keeps exactly two Lumpsum URLs in the unique 109-URL sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(107);
-    expect(new Set(urls).size).toBe(107);
+    expect(urls).toHaveLength(109);
+    expect(new Set(urls).size).toBe(109);
     for (const slug of slugs) expect(urls.filter((url) => url === absoluteUrl(`/learn/investments/${slug}`))).toHaveLength(1);
     expect(urls.filter((url) => url === absoluteUrl("/learn/investments"))).toHaveLength(1);
   });

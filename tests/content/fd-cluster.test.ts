@@ -65,7 +65,7 @@ describe("FD search answers and calculator boundaries", () => {
     expect(text).toContain("principal, entered annual interest rate, tenure and selected compounding frequency");
     expect(text).toContain("does not determine the institution's contractual payout");
     expect(article.primaryCalculator).toBe("fd");
-    expect(articles.filter(({ slug }) => /^fd-matur(?:e|ity)/.test(slug))).toEqual([]);
+    expect(articles.filter(({ slug }) => /^fd-matur(?:e|ity)/.test(slug)).map(({ slug }) => slug)).toEqual(["fd-maturity-and-renewal"]);
   });
 
   it("answers simple versus compound before the formula without generalizing to all deposits", () => {
@@ -136,7 +136,7 @@ describe("FD content cluster registry and discovery", () => {
   });
 
   it("lists the core guide and all three supporting guides in Banking", () => {
-    expect(getArticlesByCategory("banking").map(({ slug }) => slug)).toEqual(["fixed-deposit-explained", ...fdSupportingSlugs, "ppf-explained", "ppf-interest-calculation", "ppf-tenure-extension", "ppf-calculator-projection-vs-actual-maturity", "rd-explained", "rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity", "choosing-bank-deposit", "deposit-insurance-explained"]);
+    expect(getArticlesByCategory("banking").map(({ slug }) => slug)).toEqual(["fixed-deposit-explained", ...fdSupportingSlugs, "ppf-explained", "ppf-interest-calculation", "ppf-tenure-extension", "ppf-calculator-projection-vs-actual-maturity", "rd-explained", "rd-interest-calculation", "rd-calculator-projection-vs-actual-maturity", "choosing-bank-deposit", "deposit-insurance-explained", "fd-maturity-and-renewal", "manage-recurring-deposit"]);
   });
 
   it("curates exactly the approved two FD calculator cards", () => {
@@ -252,8 +252,8 @@ describe("FD cluster search-intent and SEO protection", () => {
 
   it("keeps all three article routes in the expanded unique sitemap", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(107);
-    expect(new Set(urls).size).toBe(107);
+    expect(urls).toHaveLength(109);
+    expect(new Set(urls).size).toBe(109);
     for (const slug of fdSupportingSlugs) expect(urls).toContain(absoluteUrl(getArticlePath(fdArticle(slug))));
   });
 });

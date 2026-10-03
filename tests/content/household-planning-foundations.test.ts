@@ -18,7 +18,7 @@ function links(article: Article) {
 
 describe("V2.2C household planning foundations", () => {
   it("adds exactly three declared, unique Personal Finance articles and no calculators", () => {
-    expect(articles).toHaveLength(74);
+    expect(articles).toHaveLength(76);
     expect(getArticlesByCategory("personal-finance")).toHaveLength(8 + 2);
     expect(Object.keys(calculators)).toHaveLength(17);
     expect(getArticleRegistryIssues()).toEqual([]);
@@ -63,7 +63,7 @@ describe("V2.2C household planning foundations", () => {
 
   it("has stable canonical routes once each in the expanded sitemap and unique metadata", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(107);
+    expect(urls).toHaveLength(109);
     expect(new Set(urls).size).toBe(urls.length);
     expect(new Set(articles.map(({ title }) => title)).size).toBe(articles.length);
     expect(new Set(articles.map(({ description }) => description)).size).toBe(articles.length);

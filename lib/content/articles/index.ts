@@ -11,6 +11,7 @@ import {
 } from "../types";
 import { bankingArticles } from "./banking";
 import { depositDecisionArticles } from "./deposit-decisions";
+import { depositLifecycleArticles } from "./deposit-lifecycle";
 import { epfArticles } from "./epf";
 import { gratuityArticles } from "./gratuity";
 import { gstArticles } from "./gst";
@@ -46,6 +47,7 @@ export const articles: readonly Article[] = [
   ...investmentArticles,
   ...bankingArticles,
   ...depositDecisionArticles,
+  ...depositLifecycleArticles,
   ...personalFinanceArticles,
   ...taxArticles,
   ...retirementArticles,

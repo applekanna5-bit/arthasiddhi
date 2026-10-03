@@ -24,7 +24,7 @@ function text(article: Article) {
 
 describe("V2.2D debt and investment-readiness foundations", () => {
   it("adds exactly two declared articles in Personal Finance without adding calculators", () => {
-    expect(articles).toHaveLength(74);
+    expect(articles).toHaveLength(76);
     expect(getArticlesByCategory("personal-finance")).toHaveLength(8 + 2);
     expect(Object.keys(calculators)).toHaveLength(17);
     expect(getArticleRegistryIssues()).toEqual([]);
@@ -131,7 +131,7 @@ describe("V2.2D debt and investment-readiness foundations", () => {
 
   it("adds each canonical once to the sitemap and existing discovery list", () => {
     const urls = buildSitemap().map(({ url }) => url);
-    expect(urls).toHaveLength(107);
+    expect(urls).toHaveLength(109);
     expect(new Set(urls).size).toBe(urls.length);
     for (const slug of newSlugs) {
       expect(urls.filter((url) => url === absoluteUrl(`/learn/personal-finance/${slug}`))).toHaveLength(1);

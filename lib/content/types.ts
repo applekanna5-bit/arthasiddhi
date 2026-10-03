@@ -44,6 +44,8 @@ export const articleSlugs = [
   "fixed-deposit-explained",
   "choosing-bank-deposit",
   "deposit-insurance-explained",
+  "fd-maturity-and-renewal",
+  "manage-recurring-deposit",
   "fd-interest-calculation",
   "fd-vs-rd",
   "premature-fd-withdrawal",
