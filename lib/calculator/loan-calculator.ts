@@ -22,6 +22,10 @@ export function formatIndianCurrency(value: number): string {
 export function calculateFromFormValues(
   values: CalculatorFormValues
 ): LoanResult {
+  if (values.principal.trim() === "") throw new Error("Loan amount is required.");
+  if (values.annualInterestRate.trim() === "") throw new Error("Annual interest rate is required.");
+  if (values.tenureYears.trim() === "") throw new Error("Loan tenure is required.");
+
   return calculateLoanDetails({
     principal: Number(values.principal),
     annualInterestRate: Number(values.annualInterestRate),

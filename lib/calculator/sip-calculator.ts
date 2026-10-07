@@ -12,6 +12,19 @@ export interface SipResult {
   futureValue: number;
 }
 
+/** Reject unfinished required inputs before converting values for the unchanged model. */
+export function calculateSipFromFormValues(values: { [Field in keyof SipInput]: string }): SipResult {
+  if (values.monthlyInvestment.trim() === "") throw new Error("Monthly investment is required.");
+  if (values.annualReturnRate.trim() === "") throw new Error("Expected annual return is required.");
+  if (values.investmentYears.trim() === "") throw new Error("Investment period is required.");
+
+  return calculateSip({
+    monthlyInvestment: Number(values.monthlyInvestment),
+    annualReturnRate: Number(values.annualReturnRate),
+    investmentYears: Number(values.investmentYears),
+  });
+}
+
 /**
  * Calculates SIP growth using beginning-of-month contributions and a monthly rate
  * derived from the annual percentage rate: FV = P * (((1 + r)^n - 1) / r) * (1 + r).
