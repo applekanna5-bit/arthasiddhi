@@ -4,6 +4,30 @@
   --font-sans: var(--font-geist-sans);
 }
 
+/* Opt-in ArthaSiddhi brand foundation. Existing page colors remain unchanged.
+   Use var(--as-*) in CSS or Tailwind arbitrary values, e.g.
+   bg-[var(--as-action-primary)]. These are deliberately outside @theme:
+   they neither replace slate/emerald nor generate named Tailwind utilities.
+   Decorative copper and subtle borders must not convey essential text/control
+   information alone. Control and focus contrast require rendered verification. */
+:root {
+  --as-brand-navy: #142a38;
+  --as-brand-teal: #17645d;
+  --as-brand-teal-hover: #104e49;
+  --as-brand-copper: #9a512f;
+  --as-brand-copper-decorative: #b87450;
+  --as-surface-page: #faf7f2;
+  --as-surface-card: #ffffff;
+  --as-surface-soft: #f0f4f1;
+  --as-text-primary: var(--as-brand-navy);
+  --as-text-secondary: #59666b;
+  --as-border-subtle: #dcddd6;
+  --as-border-control: #73817d;
+  --as-action-primary: var(--as-brand-teal);
+  --as-action-primary-hover: var(--as-brand-teal-hover);
+  --as-text-on-action: var(--as-surface-card);
+}
+
 body {
   margin: 0;
   background: #f8fafc;
