@@ -126,3 +126,23 @@ body {
     transition: none;
   }
 }
+
+/* Calculator directory only: leave tool interfaces and other pages untouched. */
+.calculator-directory .directory-display {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  text-wrap: balance;
+}
+.calculator-directory .directory-card {
+  box-shadow: 0 2px 8px rgb(20 42 56 / 0.025);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.calculator-directory .directory-card:hover {
+  border-color: var(--as-brand-teal);
+  box-shadow: 0 5px 18px rgb(20 42 56 / 0.06);
+}
+@media (prefers-reduced-motion: reduce) {
+  .calculator-directory .directory-card {
+    transition: none;
+  }
+}
