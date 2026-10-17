@@ -21,6 +21,8 @@ describe("Home affordability planning article", () => {
     expect(getArticle("banking", slug)).toBeUndefined();
     expect(getArticleRegistryIssues()).toEqual([]);
     expect(article.title).toBe("How Much House Can I Afford?");
+    expect(article.publishedAt).toBe("2026-09-30");
+    expect(article.updatedAt).toBe("2026-10-17");
     expect(article.description.length).toBeGreaterThan(50);
     expect(article.readingTime).toMatch(/^\d+ min read$/);
     for (const date of [article.publishedAt, article.updatedAt]) {
@@ -59,6 +61,43 @@ describe("Home affordability planning article", () => {
     expect(Object.keys(calculators)).not.toContain(slug);
     const ids = article.sections.map(({ id }) => id);
     expect(ids.indexOf("test-loan-scenarios")).toBeGreaterThan(ids.indexOf("stress-test"));
+  });
+
+  it("reconciles the hypothetical monthly budget with its displayed inputs", () => {
+    const monthly = article.sections.find(({ id }) => id === "monthly-cash-flow")!;
+    const amounts = monthly.table!.rows.map((row) => Number(row[1].replace(/[^\d]/g, "")));
+    expect(amounts).toEqual([120_000, 15_000, 45_000, 25_000, 35_000]);
+    expect(amounts[0] - amounts[1] - amounts[2] - amounts[3]).toBe(amounts[4]);
+    const copy = JSON.stringify(monthly);
+    expect(copy).toContain("₹1,20,000 − ₹15,000 − ₹45,000 − ₹25,000 = ₹35,000");
+    expect(copy).toContain("not a universal affordability rule, regulatory limit or lender approval calculation");
+    expect(copy).toContain("household-selected buffer");
+  });
+
+  it("reconciles retained cash, separate costs, contribution and required borrowing", () => {
+    const purchase = article.sections.find(({ id }) => id === "price-contribution-and-borrowing")!;
+    const amounts = purchase.table!.rows.map((row) => Number(row[1].replace(/[^\d]/g, "")));
+    expect(amounts).toEqual([2_000_000, 500_000, 300_000, 1_200_000, 5_000_000, 3_800_000]);
+    expect(amounts[0] - amounts[1] - amounts[2]).toBe(amounts[3]);
+    expect(amounts[4] - amounts[3]).toBe(amounts[5]);
+    const copy = JSON.stringify(purchase);
+    expect(copy).toContain("₹20,00,000 − ₹5,00,000 − ₹3,00,000 = ₹12,00,000");
+    expect(copy).toContain("₹50,00,000 − ₹12,00,000 = ₹38,00,000");
+    expect(copy).toContain("not a fixed amount or rate for stamp duty, registration, taxes, lender fees or other charges");
+    expect(copy).toContain("assumes neither a lender's loan-to-value ratio nor approval criteria");
+    expect(copy).toContain("no other near-term commitments in this example");
+    expect(copy).toContain("Do not subtract the separate costs again");
+  });
+
+  it("takes required borrowing to the existing calculator without claiming approval", () => {
+    const scenario = article.sections.find(({ id }) => id === "test-loan-scenarios")!;
+    const copy = JSON.stringify(scenario);
+    expect(copy).toContain("enter ₹38,00,000 as the loan amount");
+    expect(copy).toContain("choose an illustrative annual interest rate and tenure");
+    expect(copy).toContain("Compare the resulting EMI against this household's ₹35,000 monthly budget");
+    expect(copy).toContain("reconsider the candidate property price, contribution or assumptions");
+    expect(copy).toContain("still does not establish lender eligibility or personal affordability");
+    expect(scenario.callout?.text).toEqual(expect.arrayContaining([expect.objectContaining({ link: { kind: "calculator", slug: "home-loan" } })]));
   });
 
   it("protects the planning distinction without prescribing numerical affordability rules", () => {

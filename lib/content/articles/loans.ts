@@ -854,7 +854,7 @@ export const loanArticles = [
     description: "Build a property-price range around usable savings, retained liquidity and household cash flow before testing a home-loan EMI.",
     category: "loans",
     publishedAt: "2026-09-30",
-    updatedAt: "2026-09-30",
+    updatedAt: "2026-10-17",
     readingTime: "7 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: null,
@@ -901,6 +901,7 @@ export const loanArticles = [
         paragraphs: [
           "Use regular household income available for spending, rather than gross salary alone. Separate dependable income from bonuses or variable receipts, and consider whether both incomes in a two-income household are likely to continue. A strong recent month may not represent a normal year.",
           "Build a post-purchase spending plan with the following commitments visible:",
+          "For a hypothetical Indian household, monthly spendable income of ₹1,20,000 minus existing EMIs of ₹15,000, living expenses of ₹45,000 and ₹25,000 for ongoing goals, estimated ownership costs and a household-selected buffer leaves an illustrative housing EMI budget: ₹1,20,000 − ₹15,000 − ₹45,000 − ₹25,000 = ₹35,000. These are assumed household amounts, not a universal affordability rule, regulatory limit or lender approval calculation. Recheck whether the remaining payment budget feels comfortable under the stress questions below.",
         ],
         list: [
           "Essential living expenses, dependants' needs and existing EMIs or other debt payments.",
@@ -909,6 +910,7 @@ export const loanArticles = [
           "Foreseeable obligations, including irregular annual bills and any period of overlapping rent and home payments.",
           "Room for spending changes, income variability and expenses you cannot yet predict.",
         ],
+        table: { caption: "Hypothetical monthly household worksheet", headers: ["Monthly item", "Amount"], rows: [["Spendable household income", "₹1,20,000"], ["Less: existing EMIs", "₹15,000"], ["Less: living expenses", "₹45,000"], ["Less: ongoing goals, estimated ownership costs and household-selected buffer", "₹25,000"], ["Remaining illustrative housing EMI budget", "₹35,000"]] },
         callout: { title: "Keep the trade-offs visible", text: "Ask what would have to stop or shrink to make room for the proposed EMI. If the plan depends on cancelling a goal, record that decision explicitly. The remaining cash is a planning input, not an ArthaSiddhi eligibility formula or a universal EMI-to-income threshold." },
       },
       {
@@ -918,7 +920,10 @@ export const loanArticles = [
           [{ text: "For each candidate property price, subtract the " }, { text: "own contribution you plan to put toward that price", link: { kind: "article", slug: "home-loan-down-payment" } }, { text: ". The difference is the amount that may need financing. Keep separately paid costs outside this subtraction; they have already reduced the cash available for your contribution." }],
           "This arithmetic identifies a financing requirement, not a sanction. The lender's assessment can depend on your borrower profile, repayment capacity, the property and applicable rules and policies. Confirm the actual amount offered and which components can be financed; do not assume every price component or transaction cost is covered.",
           "Try a lower and a higher candidate price using the same retained-cash plan. Record the own contribution, separate costs, financing gap and eventual EMI estimate for each. If the required borrowing is unavailable, or its payments displace essential commitments, revisit the price range, timing or contribution rather than assuming the gap will resolve itself.",
+          "For the same hypothetical household, assume ₹20,00,000 of available savings, ₹5,00,000 of emergency liquidity deliberately retained and ₹3,00,000 reserved for separately paid transaction, moving and setup costs, with no other near-term commitments in this example. Funds remaining for the down payment are ₹20,00,000 − ₹5,00,000 − ₹3,00,000 = ₹12,00,000. At an illustrative candidate property price of ₹50,00,000, required borrowing is ₹50,00,000 − ₹12,00,000 = ₹38,00,000.",
+          "The ₹3,00,000 cost allowance is hypothetical, not a fixed amount or rate for stamp duty, registration, taxes, lender fees or other charges. Replace it with the costs and payment dates applicable to the actual purchase. The ₹38,00,000 financing gap assumes neither a lender's loan-to-value ratio nor approval criteria; the lender may offer a different amount or decline the application. Do not subtract the separate costs again from the down payment.",
         ],
+        table: { caption: "Hypothetical purchase-cash and borrowing worksheet", headers: ["Purchase item", "Amount"], rows: [["Total available savings", "₹20,00,000"], ["Less: emergency liquidity retained", "₹5,00,000"], ["Less: separately paid transaction, moving and setup costs", "₹3,00,000"], ["Remaining funds for down payment", "₹12,00,000"], ["Candidate property price", "₹50,00,000"], ["Borrowing required after down payment", "₹38,00,000"]] },
       },
       {
         id: "stress-test",
@@ -941,6 +946,7 @@ export const loanArticles = [
         heading: "Now test a loan amount, rate and tenure",
         paragraphs: [
           "Once you have a financing amount to investigate, use the Home Loan calculator to model scheduled EMI, interest, total repayment and the monthly repayment schedule over a chosen tenure. Its comparison feature keeps the principal shared while you change tenure or the assumed rate.",
+          "To continue the example, enter ₹38,00,000 as the loan amount in the Home Loan EMI Calculator, then choose an illustrative annual interest rate and tenure. Compare the resulting EMI against this household's ₹35,000 monthly budget. If it is too high, reconsider the candidate property price, contribution or assumptions, keeping the retained emergency liquidity and separate purchase costs visible. A longer tenure can reduce the EMI while increasing scheduled interest; a lower assumed rate is not a promise of an available offer. An EMI within ₹35,000 still does not establish lender eligibility or personal affordability.",
           "Each scenario uses a monthly reducing balance and holds the entered rate constant, with regular monthly payments and no fees, missed payments or prepayments. Trying another rate is a sensitivity check, not a forecast of future floating-rate resets.",
           "The calculator does not determine personal affordability, lender eligibility, approval, the first EMI debit date, property value, purchase costs or prepayment outcomes. Bring its payment estimate back into your household plan and repeat the stress questions before narrowing the property-price range.",
         ],
