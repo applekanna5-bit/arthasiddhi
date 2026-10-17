@@ -8,6 +8,8 @@ import { buildSitemap } from "../../lib/content/sitemap";
 import type { Article, ArticleInternalLink, ArticleSection, ArticleSlug } from "../../lib/content/types";
 
 const taxSlugs = ["new-tax-regime-slab-calculation", "section-87a-rebate", "health-education-cess-calculation", "gross-income-vs-taxable-income", "income-tax-calculator-vs-payroll-tds"] as const satisfies readonly ArticleSlug[];
+const editedTaxSlugs: readonly ArticleSlug[] = taxSlugs.slice(0, 3);
+const modifiedDate = (slug: ArticleSlug) => editedTaxSlugs.includes(slug) ? "2026-10-17" : "2026-08-23";
 const ruleSetId = "income-tax-tax-year-2026-27";
 const money = (value: number) => `₹${new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 }).format(value)}`;
 const calculate = (income: number) => calculateIncomeTax({ regime: "new", ageCategory: "below-60", taxableOrdinaryIncome: income }, incomeTaxRuleSet);
@@ -40,7 +42,7 @@ describe("Income Tax cluster registry and maintenance", () => {
       const article = taxArticle(slug);
       expect(article.maintenance).toEqual({ kind: "rule-sensitive", ruleSetId });
       expect(article.publishedAt).toBe("2026-08-18");
-      expect(article.updatedAt).toBe("2026-08-23");
+      expect(article.updatedAt).toBe(modifiedDate(slug));
       expect(getArticleMaintenanceContext(article)).toEqual({ applicablePeriod: "Tax Year 2026–27 (FY 2026–27)", periodLabels: [{ label: "Applicable Tax Year", value: "Tax Year 2026–27" }, { label: "Corresponding Financial Year", value: "FY 2026–27" }], verifiedAt: "2026-09-12" });
       const references = getArticleReferences(article);
       expect(references.length).toBeGreaterThan(0);
@@ -159,13 +161,56 @@ describe("Income Tax scope, intent and editorial safety", () => {
   });
 });
 
+describe("Tax search clarity and legislative safeguards", () => {
+  it("distinguishes the assessment year from the current tax year", () => {
+    for (const slug of ["new-tax-regime-slab-calculation", "section-87a-rebate"] as const) {
+      const article = taxArticle(slug);
+      expect(article.title).toContain("Tax Year 2026–27");
+      expect(text(article)).toContain("ay 2026–27");
+      expect(text(article)).toContain("fy 2025–26");
+      expect(text(article)).toContain("fy 2026–27");
+      expect(article.references).toEqual(expect.arrayContaining([expect.objectContaining({
+        url: "https://www.incometaxindia.gov.in/documents/d/guest/income_tax_act_2025_as_amended_by_fa_act_2026-pdf",
+        accessedAt: "2026-10-17",
+      })]));
+    }
+  });
+
+  it("qualifies rebate eligibility, special-rate tax and statutory rounding", () => {
+    const article = taxArticle("section-87a-rebate");
+    expect(article.title).toContain("Section 87A to Section 156");
+    const eligibility = JSON.stringify(section(article, "eligibility"));
+    expect(eligibility).toContain("total income, including any special-rate income");
+    expect(eligibility).toContain("both the new-regime rebate and marginal relief");
+    expect(eligibility).toContain("is not offset by this relief");
+    expect(eligibility).toContain("A non-resident or HUF does not qualify");
+    const cliff = JSON.stringify(section(article, "cliff"));
+    expect(cliff).toContain("Section 516");
+    expect(cliff).toContain("nearest ₹10 after ignoring paise");
+    expect(cliff).toContain("₹12,00,001 would first round to ₹12,00,000");
+    expect(cliff).toContain("not an amount payable on filing");
+  });
+
+  it("explains independently checked slab and cess totals, including zero cess", () => {
+    const core = taxArticle("new-tax-regime-slab-calculation");
+    expect(JSON.stringify(section(core, "read-sequence"))).toContain("₹20,000 + ₹40,000 + ₹45,000 = ₹1,05,000");
+    expect(section(core, "worked-example").table?.rows).toEqual([["₹1,05,000", "₹0", "₹0", "₹1,05,000", "₹4,200", "₹1,09,200"]]);
+    const cess = taxArticle("health-education-cess-calculation");
+    expect(cess.description).toContain("income tax plus applicable surcharge, after relevant rebate or relief");
+    expect(JSON.stringify(section(cess, "example"))).toContain("₹75,000 + ₹3,000 = ₹78,000");
+    expect(section(cess, "example").table?.rows).toEqual([["₹75,000", "₹0", "₹0", "₹75,000", "₹3,000", "₹78,000"]]);
+    expect(JSON.stringify(section(cess, "order"))).toContain("cess base is zero and cess is ₹0");
+    expect(calculate(1_200_000)).toMatchObject({ rebate: 60_000, taxAfterRelief: 0, cess: 0, totalTax: 0 });
+  });
+});
+
 describe("Income Tax SEO and sitemap", () => {
   it("uses unique metadata, production canonicals and existing schemas", () => {
     const titles = new Set<string>(); const descriptions = new Set<string>();
     for (const slug of taxSlugs) {
       const article = taxArticle(slug); const url = absoluteUrl(getArticlePath(article)); const metadata = articleMetadata(article);
       expect(url).toMatch(/^https:\/\/arthasiddhi\.com\/learn\/tax\//); expect(metadata.alternates?.canonical).toBe(url);
-      expect(articleJsonLd(article)).toMatchObject({ "@type": "Article", mainEntityOfPage: url, headline: article.title, datePublished: "2026-08-18", dateModified: "2026-08-23" }); expect(breadcrumbJsonLd(article).itemListElement).toHaveLength(4); expect(faqJsonLd(article)).toMatchObject({ "@type": "FAQPage" });
+      expect(articleJsonLd(article)).toMatchObject({ "@type": "Article", mainEntityOfPage: url, headline: article.title, datePublished: "2026-08-18", dateModified: modifiedDate(slug) }); expect(breadcrumbJsonLd(article).itemListElement).toHaveLength(4); expect(faqJsonLd(article)).toMatchObject({ "@type": "FAQPage" });
       titles.add(article.title); descriptions.add(article.description);
     }
     expect(titles.size).toBe(5); expect(descriptions.size).toBe(5);
