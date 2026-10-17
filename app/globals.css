@@ -33,3 +33,72 @@ body {
   background: #f8fafc;
   color: #0f172a;
 }
+
+/* Homepage pilot only: preserve typography and surfaces on other routes. */
+.home-editorial .home-display {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  text-wrap: balance;
+}
+.home-editorial .home-card {
+  box-shadow: 0 2px 8px rgb(20 42 56 / 0.025);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.home-editorial .home-card:hover {
+  box-shadow: 0 5px 18px rgb(20 42 56 / 0.06);
+}
+.home-editorial .home-card h3 {
+  text-wrap: balance;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-editorial .home-card {
+    transition: none;
+  }
+}
+
+/* Lightweight editorial sequence; hero content and geometry stay unchanged. */
+.home-editorial .home-process {
+  margin-top: -1rem;
+}
+.home-editorial .home-process-steps > li {
+  padding-block: 0.75rem;
+}
+.home-editorial .home-process-steps > li + li {
+  border-top: 1px solid var(--as-border-subtle);
+}
+.home-editorial .home-process-steps > li:last-child {
+  padding-bottom: 0;
+}
+@media (min-width: 640px) {
+  .home-editorial .home-process-steps > li {
+    padding: 0.5rem 1rem;
+  }
+  .home-editorial .home-process-steps > li:nth-child(odd) {
+    padding-left: 0;
+  }
+  .home-editorial .home-process-steps > li:nth-child(even) {
+    border-left: 1px solid var(--as-border-subtle);
+  }
+  .home-editorial .home-process-steps > li:nth-child(2) {
+    border-top: 0;
+  }
+}
+@media (min-width: 1024px) {
+  .home-editorial .home-process {
+    margin-top: -2rem;
+  }
+  .home-editorial .home-process-steps > li {
+    padding: 0 1rem;
+  }
+  .home-editorial .home-process-steps > li:nth-child(n + 2) {
+    border-top: 0;
+    border-left: 1px solid var(--as-border-subtle);
+    padding-left: 1rem;
+  }
+  .home-editorial .home-process-steps > li:first-child {
+    padding-left: 0;
+  }
+  .home-editorial .home-process-steps > li:last-child {
+    padding-right: 0;
+  }
+}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { BrandLogo } from "@/components/site/BrandLogo";
 import { categoryLabels, publishedCategories } from "@/lib/content/articles";
 import { getHomeGuides } from "@/lib/content/discovery";
 import { calculators, type CalculatorSlug } from "@/lib/content/calculators";
@@ -26,10 +26,10 @@ const journeys: Record<ContentCategory, { title: string; description: string }> 
   retirement: { title: "Understand longer-term planning", description: "Explore EPF, NPS and gratuity, including the rules and assumptions behind their estimates." },
 };
 const focus = "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--as-brand-teal)]";
-const card = `group rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5 sm:p-6 hover:border-[var(--as-brand-teal)] ${focus}`;
+const card = `home-card group rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5 sm:p-6 hover:border-[var(--as-brand-teal)] ${focus}`;
 const textLink = `inline-flex min-h-11 items-center gap-2 rounded-sm py-2 text-sm font-semibold text-[var(--as-brand-teal)] underline decoration-transparent underline-offset-4 hover:decoration-current ${focus}`;
 const eyebrow = "text-xs font-semibold tracking-[0.16em] uppercase text-[var(--as-brand-copper)]";
-const heading = "text-3xl font-semibold leading-tight tracking-tight sm:text-4xl";
+const heading = "home-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl";
 const steps = [
   { title: "Understand", copy: "Start with the question and the context." },
   { title: "Calculate", copy: "Explore a scenario using your own figures." },
@@ -40,12 +40,12 @@ function Arrow() { return <ArrowUpRight aria-hidden="true" className="size-4 shr
 
 export default function HomePage() {
   return (
-    <main className="flex-1 bg-[var(--as-surface-page)] text-[var(--as-text-primary)]">
+    <main className="home-editorial flex-1 bg-[var(--as-surface-page)] text-[var(--as-text-primary)]">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <section aria-labelledby="home-heading" className="grid gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.9fr)] lg:items-center lg:gap-16 lg:py-24">
+        <section aria-labelledby="home-heading" className="home-hero grid gap-7 py-9 sm:gap-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-12 lg:py-20">
           <div className="min-w-0">
             <p className={eyebrow}>Indian personal finance</p>
-            <h1 id="home-heading" className="mt-5 max-w-2xl text-[2.5rem] font-semibold leading-[1.08] tracking-[-0.04em] sm:text-6xl lg:text-[4.25rem]">Make smarter money decisions.</h1>
+            <h1 id="home-heading" className="home-display mt-5 max-w-2xl text-[2.5rem] font-semibold leading-[1.08] tracking-[-0.04em] sm:text-6xl lg:text-[4.25rem]">Make smarter money decisions.</h1>
             <p className="mt-6 text-xl font-medium leading-relaxed text-[var(--as-brand-teal)]">Understand. Calculate. Compare. Decide.</p>
             <p className="mt-4 max-w-xl text-base leading-7 text-[var(--as-text-secondary)] sm:text-lg sm:leading-8">Explore clear explanations, compare financial scenarios and use calculators to understand the assumptions behind everyday money decisions in India.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -53,13 +53,21 @@ export default function HomePage() {
               <Link href="/calculators" className={`inline-flex min-h-12 items-center justify-center rounded-lg border border-[var(--as-border-control)] px-5 py-3 text-sm font-semibold hover:bg-[var(--as-surface-card)] ${focus}`}>Browse calculators</Link>
             </div>
           </div>
-          <aside aria-label="A thoughtful approach to money decisions" className="min-w-0 rounded-2xl bg-[var(--as-brand-navy)] p-6 text-white sm:p-8">
-            <div className="text-xl"><BrandLogo treatment="monochrome" /></div>
-            <p className="mt-6 text-sm leading-6 text-white">A little clarity, before your next step.</p>
-            <ol className="mt-6 divide-y divide-white/20">
-              {steps.map((step, index) => <li key={step.title} className="flex gap-4 py-4 first:pt-0 last:pb-0"><span aria-hidden="true" className="pt-1 text-xs font-medium text-white">0{index + 1}</span><div><h2 className="text-lg font-medium">{step.title}</h2><p className="mt-1 text-sm leading-6 text-white">{step.copy}</p></div></li>)}
-            </ol>
-          </aside>
+          <figure className="home-photo min-w-0">
+            <div className="overflow-hidden rounded-2xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-soft)] shadow-sm">
+              <Image src="/images/editorial/home-planning.webp" alt="" width={1774} height={887}
+                sizes="(min-width: 1152px) 532px, (min-width: 1024px) 46vw, (min-width: 640px) calc(100vw - 48px), calc(100vw - 32px)"
+                loading="eager" className="block h-auto w-full" />
+            </div>
+            <figcaption className="mt-3 text-xs leading-5 text-[var(--as-text-secondary)]">An illustrative moment of planning. AI-generated image.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="process-heading" className="home-process mb-6 pb-1 sm:mb-8">
+          <h2 id="process-heading" className="home-display text-xl leading-tight sm:text-2xl">A little clarity, before your next step.</h2>
+          <ol className="home-process-steps mt-3 grid sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, index) => <li key={step.title} className="flex min-w-0 gap-3"><span aria-hidden="true" className="pt-1 text-xs font-semibold text-[var(--as-brand-copper)]">0{index + 1}</span><div><h3 className="font-semibold">{step.title}</h3><p className="mt-1 text-sm leading-5 text-[var(--as-text-secondary)]">{step.copy}</p></div></li>)}
+          </ol>
         </section>
 
         <section id="decisions" tabIndex={-1} aria-labelledby="decisions-heading" className={`scroll-mt-6 border-t border-[var(--as-border-subtle)] py-10 sm:py-16 ${focus}`}>
