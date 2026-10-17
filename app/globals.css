@@ -102,3 +102,27 @@ body {
     padding-right: 0;
   }
 }
+
+/* Learn hub only; the approved homepage rules above remain unchanged. */
+.learn-editorial .learn-display {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  text-wrap: balance;
+}
+.learn-editorial .learn-card {
+  box-shadow: 0 2px 8px rgb(20 42 56 / 0.025);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.learn-editorial .learn-card:hover {
+  border-color: var(--as-brand-teal);
+  box-shadow: 0 5px 18px rgb(20 42 56 / 0.06);
+}
+.learn-editorial .learn-card:focus-visible {
+  outline: 2px solid var(--as-brand-teal);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .learn-editorial .learn-card {
+    transition: none;
+  }
+}
