@@ -146,3 +146,25 @@ body {
     transition: none;
   }
 }
+
+/* Shared header refinement only; preserve all page-specific styles. */
+.site-header .site-header-link[data-section-active="true"] {
+  color: var(--as-brand-teal);
+}
+.site-header .site-header-link[data-section-active="true"]::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  bottom: 4px;
+  left: 12px;
+  right: 12px;
+  background: var(--as-brand-teal);
+}
+@media (forced-colors: active) {
+  .site-header .site-header-link[data-section-active="true"]::after {
+    background: CanvasText;
+  }
+  .site-header a:focus-visible {
+    outline-color: Highlight;
+  }
+}
