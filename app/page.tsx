@@ -59,7 +59,7 @@ export default function HomePage() {
                 sizes="(min-width: 1152px) 532px, (min-width: 1024px) 46vw, (min-width: 640px) calc(100vw - 48px), calc(100vw - 32px)"
                 loading="eager" className="block h-auto w-full" />
             </div>
-            <figcaption className="mt-3 text-xs leading-5 text-[var(--as-text-secondary)]">An illustrative moment of planning. AI-generated image.</figcaption>
+            <figcaption className="mt-3 text-xs leading-5 text-[var(--as-text-secondary)]">Illustrative image · AI-generated</figcaption>
           </figure>
         </section>
 

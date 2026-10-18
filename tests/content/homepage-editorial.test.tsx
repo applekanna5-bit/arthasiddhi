@@ -31,7 +31,7 @@ describe("Editorial homepage preserves decision pathways", () => {
     expect(html).toContain("home-planning.webp");
     expect(html).toContain('loading="eager"');
     expect(html).toContain("sizes=");
-    expect(html).toContain("AI-generated image.");
+    expect(html).toContain("Illustrative image · AI-generated");
     // React may emit one automatic resource hint for the single eager image.
     expect((html.match(/rel="preload" as="image"/g) ?? []).length).toBeLessThanOrEqual(1);
   });
