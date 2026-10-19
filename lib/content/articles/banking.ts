@@ -206,6 +206,9 @@ export const bankingArticles = [
             { text: ". If a deposit is closed early, the " },
             { text: "original maturity may no longer apply", link: { kind: "article", slug: "premature-fd-withdrawal" } },
             { text: "." },
+            { text: " For a deposit reaching its agreed end date, see " },
+            { text: "FD maturity and renewal", link: { kind: "article", slug: "fd-maturity-and-renewal" } },
+            { text: " for payout instructions and renewal terms." },
           ],
         ],
         callout: {
