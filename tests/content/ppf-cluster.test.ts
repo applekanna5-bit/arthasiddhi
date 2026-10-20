@@ -75,7 +75,7 @@ describe("PPF cluster registry and maintenance", () => {
     expect(articles.filter(({ primaryCalculator, calculatorGuideRole }) => primaryCalculator === "ppf" && calculatorGuideRole === "core")).toHaveLength(1);
   });
 
-  it("derives visible maintenance and official references from the shared PPF rule set", () => {
+  it("preserves shared verification while allowing the scoped extension citation", () => {
     expect(ppfRuleSet.id).toBe("ppf-scheme-2019-amended-2020");
     expect(ppfRuleSet.periodLabels).toEqual([{ label: "Applicable scheme", value: "Public Provident Fund Scheme, 2019 (as amended in 2020)" }]);
     expect(ppfRuleSet.lastVerified).toBe("2026-08-20");
@@ -84,10 +84,39 @@ describe("PPF cluster registry and maintenance", () => {
       expect(article.maintenance).toEqual({ kind: "rule-sensitive", ruleSetId: ppfRuleSet.id });
       expect(getArticleMaintenanceContext(article)).toEqual({ applicablePeriod: ppfRuleSet.effectivePeriod, periodLabels: ppfRuleSet.periodLabels, verifiedAt: "2026-08-20" });
       const references = getArticleReferences(article);
-      expect(references).toHaveLength(ppfRuleSet.sources.length);
-      expect(references.every(({ sourceType, url }) => sourceType === "official" && /^https:\/\/(dea\.gov\.in|www\.nsiindia\.gov\.in)\//.test(url))).toBe(true);
-      expect(references.every(({ accessedAt }) => accessedAt === "2026-08-20")).toBe(true);
+      const localReferences = article.references ?? [];
+      const inheritedReferences = references.slice(localReferences.length);
+      expect(inheritedReferences).toHaveLength(ppfRuleSet.sources.length);
+      expect(inheritedReferences.every(({ sourceType, url }) => sourceType === "official" && /^https:\/\/(dea\.gov\.in|www\.nsiindia\.gov\.in)\//.test(url))).toBe(true);
+      expect(inheritedReferences.every(({ accessedAt }) => accessedAt === "2026-08-20")).toBe(true);
+      if (slug === "ppf-tenure-extension") {
+        expect(localReferences).toEqual([
+          { title: "Public Provident Fund (Amendment) Scheme, 2023 - G.S.R. 831(E), paragraph 13 (PDF page 15)", publisher: "Ministry of Finance, Department of Economic Affairs (Gazette reproduced by Department of Posts)", url: "https://utilities.cept.gov.in/dop/pdfbind.ashx?id=9187", sourceType: "official", accessedAt: "2026-10-20" },
+        ]);
+      } else {
+        expect(localReferences).toEqual([]);
+      }
     }
+  });
+});
+
+describe("PPF post-maturity access", () => {
+  it("distinguishes available-balance access from the aggregate extension-block ceiling", () => {
+    const article = ppfArticle("ppf-tenure-extension");
+    const comparison = section(article, "maturity-access-options");
+    const rows = comparison.table!.rows;
+    expect(rows).toHaveLength(3);
+    expect(rows[0][1]).toContain("Form-3");
+    expect(rows[1][2]).toContain("any amount within the available balance");
+    expect(rows[2][1]).toContain("Form-4 before one year from maturity expires");
+    expect(rows[2][2]).toContain("total withdrawals across the block");
+    expect(rows[2][2]).toContain("60% of its opening balance");
+    const explanation = JSON.stringify(comparison.paragraphs);
+    expect(explanation).toContain("does not reset each year");
+    expect(explanation).toContain("Closure during the block is restricted");
+    expect(explanation).toContain("eligible regular accounts");
+    expect(article.updatedAt).toBe("2026-10-20");
+    expect(getArticleMaintenanceContext(article)?.verifiedAt).toBe("2026-08-20");
   });
 });
 

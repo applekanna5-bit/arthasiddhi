@@ -601,13 +601,16 @@ export const bankingArticles = [
     description: "How the PPF maturity period is defined and how continuation without deposits or extension with deposits works after maturity.",
     category: "banking",
     publishedAt: "2026-08-20",
-    updatedAt: "2026-08-20",
+    updatedAt: "2026-10-20",
     readingTime: "7 min read",
     maintenance: { kind: "rule-sensitive", ruleSetId: "ppf-scheme-2019-amended-2020" },
     primaryCalculator: "ppf",
     calculatorGuideRole: "supporting",
     relatedCalculators: [],
     relatedArticles: ["ppf-explained", "ppf-interest-calculation"],
+    references: [
+      { title: "Public Provident Fund (Amendment) Scheme, 2023 - G.S.R. 831(E), paragraph 13 (PDF page 15)", publisher: "Ministry of Finance, Department of Economic Affairs (Gazette reproduced by Department of Posts)", url: "https://utilities.cept.gov.in/dop/pdfbind.ashx?id=9187", sourceType: "official", accessedAt: "2026-10-20" },
+    ],
     sections: [
       {
         id: "maturity-definition",
@@ -632,6 +635,24 @@ export const bankingArticles = [
           "After the initial maturity period, the scheme permits extension with deposits for a further block of five years. The account holder must exercise the option through the prescribed process before one year expires from maturity.",
           "The five-year framework can apply again after an extended block, subject to the scheme. Current forms and account-office instructions should be checked when an actual election is made.",
         ],
+      },
+      {
+        id: "maturity-access-options",
+        heading: "Compare access to your money after maturity",
+        paragraphs: [
+          "Post-maturity choices reviewed on 20 October 2026 against paragraphs 11-13 of the PPF Scheme and G.S.R. 831(E), dated 7 November 2023.",
+          "These options concern eligible regular accounts; check residency or irregular-account cases separately. Interest on money retained follows the rate applicable to the scheme. The 60% limit below covers the whole five-year block; it does not reset each year.",
+          "An extension with deposits cannot later be cancelled on request. Closure during the block is restricted to the scheme's exceptional grounds and documentation, not unrestricted access. Check with the account office before choosing an extension if you may need the full balance.",
+        ],
+        table: {
+          caption: "Choices after PPF maturity",
+          headers: ["Choice", "Application and deposits", "Access to money"],
+          rows: [
+            ["Close after maturity", "Apply to the account office in Form-3.", "Receive the full balance and interest due under the scheme."],
+            ["Continue without deposits", "No extension application; no further deposits.", "One withdrawal per financial year, of any amount within the available balance; closure is also available."],
+            ["Extend with deposits", "Apply in Form-4 before one year from maturity expires, for a five-year block.", "One withdrawal per financial year; total withdrawals across the block cannot exceed 60% of its opening balance."],
+          ],
+        },
       },
       {
         id: "calculator-boundary",

@@ -105,7 +105,7 @@ describe("deposit lifecycle ownership and safety", () => {
     const banking = readFileSync("lib/content/articles/banking.ts", "utf8").replace(/\r\n/g, "\n");
     const rules = readFileSync("lib/financial-rules/rule-sets.ts", "utf8").replace(/\r\n/g, "\n");
     const decisions = readFileSync("lib/content/articles/deposit-decisions.ts", "utf8").replace(/\r\n/g, "\n");
-    expect(hash(banking.slice(banking.indexOf('    title: "PPF Explained:'), banking.indexOf('    title: "RD Explained:')))).toBe("c4ab358ee97d8aafd4c23d901c3b4b2b4c06ad88b4a165fdf5be74e058c8a067");
+    expect(hash(banking.slice(banking.indexOf('    title: "PPF Explained:'), banking.indexOf('    title: "RD Explained:')))).toBe("eff63ab28377987ac295c27f8adcbb4295887a9e721b3cc54b5689379dc0d9ff");
     expect(hash(rules.slice(rules.indexOf("export const ppfRuleSet"), rules.indexOf("export const gstRuleSet")))).toBe("0cb42d54cad876fccb44c8a1b7fef5a180a3cc6f08af37fe2a2a549db0fc6b27");
     expect(hash(rules.slice(rules.indexOf("export const dicgcRuleSet"), rules.indexOf("// Shared content-only facts")))).toBe("7eb2e6b69d9962de8b39b748b123ed748c0ca57f5309e1be6f56a9fe5d8a319f");
     expect(hash(decisions.slice(decisions.indexOf('    title: "Deposit Insurance Explained:')))).toBe("fb22b6a43d56e8f620a08506eed69f72d727f37414434dcb2185470d6f66ed1c");
