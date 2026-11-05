@@ -52,9 +52,9 @@ describe("Personal Finance hub integration", () => {
     expect(hub.groups.filter(({ corePresentation }) => corePresentation === "start-here").map(({ coreArticle }) => coreArticle)).toEqual([membership[0][0]]);
     const html = hub.groups.map(renderGroup).join("");
     expect(html.match(/>Start here</g)).toHaveLength(1);
-    expect(html.match(/bg-emerald-50/g)).toHaveLength(1);
+    expect(html.match(/bg-[var(--as-surface-soft)]/g)).toHaveLength(1);
     expect(renderGroup(hub.groups[0])).toContain('>Start here<');
-    expect(renderGroup(hub.groups[0])).toContain('bg-emerald-50');
+    expect(renderGroup(hub.groups[0])).toContain('bg-[var(--as-surface-soft)]');
     expect(html.match(/>Guide</g)).toHaveLength(6);
   });
 
@@ -63,8 +63,8 @@ describe("Personal Finance hub integration", () => {
     const html = renderGroup(hub.groups[index]);
     expect(html).toContain('>Overview<');
     expect(html).not.toContain('>Start here<');
-    expect(html).not.toContain('bg-emerald-50');
-    expect(html).toContain('bg-white');
+    expect(html).not.toContain('bg-[var(--as-surface-soft)]');
+    expect(html).toContain('bg-[var(--as-surface-card)]');
   });
 
   it("preserves Start here and highlighted cores in every untouched category", () => {
@@ -73,7 +73,7 @@ describe("Personal Finance hub integration", () => {
         expect(group.corePresentation).toBeUndefined();
         const html = renderGroup(group);
         expect(html.match(/>Start here</g)).toHaveLength(1);
-        expect(html.match(/bg-emerald-50/g)).toHaveLength(1);
+        expect(html.match(/bg-[var(--as-surface-soft)]/g)).toHaveLength(1);
         expect(html).not.toContain('>Overview<');
         expect(html.match(/>Guide</g)).toHaveLength(group.supportingArticles.length);
       }
