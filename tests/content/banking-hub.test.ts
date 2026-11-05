@@ -43,8 +43,8 @@ describe("Banking decision and lifecycle hub", () => {
     expect(html.match(/>Start here</g)).toHaveLength(1);
     expect(html.match(/>Overview</g)).toHaveLength(4);
     expect(html.match(/>Guide</g)).toHaveLength(9);
-    expect(html.match(/bg-emerald-50/g)).toHaveLength(1);
-    for (const group of hub.groups.slice(1)) expect(renderGroup(group)).not.toContain("bg-emerald-50");
+    expect(html.match(/bg-[var(--as-surface-soft)]/g)).toHaveLength(1);
+    for (const group of hub.groups.slice(1)) expect(renderGroup(group)).not.toContain("bg-[var(--as-surface-soft)]");
   });
   it("renders exactly the FD, RD and PPF calculator CTAs", () => {
     expect(hub.groups.map(({ calculator }) => calculator)).toEqual([undefined, "fd", "rd", undefined, "ppf"]);
