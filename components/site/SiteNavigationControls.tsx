@@ -1,7 +1,7 @@
 ﻿"use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ArrowLeft, ArrowUp } from "lucide-react";
 function parentPath(pathname: string): string {
   if (pathname.startsWith("/calculators/")) return "/calculators";
@@ -13,6 +13,12 @@ function parentPath(pathname: string): string {
 }
 export function SiteNavigationControls() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const requestedReturnPath = searchParams.get("returnTo");
+  // Only accept a local Learn category as the explicit return destination.
+  const returnPath = requestedReturnPath && /^\/learn\/[a-z0-9-]+$/.test(requestedReturnPath)
+    ? requestedReturnPath
+    : parentPath(pathname);
   const [showTop, setShowTop] = useState(false);
   useEffect(() => {
     const update = () => setShowTop(window.scrollY > 400);
@@ -37,7 +43,7 @@ export function SiteNavigationControls() {
           className="mx-auto w-full max-w-6xl px-4 pt-3 sm:px-6 lg:px-8"
         >
           <Link
-            href={parentPath(pathname)}
+            href={returnPath}
             className="inline-flex min-h-11 items-center gap-2 rounded-md px-2 text-sm font-medium text-[var(--as-brand-teal)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--as-brand-teal)]"
           >
             <ArrowLeft aria-hidden="true" className="size-4" />
