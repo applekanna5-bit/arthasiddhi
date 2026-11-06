@@ -1,7 +1,7 @@
 ﻿"use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ArrowLeft, ArrowUp } from "lucide-react";
 function parentPath(pathname: string): string {
   if (pathname.startsWith("/calculators/")) return "/calculators";
@@ -13,11 +13,16 @@ function parentPath(pathname: string): string {
 }
 export function SiteNavigationControls() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const requested = searchParams.get("returnTo");
+  const [requestedReturn, setRequestedReturn] = useState<string | null>(null);
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("returnTo");
+    // Query context is browser-only; defer the update to the next animation frame.
+    const frame = window.requestAnimationFrame(() => setRequestedReturn(requested));
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
   // Only allow internal Learn category destinations, never arbitrary URLs.
-  const returnPath = requested && /^\/learn\/[a-z0-9-]+$/.test(requested)
-    ? requested
+  const returnPath = requestedReturn && /^\/learn\/[a-z0-9-]+$/.test(requestedReturn)
+    ? requestedReturn
     : parentPath(pathname);
   const [showTop, setShowTop] = useState(false);
   useEffect(() => {
