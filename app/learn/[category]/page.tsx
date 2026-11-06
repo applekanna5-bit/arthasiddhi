@@ -28,12 +28,12 @@ export default async function CategoryPage({ params }: Props) {
   const resolve = (slugs: readonly ArticleSlug[]) => slugs.map((slug) => getArticleBySlug(slug)).filter((article): article is Article => Boolean(article));
 
   return (
-    <main className="flex-1 bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
+    <main className="learn-editorial flex-1 bg-[var(--as-surface-page)] px-4 py-9 text-[var(--as-text-primary)] sm:px-6 sm:py-12 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Learn", href: "/learn" }, { label: categoryLabels[contentCategory] }]} />
-        <h1 className="mt-6 text-4xl font-bold tracking-tight text-slate-950">{categoryLabels[contentCategory]}</h1>
-        <p className="mt-3 max-w-2xl text-lg leading-8 text-slate-600">{categoryDescriptions[contentCategory]}</p>
-        <div className="mt-10 space-y-12">
+        <header className="mt-7 max-w-3xl"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--as-brand-copper)]">ArthaSiddhi Learn · Explore a topic</p><h1 className="learn-display mt-4 text-4xl leading-tight tracking-tight sm:text-5xl">{categoryLabels[contentCategory]}</h1>
+        <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--as-text-secondary)]">{categoryDescriptions[contentCategory]}</p></header>
+        <div className="mt-10 space-y-12 border-t border-[var(--as-border-subtle)] pt-9 sm:mt-12 sm:pt-11">
           {hub.groups.map((group) => {
             const core = getArticleBySlug(group.coreArticle);
             if (!core) return null;
