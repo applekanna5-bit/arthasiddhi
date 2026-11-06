@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { GoogleAnalytics } from "@/components/site/GoogleAnalytics";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+import { SiteNavigationControls } from "@/components/site/SiteNavigationControls";
 import { websiteJsonLd } from "@/lib/content/seo";
 import { siteUrl } from "@/lib/content/site";
 import "./globals.css";
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col">
         <SiteHeader />
+        <SiteNavigationControls />
         {children}
         <SiteFooter />
         <script
