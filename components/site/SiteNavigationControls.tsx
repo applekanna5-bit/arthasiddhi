@@ -1,7 +1,7 @@
 ﻿"use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ArrowLeft, ArrowUp } from "lucide-react";
 function parentPath(pathname: string): string {
   if (pathname.startsWith("/calculators/")) return "/calculators";
@@ -13,14 +13,12 @@ function parentPath(pathname: string): string {
 }
 export function SiteNavigationControls() {
   const pathname = usePathname();
-  const [returnPath, setReturnPath] = useState(() => parentPath(pathname));
-  useEffect(() => {
-    const requested = new URLSearchParams(window.location.search).get("returnTo");
-    // Never accept external URLs or arbitrary routes as a return destination.
-    setReturnPath(requested && /^\/learn\/[a-z0-9-]+$/.test(requested)
-      ? requested
-      : parentPath(pathname));
-  }, [pathname]);
+  const searchParams = useSearchParams();
+  const requested = searchParams.get("returnTo");
+  // Only allow internal Learn category destinations, never arbitrary URLs.
+  const returnPath = requested && /^\/learn\/[a-z0-9-]+$/.test(requested)
+    ? requested
+    : parentPath(pathname);
   const [showTop, setShowTop] = useState(false);
   useEffect(() => {
     const update = () => setShowTop(window.scrollY > 400);
