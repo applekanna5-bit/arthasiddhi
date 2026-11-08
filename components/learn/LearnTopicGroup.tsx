@@ -25,7 +25,17 @@ export function LearnTopicGroup({ group, core, supporting }: { group: LearnTopic
           <h2 id={`${group.id}-heading`} className="learn-display text-2xl leading-tight tracking-tight sm:text-3xl">{group.title}</h2>
           {group.description && <p className="mt-2 max-w-3xl leading-7 text-[var(--as-text-secondary)]">{group.description}</p>}
         </div>
-        {calculator && <Link href={calculator.href} className="text-sm font-semibold text-[var(--as-brand-teal)] underline decoration-transparent underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--as-brand-teal)]">Open {calculator.shortName} calculator <span aria-hidden="true">→</span></Link>}
+
+{calculator && (
+  <Link
+    href={`${calculator.href}?returnTo=${encodeURIComponent(`/learn/${core.category}`)}`}
+    className="text-sm font-semibold text-[var(--as-brand-teal)] underline decoration-transparent underline-offset-4 hover:decoration-current focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--as-brand-teal)]"
+  >
+    Open {calculator.shortName} calculator{" "}
+    <span aria-hidden="true">→</span>
+  </Link>
+)}
+
       </div>
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         <GuideCard article={core} kind="core" corePresentation={group.corePresentation} />

@@ -13,6 +13,17 @@ function parentPath(pathname: string): string {
 }
 export function SiteNavigationControls() {
   const pathname = usePathname();
+  const [requestedReturn, setRequestedReturn] = useState<string | null>(null);
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("returnTo");
+    // Query context is browser-only; defer the update to the next animation frame.
+    const frame = window.requestAnimationFrame(() => setRequestedReturn(requested));
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
+  // Only allow internal Learn category destinations, never arbitrary URLs.
+  const returnPath = requestedReturn && /^\/learn\/[a-z0-9-]+$/.test(requestedReturn)
+    ? requestedReturn
+    : parentPath(pathname);
   const [showTop, setShowTop] = useState(false);
   useEffect(() => {
     const update = () => setShowTop(window.scrollY > 400);
@@ -37,7 +48,7 @@ export function SiteNavigationControls() {
           className="mx-auto w-full max-w-6xl px-4 pt-3 sm:px-6 lg:px-8"
         >
           <Link
-            href={parentPath(pathname)}
+            href={returnPath}
             className="inline-flex min-h-11 items-center gap-2 rounded-md px-2 text-sm font-medium text-[var(--as-brand-teal)] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--as-brand-teal)]"
           >
             <ArrowLeft aria-hidden="true" className="size-4" />
