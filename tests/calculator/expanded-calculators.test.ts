@@ -1,24 +1,109 @@
 import { describe, expect, it } from "vitest";
 import { calculateSip } from "../../lib/calculator/sip-calculator";
 import { calculateCagr, calculateGratuity, calculateInflation, calculateLumpsum, calculatePpf, calculateRd, calculateStepUpSip, calculateSwp } from "../../lib/calculator/expanded-calculators";
-import { gratuityRuleSet } from "../../lib/financial-rules/rule-sets";
+import { gratuityRuleSet, ppfRuleSet } from "../../lib/financial-rules/rule-sets";
 
 describe("PPF calculator", () => {
-  it("accumulates annual beginning contributions", () => { const result = calculatePpf({ annualContribution: 150000, annualInterestRate: 7.1, tenureYears: 15 }); expect(result.totalContribution).toBe(2250000); expect(result.maturityAmount).toBeCloseTo(4_068_209.22, 2); expect(result.schedule).toHaveLength(15); });
-  it("handles zero rate", () => expect(calculatePpf({ annualContribution: 1000, annualInterestRate: 0, tenureYears: 2 }).maturityAmount).toBe(2000));
-  it("handles zero contribution", () => expect(calculatePpf({ annualContribution: 0, annualInterestRate: 7, tenureYears: 15 }).maturityAmount).toBe(0));
-  it("handles a one-year tenure", () => expect(calculatePpf({ annualContribution: 1000, annualInterestRate: 10, tenureYears: 1 }).maturityAmount).toBeCloseTo(1100));
-  it("rejects invalid tenure", () => expect(() => calculatePpf({ annualContribution: 1000, annualInterestRate: 7, tenureYears: 0 })).toThrow());
-  it("accepts the inclusive amount, rate, and year upper limits", () => { const result = calculatePpf({ annualContribution: 100_000_000_000, annualInterestRate: 100, tenureYears: 100 }); expect(result.schedule).toHaveLength(100); expect(Number.isFinite(result.maturityAmount)).toBe(true); });
-  it("rejects a fractional tenure", () => expect(() => calculatePpf({ annualContribution: 1000, annualInterestRate: 7, tenureYears: 1.5 })).toThrow(/whole number/));
-  it("keeps every schedule row reconciled with the result", () => {
-    const result = calculatePpf({ annualContribution: 1000, annualInterestRate: 10, tenureYears: 3 });
-    result.schedule.forEach((row, index) => {
-      expect(row.openingBalance).toBe(index === 0 ? 0 : result.schedule[index - 1].closingBalance);
-      expect(row.closingBalance).toBeCloseTo(row.openingBalance + row.contribution + row.interest, 10);
+  const calculate = (input: Parameters<typeof calculatePpf>[0]) =>
+    calculatePpf(input, ppfRuleSet);
+
+  const standardInput = {
+    annualContribution: 150_000,
+    annualInterestRate: 7.1,
+    tenureYears: 15,
+  };
+
+  it("accumulates annual beginning contributions", () => {
+    const result = calculate(standardInput);
+
+    expect(result.totalContribution).toBe(2_250_000);
+    expect(result.maturityAmount).toBeCloseTo(4_068_209.22, 2);
+    expect(result.schedule).toHaveLength(15);
+  });
+
+  it("handles a zero interest rate", () => {
+    const result = calculate({
+      annualContribution: 1000,
+      annualInterestRate: 0,
+      tenureYears: 15,
     });
-    expect(result.schedule.at(-1)?.closingBalance).toBe(result.maturityAmount);
-    expect(result.schedule.reduce((sum, row) => sum + row.contribution, 0)).toBe(result.totalContribution);
+
+    expect(result.totalContribution).toBe(15_000);
+    expect(result.interestEarned).toBe(0);
+    expect(result.maturityAmount).toBe(15_000);
+  });
+
+  it.each([500, 150_000])(
+    "accepts the annual contribution boundary of %s",
+    (annualContribution) => {
+      const result = calculate({
+        ...standardInput,
+        annualContribution,
+      });
+
+      expect(result.totalContribution).toBe(annualContribution * 15);
+      expect(result.schedule).toHaveLength(15);
+    }
+  );
+
+  it.each([0, 499, -1, 150_001])(
+    "rejects an invalid annual contribution of %s",
+    (annualContribution) => {
+      expect(() =>
+        calculate({ ...standardInput, annualContribution })
+      ).toThrow();
+    }
+  );
+
+  it.each([0, 1, 3, 16, 100])(
+    "rejects an unsupported tenure of %s years",
+    (tenureYears) => {
+      expect(() =>
+        calculate({ ...standardInput, tenureYears })
+      ).toThrow();
+    }
+  );
+
+  it("rejects fractional tenure", () => {
+    expect(() =>
+      calculate({ ...standardInput, tenureYears: 1.5 })
+    ).toThrow(/whole number/);
+  });
+
+  it.each([-1, 100.1])(
+    "rejects an invalid annual interest rate of %s",
+    (annualInterestRate) => {
+      expect(() =>
+        calculate({ ...standardInput, annualInterestRate })
+      ).toThrow();
+    }
+  );
+
+  it("keeps every schedule row reconciled with the result", () => {
+    const result = calculate({
+      annualContribution: 1000,
+      annualInterestRate: 10,
+      tenureYears: 15,
+    });
+
+    result.schedule.forEach((row, index) => {
+      expect(row.openingBalance).toBe(
+        index === 0 ? 0 : result.schedule[index - 1].closingBalance
+      );
+
+      expect(row.closingBalance).toBeCloseTo(
+        row.openingBalance + row.contribution + row.interest,
+        10
+      );
+    });
+
+    expect(result.schedule.at(-1)?.closingBalance).toBe(
+      result.maturityAmount
+    );
+
+    expect(
+      result.schedule.reduce((sum, row) => sum + row.contribution, 0)
+    ).toBe(result.totalContribution);
   });
 });
 
@@ -148,6 +233,6 @@ describe("inflation calculator", () => {
 });
 
 describe("expanded calculator finite-number validation", () => {
-  it("rejects NaN through a representative amount field", () => expect(() => calculatePpf({ annualContribution: Number.NaN, annualInterestRate: 7, tenureYears: 1 })).toThrow(/finite/));
+  it("rejects NaN through a representative amount field", () => expect(() => calculatePpf({ annualContribution: Number.NaN, annualInterestRate: 7, tenureYears: 15 }, ppfRuleSet)).toThrow(/finite/));
   it("rejects Infinity through a representative rate field", () => expect(() => calculateInflation({ mode: "future-cost", currentValue: 100, annualInflationRate: Infinity, years: 1 })).toThrow(/finite/));
 });
