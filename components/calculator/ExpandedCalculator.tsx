@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+
 import {
   calculateCagr,
   calculateGratuity,
@@ -14,19 +15,107 @@ import {
   type InflationMode,
   type PpfScheduleRow,
 } from "@/lib/calculator/expanded-calculators";
-import { formatIndianCurrency, formatNumber, formatPercentage } from "@/lib/calculator/formatting";
-import { gratuityRuleSet } from "@/lib/financial-rules/rule-sets";
+
+import {
+  formatIndianCurrency,
+  formatNumber,
+  formatPercentage,
+} from "@/lib/calculator/formatting";
+
+import {
+  gratuityRuleSet,
+  ppfRuleSet,
+} from "@/lib/financial-rules/rule-sets";
+
 import { CalculatorInput } from "./CalculatorInput";
 import { CalculatorResult } from "./CalculatorResult";
 
-type ExpandedSlug = "ppf" | "rd" | "lumpsum" | "cagr" | "step-up-sip" | "gratuity" | "swp" | "inflation";
-type Field = { id: string; label: string; defaultValue: string; min: number; max: number; step: number; prefix?: string; hint?: string };
-type DisplayResult = { label: string; value: string; emphasis?: boolean };
-type Calculation = { results: DisplayResult[]; interpretation: string; schedule?: PpfScheduleRow[] };
-type Config = { detailsTitle: string; resultsTitle: string; resultsDescription?: string; fields: Field[]; methodTitle: string; how: string; disclosures: string[] };
+type ExpandedSlug =
+  | "ppf"
+  | "rd"
+  | "lumpsum"
+  | "cagr"
+  | "step-up-sip"
+  | "gratuity"
+  | "swp"
+  | "inflation";
+
+type Field = {
+  id: string;
+  label: string;
+  defaultValue: string;
+  min: number;
+  max: number;
+  step: number;
+  prefix?: string;
+  hint?: string;
+};
+
+type DisplayResult = {
+  label: string;
+  value: string;
+  emphasis?: boolean;
+};
+
+type Calculation = {
+  results: DisplayResult[];
+  interpretation: string;
+  schedule?: PpfScheduleRow[];
+};
+
+type Config = {
+  detailsTitle: string;
+  resultsTitle: string;
+  resultsDescription?: string;
+  fields: Field[];
+  methodTitle: string;
+  how: string;
+  disclosures: string[];
+};
 
 const configs: Record<ExpandedSlug, Config> = {
-  ppf: { detailsTitle: "PPF contribution details", resultsTitle: "Estimated PPF value", fields: [{ id: "annualContribution", label: "Annual contribution (INR)", defaultValue: "150000", min: 0, max: 100000000000, step: 5000, prefix: "₹" }, { id: "annualInterestRate", label: "Assumed annual interest rate (%)", defaultValue: "7.1", min: 0, max: 100, step: 0.1, hint: "Enter the rate for this projection. Government-notified PPF rates can change." }, { id: "tenureYears", label: "Investment tenure (years)", defaultValue: "15", min: 1, max: 100, step: 1 }], methodTitle: "How the PPF estimate builds", how: "The estimate adds the entered contribution at the beginning of each year, then applies the same entered annual rate to that year's balance.", disclosures: ["Actual interest calculation and credit depend on applicable scheme rules and deposit timing; this simplified annual estimate is illustrative."] },
+  ppf: {
+    detailsTitle: "PPF contribution details",
+    resultsTitle: "Illustrative PPF value",
+    fields: [
+      {
+        id: "annualContribution",
+        label: "Annual contribution (INR)",
+        defaultValue: "150000",
+        min: ppfRuleSet.rules.minimumAnnualContribution,
+        max: ppfRuleSet.rules.maximumAnnualContribution,
+        step: 500,
+        prefix: "₹",
+        hint: "Enter ₹500 to ₹1,50,000 per financial year for this standard contribution model.",
+      },
+      {
+        id: "annualInterestRate",
+        label: "Assumed annual interest rate (%)",
+        defaultValue: "7.1",
+        min: 0,
+        max: 100,
+        step: 0.1,
+        hint: "Enter the rate for this projection. Government-notified PPF rates can change.",
+      },
+      {
+        id: "tenureYears",
+        label: "Investment tenure (years)",
+        defaultValue: String(ppfRuleSet.rules.maturityYearsFromEndOfOpeningYear),
+        min: ppfRuleSet.rules.maturityYearsFromEndOfOpeningYear,
+        max: ppfRuleSet.rules.maturityYearsFromEndOfOpeningYear,
+        step: 1,
+        hint: "Fixed 15-year contribution projection. Actual maturity depends on the account-opening financial year.",
+      },
+    ],
+    methodTitle: "How the PPF estimate builds",
+    how: "This model adds the annual contribution at the beginning of each year and applies the same assumed annual interest rate to that year's balance. It does not reproduce the scheme's monthly interest calculation.",
+    disclosures: [
+      "For this standard contribution model, annual deposits must be between ₹500 and ₹1,50,000 under the configured PPF scheme rules.",
+      "Legal maturity is measured from the end of the financial year in which the account was opened. This 15-year projection does not determine an account's actual maturity date or value.",
+      "Actual interest depends on deposit timing, the eligible monthly balance under scheme rules, annual interest credit and government-notified rates.",
+      "Five-year extensions, including extensions without contributions, are not modelled here.",
+    ],
+  },
   rd: { detailsTitle: "Recurring deposit details", resultsTitle: "Estimated RD maturity", fields: [{ id: "monthlyDeposit", label: "Monthly deposit (INR)", defaultValue: "5000", min: 0, max: 100000000000, step: 500, prefix: "₹" }, { id: "annualInterestRate", label: "Annual interest rate (%)", defaultValue: "7", min: 0, max: 100, step: 0.1 }, { id: "tenureYears", label: "Tenure (years)", defaultValue: "5", min: 1, max: 100, step: 1 }], methodTitle: "How monthly deposits build up", how: "Each monthly deposit is assumed at the beginning of the month and grows at a monthly-equivalent rate derived from the entered annual rate.", disclosures: ["This is an illustrative generic model and may not reproduce every bank or post-office RD product convention."] },
   lumpsum: { detailsTitle: "Investment details", resultsTitle: "Estimated future value", resultsDescription: "Based on annual compounding at the entered return.", fields: [{ id: "initialInvestment", label: "Initial investment (INR)", defaultValue: "100000", min: 0, max: 100000000000, step: 1000, prefix: "₹" }, { id: "annualReturnRate", label: "Expected annual return (%)", defaultValue: "12", min: 0, max: 100, step: 0.1 }, { id: "investmentYears", label: "Investment period (years)", defaultValue: "10", min: 1, max: 100, step: 1 }], methodTitle: "How the investment compounds", how: "The one-time investment compounds once per year at the same entered annual return throughout the selected period.", disclosures: ["Expected return is an assumption, not a guaranteed investment return."] },
   cagr: { detailsTitle: "Growth details", resultsTitle: "What the CAGR number means", fields: [{ id: "beginningValue", label: "Beginning value (INR)", defaultValue: "100000", min: 0.01, max: 100000000000, step: 1000, prefix: "₹" }, { id: "endingValue", label: "Ending value (INR)", defaultValue: "200000", min: 0, max: 100000000000, step: 1000, prefix: "₹" }, { id: "durationYears", label: "Duration (years)", defaultValue: "5", min: 1, max: 100, step: 1 }], methodTitle: "How CAGR is calculated", how: "CAGR uses one constant annualised rate to connect the beginning and ending values across the entered period. It does not mean the investment actually earned that return in every individual year.", disclosures: ["CAGR smooths the full period into one annualised rate and does not show year-to-year volatility."] },
@@ -46,7 +135,22 @@ function parse(fields: Field[], values: Record<string, string>) {
 function calculate(slug: ExpandedSlug, values: Record<string, string>, mode: InflationMode): Calculation {
   const parsed = parse(configs[slug].fields, values);
   switch (slug) {
-    case "ppf": { const result = calculatePpf({ annualContribution: parsed.annualContribution, annualInterestRate: parsed.annualInterestRate, tenureYears: parsed.tenureYears }); return { results: [{ label: "Total contribution", value: formatIndianCurrency(result.totalContribution) }, { label: "Estimated interest", value: formatIndianCurrency(result.interestEarned) }, { label: "Estimated maturity", value: formatIndianCurrency(result.maturityAmount), emphasis: true }], interpretation: `You contribute ${formatIndianCurrency(result.totalContribution)} in this model. At the rate entered, estimated interest adds ${formatIndianCurrency(result.interestEarned)}, taking the maturity value to ${formatIndianCurrency(result.maturityAmount)}.`, schedule: result.schedule }; }
+    case "ppf": {
+      const result = calculatePpf({
+        annualContribution: parsed.annualContribution,
+        annualInterestRate: parsed.annualInterestRate,
+        tenureYears: parsed.tenureYears,
+      }, ppfRuleSet);
+      return {
+        results: [
+          { label: "Total contribution", value: formatIndianCurrency(result.totalContribution) },
+          { label: "Estimated interest", value: formatIndianCurrency(result.interestEarned) },
+          { label: "Illustrative 15-year value", value: formatIndianCurrency(result.maturityAmount), emphasis: true },
+        ],
+        interpretation: `You contribute ${formatIndianCurrency(result.totalContribution)} in this simplified model. At the assumed constant rate, estimated interest adds ${formatIndianCurrency(result.interestEarned)}, giving an illustrative 15-year value of ${formatIndianCurrency(result.maturityAmount)}. This is not an exact statutory PPF maturity amount.`,
+        schedule: result.schedule,
+      };
+    }
     case "rd": { const result = calculateRd({ monthlyDeposit: parsed.monthlyDeposit, annualInterestRate: parsed.annualInterestRate, tenureYears: parsed.tenureYears }); return { results: [{ label: "Total deposits", value: formatIndianCurrency(result.totalDeposits) }, { label: "Estimated interest", value: formatIndianCurrency(result.interestEarned) }, { label: "Estimated maturity", value: formatIndianCurrency(result.maturityAmount), emphasis: true }], interpretation: `Your deposits add up to ${formatIndianCurrency(result.totalDeposits)}. Earlier deposits earn interest for longer, and the model adds ${formatIndianCurrency(result.interestEarned)} in interest for an estimated maturity value of ${formatIndianCurrency(result.maturityAmount)}.` }; }
     case "lumpsum": { const result = calculateLumpsum({ initialInvestment: parsed.initialInvestment, annualReturnRate: parsed.annualReturnRate, investmentYears: parsed.investmentYears }); return { results: [{ label: "Invested amount", value: formatIndianCurrency(result.investedAmount) }, { label: "Estimated gain", value: formatIndianCurrency(result.estimatedGain) }, { label: "Estimated future value", value: formatIndianCurrency(result.futureValue), emphasis: true }], interpretation: `The one-time investment of ${formatIndianCurrency(result.investedAmount)} adds a projected gain of ${formatIndianCurrency(result.estimatedGain)}, taking the future value to ${formatIndianCurrency(result.futureValue)}.` }; }
     case "cagr": { const result = calculateCagr({ beginningValue: parsed.beginningValue, endingValue: parsed.endingValue, durationYears: parsed.durationYears }); return { results: [{ label: "Beginning value", value: formatIndianCurrency(result.beginningValue) }, { label: "Ending value", value: formatIndianCurrency(result.endingValue) }, { label: "Absolute gain/loss", value: formatIndianCurrency(result.absoluteGainLoss) }, { label: "CAGR", value: formatPercentage(result.cagrPercentage), emphasis: true }], interpretation: `A CAGR of ${formatPercentage(result.cagrPercentage)} is the constant yearly rate connecting ${formatIndianCurrency(result.beginningValue)} to ${formatIndianCurrency(result.endingValue)}. It does not mean the value changed by that rate in every individual year.` }; }

@@ -1,6 +1,6 @@
 import { assertFiniteNumber, assertInRange } from "./validation";
 import type { FinancialRuleSet } from "../financial-rules/types";
-import type { GratuityRules } from "../financial-rules/rule-sets";
+import type { GratuityRules, PpfRules } from "../financial-rules/rule-sets";
 
 function validateAmount(value: number, label: string, allowZero = true) {
   assertFiniteNumber(value, label);
@@ -22,10 +22,25 @@ export interface PpfInput { annualContribution: number; annualInterestRate: numb
 export interface PpfScheduleRow { year: number; openingBalance: number; contribution: number; interest: number; closingBalance: number }
 export interface PpfResult { totalContribution: number; interestEarned: number; maturityAmount: number; schedule: PpfScheduleRow[] }
 
-export function calculatePpf(input: PpfInput): PpfResult {
-  validateAmount(input.annualContribution, "Annual contribution");
+export function calculatePpf(
+  input: PpfInput,
+  ruleSet: FinancialRuleSet<PpfRules>
+): PpfResult {
+  const rules = ruleSet.rules;
+  assertFiniteNumber(input.annualContribution, "Annual contribution");
+  assertInRange(
+    input.annualContribution,
+    "Annual contribution",
+    rules.minimumAnnualContribution,
+    rules.maximumAnnualContribution
+  );
   validateRate(input.annualInterestRate, "Assumed annual interest rate");
   validateYears(input.tenureYears, "Investment tenure");
+  if (input.tenureYears !== rules.maturityYearsFromEndOfOpeningYear) {
+    throw new Error(
+      `Standard PPF projection must use ${rules.maturityYearsFromEndOfOpeningYear} years.`
+    );
+  }
   const rate = input.annualInterestRate / 100;
   const schedule: PpfScheduleRow[] = [];
   let balance = 0;
@@ -33,12 +48,22 @@ export function calculatePpf(input: PpfInput): PpfResult {
     const openingBalance = balance;
     const interest = (openingBalance + input.annualContribution) * rate;
     balance = openingBalance + input.annualContribution + interest;
-    schedule.push({ year, openingBalance, contribution: input.annualContribution, interest, closingBalance: balance });
+    schedule.push({
+      year,
+      openingBalance,
+      contribution: input.annualContribution,
+      interest,
+      closingBalance: balance,
+    });
   }
   const totalContribution = input.annualContribution * input.tenureYears;
-  return { totalContribution, interestEarned: balance - totalContribution, maturityAmount: balance, schedule };
+  return {
+    totalContribution,
+    interestEarned: balance - totalContribution,
+    maturityAmount: balance,
+    schedule,
+  };
 }
-
 export interface RdInput { monthlyDeposit: number; annualInterestRate: number; tenureYears: number }
 export interface RdResult { totalDeposits: number; interestEarned: number; maturityAmount: number }
 
