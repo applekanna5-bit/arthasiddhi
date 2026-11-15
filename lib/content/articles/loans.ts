@@ -854,7 +854,7 @@ export const loanArticles = [
     description: "How much house can you afford in India? Learn how income, existing EMIs, savings, down payment and purchase costs affect your home-buying budget.",
     category: "loans",
     publishedAt: "2026-09-30",
-    updatedAt: "2026-10-17",
+    updatedAt: "2026-11-15",
     readingTime: "7 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: null,
