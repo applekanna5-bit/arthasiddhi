@@ -851,7 +851,7 @@ export const loanArticles = [
   {
     title: "How Much House Can I Afford?",
     slug: "how-much-house-can-i-afford",
-    description: "Build a property-price range around usable savings, retained liquidity and household cash flow before testing a home-loan EMI.",
+    description: "How much house can you afford in India? Learn how income, existing EMIs, savings, down payment and purchase costs affect your home-buying budget.",
     category: "loans",
     publishedAt: "2026-09-30",
     updatedAt: "2026-10-17",
@@ -866,7 +866,7 @@ export const loanArticles = [
         id: "affordability-eligibility-and-emi",
         heading: "Start with a property budget your household can carry",
         paragraphs: [
-          "The house you can afford is one whose upfront cash requirement and ongoing payments leave room for living expenses, important goals and uncertainty. Start with the cash you can use, then test the borrowing needed at several property prices. The result is a range to investigate, not a universal salary multiple or EMI percentage.",
+          "Buying a house is a major financial decision. Before choosing a property, check how much you can comfortably spend based on your monthly income, existing EMIs, savings, down payment and everyday expenses. Remember to keep money aside for emergencies and other important goals. Your affordable property budget may be different from the loan amount a bank is willing to approve.",
           "Keep three different questions separate from the beginning:",
         ],
         list: [
