@@ -34,6 +34,9 @@ export function calculatePpf(
     rules.minimumAnnualContribution,
     rules.maximumAnnualContribution
   );
+  if (input.annualContribution % 50 !== 0) {
+    throw new Error("Annual contribution must be in multiples of ₹50.");
+  }
   validateRate(input.annualInterestRate, "Assumed annual interest rate");
   validateYears(input.tenureYears, "Investment tenure");
   if (input.tenureYears !== rules.maturityYearsFromEndOfOpeningYear) {
