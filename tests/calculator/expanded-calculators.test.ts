@@ -55,6 +55,22 @@ describe("PPF calculator", () => {
     }
   );
 
+  it.each([500, 550, 1_050, 149_950, 150_000])(
+    "accepts valid ₹50 contribution increments of %s",
+    (annualContribution) => {
+      expect(calculate({ ...standardInput, annualContribution }).totalContribution)
+        .toBe(annualContribution * 15);
+    }
+  );
+
+  it.each([501, 525, 1_001, 149_999, 500.5])(
+    "rejects contributions outside ₹50 increments: %s",
+    (annualContribution) => {
+      expect(() => calculate({ ...standardInput, annualContribution }))
+        .toThrow(/multiples of ₹50/);
+    }
+  );
+
   it.each([0, 1, 3, 16, 100])(
     "rejects an unsupported tenure of %s years",
     (tenureYears) => {
