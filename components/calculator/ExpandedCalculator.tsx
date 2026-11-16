@@ -84,9 +84,9 @@ const configs: Record<ExpandedSlug, Config> = {
         defaultValue: "150000",
         min: ppfRuleSet.rules.minimumAnnualContribution,
         max: ppfRuleSet.rules.maximumAnnualContribution,
-        step: 500,
+        step: 50,
         prefix: "₹",
-        hint: "Enter ₹500 to ₹1,50,000 per financial year for this standard contribution model.",
+        hint: "Enter ₹500 to ₹1,50,000 per financial year in multiples of ₹50 for this standard contribution model.",
       },
       {
         id: "annualInterestRate",
