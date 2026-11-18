@@ -137,7 +137,7 @@ export const loanArticles = [
         id: "short-answer",
         heading: "The EMI start date comes from disbursement and the repayment terms",
         paragraphs: [
-          "Your home loan EMI does not automatically begin when the bank sanctions the loan. The first regular EMI date depends on when funds are disbursed and the repayment schedule agreed with your lender. If the loan is released in stages, such as for an under-construction home, you may pay pre-EMI interest or follow another arrangement stated in your loan terms.",
+          "Your home loan EMI does not automatically begin when the bank sanctions the loan. The first EMI or debit date depends on the loan agreement, when funds are disbursed, the repayment cycle and the lender's terms. If the loan is released in stages, such as for an under-construction home, you may pay pre-EMI interest or follow another arrangement stated in your loan terms.",
           "Confirm the actual first debit date in the lender's repayment schedule and disbursement communication. It is not universally the next month or exactly 30 days after disbursement.",
         ],
         table: {
