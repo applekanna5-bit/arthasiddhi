@@ -121,10 +121,10 @@ export const loanArticles = [
   {
     title: "When Does a Home Loan EMI Start? Disbursement and First Payment",
     slug: "when-home-loan-emi-starts",
-    description: "Understand the sequence from Home Loan sanction to disbursement and why the first EMI date depends on the actual repayment terms.",
+    description: "When does home loan EMI start in India? Understand disbursement, pre-EMI and how to confirm your first debit date with the lender.",
     category: "loans",
     publishedAt: "2026-08-26",
-    updatedAt: "2026-10-01",
+    updatedAt: "2026-11-18",
     readingTime: "8 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "home-loan",
@@ -137,7 +137,7 @@ export const loanArticles = [
         id: "short-answer",
         heading: "The EMI start date comes from disbursement and the repayment terms",
         paragraphs: [
-          "The exact first EMI or debit date depends on the loan agreement, when funds are disbursed, the repayment cycle and the lender's terms. Sanction alone does not establish that date. With partial or staged disbursement, an interim payment arrangement may apply before regular EMI, if the loan terms provide for it.",
+          "Your home loan EMI does not automatically begin when the bank sanctions the loan. The first regular EMI date depends on when funds are disbursed and the repayment schedule agreed with your lender. If the loan is released in stages, such as for an under-construction home, you may pay pre-EMI interest or follow another arrangement stated in your loan terms.",
           "Confirm the actual first debit date in the lender's repayment schedule and disbursement communication. It is not universally the next month or exactly 30 days after disbursement.",
         ],
         table: {
@@ -206,6 +206,22 @@ export const loanArticles = [
         ],
       },
       {
+        id: "example-first-emi-timeline",
+        heading: "Example: sanction, disbursement and the first EMI",
+        paragraphs: [
+          "Illustration only: Suppose a lender sanctions a home loan on 5 January, releases the full amount on 20 January and confirms 5 March as the first regular EMI debit date in the repayment schedule. The borrower should plan for the confirmed 5 March debit, not assume that sanction on 5 January or disbursement on 20 January creates a universal 30-day rule.",
+          "The actual dates and any interest for the intervening period depend on the individual loan agreement and lender communications. For a partly disbursed loan, the interim payment treatment may differ.",
+        ],
+      },
+      {
+        id: "example-pre-emi-interest",
+        heading: "Example: what pre-EMI interest might look like",
+        paragraphs: [
+          "Illustration only: If ₹20,00,000 has been disbursed at an assumed 9% annual rate, interest for a hypothetical 30-day period on a simple actual/365 basis is ₹20,00,000 × 9% × 30 ÷ 365 = approximately ₹14,795. This is interest on the released amount, not a standard principal-and-interest EMI.",
+          "This is not a quote of any lender's pre-EMI charge. Lenders may apply different day-count methods, periods, rate changes or contractual arrangements. If the payment is interest-only, it does not reduce the outstanding principal.",
+        ],
+      },
+      {
         id: "documents-to-check",
         heading: "Verify the dates and payment treatment in the loan documents",
         paragraphs: [
@@ -216,7 +232,7 @@ export const loanArticles = [
           "What amount was disbursed, and on what date?",
           "Does the documented arrangement require pre-EMI or another interim payment?",
           "How is any interim interest determined and shown in the account?",
-          "When does regular EMI begin, and what is the first debit date?",
+          "What exact first EMI debit date is shown in the repayment schedule, and is the auto-debit mandate ready?",
           "How will later disbursements affect the payment amount or schedule?",
           "Can an amount above interim interest reduce principal, and how will it be recorded?",
           "Which lender document or written clarification should be followed if dates appear to differ?",
