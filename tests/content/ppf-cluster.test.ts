@@ -15,30 +15,25 @@ import { articleJsonLd, articleMetadata, breadcrumbJsonLd, faqJsonLd, getArticle
 import { absoluteUrl } from "../../lib/content/site";
 import { buildSitemap } from "../../lib/content/sitemap";
 import type { Article, ArticleInternalLink, ArticleSection, ArticleSlug } from "../../lib/content/types";
-
 const ppfSlugs = [
   "ppf-explained",
   "ppf-interest-calculation",
   "ppf-tenure-extension",
   "ppf-calculator-projection-vs-actual-maturity",
 ] as const satisfies readonly ArticleSlug[];
-
 function ppfArticle(slug: ArticleSlug) {
   const article = getArticle("banking", slug);
   expect(article).toBeDefined();
   return article!;
 }
-
 function section(article: Article, id: string): ArticleSection {
   const value = article.sections.find((candidate) => candidate.id === id);
   expect(value).toBeDefined();
   return value!;
 }
-
 function wholeRupees(value: number) {
   return `₹${new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 }).format(value)}`;
 }
-
 function inlineLinks(article: Article): ArticleInternalLink[] {
   const links: ArticleInternalLink[] = [];
   for (const item of article.sections) {
@@ -51,11 +46,9 @@ function inlineLinks(article: Article): ArticleInternalLink[] {
   }
   return links;
 }
-
 function articleText(article: Article) {
   return JSON.stringify(article).toLowerCase();
 }
-
 describe("PPF cluster registry and maintenance", () => {
   it("registers exactly the four approved PPF articles in Banking", () => {
     const registered = articles.filter(({ primaryCalculator }) => primaryCalculator === "ppf");
@@ -68,13 +61,11 @@ describe("PPF cluster registry and maintenance", () => {
       "choosing-bank-deposit", "deposit-insurance-explained", "fd-maturity-and-renewal", "manage-recurring-deposit",
     ]);
   });
-
   it("keeps one sole core guide and three supporting guides", () => {
     expect(getPrimaryGuideForCalculator("ppf")?.slug).toBe("ppf-explained");
     expect(ppfSlugs.map((slug) => ppfArticle(slug).calculatorGuideRole)).toEqual(["core", "supporting", "supporting", "supporting"]);
     expect(articles.filter(({ primaryCalculator, calculatorGuideRole }) => primaryCalculator === "ppf" && calculatorGuideRole === "core")).toHaveLength(1);
   });
-
   it("preserves shared verification while allowing the scoped extension citation", () => {
     expect(ppfRuleSet.id).toBe("ppf-scheme-2019-amended-2020");
     expect(ppfRuleSet.periodLabels).toEqual([{ label: "Applicable scheme", value: "Public Provident Fund Scheme, 2019 (as amended in 2020)" }]);
@@ -99,7 +90,6 @@ describe("PPF cluster registry and maintenance", () => {
     }
   });
 });
-
 describe("PPF post-maturity access", () => {
   it("distinguishes available-balance access from the aggregate extension-block ceiling", () => {
     const article = ppfArticle("ppf-tenure-extension");
@@ -119,7 +109,6 @@ describe("PPF post-maturity access", () => {
     expect(getArticleMaintenanceContext(article)?.verifiedAt).toBe("2026-08-20");
   });
 });
-
 describe("PPF calculator discovery and internal links", () => {
   it("curates the approved core and exactly two supporting cards", () => {
     expect(getSupportingGuidesForCalculator("ppf").map(({ slug }) => slug)).toEqual(["ppf-interest-calculation", "ppf-calculator-projection-vs-actual-maturity"]);
@@ -130,7 +119,6 @@ describe("PPF calculator discovery and internal links", () => {
     expect(getSupportingGuidesForCalculator("sip").map(({ slug }) => slug)).toEqual(["sip-return-calculation", "sip-projection-assumptions"]);
     expect(getSupportingGuidesForCalculator("home-loan").map(({ slug }) => slug)).toEqual(["home-loan-emi-calculation", "home-loan-tenure-comparison"]);
   });
-
   it.each([
     ["ppf-explained", [{ kind: "calculator", slug: "ppf" }, { kind: "article", slug: "ppf-interest-calculation" }, { kind: "article", slug: "ppf-tenure-extension" }, { kind: "article", slug: "ppf-calculator-projection-vs-actual-maturity" }]],
     ["ppf-interest-calculation", [{ kind: "calculator", slug: "ppf" }, { kind: "article", slug: "ppf-explained" }, { kind: "article", slug: "ppf-calculator-projection-vs-actual-maturity" }]],
@@ -146,31 +134,27 @@ describe("PPF calculator discovery and internal links", () => {
     expect(article.relatedCalculators).toEqual([]);
   });
 });
-
 describe("PPF numerical and assumption integrity", () => {
   it("reconciles the core baseline example directly with calculatePpf", () => {
-    const result = calculatePpf({ annualContribution: 150_000, annualInterestRate: 7.1, tenureYears: 15 });
+    const result = calculatePpf({ annualContribution: 150_000, annualInterestRate: 7.1, tenureYears: 15 }, ppfRuleSet);
     expect(section(ppfArticle("ppf-explained"), "worked-example").table?.rows).toEqual([[
       wholeRupees(150_000), "15 years", wholeRupees(result.totalContribution), wholeRupees(result.interestEarned), wholeRupees(result.maturityAmount),
     ]]);
   });
-
   it("reconciles displayed annual schedule rows with calculatePpf", () => {
-    const result = calculatePpf({ annualContribution: 150_000, annualInterestRate: 7.1, tenureYears: 15 });
+    const result = calculatePpf({ annualContribution: 150_000, annualInterestRate: 7.1, tenureYears: 15 }, ppfRuleSet);
     const rows = result.schedule.slice(0, 2).map((row) => [String(row.year), wholeRupees(row.openingBalance), wholeRupees(row.contribution), wholeRupees(row.interest), wholeRupees(row.closingBalance)]);
     expect(section(ppfArticle("ppf-interest-calculation"), "schedule-example").table?.rows).toEqual(rows);
     expect(result.schedule[0]).toMatchObject({ openingBalance: 0, contribution: 150_000, closingBalance: 160_650 });
     expect(result.schedule[0].interest).toBeCloseTo(10_650, 8);
   });
-
   it("reconciles every sensitivity row with the engine", () => {
     const rows = [6, 7, 8].map((rate) => {
-      const result = calculatePpf({ annualContribution: 100_000, annualInterestRate: rate, tenureYears: 15 });
+      const result = calculatePpf({ annualContribution: 100_000, annualInterestRate: rate, tenureYears: 15 }, ppfRuleSet);
       return [`${rate}%`, wholeRupees(result.totalContribution), wholeRupees(result.interestEarned), wholeRupees(result.maturityAmount)];
     });
     expect(section(ppfArticle("ppf-calculator-projection-vs-actual-maturity"), "sensitivity-example").table?.rows).toEqual(rows);
   });
-
   it("states the calculator and actual-scheme timing boundaries", () => {
     const combined = ppfSlugs.map((slug) => articleText(ppfArticle(slug))).join(" ");
     expect(combined).toContain("beginning of every modeled year");
@@ -180,7 +164,6 @@ describe("PPF numerical and assumption integrity", () => {
     expect(combined).toContain("government-notified ppf rates can change");
   });
 });
-
 describe("PPF tenure, editorial and SEO safety", () => {
   it("sources the statutory framework and rejects calculator-based extension validation", () => {
     const tenure = articleText(ppfArticle("ppf-tenure-extension"));
@@ -190,7 +173,6 @@ describe("PPF tenure, editorial and SEO safety", () => {
     expect(tenure).toContain("20-year projection is not an extension election");
     expect(tenure).toContain("does not submit or validate");
   });
-
   it("avoids prohibited guarantees, future-rate claims, comparisons and unsupported calculations", () => {
     const combined = ppfSlugs.map((slug) => articleText(ppfArticle(slug))).join(" ");
     for (const phrase of [
@@ -201,7 +183,6 @@ describe("PPF tenure, editorial and SEO safety", () => {
     expect(combined).toContain("not a guaranteed maturity value");
     expect(combined).toContain("not forecasts of future ppf rates");
   });
-
   it("provides unique metadata, production canonicals and existing schemas", () => {
     const titles = new Set<string>();
     const descriptions = new Set<string>();
@@ -222,7 +203,6 @@ describe("PPF tenure, editorial and SEO safety", () => {
     expect(titles.size).toBe(4);
     expect(descriptions.size).toBe(4);
   });
-
   it("keeps all four article URLs in the expanded unique sitemap without a new category", () => {
     const urls = buildSitemap().map(({ url }) => url);
     expect(urls).toHaveLength(109);
