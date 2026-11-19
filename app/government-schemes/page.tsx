@@ -26,9 +26,10 @@ export default function GovernmentSchemesPage() {
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             {plannedSchemeGuides.map((scheme) => (
               <article key={scheme.slug} className="rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5">
-                <h3 className="text-lg font-semibold">{scheme.title}</h3>
+                <h3 className="text-lg font-semibold"><Link href={`/government-schemes/${scheme.slug}`} className="underline-offset-4 hover:underline focus-visible:underline">{scheme.title}</Link></h3>
                 <p className="mt-3 text-sm leading-6 text-[var(--as-text-secondary)]">{scheme.summary}</p>
-                <p className="mt-3 text-xs text-[var(--as-text-secondary)]">Full guide pending official-rule verification.</p>
+                <p className="mt-3 text-xs text-[var(--as-text-secondary)]">Draft guide — current rules still under review.</p>
+                <Link href={`/government-schemes/${scheme.slug}`} className="mt-4 block text-sm font-semibold text-[var(--as-brand-teal)] underline underline-offset-4">Read draft guide</Link>
                 <a className="mt-4 inline-block text-sm font-semibold text-[var(--as-brand-teal)] underline underline-offset-4" href={scheme.sources[0].url} target="_blank" rel="noopener noreferrer">Official information</a>
               </article>
             ))}
