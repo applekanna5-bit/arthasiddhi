@@ -8,7 +8,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     summary: "Understand contributions, interest assumptions, access rules and maturity.",
     category: "savings",
     reviewStatus: "needs-verification",
-    sources: [{ title: "National Savings Institute", authority: "Government of India", url: "https://www.nsiindia.gov.in/" }],
+    sources: [{ title: "National Savings Institute", authority: "Government of India", url: "https://www.nsiindia.gov.in/writereaddata/SchemeRules/PublicProvidentFundSchemeRule.pdf" }],
     relatedPaths: ["/learn/banking/ppf-explained"],
   },
   {
@@ -17,7 +17,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     summary: "Understand urban housing assistance and why eligibility depends on the programme component.",
     category: "housing",
     reviewStatus: "needs-verification",
-    sources: [{ title: "PMAY-U 2.0 guidelines", authority: "Ministry of Housing and Urban Affairs", url: "https://pmay-urban.gov.in/pmay-u-2.0-guidelines" }],
+    sources: [{ title: "PMAY-U 2.0 guidelines", authority: "Ministry of Housing and Urban Affairs", url: "https://pmay-urban.gov.in/uploads/guidelines/Operational-Guidelines-of-PMAY-U-2.pdf" }],
     relatedPaths: ["/learn/loans/how-much-house-can-i-afford"],
   },
   {
@@ -26,7 +26,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     summary: "Understand account eligibility, contributions, withdrawal rules and maturity.",
     category: "savings",
     reviewStatus: "needs-verification",
-    sources: [{ title: "National Savings Institute", authority: "Government of India", url: "https://www.nsiindia.gov.in/" }],
+    sources: [{ title: "Sukanya Samriddhi Scheme Rules", authority: "Government of India", url: "https://www.nsiindia.gov.in/writereaddata/SchemeRules/SukanyaSamriddhiAccountSchemeRule.pdf" }],
     relatedPaths: [],
   },
 ];
