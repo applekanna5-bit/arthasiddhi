@@ -25,9 +25,9 @@ export default async function SchemeGuidePage({ params }: Props) {
         <p className="mt-5 text-lg leading-8 text-[var(--as-text-secondary)]">{guide.intro}</p>
         <p className="mt-5 rounded-lg border border-[var(--as-border-subtle)] p-4 text-sm leading-6">Editorial review in progress. Confirm the latest scheme rules, amendments and rates with official authorities before relying on this guide.</p>
         {guide.sections.map((section) => (
-          <section key={section.heading} className="mt-9">
-            <h2 className="learn-display text-2xl">{section.heading}</h2>
-            {section.paragraphs.map((paragraph) => <p key={paragraph} className="mt-3 leading-7 text-[var(--as-text-secondary)]">{paragraph}</p>)}
+          <section key={section.heading} className={`mt-9 ${section.heading.toLowerCase().includes("example") ? "rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5 sm:p-6" : "border-b border-[var(--as-border-subtle)] pb-7 last:border-b-0"}`}>
+            <h2 className="learn-display text-2xl leading-snug">{section.heading}</h2>
+            {section.paragraphs.map((paragraph) => <p key={paragraph} className="mt-3 text-base leading-8 text-[var(--as-text-secondary)]">{paragraph}</p>)}
           </section>
         ))}
         <section className="mt-10 border-t border-[var(--as-border-subtle)] pt-6">
