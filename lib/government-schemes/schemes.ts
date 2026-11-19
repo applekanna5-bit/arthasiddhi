@@ -9,7 +9,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     category: "savings",
     reviewStatus: "needs-verification",
     sources: [{ title: "National Savings Institute", authority: "Government of India", url: "https://www.nsiindia.gov.in/writereaddata/SchemeRules/PublicProvidentFundSchemeRule.pdf" }],
-    relatedPaths: ["/learn/banking/ppf-explained"],
+    relatedPaths: ["/calculators/ppf"],
   },
   {
     slug: "pmay-u-2",
