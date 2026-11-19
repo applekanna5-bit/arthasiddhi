@@ -24,6 +24,45 @@ export default async function SchemeGuidePage({ params }: Props) {
         <h1 className="learn-display mt-3 text-4xl leading-tight sm:text-5xl">{guide.title}</h1>
         <p className="mt-5 text-lg leading-8 text-[var(--as-text-secondary)]">{guide.intro}</p>
         <p className="mt-5 rounded-lg border border-[var(--as-border-subtle)] p-4 text-sm leading-6">Editorial review in progress. Confirm the latest scheme rules, amendments and rates with official authorities before relying on this guide.</p>
+        {slug === "ppf" && (
+          <section aria-label="PPF at a glance" className="mt-7 rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5">
+            <h2 className="learn-display text-xl">PPF at a glance</h2>
+            <dl className="mt-4 grid gap-4 sm:grid-cols-3">
+              <div><dt className="text-sm text-[var(--as-text-secondary)]">Annual deposit</dt><dd className="mt-1 font-semibold">₹500–₹1,50,000</dd></div>
+              <div><dt className="text-sm text-[var(--as-text-secondary)]">Normal maturity</dt><dd className="mt-1 font-semibold">15 complete financial years after opening FY</dd></div>
+              <div><dt className="text-sm text-[var(--as-text-secondary)]">Interest</dt><dd className="mt-1 font-semibold">Government-notified, variable</dd></div>
+            </dl>
+          </section>
+        )}
+        {slug === "sukanya-samriddhi" && (
+          <section aria-label="Sukanya Samriddhi at a glance" className="mt-7 rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5">
+            <h2 className="learn-display text-xl">Sukanya Samriddhi at a glance</h2>
+            <dl className="mt-4 grid gap-4 sm:grid-cols-3">
+              <div><dt className="text-sm text-[var(--as-text-secondary)]">Annual deposit</dt><dd className="mt-1 font-semibold">₹250–₹1,50,000</dd></div>
+              <div><dt className="text-sm text-[var(--as-text-secondary)]">Deposit period</dt><dd className="mt-1 font-semibold">15 years from opening</dd></div>
+              <div><dt className="text-sm text-[var(--as-text-secondary)]">Normal maturity</dt><dd className="mt-1 font-semibold">21 years from opening</dd></div>
+            </dl>
+          </section>
+        )}
+        {slug === "pmay-u-2" && (
+          <section aria-label="PMAY-U 2.0 components" className="mt-7">
+            <h2 className="learn-display text-xl">Four pathways at a glance</h2>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {[
+                { name: "BLC", description: "Beneficiary-led construction for eligible households building on their own land, subject to programme rules." },
+                { name: "AHP", description: "Affordable housing in partnership through qualifying housing projects." },
+                { name: "ARH", description: "Affordable rental housing for eligible urban households." },
+                { name: "ISS", description: "Interest subsidy on qualifying home loans, subject to specific loan and household conditions." },
+              ].map((component) => (
+                <div key={component.name} className="rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-4">
+                  <h3 className="font-semibold">{component.name}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--as-text-secondary)]">{component.description}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-3 text-sm leading-6 text-[var(--as-text-secondary)]">These are different programme components, not automatic or cumulative entitlements.</p>
+          </section>
+        )}
         {guide.sections.map((section) => (
           <section key={section.heading} className={`mt-9 ${section.heading.toLowerCase().includes("example") ? "rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5 sm:p-6" : "border-b border-[var(--as-border-subtle)] pb-7 last:border-b-0"}`}>
             <h2 className="learn-display text-2xl leading-snug">{section.heading}</h2>
