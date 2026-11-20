@@ -81,6 +81,19 @@ The September 2024 operational guidelines distinguish four pathways. The general
 
 **Outstanding evidence:** The ministry's guidelines page directly links to https://pmay-urban.gov.in/uploads/guidelines/AHP-SOP.pdf. Its provenance is confirmed, but the full PDF content has not been independently reconciled here. Link to the official PDF with an explicit pending-review caveat; do not assert full-document verification.
 
+### Component-specific PMAY-U review (20 November 2026)
+
+The September 2024 operational guidelines are the governing baseline for this draft; the April 2026 AHP SOP is separately listed on the ministry's guidelines page. **These findings do not certify that every later implementation instruction has been reviewed.**
+
+| Component | Current draft coverage | Publication-sensitive follow-up |
+| --- | --- | --- |
+| BLC — Beneficiary Led Construction | Accurately identifies construction on an eligible household's own land | Confirm land/title requirements, geography, EWS restrictions, state/UT verification and payment stages before publishing numerical assistance examples |
+| AHP — Affordable Housing in Partnership | Accurately describes a project-based route | Review April 2026 AHP SOP directly, including eligible projects, beneficiary selection, financing and local conditions |
+| ARH — Affordable Rental Housing | Accurately distinguishes rental assistance from home ownership | Check eligible implementing entities, target groups, rents and project-specific conditions before describing entitlements |
+| ISS — Interest Subsidy Scheme | Correctly warns that income band and EMI alone cannot establish entitlement | Verify qualifying loan sanction date, principal/property limits, household criteria, subsidy computation, disbursement and lender participation against latest official ISS instructions |
+
+**Editorial outcome:** The current non-numeric component descriptions are appropriately cautious. Do not add benefit amounts, approval promises, or an automated eligibility verdict until the component-specific rules are reconciled.
+
 ## Publication blockers and acceptance criteria
 
 1. PPF 2019 scheme paragraphs 8–13 have been reconciled to the published NSI text; check for later applicable circulars and confirm the final guide wording against those clauses.
