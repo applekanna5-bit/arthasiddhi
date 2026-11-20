@@ -63,7 +63,7 @@ Official guidelines index: https://pmay-urban.gov.in/guideline
 | EWS/LIG/MIG household-income bands | Confirmed against September 2024 guidelines | Check later state-specific and ministry instructions |
 | Pucca-house ownership and prior housing-benefit restrictions | Confirmed at guideline level | Component exceptions and eligibility validation remain open |
 | ISS loan, property, timing and subsidy conditions | Partial | Reconcile exact ISS chapter and amendments before any numeric example |
-| April 2026 AHP SOP | Official ministry listing located | Exact SOP PDF contents not fully audited; link to verified official listing only |
+| April 2026 AHP SOP | Official ministry PDF link confirmed | Exact SOP PDF contents not fully audited; direct PDF link may be shown with a pending-review caveat |
 | Any individual entitlement or lender approval | Not asserted | Must remain explicitly conditional |
 
 ### Component-specific PMAY-U publication checks
@@ -79,7 +79,7 @@ The September 2024 operational guidelines distinguish four pathways. The general
 
 **Editorial rule:** Do not publish numeric subsidy promises, automatic approval claims, or cross-component benefit stacking until each specific claim has an official clause citation. The current article deliberately avoids such claims.
 
-**Outstanding evidence:** The April 2026 AHP SOP appears on the official ministry listing, but its complete PDF contents have not yet been independently reconciled here. Keep the AHP SOP as an official listing reference rather than asserting full-document verification.
+**Outstanding evidence:** The ministry's guidelines page directly links to https://pmay-urban.gov.in/uploads/guidelines/AHP-SOP.pdf. Its provenance is confirmed, but the full PDF content has not been independently reconciled here. Link to the official PDF with an explicit pending-review caveat; do not assert full-document verification.
 
 ## Publication blockers and acceptance criteria
 
