@@ -63,7 +63,7 @@ Official guidelines index: https://pmay-urban.gov.in/guideline
 | EWS/LIG/MIG household-income bands | Confirmed against September 2024 guidelines | Check later state-specific and ministry instructions |
 | Pucca-house ownership and prior housing-benefit restrictions | Confirmed at guideline level | Component exceptions and eligibility validation remain open |
 | ISS loan, property, timing and subsidy conditions | Partial | Reconcile exact ISS chapter and amendments before any numeric example |
-| April 2026 AHP SOP | Official ministry PDF link confirmed | Exact SOP PDF contents not fully audited; direct PDF link may be shown with a pending-review caveat |
+| April 2026 AHP SOP | Official ministry PDF reviewed for claims in the draft | EWS targeting, 30–45 sq. m. homes, public/private implementation models and conditional verification checked; comprehensive clause-by-clause implementation audit remains open |
 | Any individual entitlement or lender approval | Not asserted | Must remain explicitly conditional |
 
 ### Component-specific PMAY-U publication checks
@@ -73,13 +73,13 @@ The September 2024 operational guidelines distinguish four pathways. The general
 | Component | What the guide can safely say now | Further verification required before detailed claims |
 | --- | --- | --- |
 | BLC — Beneficiary Led Construction | Assistance for eligible households constructing on their own available land, subject to programme and local validation | Land-title/tenure requirements, assistance share, construction standards, state/UT conditions and current implementation circulars |
-| AHP — Affordable Housing in Partnership | Eligible housing units delivered through qualifying partnership projects | April 2026 AHP SOP full text, project eligibility, unit allocation and financial assistance rules |
+| AHP — Affordable Housing in Partnership | EWS-targeted qualifying projects, 30–45 sq. m. carpet area, public/private models and conditional allotment | Verify any detailed financial assistance, project approvals, beneficiary allocation and later circulars before adding numerical claims |
 | ARH — Affordable Rental Housing | Rental-housing pathway, not an ownership subsidy | Eligibility, operating model, rental conditions, implementing-agency instructions and state/UT rules |
 | ISS — Interest Subsidy Scheme | Conditional interest subsidy for eligible qualifying housing loans, not an automatic EMI discount | Current loan sanction/disbursement dates, loan and property limits, subsidy calculation, release mechanism and lender/portal verification |
 
 **Editorial rule:** Do not publish numeric subsidy promises, automatic approval claims, or cross-component benefit stacking until each specific claim has an official clause citation. The current article deliberately avoids such claims.
 
-**Outstanding evidence:** The ministry's guidelines page directly links to https://pmay-urban.gov.in/uploads/guidelines/AHP-SOP.pdf. Its provenance is confirmed, but the full PDF content has not been independently reconciled here. Link to the official PDF with an explicit pending-review caveat; do not assert full-document verification.
+**AHP evidence update:** The 39-page April 2026 ministry SOP was supplied and reviewed for the claims currently used in the guide: EWS beneficiary targeting, 30–45 sq. m. homes, public/private delivery models, application channels and non-guaranteed allotment. This is claim-level review, not certification of every project-finance, allocation or implementation clause. The official PDF is https://pmay-urban.gov.in/uploads/guidelines/AHP-SOP.pdf.
 
 ### Component-specific PMAY-U review (20 November 2026)
 
@@ -88,11 +88,11 @@ The September 2024 operational guidelines are the governing baseline for this dr
 | Component | Current draft coverage | Publication-sensitive follow-up |
 | --- | --- | --- |
 | BLC — Beneficiary Led Construction | Accurately identifies construction on an eligible household's own land | Confirm land/title requirements, geography, EWS restrictions, state/UT verification and payment stages before publishing numerical assistance examples |
-| AHP — Affordable Housing in Partnership | Accurately describes a project-based route | Review April 2026 AHP SOP directly, including eligible projects, beneficiary selection, financing and local conditions |
+| AHP — Affordable Housing in Partnership | Updated using the April 2026 SOP: EWS targeting, carpet area, public/private models, official application and verification channels | Detailed project approval, beneficiary selection, financing and later local conditions remain outside the current guide's claims |
 | ARH — Affordable Rental Housing | Accurately distinguishes rental assistance from home ownership | Check eligible implementing entities, target groups, rents and project-specific conditions before describing entitlements |
 | ISS — Interest Subsidy Scheme | Correctly warns that income band and EMI alone cannot establish entitlement | Verify qualifying loan sanction date, principal/property limits, household criteria, subsidy computation, disbursement and lender participation against latest official ISS instructions |
 
-**Editorial outcome:** The current non-numeric component descriptions are appropriately cautious. Do not add benefit amounts, approval promises, or an automated eligibility verdict until the component-specific rules are reconciled.
+**Editorial outcome:** The current non-numeric component descriptions, including the AHP explanation reviewed against the April 2026 SOP, are appropriately cautious. Do not add benefit amounts, approval promises, or an automated eligibility verdict until the component-specific rules are reconciled.
 
 ## Publication blockers and acceptance criteria
 
