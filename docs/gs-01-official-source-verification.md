@@ -23,11 +23,11 @@ Official NSI overview: https://www.nsiindia.gov.in/InternalPage.aspx?Id_Pk=55
 | ₹500–₹1,50,000 annual deposits; ₹50 multiples | Confirmed | PPF Scheme, 2019, paragraphs 4–5 |
 | Maturity after 15 complete financial years following opening FY | Confirmed | NSI PPF overview and 2019 scheme |
 | Loans in third through sixth FY; withdrawals from seventh FY | Confirmed | NSI PPF overview and 2019 scheme |
-| Exact 25% loan balance formula, repayment restrictions | Partial | Recheck full paragraph 8 and related provisions against applicable amendments |
-| Exact 50% withdrawal calculation and prior-year balance references | Partial | Recheck full paragraph 10 and related provisions |
+| Exact 25% loan balance formula, repayment restrictions | Confirmed in published 2019 scheme | Paragraphs 8–9: 25% of balance at end of second preceding year; fresh loan requires prior loan and interest settlement |
+| Exact 50% withdrawal calculation and prior-year balance references | Confirmed in published 2019 scheme | Paragraph 10: lower of balances at end of fourth preceding year or immediately preceding year; one per year and loan dues cleared |
 | Extension with deposits in five-year blocks; 60% block withdrawal ceiling | Confirmed in published scheme text | Recheck any later amendments before publication |
 | Continuation without deposits | Confirmed | NSI overview and published scheme |
-| Premature-closure grounds, five-year condition and 1 percentage-point adjustment | Partial | Verify complete premature-closure provision and any later amendments |
+| Premature-closure grounds, five-year condition and 1 percentage-point adjustment | Confirmed in published 2019 scheme | Paragraph 13: specified grounds and supporting documentation; interest adjustment. Later circulars remain to be checked |
 | Monthly interest qualifying balance (5th day through month end) | Confirmed | 2019 scheme paragraph 7, as amended May 2020 |
 | ₹5,000 × 12 × 15 = ₹9,00,000 principal example | Confirmed arithmetic | Not a maturity projection |
 
@@ -68,11 +68,11 @@ Official guidelines index: https://pmay-urban.gov.in/guideline
 
 ## Publication blockers and acceptance criteria
 
-1. Recheck PPF loan, withdrawal and premature-closure formulas clause by clause in the full official rules, including applicable amendments.
+1. PPF 2019 scheme paragraphs 8–13 have been reconciled to the published NSI text; check for later applicable circulars and confirm the final guide wording against those clauses.
 2. Reconcile any post-2019/2020 Sukanya instructions relevant to the published draft.
 3. Reconcile PMAY-U 2.0 component-specific eligibility and current implementation instructions.
 4. Validate all official outbound links and internal links in the final preview.
 5. Confirm CI for the final commit, `noindex` on the hub and guides, and exclusion from public navigation and sitemap.
 6. Obtain separate explicit owner approval before changing Draft PR status, merging or deploying.
 
-**Editorial verdict:** HOLD publication; continue verification. This register records evidence, not legal advice or government eligibility certification.
+**PPF clause review update:** The NSI official published 2019 scheme text (including its May 2020 amendment notation) was consulted for paragraphs 8–13 on 20 November 2026. This closes the previously open loan, withdrawal, and premature-closure clause checks against that published text; it does not certify that no later circulars apply.\n\n**Editorial verdict:** HOLD publication; continue verification. This register records evidence, not legal advice or government eligibility certification.
