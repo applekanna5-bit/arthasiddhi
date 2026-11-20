@@ -32,9 +32,12 @@ describe("government scheme draft publication safeguards", () => {
     expect(urls.some((url) => new URL(url).pathname.startsWith("/government-schemes"))).toBe(false);
   });
 
-  it("does not reintroduce the unverified AHP PDF link", () => {
+  it("labels the ministry-confirmed AHP PDF as pending full-text review", () => {
     const pmay = schemeDrafts.find((guide) => guide.slug === "pmay-u-2");
     expect(pmay).toBeDefined();
-    expect(pmay?.sources.some((source) => source.url.endsWith("/AHP-SOP.pdf"))).toBe(false);
+    const ahpSources = pmay?.sources.filter((source) => source.url.endsWith("/AHP-SOP.pdf")) ?? [];
+    expect(ahpSources).toHaveLength(1);
+    expect(ahpSources[0].url).toBe("https://pmay-urban.gov.in/uploads/guidelines/AHP-SOP.pdf");
+    expect(ahpSources[0].title.toLowerCase()).toContain("pending");
   });
 });
