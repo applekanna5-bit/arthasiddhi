@@ -66,6 +66,21 @@ Official guidelines index: https://pmay-urban.gov.in/guideline
 | April 2026 AHP SOP | Official ministry listing located | Exact SOP PDF contents not fully audited; link to verified official listing only |
 | Any individual entitlement or lender approval | Not asserted | Must remain explicitly conditional |
 
+### Component-specific PMAY-U publication checks
+
+The September 2024 operational guidelines distinguish four pathways. The general household income classification is **not** a substitute for the eligibility test under each pathway.
+
+| Component | What the guide can safely say now | Further verification required before detailed claims |
+| --- | --- | --- |
+| BLC — Beneficiary Led Construction | Assistance for eligible households constructing on their own available land, subject to programme and local validation | Land-title/tenure requirements, assistance share, construction standards, state/UT conditions and current implementation circulars |
+| AHP — Affordable Housing in Partnership | Eligible housing units delivered through qualifying partnership projects | April 2026 AHP SOP full text, project eligibility, unit allocation and financial assistance rules |
+| ARH — Affordable Rental Housing | Rental-housing pathway, not an ownership subsidy | Eligibility, operating model, rental conditions, implementing-agency instructions and state/UT rules |
+| ISS — Interest Subsidy Scheme | Conditional interest subsidy for eligible qualifying housing loans, not an automatic EMI discount | Current loan sanction/disbursement dates, loan and property limits, subsidy calculation, release mechanism and lender/portal verification |
+
+**Editorial rule:** Do not publish numeric subsidy promises, automatic approval claims, or cross-component benefit stacking until each specific claim has an official clause citation. The current article deliberately avoids such claims.
+
+**Outstanding evidence:** The April 2026 AHP SOP appears on the official ministry listing, but its complete PDF contents have not yet been independently reconciled here. Keep the AHP SOP as an official listing reference rather than asserting full-document verification.
+
 ## Publication blockers and acceptance criteria
 
 1. PPF 2019 scheme paragraphs 8–13 have been reconciled to the published NSI text; check for later applicable circulars and confirm the final guide wording against those clauses.
