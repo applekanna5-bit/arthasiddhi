@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { schemeDrafts } from "./guide-content";
+import { buildSitemap } from "../content/sitemap";
 import { plannedSchemeGuides } from "./schemes";
 
 describe("government scheme draft publication safeguards", () => {
@@ -24,6 +25,11 @@ describe("government scheme draft publication safeguards", () => {
       expect(urls.every((url) => url.startsWith("https://"))).toBe(true);
       expect(guide.sections.length).toBeGreaterThan(0);
     }
+  });
+
+  it("excludes all unpublished scheme routes from the public sitemap", () => {
+    const urls = buildSitemap().map((entry) => entry.url);
+    expect(urls.some((url) => new URL(url).pathname.startsWith("/government-schemes"))).toBe(false);
   });
 
   it("does not reintroduce the unverified AHP PDF link", () => {
