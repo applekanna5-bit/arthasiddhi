@@ -42,7 +42,9 @@ describe("Shared header navigation", () => {
     const html = renderToStaticMarkup(<SiteHeader />);
     expect(html).toContain('aria-label="Primary navigation"');
     expect(html.match(/<nav\b/g)).toHaveLength(1);
-    expect(html.match(/<a\b/g)).toHaveLength(4);
+    expect(html.match(/<a\b/g)).toHaveLength(5);
+    expect(html).toContain('href="/search"');
+    expect(html).toContain('aria-label="Search ArthaSiddhi"');
     for (const href of ["/", "/learn", "/calculators"]) expect(html).toContain(`href="${href}"`);
     expect(html).toContain("ArthaSiddhi</span>");
     expect(html).toContain('aria-hidden="true" focusable="false"');
