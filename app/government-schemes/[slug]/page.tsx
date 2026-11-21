@@ -50,21 +50,28 @@ export default async function SchemeGuidePage({ params }: Props) {
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {[
                 { name: "BLC", description: "Beneficiary-led construction for eligible households building on their own land, subject to programme rules." },
-                { name: "AHP", description: "Affordable housing in partnership through qualifying housing projects." },
+                { name: "AHP", description: "Affordable housing in partnership through qualifying housing projects.", href: "#ahp-details" },
                 { name: "ARH", description: "Affordable rental housing for eligible urban households." },
                 { name: "ISS", description: "Interest subsidy on qualifying home loans, subject to specific loan and household conditions." },
               ].map((component) => (
-                <div key={component.name} className="rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-4">
-                  <h3 className="font-semibold">{component.name}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[var(--as-text-secondary)]">{component.description}</p>
-                </div>
+                component.href ? (
+                  <a key={component.name} href={component.href} className="block rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-4 transition-colors hover:border-[var(--as-brand-teal)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--as-brand-teal)]">
+                    <h3 className="font-semibold">{component.name} <span aria-hidden="true">↓</span></h3>
+                    <p className="mt-2 text-sm leading-6 text-[var(--as-text-secondary)]">{component.description}</p>
+                  </a>
+                ) : (
+                  <div key={component.name} className="rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-4">
+                    <h3 className="font-semibold">{component.name}</h3>
+                    <p className="mt-2 text-sm leading-6 text-[var(--as-text-secondary)]">{component.description}</p>
+                  </div>
+                )
               ))}
             </div>
             <p className="mt-3 text-sm leading-6 text-[var(--as-text-secondary)]">These are different programme components, not automatic or cumulative entitlements.</p>
           </section>
         )}
         {guide.sections.map((section) => (
-          <section key={section.heading} className={`mt-9 ${section.heading.toLowerCase().includes("example") ? "rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5 sm:p-6" : "border-b border-[var(--as-border-subtle)] pb-7 last:border-b-0"}`}>
+          <section key={section.heading} id={slug === "pmay-u-2" && section.heading.startsWith("AHP:") ? "ahp-details" : undefined} className={`mt-9 scroll-mt-28 ${section.heading.toLowerCase().includes("example") ? "rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5 sm:p-6" : "border-b border-[var(--as-border-subtle)] pb-7 last:border-b-0"}`}>
             <h2 className="learn-display text-2xl leading-snug">{section.heading}</h2>
             {section.paragraphs.map((paragraph) => <p key={paragraph} className="mt-3 text-base leading-8 text-[var(--as-text-secondary)]">{paragraph}</p>)}
           </section>
