@@ -47,7 +47,7 @@ export default function HomePage() {
             <p className={eyebrow}>Indian personal finance</p>
             <h1 id="home-heading" className="home-display mt-5 max-w-2xl text-[2.5rem] font-semibold leading-[1.08] tracking-[-0.04em] sm:text-6xl lg:text-[4.25rem]">Make smarter money decisions.</h1>
             <p className="mt-6 text-xl font-medium leading-relaxed text-[var(--as-brand-teal)]">Understand. Calculate. Compare. Decide.</p>
-            <p className="mt-4 max-w-xl text-base leading-7 text-[var(--as-text-secondary)] sm:text-lg sm:leading-8">Explore clear explanations, compare financial scenarios and use calculators to understand the assumptions behind everyday money decisions in India.</p>
+            <p className="mt-4 max-w-xl text-base leading-7 text-[var(--as-text-secondary)] sm:text-lg sm:leading-8">Calculate EMIs, explore savings and investment scenarios, and understand everyday money questions in India with straightforward guides.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a href="#decisions" className={`inline-flex min-h-12 items-center justify-center gap-3 rounded-lg bg-[var(--as-action-primary)] px-5 py-3 text-sm font-semibold text-[var(--as-text-on-action)] hover:bg-[var(--as-action-primary-hover)] ${focus}`}>Explore money decisions <Arrow /></a>
               <Link href="/calculators" className={`inline-flex min-h-12 items-center justify-center rounded-lg border border-[var(--as-border-control)] px-5 py-3 text-sm font-semibold hover:bg-[var(--as-surface-card)] ${focus}`}>Browse calculators</Link>
