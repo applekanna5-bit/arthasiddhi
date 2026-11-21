@@ -4,7 +4,7 @@ import { SiteNav } from "./SiteNav";
 
 export function SiteHeader() {
   return (
-    <header className="site-header border-b border-[var(--as-border-subtle)] bg-[var(--as-surface-card)]">
+    <header className="site-header sticky top-0 z-50 border-b border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] shadow-sm">
       <div className="site-header-inner mx-auto flex max-w-6xl flex-col items-start justify-between gap-1 px-4 py-3 sm:flex-row sm:items-center sm:gap-6 sm:px-6 sm:py-4 lg:px-8">
         <Link
           href="/"
