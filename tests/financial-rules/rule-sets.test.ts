@@ -13,6 +13,7 @@ describe("financial rule registry", () => {
   });
   it("uses accessible official replacements for the retired EPFO source set", () => {
     expect(epfRuleSet.sources.map(({ reference }) => reference)).toEqual([
+      "https://www.labour.gov.in/static/uploads/2026/11/da640b1558a315e81e22ce5ac12f463f.pdf",
       "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1944361&lang=2&reg=48",
       "https://www.labour.gov.in/static/uploads/2025/06/234a069a1beae3e3f9c3e8cc9ea69b1a.pdf",
       "https://delhihighcourt.nic.in/app/showFileJudgment/68304112025CW29412012_155558.pdf",
