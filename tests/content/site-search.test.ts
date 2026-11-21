@@ -13,6 +13,10 @@ describe("Site-wide search", () => {
     expect(searchContent("fixed deposit").some((item) => item.href === "/calculators/fd")).toBe(true);
     expect(searchContent("SIP").some((item) => item.href === "/calculators/sip")).toBe(true);
   });
+  it("prioritizes directly matching calculators for common searches", () => {
+    expect(searchContent("SIP")[0]?.href).toBe("/calculators/sip");
+    expect(searchContent("fixed deposit")[0]?.href).toBe("/calculators/fd");
+  });
   it("filters guides and calculators without mixing types", () => {
     expect(searchContent("loan", "calculator").every((item) => item.kind === "calculator")).toBe(true);
     expect(searchContent("loan", "guide").every((item) => item.kind === "guide")).toBe(true);
