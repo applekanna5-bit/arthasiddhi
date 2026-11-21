@@ -4,7 +4,7 @@ export const personalFinanceArticles = [
   {
     title: "How to Build a Personal Financial Plan",
     slug: "how-to-build-a-personal-financial-plan",
-    description: "Turn your household's resources, commitments, goals and access needs into an ordered plan, with clear next steps for each decision.",
+    description: "Learn how to look at your income, expenses, loans and savings, then decide which money goals need attention first.",
     category: "personal-finance",
     publishedAt: "2026-10-02",
     updatedAt: "2026-11-21",
@@ -20,14 +20,22 @@ export const personalFinanceArticles = [
         heading: "Start with your current financial position",
         paragraphs: [
           "Start by looking at the money your household receives, the bills you pay, the loans you owe and the savings you already have. This gives you a clearer picture before you decide what to save for or pay off next. The steps below are for learning and planning, not a required method or personal financial advice.",
-          "Begin with a lightweight snapshot of income and other resources, existing assets, debts, recurring commitments and money already assigned to known goals. Approximate values can help you see the position without requiring an exact valuation of every asset. Net worth, a broad comparison of assets and debts, is one possible snapshot; it does not show when money will be available.",
+          "Write down your monthly take-home income, regular expenses, loan payments and savings. Include bills due soon, even if you have not paid them yet. You can also list what you own and owe, but remember that owning something valuable does not mean you can use its value to pay a bill today.",
+        ],
+      },
+      {
+        id: "monthly-example",
+        heading: "Example: Where does a ₹60,000 monthly salary go?",
+        paragraphs: [
+          "Imagine a household with ₹60,000 in monthly take-home pay. It spends ₹28,000 on rent and household needs, ₹12,000 on a loan EMI and ₹5,000 on other planned expenses. That leaves ₹15,000 after these listed costs: ₹60,000 − ₹28,000 − ₹12,000 − ₹5,000 = ₹15,000.",
+          "The ₹15,000 is not automatically free to invest. The family still needs to check upcoming bills, irregular costs and whether it has money available for emergencies. These amounts are only an illustration, not a recommended budget or savings target.",
         ],
       },
       {
         id: "cash-flow",
         heading: "Understand what comes in and what is already committed",
         paragraphs: [
-          "Before making a larger decision, consider the resources arriving, the obligations they must cover and the flexibility left over. Timing matters: an expected inflow after a bill falls due cannot meet that bill on its own.",
+          "Check when your income arrives and when bills must be paid. For example, if rent is due on the 1st but your salary arrives on the 5th, the money may be enough for the month but not available when rent is due.",
           [{ text: "Use " }, { text: "Understand Your Household Cash Flow", link: { kind: "article", slug: "understand-household-cash-flow" } }, { text: " to map those commitments and their timing before assigning money to another priority." }],
         ],
       },
@@ -35,7 +43,7 @@ export const personalFinanceArticles = [
         id: "known-costs-and-emergencies",
         heading: "Separate known costs from emergency liquidity",
         paragraphs: [
-          "Money needed for a known upcoming obligation has a different job from money retained for an unexpected disruption. A planned school fee or repair should remain visible as a commitment rather than also being counted as an untouched emergency reserve.",
+          "Keep money for planned bills separate from money for unexpected problems. If school fees are due next month, do not count that amount as emergency savings too.",
           [{ text: "Consider " }, { text: "Emergency Fund Planning: What Money Should Stay Accessible?", link: { kind: "article", slug: "emergency-fund-planning" } }, { text: " for the household factors that can shape this decision. This framework does not prescribe an emergency-fund amount." }],
         ],
       },
@@ -69,7 +77,7 @@ export const personalFinanceArticles = [
         id: "specialist-questions",
         heading: "Take specific questions to the relevant specialist guide",
         paragraphs: [
-          "Once a question becomes about a product, eligibility, current rules, a calculation or a process, use the vertical that owns that detail. Banking owns deposit and access mechanics; Loans owns borrowing mechanics; Investments, Tax and Retirement own their respective product and rule questions.",
+          "When you need details about a specific financial product or rule, use the relevant guide. For example, read a Banking guide for fixed deposits, a Loans guide for borrowing, or an Investments or Tax guide for questions in those areas.",
           [{ text: "For example, a decision about a property price belongs in " }, { text: "How Much House Can I Afford?", link: { kind: "article", slug: "how-much-house-can-i-afford" } }, { text: ". If your question concerns accessing an existing fixed deposit before its term ends, use " }, { text: "Premature FD Withdrawal", link: { kind: "article", slug: "premature-fd-withdrawal" } }, { text: " for the product-specific considerations. Neither link is a product recommendation." }],
         ],
       },
