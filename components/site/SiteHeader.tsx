@@ -12,7 +12,12 @@ export function SiteHeader() {
         >
           <BrandLogo />
         </Link>
-        <SiteNav />
+        <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-end">
+          <SiteNav />
+          <Link href="/search" aria-label="Search ArthaSiddhi" className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md border border-[var(--as-border-subtle)] text-[var(--as-text-primary)] hover:bg-[var(--as-surface-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--as-brand-teal)]">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="m16 16 5 5" /></svg>
+          </Link>
+        </div>
       </div>
     </header>
   );
