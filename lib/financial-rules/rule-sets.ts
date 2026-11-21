@@ -88,7 +88,7 @@ export const gstRuleSet: FinancialRuleSet<GstRules> = {
   label: "GST generic arithmetic rules",
   effectivePeriod: "Generic GST arithmetic; presets are illustrative, not a current statutory rate schedule",
   lastVerified: "2026-08-16",
-  rules: { minimumRate: 0, maximumRate: 100, presets: [0, 3, 5, 12, 18, 28] },
+  rules: { minimumRate: 0, maximumRate: 100, presets: [0, 5, 18, 40] },
   sources: [{ title: "GST goods and services rates", authority: "Central Board of Indirect Taxes and Customs", reference: "https://cbic-gst.gov.in/gst-goods-services-rates.html" }],
 };
 
