@@ -86,7 +86,7 @@ export const ppfRuleSet: FinancialRuleSet<PpfRules> = {
 export const gstRuleSet: FinancialRuleSet<GstRules> = {
   id: "gst-generic-arithmetic-2026-08",
   label: "GST generic arithmetic rules",
-  effectivePeriod: "Rules verified 16 August 2026",
+  effectivePeriod: "Generic GST arithmetic; presets are illustrative, not a current statutory rate schedule",
   lastVerified: "2026-08-16",
   rules: { minimumRate: 0, maximumRate: 100, presets: [0, 3, 5, 12, 18, 28] },
   sources: [{ title: "GST goods and services rates", authority: "Central Board of Indirect Taxes and Customs", reference: "https://cbic-gst.gov.in/gst-goods-services-rates.html" }],
