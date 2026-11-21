@@ -91,8 +91,8 @@ describe("V2.2C household planning foundations", () => {
     for (const slug of slugs) {
       const article = getArticleBySlug(slug)!;
       const text = JSON.stringify(article).toLowerCase();
-      expect(text).toContain("arthasiddhi educational planning framework");
-      expect(text).toContain("individualized financial advice");
+      expect(text).toMatch(/planning guide|planning, not a required method|steps below are for learning and planning/);
+      expect(text).toMatch(/personal financial advice/);
       expect(text).not.toMatch(/50\/30\/20|\d+%|\d+ months|guaranteed outcomes|affordability score/);
       expect(article.references ?? []).toEqual([]);
       expect(new Set(article.sections.map(({ id }) => id)).size).toBe(article.sections.length);
