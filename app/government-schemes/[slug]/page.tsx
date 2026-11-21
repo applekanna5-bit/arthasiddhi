@@ -49,33 +49,38 @@ export default async function SchemeGuidePage({ params }: Props) {
             <h2 className="learn-display text-xl">Four pathways at a glance</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {[
-                { name: "BLC", description: "Beneficiary-led construction for eligible households building on their own land, subject to programme rules." },
+                { name: "BLC", description: "Beneficiary-led construction for eligible households building on their own land, subject to programme rules.", href: "#blc-details" },
                 { name: "AHP", description: "Affordable housing in partnership through qualifying housing projects.", href: "#ahp-details" },
-                { name: "ARH", description: "Affordable rental housing for eligible urban households." },
-                { name: "ISS", description: "Interest subsidy on qualifying home loans, subject to specific loan and household conditions." },
+                { name: "ARH", description: "Affordable rental housing for eligible urban households.", href: "#arh-details" },
+                { name: "ISS", description: "Interest subsidy on qualifying home loans, subject to specific loan and household conditions.", href: "#iss-details" },
               ].map((component) => (
-                component.href ? (
-                  <a key={component.name} href={component.href} className="block rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-4 transition-colors hover:border-[var(--as-brand-teal)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--as-brand-teal)]">
-                    <h3 className="font-semibold">{component.name} <span aria-hidden="true">↓</span></h3>
-                    <p className="mt-2 text-sm leading-6 text-[var(--as-text-secondary)]">{component.description}</p>
-                  </a>
-                ) : (
-                  <div key={component.name} className="rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-4">
-                    <h3 className="font-semibold">{component.name}</h3>
-                    <p className="mt-2 text-sm leading-6 text-[var(--as-text-secondary)]">{component.description}</p>
-                  </div>
-                )
+                <a key={component.name} href={component.href} className="block rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-4 transition-colors hover:border-[var(--as-brand-teal)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--as-brand-teal)]">
+                  <h3 className="font-semibold">{component.name}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[var(--as-text-secondary)]">{component.description}</p>
+                </a>
               ))}
             </div>
             <p className="mt-3 text-sm leading-6 text-[var(--as-text-secondary)]">These are different programme components, not automatic or cumulative entitlements.</p>
           </section>
         )}
+        {slug === "pmay-u-2" && (
+          <section id="blc-details" className="mt-9 scroll-mt-28 border-b border-[var(--as-border-subtle)] pb-7">
+            <h2 className="learn-display text-2xl leading-snug">BLC: building on your own land</h2>
+            <p className="mt-3 text-base leading-8 text-[var(--as-text-secondary)]">Beneficiary Led Construction is the pathway for eligible households seeking assistance to construct a house on their own land. Land, household and local verification requirements apply; owning land or meeting an income band does not guarantee assistance. Check the current operational guidelines and your Urban Local Body for the application process.</p>
+          </section>
+        )}
         {guide.sections.map((section) => (
-          <section key={section.heading} id={slug === "pmay-u-2" && section.heading.startsWith("AHP:") ? "ahp-details" : undefined} className={`mt-9 scroll-mt-28 ${section.heading.toLowerCase().includes("example") ? "rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5 sm:p-6" : "border-b border-[var(--as-border-subtle)] pb-7 last:border-b-0"}`}>
+          <section key={section.heading} id={slug === "pmay-u-2" && section.heading.startsWith("AHP:") ? "ahp-details" : slug === "pmay-u-2" && section.heading.startsWith("Interest subsidy") ? "iss-details" : undefined} className={`mt-9 scroll-mt-28 ${section.heading.toLowerCase().includes("example") ? "rounded-xl border border-[var(--as-border-subtle)] bg-[var(--as-surface-card)] p-5 sm:p-6" : "border-b border-[var(--as-border-subtle)] pb-7 last:border-b-0"}`}>
             <h2 className="learn-display text-2xl leading-snug">{section.heading}</h2>
             {section.paragraphs.map((paragraph) => <p key={paragraph} className="mt-3 text-base leading-8 text-[var(--as-text-secondary)]">{paragraph}</p>)}
           </section>
         ))}
+        {slug === "pmay-u-2" && (
+          <section id="arh-details" className="mt-9 scroll-mt-28 border-b border-[var(--as-border-subtle)] pb-7">
+            <h2 className="learn-display text-2xl leading-snug">ARH: affordable rental housing</h2>
+            <p className="mt-3 text-base leading-8 text-[var(--as-text-secondary)]">Affordable Rental Housing is the rental pathway within PMAY-U 2.0, distinct from assistance to own or construct a home. Availability, eligibility, rent and application arrangements depend on the applicable project and local implementation. Check official programme and local-authority information rather than assuming an automatic allotment.</p>
+          </section>
+        )}
         <section className="mt-10 border-t border-[var(--as-border-subtle)] pt-6">
           <h2 className="learn-display text-2xl">Official sources</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5">{guide.sources.map((source) => <li key={source.url}><a className="text-[var(--as-brand-teal)] underline underline-offset-4" href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a></li>)}</ul>
