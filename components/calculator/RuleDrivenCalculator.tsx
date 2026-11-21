@@ -93,11 +93,11 @@ function IncomeTaxComparison({ result }: { result: ReturnType<typeof calculateIn
     { label: "Effective tax rate", key: "effectiveTaxRate", format: formatPercentage },
   ] as const;
   return <div aria-live="polite" className="mt-4">
-    {comparison ? <div className="overflow-x-auto"><table className="w-full text-right text-sm">
+    {comparison ? <><p className="mb-2 text-xs text-slate-600 sm:hidden">Swipe sideways to compare both tax regimes.</p><div className="overflow-x-auto" role="region" aria-label="Old and new income tax regime comparison" tabIndex={0}><table className="min-w-[520px] w-full text-right text-sm">
       <caption className="pb-3 text-left text-sm text-slate-700">Same taxable ordinary income: {formatIndianCurrency(comparison.newRegime.taxableIncome)}. {comparison.newRegime.applicablePeriod}. Values are rounded only for display.</caption>
       <thead className="bg-slate-50"><tr><th scope="col" className="p-3 text-left">Output</th><th scope="col" className="p-3">New Regime</th><th scope="col" className="p-3">Old Regime</th></tr></thead>
       <tbody className="divide-y divide-slate-100">{rows.map(({ label, key, format }) => <tr key={key} className={key === "totalTax" ? "bg-emerald-50 font-semibold" : undefined}><th scope="row" className="p-3 text-left font-medium">{label}</th><td className="whitespace-nowrap p-3">{format(comparison.newRegime[key])}</td><td className="whitespace-nowrap p-3">{format(comparison.oldRegime[key])}</td></tr>)}</tbody>
-    </table></div> : <p className="rounded-lg bg-slate-50 p-4 text-sm text-slate-700">Enter valid taxable ordinary income and age details above to compare both regimes.</p>}
+    </table></div></> : <p className="rounded-lg bg-slate-50 p-4 text-sm text-slate-700">Enter valid taxable ordinary income and age details above to compare both regimes.</p>}
   </div>;
 }
 
