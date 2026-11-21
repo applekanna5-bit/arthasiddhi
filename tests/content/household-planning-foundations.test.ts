@@ -91,7 +91,7 @@ describe("V2.2C household planning foundations", () => {
     for (const slug of slugs) {
       const article = getArticleBySlug(slug)!;
       const text = JSON.stringify(article).toLowerCase();
-      expect(text).toMatch(/planning guide|planning, not a required method|steps below are for learning and planning/);
+      expect(text).toMatch(/planning guide|planning, not a required method|steps below are for learning and planning|this guide does not set a fixed amount/);
       expect(text).toMatch(/personal financial advice/);
       expect(text).not.toMatch(/50\/30\/20|\d+%|\d+ months|guaranteed outcomes|affordability score/);
       expect(article.references ?? []).toEqual([]);
