@@ -19,7 +19,7 @@ export const personalFinanceArticles = [
         id: "current-position",
         heading: "Start with your current financial position",
         paragraphs: [
-          "A personal financial plan connects what your household has today with the decisions it needs to make next. This ArthaSiddhi educational planning framework offers a sequence of questions to work through; it is not a regulatory requirement or individualized financial advice.",
+          "Start by looking at the money your household receives, the bills you pay, the loans you owe and the savings you already have. This gives you a clearer picture before you decide what to save for or pay off next. The steps below are for learning and planning, not a required method or personal financial advice.",
           "Begin with a lightweight snapshot of income and other resources, existing assets, debts, recurring commitments and money already assigned to known goals. Approximate values can help you see the position without requiring an exact valuation of every asset. Net worth, a broad comparison of assets and debts, is one possible snapshot; it does not show when money will be available.",
         ],
       },
@@ -101,7 +101,7 @@ export const personalFinanceArticles = [
         id: "why-cash-flow-matters",
         heading: "Cash flow shows what money needs to do and when",
         paragraphs: [
-          "Household cash flow is the movement of resources into and out of the household over time. It helps distinguish what is already needed from what remains flexible for competing priorities. This is an ArthaSiddhi educational planning framework, not a required budget method or individualized financial advice.",
+          "Household cash flow simply means the money coming in and going out over time. For example, your salary may arrive at the end of the month while rent or a loan payment is due earlier. Looking at both amounts and dates helps you see what money is already committed. This is a planning guide, not a required budgeting method or personal financial advice.",
           "A total account balance is not automatically the money available for a decision on a particular date. Part of that balance may already be assigned to a bill, while another expected payment may arrive too late to cover it.",
         ],
       },
@@ -184,7 +184,7 @@ export const personalFinanceArticles = [
         id: "purpose-and-known-bills",
         heading: "Separate emergency liquidity from known future bills",
         paragraphs: [
-          "Emergency liquidity is money kept accessible to help the household respond to an unexpected disruption or essential cost. This ArthaSiddhi educational planning framework explains the decision factors; it does not prescribe an amount, a universal reserve or individualized financial advice.",
+          "An emergency fund is money you can access when something unexpected affects your household, such as a sudden loss of income or an essential repair. How much to keep depends on your circumstances; this guide does not set a fixed amount or provide personal financial advice.",
           "A known upcoming expense is not automatically an emergency. Money assigned to a scheduled fee, planned repair or other foreseeable bill already has a job and should not also be counted as an untouched reserve.",
           [{ text: "Start with " }, { text: "Understand Your Household Cash Flow", link: { kind: "article", slug: "understand-household-cash-flow" } }, { text: " to distinguish known commitments from money available for other purposes." }],
         ],
