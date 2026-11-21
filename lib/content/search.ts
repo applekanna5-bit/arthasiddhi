@@ -53,8 +53,15 @@ export function searchContent(query: string, kind: "all" | SearchKind = "all"): 
       const keywords = normalize(item.keywords);
       const body = normalize(item.description + " " + item.category);
       if (!terms.every((term) => (title + " " + keywords + " " + body).includes(term))) return null;
-      const score = terms.reduce((sum, term) => sum + (title.includes(term) ? 5 : 0) + (keywords.includes(term) ? 3 : 0) + (body.includes(term) ? 1 : 0), 0)
-        + (item.kind === "calculator" && (title === terms.join(" ") || title.startsWith(terms.join(" ") + " ") || normalize(item.href.split("/").pop() ?? "") === terms.join(" ") || keywords.includes(terms.join(" "))) ? 30 : 0);
+      const phrase = terms.join(" ");
+      const slug = normalize(item.href.split("/").pop() ?? "");
+      const exactCalculatorMatch = item.kind === "calculator" && (slug === phrase || title === phrase || title === phrase + " calculator");
+      const leadingCalculatorMatch = item.kind === "calculator" && title.startsWith(phrase + " ");
+      const aliasCalculatorMatch = item.kind === "calculator" && keywords.includes(phrase);
+      const score = terms.reduce(
+        (sum, term) => sum + (title.includes(term) ? 5 : 0) + (keywords.includes(term) ? 3 : 0) + (body.includes(term) ? 1 : 0),
+        0,
+      ) + (exactCalculatorMatch ? 100 : leadingCalculatorMatch ? 60 : aliasCalculatorMatch ? 30 : 0);
       return { item, score };
     })
     .filter((result): result is { item: SearchItem; score: number } => result !== null)
