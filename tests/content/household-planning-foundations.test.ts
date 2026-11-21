@@ -91,8 +91,14 @@ describe("V2.2C household planning foundations", () => {
     for (const slug of slugs) {
       const article = getArticleBySlug(slug)!;
       const text = JSON.stringify(article).toLowerCase();
-      expect(text).toMatch(/planning guide|planning, not a required method|steps below are for learning and planning|this guide does not set a fixed amount/);
-      expect(text).toMatch(/personal financial advice/);
+      expect(text).toContain("personal financial advice");
+      if (slug === "how-to-build-a-personal-financial-plan") {
+        expect(text).toContain("the steps below are for learning and planning, not a required method");
+      } else if (slug === "understand-household-cash-flow") {
+        expect(text).toContain("this is a planning guide, not a required budgeting method");
+      } else {
+        expect(text).toContain("this guide does not set a fixed amount");
+      }
       expect(text).not.toMatch(/50\/30\/20|\d+%|\d+ months|guaranteed outcomes|affordability score/);
       expect(article.references ?? []).toEqual([]);
       expect(new Set(article.sections.map(({ id }) => id)).size).toBe(article.sections.length);
