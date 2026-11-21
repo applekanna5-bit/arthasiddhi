@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { articles, getArticle, getArticleBySlug, getArticlesByCategory, getArticleRegistryIssues, getPrimaryGuideForCalculator } from "../../lib/content/articles";
 import { calculators } from "../../lib/content/calculators";
 import { getDiscoveryRegistryIssues, getLearnCategoryHub } from "../../lib/content/discovery";
-import { articleMetadata, faqJsonLd, getArticlePath } from "../../lib/content/seo";
+import { articleJsonLd, articleMetadata, faqJsonLd, getArticlePath } from "../../lib/content/seo";
 import { buildSitemap } from "../../lib/content/sitemap";
 import { absoluteUrl } from "../../lib/content/site";
 import { getHomeBuyingJourneyLink } from "../../lib/analytics";
@@ -30,6 +30,20 @@ describe("V2.2C household planning foundations", () => {
       expect(links(foundation(index)).every((link) => link.kind === "article")).toBe(true);
       expect(getLearnCategoryHub("personal-finance").groups.flatMap((group) => [group.coreArticle, ...group.supportingArticles]).filter((entry) => entry === slug)).toHaveLength(1);
     }
+  });
+
+  it("explains the household example without implying a universal budget rule", () => {
+    const article = foundation(0);
+    expect(article.description).toContain("income, expenses, loans and savings");
+    const example = article.sections.find(({ id }) => id === "monthly-example");
+    expect(example).toBeDefined();
+    const text = example!.paragraphs!.map((paragraph) => typeof paragraph === "string" ? paragraph : paragraph.map(({ text }) => text).join("")).join(" ");
+    for (const amount of ["₹60,000", "₹28,000", "₹12,000", "₹5,000", "₹15,000"]) {
+      expect(text).toContain(amount);
+    }
+    expect(60000 - 28000 - 12000 - 5000).toBe(15000);
+    expect(text).toContain("not automatically free to invest");
+    expect(text).toContain("not a recommended budget or savings target");
   });
 
   it("provides contextual planning progression and return paths", () => {
@@ -72,6 +86,10 @@ describe("V2.2C household planning foundations", () => {
       const path = `/learn/personal-finance/${slug}`;
       expect(getArticlePath(article)).toBe(path);
       expect(articleMetadata(article)).toMatchObject({ title: titles[index], description: article.description, alternates: { canonical: absoluteUrl(path) } });
+      expect(article.publishedAt).toBe("2026-10-02");
+      expect(article.updatedAt).toBe("2026-11-21");
+      expect(articleMetadata(article).openGraph).toMatchObject({ publishedTime: "2026-10-02", modifiedTime: "2026-11-21" });
+      expect(articleJsonLd(article)).toMatchObject({ datePublished: "2026-10-02", dateModified: "2026-11-21" });
       expect(articleMetadata(article).robots).toBeUndefined();
       expect(urls.filter((url) => url === absoluteUrl(path))).toHaveLength(1);
       expect(faqJsonLd(article)).toBeNull();
@@ -91,8 +109,14 @@ describe("V2.2C household planning foundations", () => {
     for (const slug of slugs) {
       const article = getArticleBySlug(slug)!;
       const text = JSON.stringify(article).toLowerCase();
-      expect(text).toContain("arthasiddhi educational planning framework");
-      expect(text).toContain("individualized financial advice");
+      expect(text).toContain("personal financial advice");
+      if (slug === "how-to-build-a-personal-financial-plan") {
+        expect(text).toContain("the steps below are for learning and planning, not a required method");
+      } else if (slug === "understand-household-cash-flow") {
+        expect(text).toContain("this is a planning guide, not a required budgeting method");
+      } else {
+        expect(text).toContain("this guide does not set a fixed amount");
+      }
       expect(text).not.toMatch(/50\/30\/20|\d+%|\d+ months|guaranteed outcomes|affordability score/);
       expect(article.references ?? []).toEqual([]);
       expect(new Set(article.sections.map(({ id }) => id)).size).toBe(article.sections.length);

@@ -4,10 +4,10 @@ export const personalFinanceArticles = [
   {
     title: "How to Build a Personal Financial Plan",
     slug: "how-to-build-a-personal-financial-plan",
-    description: "Turn your household's resources, commitments, goals and access needs into an ordered plan, with clear next steps for each decision.",
+    description: "Learn how to look at your income, expenses, loans and savings, then decide which money goals need attention first.",
     category: "personal-finance",
     publishedAt: "2026-10-02",
-    updatedAt: "2026-10-02",
+    updatedAt: "2026-11-21",
     readingTime: "5 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: null,
@@ -19,15 +19,23 @@ export const personalFinanceArticles = [
         id: "current-position",
         heading: "Start with your current financial position",
         paragraphs: [
-          "A personal financial plan connects what your household has today with the decisions it needs to make next. This ArthaSiddhi educational planning framework offers a sequence of questions to work through; it is not a regulatory requirement or individualized financial advice.",
-          "Begin with a lightweight snapshot of income and other resources, existing assets, debts, recurring commitments and money already assigned to known goals. Approximate values can help you see the position without requiring an exact valuation of every asset. Net worth, a broad comparison of assets and debts, is one possible snapshot; it does not show when money will be available.",
+          "Start by looking at the money your household receives, the bills you pay, the loans you owe and the savings you already have. This gives you a clearer picture before you decide what to save for or pay off next. The steps below are for learning and planning, not a required method or personal financial advice.",
+          "Write down your monthly take-home income, regular expenses, loan payments and savings. Include bills due soon, even if you have not paid them yet. You can also list what you own and owe, but remember that owning something valuable does not mean you can use its value to pay a bill today.",
+        ],
+      },
+      {
+        id: "monthly-example",
+        heading: "Example: Where does a ₹60,000 monthly salary go?",
+        paragraphs: [
+          "Imagine a household with ₹60,000 in monthly take-home pay. It spends ₹28,000 on rent and household needs, ₹12,000 on a loan EMI and ₹5,000 on other planned expenses. That leaves ₹15,000 after these listed costs: ₹60,000 − ₹28,000 − ₹12,000 − ₹5,000 = ₹15,000.",
+          "The ₹15,000 is not automatically free to invest. The family still needs to check upcoming bills, irregular costs and whether it has money available for emergencies. These amounts are only an illustration, not a recommended budget or savings target.",
         ],
       },
       {
         id: "cash-flow",
         heading: "Understand what comes in and what is already committed",
         paragraphs: [
-          "Before making a larger decision, consider the resources arriving, the obligations they must cover and the flexibility left over. Timing matters: an expected inflow after a bill falls due cannot meet that bill on its own.",
+          "Check when your income arrives and when bills must be paid. For example, if rent is due on the 1st but your salary arrives on the 5th, the money may be enough for the month but not available when rent is due.",
           [{ text: "Use " }, { text: "Understand Your Household Cash Flow", link: { kind: "article", slug: "understand-household-cash-flow" } }, { text: " to map those commitments and their timing before assigning money to another priority." }],
         ],
       },
@@ -35,7 +43,7 @@ export const personalFinanceArticles = [
         id: "known-costs-and-emergencies",
         heading: "Separate known costs from emergency liquidity",
         paragraphs: [
-          "Money needed for a known upcoming obligation has a different job from money retained for an unexpected disruption. A planned school fee or repair should remain visible as a commitment rather than also being counted as an untouched emergency reserve.",
+          "Keep money for planned bills separate from money for unexpected problems. If school fees are due next month, do not count that amount as emergency savings too.",
           [{ text: "Consider " }, { text: "Emergency Fund Planning: What Money Should Stay Accessible?", link: { kind: "article", slug: "emergency-fund-planning" } }, { text: " for the household factors that can shape this decision. This framework does not prescribe an emergency-fund amount." }],
         ],
       },
@@ -69,7 +77,7 @@ export const personalFinanceArticles = [
         id: "specialist-questions",
         heading: "Take specific questions to the relevant specialist guide",
         paragraphs: [
-          "Once a question becomes about a product, eligibility, current rules, a calculation or a process, use the vertical that owns that detail. Banking owns deposit and access mechanics; Loans owns borrowing mechanics; Investments, Tax and Retirement own their respective product and rule questions.",
+          "When you need details about a specific financial product or rule, use the relevant guide. For example, read a Banking guide for fixed deposits, a Loans guide for borrowing, or an Investments or Tax guide for questions in those areas.",
           [{ text: "For example, a decision about a property price belongs in " }, { text: "How Much House Can I Afford?", link: { kind: "article", slug: "how-much-house-can-i-afford" } }, { text: ". If your question concerns accessing an existing fixed deposit before its term ends, use " }, { text: "Premature FD Withdrawal", link: { kind: "article", slug: "premature-fd-withdrawal" } }, { text: " for the product-specific considerations. Neither link is a product recommendation." }],
         ],
       },
@@ -89,7 +97,7 @@ export const personalFinanceArticles = [
     description: "Map household resources, committed and flexible spending, periodic costs and payment timing before assigning money to competing priorities.",
     category: "personal-finance",
     publishedAt: "2026-10-02",
-    updatedAt: "2026-10-02",
+    updatedAt: "2026-11-21",
     readingTime: "4 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: null,
@@ -101,7 +109,7 @@ export const personalFinanceArticles = [
         id: "why-cash-flow-matters",
         heading: "Cash flow shows what money needs to do and when",
         paragraphs: [
-          "Household cash flow is the movement of resources into and out of the household over time. It helps distinguish what is already needed from what remains flexible for competing priorities. This is an ArthaSiddhi educational planning framework, not a required budget method or individualized financial advice.",
+          "Household cash flow simply means the money coming in and going out over time. For example, your salary may arrive at the end of the month while rent or a loan payment is due earlier. Looking at both amounts and dates helps you see what money is already committed. This is a planning guide, not a required budgeting method or personal financial advice.",
           "A total account balance is not automatically the money available for a decision on a particular date. Part of that balance may already be assigned to a bill, while another expected payment may arrive too late to cover it.",
         ],
       },
@@ -172,7 +180,7 @@ export const personalFinanceArticles = [
     description: "Understand the purpose of emergency liquidity, the household factors that affect it and why access needs differ from known future bills.",
     category: "personal-finance",
     publishedAt: "2026-10-02",
-    updatedAt: "2026-10-02",
+    updatedAt: "2026-11-21",
     readingTime: "4 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: null,
@@ -184,7 +192,7 @@ export const personalFinanceArticles = [
         id: "purpose-and-known-bills",
         heading: "Separate emergency liquidity from known future bills",
         paragraphs: [
-          "Emergency liquidity is money kept accessible to help the household respond to an unexpected disruption or essential cost. This ArthaSiddhi educational planning framework explains the decision factors; it does not prescribe an amount, a universal reserve or individualized financial advice.",
+          "An emergency fund is money you can access when something unexpected affects your household, such as a sudden loss of income or an essential repair. How much to keep depends on your circumstances; this guide does not set a fixed amount or provide personal financial advice.",
           "A known upcoming expense is not automatically an emergency. Money assigned to a scheduled fee, planned repair or other foreseeable bill already has a job and should not also be counted as an untouched reserve.",
           [{ text: "Start with " }, { text: "Understand Your Household Cash Flow", link: { kind: "article", slug: "understand-household-cash-flow" } }, { text: " to distinguish known commitments from money available for other purposes." }],
         ],
