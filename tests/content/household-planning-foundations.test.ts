@@ -32,6 +32,20 @@ describe("V2.2C household planning foundations", () => {
     }
   });
 
+  it("explains the household example without implying a universal budget rule", () => {
+    const article = foundation(0);
+    expect(article.description).toContain("income, expenses, loans and savings");
+    const example = article.sections.find(({ id }) => id === "monthly-example");
+    expect(example).toBeDefined();
+    const text = example!.paragraphs!.map((paragraph) => typeof paragraph === "string" ? paragraph : paragraph.map(({ text }) => text).join("")).join(" ");
+    for (const amount of ["₹60,000", "₹28,000", "₹12,000", "₹5,000", "₹15,000"]) {
+      expect(text).toContain(amount);
+    }
+    expect(60000 - 28000 - 12000 - 5000).toBe(15000);
+    expect(text).toContain("not automatically free to invest");
+    expect(text).toContain("not a recommended budget or savings target");
+  });
+
   it("provides contextual planning progression and return paths", () => {
     const destinations = slugs.map((_, index) => links(foundation(index)).map(({ slug }) => slug));
     expect(destinations[0]).toEqual([slugs[1], slugs[2], "prioritize-debt-financial-commitments", "risk-return-time-horizon", "how-much-house-can-i-afford", "premature-fd-withdrawal"]);
