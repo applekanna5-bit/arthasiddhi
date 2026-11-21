@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { epfRuleSet, financialRuleSets, gratuityRuleSet, incomeTaxRuleSet, npsRuleSet, ppfRuleSet } from "../../lib/financial-rules/rule-sets";
+import { epfRuleSet, financialRuleSets, gstRuleSet, gratuityRuleSet, incomeTaxRuleSet, npsRuleSet, ppfRuleSet } from "../../lib/financial-rules/rule-sets";
 
 describe("financial rule registry", () => {
   it("uses stable, unique rule-set IDs", () => { const ids = Object.values(financialRuleSets).map((ruleSet) => ruleSet.id); expect(new Set(ids).size).toBe(8); expect(ids).toEqual(["rbi-commercial-bank-domestic-deposits-2026-10", "dicgc-deposit-insurance-2026-10", "income-tax-tax-year-2026-27", "ppf-scheme-2019-amended-2020", "gst-generic-arithmetic-2026-08", "epf-schemes-contributions-2026-08", "nps-all-citizen-exits-2026-07", "gratuity-social-security-code-2025-11"]); });
@@ -23,6 +23,7 @@ describe("financial rule registry", () => {
     ]);
     expect(JSON.stringify(epfRuleSet.sources)).not.toMatch(/ContributionRate\.pdf|FAQ\.php|Downloads\.php|EPS95_update102008|DeclarationOfROI_2024_25/);
   });
+  it("keeps GST shortcuts illustrative while preserving custom-rate arithmetic", () => { expect(gstRuleSet.rules.presets).toEqual([0, 5, 18, 40]); expect(gstRuleSet.rules.minimumRate).toBe(0); expect(gstRuleSet.rules.maximumRate).toBe(100); expect(gstRuleSet.effectivePeriod).toContain("illustrative"); });
   it("records the narrow PPF scheme facts used by content", () => expect(ppfRuleSet.rules).toEqual({ schemeName: "Public Provident Fund Scheme, 2019", minimumAnnualContribution: 500, maximumAnnualContribution: 150_000, maturityYearsFromEndOfOpeningYear: 15, extensionBlockYears: 5, extensionOptionDeadlineYears: 1, interestEligibleBalanceFromDay: 5, interestCreditedAnnually: true }));
   it("records the operative Gratuity formula, boundary and ceiling", () => expect(gratuityRuleSet.rules).toMatchObject({ ordinaryMonthlyRatedNumerator: 15, ordinaryMonthlyRatedDenominator: 26, additionalMonthsMustExceed: 6, generalContinuousServiceYears: 5, deathException: true, disablementException: true, statutoryCeiling: 2_000_000, betterTermsMayApply: true }));
   it("uses the accessible official Gazette source for the Gratuity framework", () => {
