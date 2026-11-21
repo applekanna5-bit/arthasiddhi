@@ -156,6 +156,8 @@ describe("NPS calculator", () => {
   it("handles zero return without rounding", () => expect(nps()).toMatchObject({ totalContributions: 12_000, estimatedGrowth: 0, retirementCorpus: 12_000 }));
   it("uses a 40% annuity allocation", () => expect(nps()).toMatchObject({ annuityCorpus: 4800, lumpSumCorpus: 7200 }));
   it("accepts a 20% annuity allocation and reconciles the 80% lump sum", () => { const result = nps({ annuityAllocation: 20 }); expect(result).toMatchObject({ annuityCorpus: 2400, lumpSumCorpus: 9600 }); expect(result.annuityCorpus + result.lumpSumCorpus).toBe(result.retirementCorpus); });
+  it("allows a 100% annuity allocation with no lump-sum remainder", () => { const result = nps({ annuityAllocation: 100 }); expect(result.annuityCorpus).toBe(result.retirementCorpus); expect(result.lumpSumCorpus).toBe(0); });
+  it("preserves an opening corpus when there are no contributions or returns", () => { const result = nps({ currentCorpus: 125_000, monthlyContribution: 0, annualReturnRate: 0 }); expect(result).toMatchObject({ totalContributions: 0, estimatedGrowth: 0, retirementCorpus: 125_000 }); });
   it("supports a higher annuity allocation", () => expect(nps({ annuityAllocation: 75 })).toMatchObject({ annuityCorpus: 9000, lumpSumCorpus: 3000 }));
   it("steps contributions only after 12 completed months", () => expect(nps({ retirementAge: 32, annualContributionIncrease: 10 })).toMatchObject({ totalContributions: 25_200, finalMonthlyContribution: 1100 }));
   it("reconciles lump sum and annuity to corpus", () => { const result = nps({ currentCorpus: 12_345, annualReturnRate: 9.5 }); expect(result.lumpSumCorpus + result.annuityCorpus).toBe(result.retirementCorpus); });
