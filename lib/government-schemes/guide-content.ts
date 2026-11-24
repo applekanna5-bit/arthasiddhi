@@ -342,6 +342,9 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "Pradhan Mantri Awaas Yojana – Gramin",
     "intro": "Understand rural housing assistance and household eligibility.",
     "sections": [
+      {"heading":"Housing assistance and selection","paragraphs":["PMAY-G supports eligible rural households without adequate housing. Beneficiary selection uses programme records and local verification rather than income alone. Assistance is generally released in stages linked to construction progress. Confirm the applicable assistance amount and convergence benefits locally."]},
+      {"heading":"Practical example","paragraphs":["If a construction estimate is ₹3 lakh, prepare a budget for materials, labour and any amount not covered by approved assistance. Do not count a proposed benefit as cash already received."]},
+      {"heading":"Application and documentation","paragraphs":["Contact the Gram Panchayat or block programme office to check beneficiary records, survey procedures, required documents and sanction status. Use the official PMAY-G portal to locate programme information."]},
       {
         "heading": "How it relates to household finances",
         "paragraphs": [
@@ -374,6 +377,9 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "Pradhan Mantri MUDRA Yojana",
     "intro": "Understand business credit for eligible small enterprises.",
     "sections": [
+      {"heading":"Loan categories and repayment","paragraphs":["MUDRA supports eligible microenterprise borrowing for income-generating activities. The Shishu, Kishor, Tarun and Tarun Plus categories distinguish borrowing requirements; Tarun Plus is intended for qualifying borrowers who successfully repaid an earlier Tarun loan. Confirm current limits and eligibility with the lender. Interest and repayment terms are lender-specific."]},
+      {"heading":"Practical example","paragraphs":["A business borrowing ₹1 lakh at an illustrative 12% annual reducing-balance rate for 24 months would pay about ₹4,707 monthly, excluding fees. Compare repayment with conservative business cash flow, not gross sales."]},
+      {"heading":"Application and documentation","paragraphs":["Prepare a business plan, equipment quotations, identity documents and financial records as applicable. Approach a participating lender and obtain a written quotation before accepting credit."]},
       {
         "heading": "How it relates to household finances",
         "paragraphs": [
@@ -406,6 +412,9 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "PM Vishwakarma",
     "intro": "Understand support for eligible traditional artisans.",
     "sections": [
+      {"heading":"Support for traditional trades","paragraphs":["The programme combines recognition, skills training, toolkit support, credit and marketing assistance for eligible traditional artisans in specified trades. Registration and verification requirements apply, and credit assistance is repayable. Confirm current trade lists, benefit amounts and conditions on the official portal."]},
+      {"heading":"Practical example","paragraphs":["A carpenter planning a ₹40,000 equipment purchase should distinguish approved toolkit assistance from a loan and budget for any remaining cost and repayment."]},
+      {"heading":"Application and documentation","paragraphs":["Consult the official portal or authorised Common Service Centre for registration, identity and trade verification, training and benefit procedures. Keep acknowledgement records."]},
       {
         "heading": "How it relates to household finances",
         "paragraphs": [
@@ -438,6 +447,9 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "Ayushman Bharat PM-JAY",
     "intro": "Understand eligible household healthcare protection.",
     "sections": [
+      {"heading":"Healthcare coverage and eligibility","paragraphs":["PM-JAY provides eligible beneficiaries access to covered hospital treatment through empanelled facilities. Coverage is package-based and does not automatically reimburse all outpatient expenses or every hospital bill. Eligibility pathways include qualifying households and a separate expansion for senior citizens aged 70 and above; confirm current state implementation and applicable coverage."]},
+      {"heading":"Practical example","paragraphs":["Before admission, ask the hospital help desk whether the proposed treatment package is covered and whether authorisation is required. Do not assume an unrelated private hospital bill will be reimbursed."]},
+      {"heading":"Application and documentation","paragraphs":["Use the National Health Authority beneficiary and hospital information channels or an authorised help desk to confirm eligibility, identity documentation and card procedures."]},
       {
         "heading": "How it relates to household finances",
         "paragraphs": [
@@ -470,6 +482,9 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "PM Surya Ghar Muft Bijli Yojana",
     "intro": "Understand household rooftop solar support and electricity savings.",
     "sections": [
+      {"heading":"Solar assistance and electricity bills","paragraphs":["The programme supports eligible residential rooftop solar installations. Central financial assistance depends on applicable capacity and programme conditions; local distribution-company procedures and inspection matter. The advertised electricity savings are not an unconditional guarantee of a zero bill."]},
+      {"heading":"Practical example","paragraphs":["If a system saves 150 billed units monthly at an illustrative ₹6 per unit, the energy-charge saving is ₹900 before fixed charges and other billing adjustments. Actual generation, self-consumption and export settlement vary."]},
+      {"heading":"Application and documentation","paragraphs":["Use the official portal to check registration, electricity connection details, vendor selection, feasibility, installation, inspection and subsidy disbursement procedures. Compare written quotations and avoid unofficial advance-payment requests."]},
       {
         "heading": "How it relates to household finances",
         "paragraphs": [
