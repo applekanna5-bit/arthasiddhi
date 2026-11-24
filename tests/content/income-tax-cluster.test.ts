@@ -8,8 +8,7 @@ import { buildSitemap } from "../../lib/content/sitemap";
 import type { Article, ArticleInternalLink, ArticleSection, ArticleSlug } from "../../lib/content/types";
 
 const taxSlugs = ["new-tax-regime-slab-calculation", "section-87a-rebate", "health-education-cess-calculation", "gross-income-vs-taxable-income", "income-tax-calculator-vs-payroll-tds"] as const satisfies readonly ArticleSlug[];
-const editedTaxSlugs: readonly ArticleSlug[] = taxSlugs.slice(0, 3);
-const modifiedDate = (slug: ArticleSlug) => editedTaxSlugs.includes(slug) ? "2026-10-17" : "2026-08-23";
+const modifiedDate = () => "2026-11-24";
 const ruleSetId = "income-tax-tax-year-2026-27";
 const money = (value: number) => `₹${new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 }).format(value)}`;
 const calculate = (income: number) => calculateIncomeTax({ regime: "new", ageCategory: "below-60", taxableOrdinaryIncome: income }, incomeTaxRuleSet);
@@ -42,7 +41,7 @@ describe("Income Tax cluster registry and maintenance", () => {
       const article = taxArticle(slug);
       expect(article.maintenance).toEqual({ kind: "rule-sensitive", ruleSetId });
       expect(article.publishedAt).toBe("2026-08-18");
-      expect(article.updatedAt).toBe(modifiedDate(slug));
+      expect(article.updatedAt).toBe(modifiedDate());
       expect(getArticleMaintenanceContext(article)).toEqual({ applicablePeriod: "Tax Year 2026–27 (FY 2026–27)", periodLabels: [{ label: "Applicable Tax Year", value: "Tax Year 2026–27" }, { label: "Corresponding Financial Year", value: "FY 2026–27" }], verifiedAt: "2026-09-12" });
       const references = getArticleReferences(article);
       expect(references.length).toBeGreaterThan(0);
@@ -210,7 +209,7 @@ describe("Income Tax SEO and sitemap", () => {
     for (const slug of taxSlugs) {
       const article = taxArticle(slug); const url = absoluteUrl(getArticlePath(article)); const metadata = articleMetadata(article);
       expect(url).toMatch(/^https:\/\/arthasiddhi\.com\/learn\/tax\//); expect(metadata.alternates?.canonical).toBe(url);
-      expect(articleJsonLd(article)).toMatchObject({ "@type": "Article", mainEntityOfPage: url, headline: article.title, datePublished: "2026-08-18", dateModified: modifiedDate(slug) }); expect(breadcrumbJsonLd(article).itemListElement).toHaveLength(4); expect(faqJsonLd(article)).toMatchObject({ "@type": "FAQPage" });
+      expect(articleJsonLd(article)).toMatchObject({ "@type": "Article", mainEntityOfPage: url, headline: article.title, datePublished: "2026-08-18", dateModified: modifiedDate() }); expect(breadcrumbJsonLd(article).itemListElement).toHaveLength(4); expect(faqJsonLd(article)).toMatchObject({ "@type": "FAQPage" });
       titles.add(article.title); descriptions.add(article.description);
     }
     expect(titles.size).toBe(5); expect(descriptions.size).toBe(5);

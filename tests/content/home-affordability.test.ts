@@ -22,7 +22,7 @@ describe("Home affordability planning article", () => {
     expect(getArticleRegistryIssues()).toEqual([]);
     expect(article.title).toBe("How Much House Can I Afford?");
     expect(article.publishedAt).toBe("2026-09-30");
-    expect(article.updatedAt).toBe("2026-11-15");
+    expect(article.updatedAt).toBe("2026-11-24");
     expect(article.description.length).toBeGreaterThan(50);
     expect(article.readingTime).toMatch(/^\d+ min read$/);
     for (const date of [article.publishedAt, article.updatedAt]) {
