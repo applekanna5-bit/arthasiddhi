@@ -74,7 +74,7 @@ describe("FD search answers and calculator boundaries", () => {
     const text = JSON.stringify(article.sections[0]).toLowerCase();
     expect(text).toContain("depends on your deposit terms");
     expect(text).toContain("models compound growth");
-    expect(text).toContain("interest remains in the modeled deposit and earns further interest");
+    expect(text).toContain("interest stays in the deposit and earns further interest");
     expect(text).toContain("monthly, quarterly, half-yearly or yearly compounding");
     expect(text).toContain("non-cumulative or payout deposits are not modeled");
     expect(text).toContain("yearly compounding is not a general simple-interest mode");
