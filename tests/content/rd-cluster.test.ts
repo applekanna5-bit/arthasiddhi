@@ -52,7 +52,7 @@ function text(article: Article) {
 describe("RD full form and installment definitions", () => {
   it("answers the full form first and distinguishes installment amount, count, deposits and maturity", () => {
     const article = rdArticle("rd-explained");
-    expect(article.sections[0].paragraphs?.[0]).toMatch(/^RD stands for Recurring Deposit\./);
+    expect(article.sections[0].paragraphs?.[0]).toMatch(/^A recurring deposit \(RD\)/);
     const definitions = section(article, "inputs-and-results").list!;
     expect(definitions).toContain("Monthly installment: the amount deposited each month, entered as Monthly deposit in the calculator.");
     expect(definitions).toContain("Number of installments: the number of modeled monthly contributions, equal to the whole-year tenure multiplied by 12.");
