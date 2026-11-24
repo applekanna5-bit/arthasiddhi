@@ -54,6 +54,8 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "Senior Citizens Savings Scheme",
     "intro": "Understand a savings option designed for eligible senior citizens.",
     "sections": [
+      {"heading":"Scheme rules at a glance","paragraphs":["SCSS is intended for eligible older savers. The NSI overview describes a five-year term, quarterly interest, deposits from ₹1,000 and a ₹30 lakh ceiling. People aged 60 or above are the main eligible group; certain retirees aged 55–59 and qualifying retired defence personnel aged 50 or above may qualify under additional conditions.","Based on the National Savings Institute overview and published scheme text; subsequent amendments and current tax treatment require final review."]},
+      {"heading":"Worked example","paragraphs":["At an illustrative annual rate of 8%, ₹10 lakh would generate ₹20,000 for a full quarter before tax. Initial payment periods and actual applicable rates may differ."]},
       {
         "heading": "How it fits your savings plan",
         "paragraphs": [
@@ -74,6 +76,8 @@ export const schemeDrafts: readonly SchemeDraft[] = [
       }
     ],
     "sources": [
+      {"title":"Published scheme rules (2019, amended 2020)","url":"https://www.nsiindia.gov.in/writereaddata/SchemeRules/SeniorCitizensSavingsSchemeRule.pdf"},
+      {"title":"National Savings Institute scheme overview","url":"https://www.nsiindia.gov.in/InternalPage.aspx?Id_Pk=27"},
       {
         "title": "National Savings Institute official website",
         "url": "https://www.nsiindia.gov.in/"
@@ -86,6 +90,8 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "National Savings Certificate",
     "intro": "Understand fixed-term small savings and maturity.",
     "sections": [
+      {"heading":"Scheme rules at a glance","paragraphs":["The NSC rules describe a five-year deposit, starting at ₹1,000 with further amounts in ₹100 increments and no maximum deposit limit. Interest accumulates rather than providing regular monthly income. Early closure is restricted.","Based on the National Savings Institute overview and published scheme text; subsequent amendments and current tax treatment require final review."]},
+      {"heading":"Worked example","paragraphs":["At an assumed annual compound rate of 7%, ₹10,000 grows to about ₹14,026 over five years before tax. This is an illustration, not a notified maturity quotation."]},
       {
         "heading": "How it fits your savings plan",
         "paragraphs": [
@@ -106,6 +112,8 @@ export const schemeDrafts: readonly SchemeDraft[] = [
       }
     ],
     "sources": [
+      {"title":"Published scheme rules (2019, amended 2020)","url":"https://www.nsiindia.gov.in/writereaddata/SchemeRules/NationalSavingsCertificatesRule.pdf"},
+      {"title":"National Savings Institute scheme overview","url":"https://www.nsiindia.gov.in/InternalPage.aspx?Id_Pk=27"},
       {
         "title": "National Savings Institute official website",
         "url": "https://www.nsiindia.gov.in/"
@@ -118,6 +126,8 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "Kisan Vikas Patra",
     "intro": "Understand the notified maturity period and savings commitment.",
     "sections": [
+      {"heading":"Scheme rules at a glance","paragraphs":["The NSI overview describes a minimum investment of ₹1,000 with no maximum limit. The amount doubles at the prescribed maturity date, which depends on the terms applicable at purchase. Early encashment is subject to rules and prescribed values.","Based on the National Savings Institute overview and published scheme text; subsequent amendments and current tax treatment require final review."]},
+      {"heading":"Worked example","paragraphs":["A ₹50,000 purchase would have a scheduled maturity value of ₹1 lakh under the doubling terms. Check the applicable maturity period rather than assuming a fixed number of years."]},
       {
         "heading": "How it fits your savings plan",
         "paragraphs": [
@@ -138,6 +148,8 @@ export const schemeDrafts: readonly SchemeDraft[] = [
       }
     ],
     "sources": [
+      {"title":"Published scheme rules (2019, amended 2020)","url":"https://www.nsiindia.gov.in/writereaddata/SchemeRules/KisanVikasPatra.pdf"},
+      {"title":"National Savings Institute scheme overview","url":"https://www.nsiindia.gov.in/InternalPage.aspx?Id_Pk=27"},
       {
         "title": "National Savings Institute official website",
         "url": "https://www.nsiindia.gov.in/"
@@ -150,6 +162,8 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "Post Office Monthly Income Scheme",
     "intro": "Understand regular interest income from a deposit.",
     "sections": [
+      {"heading":"Scheme rules at a glance","paragraphs":["The NSI overview describes a five-year account paying monthly interest, with a ₹1,000 minimum and ceilings of ₹9 lakh for single accounts and ₹15 lakh for joint accounts. Individual aggregate holdings and joint shares are subject to scheme rules. Early closure is available after one year subject to deductions.","Based on the National Savings Institute overview and published scheme text; subsequent amendments and current tax treatment require final review."]},
+      {"heading":"Worked example","paragraphs":["At an assumed 7% annual rate, ₹6 lakh produces ₹3,500 monthly before tax. The actual rate and permitted deposit depend on the applicable rules."]},
       {
         "heading": "How it fits your savings plan",
         "paragraphs": [
@@ -170,6 +184,8 @@ export const schemeDrafts: readonly SchemeDraft[] = [
       }
     ],
     "sources": [
+      {"title":"Published scheme rules (2019, amended 2020)","url":"https://www.nsiindia.gov.in/writereaddata/SchemeRules/MonthlyIncomeAccountRule.pdf"},
+      {"title":"National Savings Institute scheme overview","url":"https://www.nsiindia.gov.in/InternalPage.aspx?Id_Pk=27"},
       {
         "title": "India Post official website",
         "url": "https://www.indiapost.gov.in/"
