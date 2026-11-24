@@ -177,4 +177,132 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     ],
     "related": []
   },
+  {
+    "slug": "apy",
+    "title": "Atal Pension Yojana",
+    "intro": "Understand a pension scheme intended to support retirement income.",
+    "sections": [
+      {
+        "heading": "Why it matters",
+        "paragraphs": [
+          "Consider how a future monthly pension might fit alongside your other retirement savings."
+        ]
+      },
+      {
+        "heading": "What to check before enrolling",
+        "paragraphs": [
+          "Check current joining eligibility, contribution schedule, pension options, exit and nominee rules."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Consult the official scheme information and authorised institution for current enrolment and documentation requirements. This research draft does not establish eligibility or promise benefits."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "Pension Fund Regulatory and Development Authority",
+        "url": "https://www.pfrda.org.in/"
+      }
+    ],
+    "related": []
+  },
+  {
+    "slug": "pmjjby",
+    "title": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+    "intro": "Understand life insurance protection under a government-supported scheme.",
+    "sections": [
+      {
+        "heading": "Why it matters",
+        "paragraphs": [
+          "Consider how your family would meet essential expenses if your income stopped because of your death."
+        ]
+      },
+      {
+        "heading": "What to check before enrolling",
+        "paragraphs": [
+          "Check current eligibility, premium, coverage, renewal, exclusions and claim requirements."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Consult the official scheme information and authorised institution for current enrolment and documentation requirements. This research draft does not establish eligibility or promise benefits."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "Department of Financial Services",
+        "url": "https://financialservices.gov.in/"
+      }
+    ],
+    "related": []
+  },
+  {
+    "slug": "pmsby",
+    "title": "Pradhan Mantri Suraksha Bima Yojana",
+    "intro": "Understand accident insurance protection.",
+    "sections": [
+      {
+        "heading": "Why it matters",
+        "paragraphs": [
+          "Accident insurance and life insurance address different risks. Compare what each policy actually covers before relying on it."
+        ]
+      },
+      {
+        "heading": "What to check before enrolling",
+        "paragraphs": [
+          "Check current age eligibility, premium, accidental death and disability benefits, renewal and claim conditions."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Consult the official scheme information and authorised institution for current enrolment and documentation requirements. This research draft does not establish eligibility or promise benefits."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "Department of Financial Services",
+        "url": "https://financialservices.gov.in/"
+      }
+    ],
+    "related": []
+  },
+  {
+    "slug": "pmjdy",
+    "title": "Pradhan Mantri Jan Dhan Yojana",
+    "intro": "Understand access to basic banking services.",
+    "sections": [
+      {
+        "heading": "Why it matters",
+        "paragraphs": [
+          "A bank account can help a household receive payments and keep savings separate from everyday cash."
+        ]
+      },
+      {
+        "heading": "What to check before enrolling",
+        "paragraphs": [
+          "Check account opening requirements, applicable account features and conditions for any additional benefits."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Consult the official scheme information and authorised institution for current enrolment and documentation requirements. This research draft does not establish eligibility or promise benefits."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "PMJDY official portal",
+        "url": "https://pmjdy.gov.in/"
+      }
+    ],
+    "related": []
+  },
 ];
