@@ -149,4 +149,79 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     ],
     "relatedPaths": []
   },
+  {
+    "slug": "pmay-g",
+    "title": "Pradhan Mantri Awaas Yojana – Gramin",
+    "summary": "Understand rural housing assistance and household eligibility.",
+    "category": "housing",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "PMAY-G official portal",
+        "authority": "PMAY-G official portal",
+        "url": "https://pmayg.nic.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
+  {
+    "slug": "mudra",
+    "title": "Pradhan Mantri MUDRA Yojana",
+    "summary": "Understand business credit for eligible small enterprises.",
+    "category": "business",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "MUDRA",
+        "authority": "MUDRA",
+        "url": "https://www.mudra.org.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
+  {
+    "slug": "pm-vishwakarma",
+    "title": "PM Vishwakarma",
+    "summary": "Understand support for eligible traditional artisans.",
+    "category": "business",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "PM Vishwakarma official portal",
+        "authority": "PM Vishwakarma official portal",
+        "url": "https://pmvishwakarma.gov.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
+  {
+    "slug": "pm-jay",
+    "title": "Ayushman Bharat PM-JAY",
+    "summary": "Understand eligible household healthcare protection.",
+    "category": "health",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "National Health Authority",
+        "authority": "National Health Authority",
+        "url": "https://nha.gov.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
+  {
+    "slug": "pm-surya-ghar",
+    "title": "PM Surya Ghar Muft Bijli Yojana",
+    "summary": "Understand household rooftop solar support and electricity savings.",
+    "category": "energy",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "PM Surya Ghar official portal",
+        "authority": "PM Surya Ghar official portal",
+        "url": "https://pmsuryaghar.gov.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
 ];
