@@ -118,7 +118,7 @@ export const featuredArticleSlugs = [
   "nps-explained",
 ] as const satisfies readonly ArticleSlug[];
 
-export const homeGuideSlugs = ["home-loan-guide", "home-loan-emi-calculation", "home-loan-tenure-comparison"] as const satisfies readonly ArticleSlug[];
+export const homeGuideSlugs = ["how-to-build-a-personal-financial-plan", "home-loan-guide", "sip-explained"] as const satisfies readonly ArticleSlug[];
 
 function resolveArticles(slugs: readonly ArticleSlug[]): Article[] {
   return slugs.map((slug) => getArticleBySlug(slug)).filter((article): article is Article => Boolean(article));
