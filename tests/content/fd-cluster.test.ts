@@ -61,7 +61,7 @@ describe("FD search answers and calculator boundaries", () => {
     expect(article.sections[0].id).toBe("maturity-meaning");
     const text = JSON.stringify(article.sections[0]).toLowerCase();
     expect(text).toContain("maturity date tells you when the agreed term ends");
-    expect(text).toContain("maturity amount is the amount payable then under the deposit's terms");
+    expect(text).toContain("maturity amount tells you how much is payable then under the deposit terms");
     expect(text).toContain("principal, entered annual interest rate, tenure and selected compounding frequency");
     expect(text).toContain("does not determine the institution's contractual payout");
     expect(article.primaryCalculator).toBe("fd");
@@ -73,7 +73,7 @@ describe("FD search answers and calculator boundaries", () => {
     expect(article.sections[0].id).toBe("simple-or-compound");
     const text = JSON.stringify(article.sections[0]).toLowerCase();
     expect(text).toContain("depends on your deposit terms");
-    expect(text).toContain("uses compound growth");
+    expect(text).toContain("models compound growth");
     expect(text).toContain("interest remains in the modeled deposit and earns further interest");
     expect(text).toContain("monthly, quarterly, half-yearly or yearly compounding");
     expect(text).toContain("non-cumulative or payout deposits are not modeled");
