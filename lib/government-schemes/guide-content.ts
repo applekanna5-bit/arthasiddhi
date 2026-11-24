@@ -83,7 +83,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://www.nsiindia.gov.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Plan your household cash flow","href":"/learn/personal-finance/understand-household-cash-flow"},{"label":"Fixed deposit calculator","href":"/calculators/fd"}]
   },
   {
     "slug": "nsc",
@@ -119,7 +119,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://www.nsiindia.gov.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Understand compound interest","href":"/learn/personal-finance/compound-interest"},{"label":"Fixed deposit calculator (compare assumptions)","href":"/calculators/fd"}]
   },
   {
     "slug": "kvp",
@@ -155,7 +155,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://www.nsiindia.gov.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Understand annualised growth","href":"/calculators/cagr"}]
   },
   {
     "slug": "post-office-mis",
@@ -191,7 +191,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://www.indiapost.gov.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Plan household cash flow","href":"/learn/personal-finance/understand-household-cash-flow"}]
   },
   {
     "slug": "apy",
@@ -227,7 +227,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://www.pfrda.org.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Explore retirement projections","href":"/calculators/nps"},{"label":"Understand inflation","href":"/calculators/inflation"}]
   },
   {
     "slug": "pmjjby",
@@ -263,7 +263,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://financialservices.gov.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Build a financial plan","href":"/learn/personal-finance/how-to-build-a-personal-financial-plan"}]
   },
   {
     "slug": "pmsby",
@@ -299,7 +299,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://financialservices.gov.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Plan emergency savings","href":"/learn/personal-finance/emergency-fund-planning"}]
   },
   {
     "slug": "pmjdy",
@@ -335,7 +335,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://pmjdy.gov.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Understand household cash flow","href":"/learn/personal-finance/understand-household-cash-flow"}]
   },
   {
     "slug": "pmay-g",
@@ -370,7 +370,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://pmayg.nic.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Understand home buying costs","href":"/learn/loans/home-buying-costs-beyond-property-price"}]
   },
   {
     "slug": "mudra",
@@ -405,7 +405,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://www.mudra.org.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Understand loan repayment calculations","href":"/learn/loans/personal-loan-emi-explained"}]
   },
   {
     "slug": "pm-vishwakarma",
@@ -440,7 +440,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://pmvishwakarma.gov.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Understand financial commitments","href":"/learn/personal-finance/prioritize-debt-financial-commitments"}]
   },
   {
     "slug": "pm-jay",
@@ -475,7 +475,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://nha.gov.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Plan emergency savings","href":"/learn/personal-finance/emergency-fund-planning"}]
   },
   {
     "slug": "pm-surya-ghar",
@@ -510,6 +510,6 @@ export const schemeDrafts: readonly SchemeDraft[] = [
         "url": "https://pmsuryaghar.gov.in/"
       }
     ],
-    "related": []
+    "related": [{"label":"Plan household cash flow","href":"/learn/personal-finance/understand-household-cash-flow"}]
   },
 ];
