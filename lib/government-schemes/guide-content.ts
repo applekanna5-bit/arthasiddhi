@@ -49,4 +49,132 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     sources: [{ title: "Sukanya Samriddhi Account Scheme Rules", url: "https://www.nsiindia.gov.in/writereaddata/SchemeRules/SukanyaSamriddhiAccountSchemeRule.pdf" }, { title: "Latest small-savings interest notifications (Department of Economic Affairs)", url: "https://dea.gov.in/budget-division/475" }],
     related: [],
   },
+  {
+    "slug": "scss",
+    "title": "Senior Citizens Savings Scheme",
+    "intro": "Understand a savings option designed for eligible senior citizens.",
+    "sections": [
+      {
+        "heading": "How it fits your savings plan",
+        "paragraphs": [
+          "Consider how regular interest payments fit your household expenses. For example, list your monthly expenses and other income before deciding how much savings to commit."
+        ]
+      },
+      {
+        "heading": "What to check before applying",
+        "paragraphs": [
+          "Check current age and retirement-related eligibility, deposit limits, interest payment schedule, maturity, extension and premature closure rules with an authorised institution."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Use the official information link to locate the current scheme rules and authorised application channel. Confirm documentation requirements and keep your account or purchase records. This introductory draft does not establish eligibility or quote current rates."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "National Savings Institute official website",
+        "url": "https://www.nsiindia.gov.in/"
+      }
+    ],
+    "related": []
+  },
+  {
+    "slug": "nsc",
+    "title": "National Savings Certificate",
+    "intro": "Understand fixed-term small savings and maturity.",
+    "sections": [
+      {
+        "heading": "How it fits your savings plan",
+        "paragraphs": [
+          "If you are saving for a future expense, compare the date you need the money with the certificate maturity date. Do not assume you can withdraw whenever you want."
+        ]
+      },
+      {
+        "heading": "What to check before applying",
+        "paragraphs": [
+          "Check current purchase limits, applicable interest, maturity, early encashment restrictions and tax treatment before purchasing."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Use the official information link to locate the current scheme rules and authorised application channel. Confirm documentation requirements and keep your account or purchase records. This introductory draft does not establish eligibility or quote current rates."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "National Savings Institute official website",
+        "url": "https://www.nsiindia.gov.in/"
+      }
+    ],
+    "related": []
+  },
+  {
+    "slug": "kvp",
+    "title": "Kisan Vikas Patra",
+    "intro": "Understand the notified maturity period and savings commitment.",
+    "sections": [
+      {
+        "heading": "How it fits your savings plan",
+        "paragraphs": [
+          "If you set aside ₹50,000, check when the certificate is scheduled to mature before committing money needed for nearer-term expenses."
+        ]
+      },
+      {
+        "heading": "What to check before applying",
+        "paragraphs": [
+          "Check the notified maturity period applicable on purchase, eligibility, transfer and premature encashment rules."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Use the official information link to locate the current scheme rules and authorised application channel. Confirm documentation requirements and keep your account or purchase records. This introductory draft does not establish eligibility or quote current rates."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "National Savings Institute official website",
+        "url": "https://www.nsiindia.gov.in/"
+      }
+    ],
+    "related": []
+  },
+  {
+    "slug": "post-office-mis",
+    "title": "Post Office Monthly Income Scheme",
+    "intro": "Understand regular interest income from a deposit.",
+    "sections": [
+      {
+        "heading": "How it fits your savings plan",
+        "paragraphs": [
+          "If you need ₹5,000 each month for household expenses, compare your required income with the interest payable under the applicable deposit terms. This is a budgeting example, not a promised payout."
+        ]
+      },
+      {
+        "heading": "What to check before applying",
+        "paragraphs": [
+          "Check current deposit limits, joint account rules, interest rate, maturity and early closure conditions at an authorised post office."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Use the official information link to locate the current scheme rules and authorised application channel. Confirm documentation requirements and keep your account or purchase records. This introductory draft does not establish eligibility or quote current rates."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "India Post official website",
+        "url": "https://www.indiapost.gov.in/"
+      }
+    ],
+    "related": []
+  },
 ];
