@@ -89,4 +89,64 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     ],
     "relatedPaths": []
   },
+  {
+    "slug": "apy",
+    "title": "Atal Pension Yojana",
+    "summary": "Understand a pension scheme intended to support retirement income.",
+    "category": "retirement",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "Pension Fund Regulatory and Development Authority",
+        "authority": "Pension Fund Regulatory and Development Authority",
+        "url": "https://www.pfrda.org.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
+  {
+    "slug": "pmjjby",
+    "title": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
+    "summary": "Understand life insurance protection under a government-supported scheme.",
+    "category": "insurance",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "Department of Financial Services",
+        "authority": "Department of Financial Services",
+        "url": "https://financialservices.gov.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
+  {
+    "slug": "pmsby",
+    "title": "Pradhan Mantri Suraksha Bima Yojana",
+    "summary": "Understand accident insurance protection.",
+    "category": "insurance",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "Department of Financial Services",
+        "authority": "Department of Financial Services",
+        "url": "https://financialservices.gov.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
+  {
+    "slug": "pmjdy",
+    "title": "Pradhan Mantri Jan Dhan Yojana",
+    "summary": "Understand access to basic banking services.",
+    "category": "banking",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "PMJDY official portal",
+        "authority": "PMJDY official portal",
+        "url": "https://pmjdy.gov.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
 ];
