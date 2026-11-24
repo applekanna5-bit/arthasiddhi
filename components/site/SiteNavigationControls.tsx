@@ -62,7 +62,7 @@ export function SiteNavigationControls() {
           onClick={goToTop}
           aria-label="Back to top"
           title="Back to top"
-          className="fixed bottom-6 right-4 z-40 flex size-12 items-center justify-center rounded-full bg-[var(--as-action-primary)] text-[var(--as-text-on-action)] shadow-lg hover:bg-[var(--as-action-primary-hover)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--as-brand-teal)] sm:bottom-8 sm:right-8"
+          className="fixed bottom-8 right-8 z-40 hidden size-12 sm:flex items-center justify-center rounded-full bg-[var(--as-action-primary)] text-[var(--as-text-on-action)] shadow-lg hover:bg-[var(--as-action-primary-hover)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--as-brand-teal)]"
         >
           <ArrowUp aria-hidden="true" className="size-5" />
         </button>
