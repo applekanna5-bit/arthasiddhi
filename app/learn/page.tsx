@@ -18,9 +18,10 @@ export default function LearnPage() {
       <div className="mx-auto max-w-6xl">
         <section className="max-w-3xl py-9 sm:py-12">
           <p className="text-xs font-semibold tracking-[0.16em] text-[var(--as-brand-copper)] uppercase">ArthaSiddhi Learn</p>
-          <h1 className="learn-display mt-4 text-4xl leading-tight tracking-tight sm:text-5xl">Learn the financial concepts behind the numbers</h1>
+          <h1 className="learn-display mt-4 text-4xl leading-tight tracking-tight sm:text-5xl">Learn how to manage your money</h1>
           <p className="mt-5 text-lg leading-8 text-[var(--as-text-secondary)]">Explore practical explanations of personal finance, borrowing, investing, savings, tax and retirement, with worked examples and clear calculator assumptions.</p>
         </section>
+        <div className="mb-8 flex flex-wrap gap-4 text-sm font-semibold text-[var(--as-brand-teal)]"><Link href="/search" className="inline-flex min-h-11 items-center underline underline-offset-4">Find a guide or calculator</Link><Link href="/calculators" className="inline-flex min-h-11 items-center underline underline-offset-4">Explore financial calculators</Link></div>
         <section aria-labelledby="categories-heading">
           <h2 id="categories-heading" className="learn-display text-3xl leading-tight tracking-tight">Topics</h2>
           <div className="learn-topic-grid mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
