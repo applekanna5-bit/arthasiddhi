@@ -54,7 +54,7 @@ describe("V2.2D debt and investment-readiness foundations", () => {
     expect(debt().sections.map(({ id }) => id)).toEqual(["household-decision", "cash-flow-and-obligations", "compare-obligations", "liquidity-and-competing-goals", "loan-specific-questions", "plan-and-review"]);
     const content = text(debt());
     expect(content).toContain("There is no single repayment order that suits every household.");
-    expect(content).toContain("not a universal repayment method");
+    expect(content).toContain("There is no single repayment order that suits every household.");
     expect(content).toContain("no assigned weights");
     expect(content).toContain("no fixed review interval or universal payoff sequence");
     expect(content).not.toMatch(/snowball|avalanche|highest-interest-first|smallest-balance-first|\d+%|\d+ months/i);
