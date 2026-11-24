@@ -17,7 +17,7 @@ describe("Batch B3 rule-driven calculator voice", () => {
 
   it("keeps the shortened income label beside complete scope help", () => {
     expect(source).toContain('label="Taxable ordinary income (INR)"');
-    expect(source).toContain("Enter the amount after applicable deductions and exemptions. This calculator does not determine them.");
+    expect(source).toContain("First account for applicable deductions and exemptions; this calculator does not determine them.");
     expect(source).toContain("Income above ₹50,00,000 is outside scope because surcharge is not supported.");
     expect(source).toContain('resultsTitle="Estimated income tax"');
   });
@@ -29,8 +29,8 @@ describe("Batch B3 rule-driven calculator voice", () => {
   });
 
   it("keeps one GST classification warning beside the rate", () => {
-    expect(source).toContain("Enter the applicable rate. Presets are not a complete rate list and do not determine HSN/SAC classification.");
-    expect(source.match(/HSN\/SAC classification/g)).toHaveLength(1);
+    expect(source).toContain("Use the GST rate applicable to your goods or services. The shortcuts are examples, not a complete rate list; this tool does not identify your tax classification.");
+    expect(source.match(/this tool does not identify your tax classification/g)).toHaveLength(1);
   });
 
   it("includes both GST interpretation modes and material limitations", () => {
@@ -42,7 +42,7 @@ describe("Batch B3 rule-driven calculator voice", () => {
 
   it("keeps the EPF rate explicitly assumed and binds the employer split", () => {
     expect(source).toContain('label="Assumed EPF annual interest rate (%)"');
-    expect(source).toContain("Enter the rate for this projection. Future notified rates may differ.");
+    expect(source).toContain("The starting rate is an illustrative assumption for this projection, not confirmation of the latest notified rate. Actual future rates may differ.");
     expect(source).toContain("formatIndianCurrency(calculation.result.monthlyEmployerTotal)");
     expect(source).toContain("formatIndianCurrency(calculation.result.monthlyEmployerEps)");
     expect(source).toContain("formatIndianCurrency(calculation.result.monthlyEmployerEpf)");
@@ -62,7 +62,7 @@ describe("Batch B3 rule-driven calculator voice", () => {
   });
 
   it("keeps the NPS 20% minimum without advisory language", () => {
-    expect(source).toContain("The configured All Citizen Model normal-exit minimum is 20%, subject to the rules applicable at exit.");
+    expect(source).toContain("This model uses a 20% minimum for All Citizen Model normal exit; actual options depend on your category, corpus and applicable exit rules.");
     expect(source).not.toContain("conservative");
     expect(source).toContain("Used only to estimate annuity income; it is not a guaranteed rate.");
   });
