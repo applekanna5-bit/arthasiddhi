@@ -86,9 +86,9 @@ export const ppfRuleSet: FinancialRuleSet<PpfRules> = {
 export const gstRuleSet: FinancialRuleSet<GstRules> = {
   id: "gst-generic-arithmetic-2026-08",
   label: "GST generic arithmetic rules",
-  effectivePeriod: "Rules verified 16 August 2026",
+  effectivePeriod: "Generic GST arithmetic; presets are illustrative, not a current statutory rate schedule",
   lastVerified: "2026-08-16",
-  rules: { minimumRate: 0, maximumRate: 100, presets: [0, 3, 5, 12, 18, 28] },
+  rules: { minimumRate: 0, maximumRate: 100, presets: [0, 5, 18, 40] },
   sources: [{ title: "GST goods and services rates", authority: "Central Board of Indirect Taxes and Customs", reference: "https://cbic-gst.gov.in/gst-goods-services-rates.html" }],
 };
 
@@ -138,6 +138,7 @@ export const epfRuleSet: FinancialRuleSet<EpfRules> = {
     recommendedInterestStatus: "cbt-recommendation-pending-government-notification",
   },
   sources: [
+    { title: "Ministry of Labour November 2026 FAQ — states PF wage ceiling revised to ₹25,000 by notification dated 17 September 2026; notification and EPS application require separate verification", authority: "Ministry of Labour & Employment", reference: "https://www.labour.gov.in/static/uploads/2026/11/da640b1558a315e81e22ce5ac12f463f.pdf", sourceType: "official", accessedAt: "2026-11-21" },
     { title: "Employees' Provident Fund Scheme — 12% contribution and ₹15,000 wage context", authority: "Ministry of Labour & Employment, Press Information Bureau", reference: "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1944361&lang=2&reg=48", sourceType: "official", accessedAt: "2026-08-28" },
     { title: "Employees' Pension Scheme — 8.33% employer allocation and ₹15,000 context", authority: "Ministry of Labour & Employment", reference: "https://www.labour.gov.in/static/uploads/2025/06/234a069a1beae3e3f9c3e8cc9ea69b1a.pdf", sourceType: "official", accessedAt: "2026-08-28" },
     { title: "Delhi High Court judgment on EPF Scheme paragraph 83 and ordinary contribution provisions", authority: "High Court of Delhi", reference: "https://delhihighcourt.nic.in/app/showFileJudgment/68304112025CW29412012_155558.pdf", sourceType: "official", accessedAt: "2026-08-28" },

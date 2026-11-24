@@ -64,7 +64,7 @@ describe("EPF cluster registry, maintenance and discovery", () => {
       const article = epfArticle(slug);
       expect(article.maintenance).toEqual({ kind: "rule-sensitive", ruleSetId: epfRuleSet.id });
       expect(getArticleMaintenanceContext(article)).toMatchObject({ applicablePeriod: epfRuleSet.effectivePeriod, verifiedAt: "2026-08-28" });
-      expect(getArticleReferences(article)).toHaveLength(6);
+      expect(getArticleReferences(article)).toHaveLength(epfRuleSet.sources.length);
       expect(getArticleReferences(article).every(({ sourceType, accessedAt }) => sourceType === "official" && Boolean(accessedAt))).toBe(true);
     }
     expect(epfArticle("epf-calculator-projection-assumptions").maintenance).toEqual({ kind: "evergreen" });

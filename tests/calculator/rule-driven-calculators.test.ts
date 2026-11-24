@@ -117,7 +117,8 @@ describe("Income Tax same-income comparison", () => {
 describe("GST calculator", () => {
   const gst = (overrides = {}) => calculateGst({ mode: "exclusive" as const, transactionType: "intra-state" as const, amount: 1000, gstRate: 18, ...overrides }, gstRuleSet);
   it("handles a zero rate", () => expect(gst({ gstRate: 0 })).toMatchObject({ taxableValue: 1000, totalGst: 0, invoiceTotal: 1000 }));
-  it.each([[5, 50, 1050], [18, 180, 1180], [12, 120, 1120], [28, 280, 1280]])("adds %i%% GST to an exclusive amount", (gstRate, totalGst, invoiceTotal) => expect(gst({ gstRate })).toMatchObject({ totalGst, invoiceTotal }));
+  it.each([[5, 50, 1050], [18, 180, 1180], [40, 400, 1400], [12, 120, 1120], [28, 280, 1280]])("adds %i%% GST to an exclusive amount", (gstRate, totalGst, invoiceTotal) => expect(gst({ gstRate })).toMatchObject({ totalGst, invoiceTotal }));
+  it("reverses a 40% inclusive GST amount without losing the taxable base", () => { const result = gst({ mode: "inclusive", amount: 1400, gstRate: 40 }); expect(result.taxableValue).toBeCloseTo(1000, 8); expect(result.totalGst).toBeCloseTo(400, 8); expect(result.invoiceTotal).toBe(1400); });
   it("removes GST from an inclusive amount", () => expect(gst({ mode: "inclusive", amount: 1180 })).toMatchObject({ taxableValue: 1000, totalGst: 180, invoiceTotal: 1180 }));
   it("reconciles exclusive and inclusive calculations", () => { const exclusive = gst({ amount: 1234.56, gstRate: 17.25 }); const inclusive = gst({ mode: "inclusive", amount: exclusive.invoiceTotal, gstRate: 17.25 }); expect(inclusive.taxableValue).toBeCloseTo(exclusive.taxableValue, 10); expect(inclusive.totalGst).toBeCloseTo(exclusive.totalGst, 10); });
   it("splits intra-state GST equally", () => { const result = gst(); expect(result.cgst + result.sgst).toBe(result.totalGst); expect(result.igst).toBe(0); });
@@ -155,6 +156,8 @@ describe("NPS calculator", () => {
   it("handles zero return without rounding", () => expect(nps()).toMatchObject({ totalContributions: 12_000, estimatedGrowth: 0, retirementCorpus: 12_000 }));
   it("uses a 40% annuity allocation", () => expect(nps()).toMatchObject({ annuityCorpus: 4800, lumpSumCorpus: 7200 }));
   it("accepts a 20% annuity allocation and reconciles the 80% lump sum", () => { const result = nps({ annuityAllocation: 20 }); expect(result).toMatchObject({ annuityCorpus: 2400, lumpSumCorpus: 9600 }); expect(result.annuityCorpus + result.lumpSumCorpus).toBe(result.retirementCorpus); });
+  it("allows a 100% annuity allocation with no lump-sum remainder", () => { const result = nps({ annuityAllocation: 100 }); expect(result.annuityCorpus).toBe(result.retirementCorpus); expect(result.lumpSumCorpus).toBe(0); });
+  it("preserves an opening corpus when there are no contributions or returns", () => { const result = nps({ currentCorpus: 125_000, monthlyContribution: 0, annualReturnRate: 0 }); expect(result).toMatchObject({ totalContributions: 0, estimatedGrowth: 0, retirementCorpus: 125_000 }); });
   it("supports a higher annuity allocation", () => expect(nps({ annuityAllocation: 75 })).toMatchObject({ annuityCorpus: 9000, lumpSumCorpus: 3000 }));
   it("steps contributions only after 12 completed months", () => expect(nps({ retirementAge: 32, annualContributionIncrease: 10 })).toMatchObject({ totalContributions: 25_200, finalMonthlyContribution: 1100 }));
   it("reconciles lump sum and annuity to corpus", () => { const result = nps({ currentCorpus: 12_345, annualReturnRate: 9.5 }); expect(result.lumpSumCorpus + result.annuityCorpus).toBe(result.retirementCorpus); });
