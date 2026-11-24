@@ -198,6 +198,9 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "Atal Pension Yojana",
     "intro": "Understand a pension scheme intended to support retirement income.",
     "sections": [
+      {"heading":"Eligibility and benefits","paragraphs":["Indian citizens aged 18–40 with a savings account at a bank or post office may qualify. New enrolment from 1 October 2022 excludes citizens who are or have been income-tax payers as described in the FAQ. This restriction does not prevent subscribers enrolled by 30 September 2022 from continuing."]},
+      {"heading":"Practical example and restrictions","paragraphs":["Choose a minimum monthly pension of ₹1,000, ₹2,000, ₹3,000, ₹4,000 or ₹5,000 from age 60, subject to scheme conditions. Contributions depend on joining age and pension choice. A ₹3,000 monthly pension corresponds to ₹36,000 annually; consider inflation when planning future expenses."]},
+      {"heading":"Application and documentation","paragraphs":["Ask your bank or post office for the contribution chart, enrolment form, nomination and spouse details, and auto-debit arrangements. Confirm early exit and survivor rules before enrolling."]},
       {
         "heading": "Why it matters",
         "paragraphs": [
@@ -218,6 +221,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
       }
     ],
     "sources": [
+      {"title":"PFRDA FAQ (accessed 24 November 2026)","url":"https://pfrda.org.in/web/pfrda/w/faqs/atal-pension-yojana"},
       {
         "title": "Pension Fund Regulatory and Development Authority",
         "url": "https://www.pfrda.org.in/"
@@ -230,6 +234,9 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
     "intro": "Understand life insurance protection under a government-supported scheme.",
     "sections": [
+      {"heading":"Eligibility and benefits","paragraphs":["New enrolment is available to eligible individual bank or post office account holders aged 18–50, through one account per person. The official FAQ lists ₹436 annual renewal premium and ₹2 lakh death cover, subject to policy conditions."]},
+      {"heading":"Practical example and restrictions","paragraphs":["This is life cover, not an investment. A household paying ₹436 for the full annual premium should not expect a maturity payout. New enrolment during the policy year may attract a reduced premium. The first 30 days exclude non-accidental death claims for first-time entrants under the FAQ conditions."]},
+      {"heading":"Application and documentation","paragraphs":["Ask the participating institution for its enrolment form, auto-debit consent, nominee details, insurer and current renewal terms. Keep confirmation of cover and ask the insurer for claim documentation."]},
       {
         "heading": "Why it matters",
         "paragraphs": [
@@ -250,6 +257,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
       }
     ],
     "sources": [
+      {"title":"Department of Financial Services FAQ (accessed 24 November 2026)","url":"https://financialservices.gov.in/pmjjby"},
       {
         "title": "Department of Financial Services",
         "url": "https://financialservices.gov.in/"
@@ -262,6 +270,9 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "Pradhan Mantri Suraksha Bima Yojana",
     "intro": "Understand accident insurance protection.",
     "sections": [
+      {"heading":"Eligibility and benefits","paragraphs":["Eligible account holders aged 18–70 can enrol through one participating bank or post office account. The official FAQ lists ₹20 annual premium, with ₹2 lakh for covered accidental death or specified total permanent disability and ₹1 lakh for specified partial permanent disability."]},
+      {"heading":"Practical example and restrictions","paragraphs":["A hospital bill following an accident does not itself qualify for reimbursement under PMSBY. The benefit depends on the covered event and disability definitions, rather than the amount spent on medical care."]},
+      {"heading":"Application and documentation","paragraphs":["Submit enrolment and auto-debit consent through the participating institution. Confirm the insurer, nominee and renewal status. For claims, promptly obtain the relevant accident and medical evidence and follow insurer instructions."]},
       {
         "heading": "Why it matters",
         "paragraphs": [
@@ -282,6 +293,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
       }
     ],
     "sources": [
+      {"title":"Department of Financial Services FAQ (accessed 24 November 2026)","url":"https://financialservices.gov.in/pmsby"},
       {
         "title": "Department of Financial Services",
         "url": "https://financialservices.gov.in/"
@@ -294,6 +306,9 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "title": "Pradhan Mantri Jan Dhan Yojana",
     "intro": "Understand access to basic banking services.",
     "sections": [
+      {"heading":"Eligibility and benefits","paragraphs":["The scheme provides basic banking access for people without another account. The official overview describes no minimum balance requirement, interest on deposits and a RuPay debit card. Eligible holders may access an overdraft up to ₹10,000 subject to conditions."]},
+      {"heading":"Practical example and restrictions","paragraphs":["An overdraft is borrowed money that must be repaid, not a free ₹10,000 benefit. The official overview describes accident cover associated with eligible RuPay cards, including enhanced cover of ₹2 lakh for new accounts opened after 28 August 2018; confirm card and insurance conditions."]},
+      {"heading":"Application and documentation","paragraphs":["Visit a bank branch or authorised Bank Mitra and ask for current identity and address documentation requirements. Confirm account features, card terms and eligibility separately for insurance, pension, overdraft and direct benefit transfers."]},
       {
         "heading": "Why it matters",
         "paragraphs": [
@@ -314,6 +329,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
       }
     ],
     "sources": [
+      {"title":"PMJDY official scheme details (accessed 24 November 2026)","url":"https://www.pmjdy.gov.in/scheme"},
       {
         "title": "PMJDY official portal",
         "url": "https://pmjdy.gov.in/"
