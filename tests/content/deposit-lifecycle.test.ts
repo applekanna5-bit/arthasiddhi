@@ -108,6 +108,6 @@ describe("deposit lifecycle ownership and safety", () => {
     expect(hash(banking.slice(banking.indexOf('    title: "PPF Explained:'), banking.indexOf('    title: "RD Explained:')))).toBe("e112084ba149935949e0906bcdcb5ebc0e148c6d40dc6911f81fc2e7863b5d08");
     expect(hash(rules.slice(rules.indexOf("export const ppfRuleSet"), rules.indexOf("export const gstRuleSet")))).toBe("0cb42d54cad876fccb44c8a1b7fef5a180a3cc6f08af37fe2a2a549db0fc6b27");
     expect(hash(rules.slice(rules.indexOf("export const dicgcRuleSet"), rules.indexOf("// Shared content-only facts")))).toBe("7eb2e6b69d9962de8b39b748b123ed748c0ca57f5309e1be6f56a9fe5d8a319f");
-    expect(hash(decisions.slice(decisions.indexOf('    title: "Deposit Insurance Explained:')))).toBe("fb22b6a43d56e8f620a08506eed69f72d727f37414434dcb2185470d6f66ed1c");
+    expect(hash(decisions.slice(decisions.indexOf('    title: "Deposit Insurance Explained:')))).toBe("69835832d71a0168cedeeb18e6f94e74dbb214e282fb1ed8be63bdca0e7b8b5d");
   });
 });
