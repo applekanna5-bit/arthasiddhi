@@ -29,4 +29,64 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     sources: [{ title: "Sukanya Samriddhi Scheme Rules", authority: "Government of India", url: "https://www.nsiindia.gov.in/writereaddata/SchemeRules/SukanyaSamriddhiAccountSchemeRule.pdf" }],
     relatedPaths: [],
   },
+  {
+    "slug": "scss",
+    "title": "Senior Citizens Savings Scheme",
+    "summary": "Understand a savings option designed for eligible senior citizens.",
+    "category": "savings",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "National Savings Institute official website",
+        "authority": "National Savings Institute",
+        "url": "https://www.nsiindia.gov.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
+  {
+    "slug": "nsc",
+    "title": "National Savings Certificate",
+    "summary": "Understand fixed-term small savings and maturity.",
+    "category": "savings",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "National Savings Institute official website",
+        "authority": "National Savings Institute",
+        "url": "https://www.nsiindia.gov.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
+  {
+    "slug": "kvp",
+    "title": "Kisan Vikas Patra",
+    "summary": "Understand the notified maturity period and savings commitment.",
+    "category": "savings",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "National Savings Institute official website",
+        "authority": "National Savings Institute",
+        "url": "https://www.nsiindia.gov.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
+  {
+    "slug": "post-office-mis",
+    "title": "Post Office Monthly Income Scheme",
+    "summary": "Understand regular interest income from a deposit.",
+    "category": "savings",
+    "reviewStatus": "research",
+    "sources": [
+      {
+        "title": "India Post official website",
+        "authority": "India Post",
+        "url": "https://www.indiapost.gov.in/"
+      }
+    ],
+    "relatedPaths": []
+  },
 ];
