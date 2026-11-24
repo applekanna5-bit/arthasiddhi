@@ -7,7 +7,7 @@ export const depositLifecycleArticles = [
     description: "Check maturity instructions, access needs and renewed-deposit terms before receiving or reinvesting FD proceeds, with scoped RBI guidance on unpaid domestic deposits.",
     category: "banking",
     publishedAt: "2026-10-03",
-    updatedAt: "2026-10-03",
+    updatedAt: "2026-11-24",
     readingTime: "5 min read",
     maintenance: { kind: "rule-sensitive", ruleSetId: "rbi-commercial-bank-domestic-deposits-2026-10" },
     primaryCalculator: null,
@@ -18,7 +18,7 @@ export const depositLifecycleArticles = [
       {
         id: "normal-maturity", heading: "When an FD reaches normal maturity",
         paragraphs: [
-          "The maturity date marks the end of the agreed deposit term. Maturity proceeds include principal and interest payable under the contract. Interest already paid out during the term should not be assumed to appear again in the final proceeds.",
+          "If you opened a one-year FD, you will eventually need to decide what happens when that year ends: receive the money or consider renewing the deposit, depending on its terms. The maturity date marks the end of the agreed deposit term. Maturity proceeds include principal and interest payable under the contract. Interest already paid out during the term should not be assumed to appear again in the final proceeds.",
           [{ text: "For the underlying product and interest structures, see " }, { text: "Fixed Deposit Explained", link: { kind: "article", slug: "fixed-deposit-explained" } }, { text: ". This page owns the next decision: receiving, renewing or reinvesting money at normal maturity." }],
         ],
       },
@@ -97,7 +97,7 @@ export const depositLifecycleArticles = [
     description: "Check RD instalment terms, changed contribution ability, early-closure treatment and maturity records without assuming universal penalties or calculator-guaranteed proceeds.",
     category: "banking",
     publishedAt: "2026-10-03",
-    updatedAt: "2026-10-03",
+    updatedAt: "2026-11-24",
     readingTime: "4 min read",
     maintenance: { kind: "rule-sensitive", ruleSetId: "rbi-commercial-bank-domestic-deposits-2026-10" },
     primaryCalculator: null,
@@ -109,7 +109,7 @@ export const depositLifecycleArticles = [
         id: "commitment", heading: "Manage the commitment after opening",
         paragraphs: [
           [{ text: "An RD generally involves periodic instalments over an agreed term. " }, { text: "RD Explained", link: { kind: "article", slug: "rd-explained" } }, { text: " introduces the product; this page addresses what to check while managing an actual deposit." }],
-          "Keep the instalment schedule, due dates, agreed contribution amount and payment method available. Check how payments are recorded, how the bank communicates a problem, and which access and maturity instructions apply. A scheduled payment should be reconciled with the actual account record.",
+          "For example, if your RD instalment is ₹5,000 each month, check that the payment actually reaches the deposit on the agreed schedule. Keep the instalment schedule, due dates, agreed contribution amount and payment method available. Check how payments are recorded, how the bank communicates a problem, and which access and maturity instructions apply. A scheduled payment should be reconciled with the actual account record.",
         ],
       },
       {

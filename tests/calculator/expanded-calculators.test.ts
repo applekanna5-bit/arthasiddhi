@@ -33,6 +33,8 @@ describe("PPF calculator", () => {
     expect(result.maturityAmount).toBe(15_000);
   });
 
+  it("keeps all fifteen PPF schedule rows interest-free at a zero assumed rate", () => { const result = calculate({ annualContribution: 500, annualInterestRate: 0, tenureYears: 15 }); expect(result.schedule).toHaveLength(15); result.schedule.forEach((row, index) => { expect(row.interest).toBe(0); expect(row.closingBalance).toBe((index + 1) * 500); }); });
+
   it.each([500, 150_000])(
     "accepts the annual contribution boundary of %s",
     (annualContribution) => {
@@ -216,6 +218,7 @@ describe("gratuity calculator", () => {
   it("does not round up six additional months", () => expect(calculate({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 6 }).serviceYearsCounted).toBe(10));
   it("rounds up more than six additional months", () => expect(calculate({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 7 }).serviceYearsCounted).toBe(11));
   it("caps the statutory estimate while retaining the raw amount", () => expect(calculate({ eligibleMonthlyWage: 500_000, completedYears: 30, additionalMonths: 0 })).toMatchObject({ statutoryCeiling: 2_000_000, estimatedGratuity: 2_000_000, ceilingApplied: true }));
+  it("leaves an ordinary gratuity estimate below the ceiling uncapped", () => { const result = calculate({ eligibleMonthlyWage: 260_000, completedYears: 13, additionalMonths: 0 }); expect(result.rawFormulaGratuity).toBe(1_950_000); expect(result.estimatedGratuity).toBe(1_950_000); expect(result.ceilingApplied).toBe(false); });
   it("handles zero wage", () => expect(calculate({ eligibleMonthlyWage: 0, completedYears: 10, additionalMonths: 0 }).estimatedGratuity).toBe(0));
   it("rejects invalid month count", () => expect(() => calculate({ eligibleMonthlyWage: 50000, completedYears: 10, additionalMonths: 12 })).toThrow());
   it("rejects negative values", () => expect(() => calculate({ eligibleMonthlyWage: 50000, completedYears: -1, additionalMonths: 0 })).toThrow());

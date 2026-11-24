@@ -53,8 +53,8 @@ describe("V2.2D debt and investment-readiness foundations", () => {
   it("owns debt decisions and planning without a payoff score or unconditional method", () => {
     expect(debt().sections.map(({ id }) => id)).toEqual(["household-decision", "cash-flow-and-obligations", "compare-obligations", "liquidity-and-competing-goals", "loan-specific-questions", "plan-and-review"]);
     const content = text(debt());
-    expect(content).toContain("ArthaSiddhi educational planning framework");
-    expect(content).toContain("not a universal repayment method");
+    expect(content).toContain("There is no single repayment order that suits every household.");
+    expect(content).toContain("There is no single repayment order that suits every household.");
     expect(content).toContain("no assigned weights");
     expect(content).toContain("no fixed review interval or universal payoff sequence");
     expect(content).not.toMatch(/snowball|avalanche|highest-interest-first|smallest-balance-first|\d+%|\d+ months/i);
@@ -65,7 +65,7 @@ describe("V2.2D debt and investment-readiness foundations", () => {
   it("owns understanding uncertainty before product decisions without expanding products", () => {
     expect(investment().sections.map(({ id }) => id)).toEqual(["decision-context", "risk-and-return", "time-horizon", "liquidity-and-access", "diversification-boundary", "concept-and-product-handoffs"]);
     const content = text(investment());
-    expect(content).toContain("ArthaSiddhi educational framework");
+    expect(content).toContain("they do not determine which investment is right for you.");
     expect(content).toContain("A past gain does not guarantee a future gain");
     expect(content).toContain("taking more risk does not ensure a higher realized return");
     expect(content).toContain("different kinds of uncertainty");
