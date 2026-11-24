@@ -235,7 +235,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "intro": "Understand life insurance protection under a government-supported scheme.",
     "sections": [
       {"heading":"Eligibility and benefits","paragraphs":["New enrolment is available to eligible individual bank or post office account holders aged 18–50, through one account per person. The official FAQ lists ₹436 annual renewal premium and ₹2 lakh death cover, subject to policy conditions."]},
-      {"heading":"Practical example and restrictions","paragraphs":["This is life cover, not an investment. A household paying ₹436 for the full annual premium should not expect a maturity payout. New enrolment during the policy year may attract a reduced premium. The first 30 days exclude non-accidental death claims for first-time entrants under the FAQ conditions."]},
+      {"heading":"Practical example and restrictions","paragraphs":["This is life cover, not an investment. A household paying ₹436 for the full annual premium should not expect a maturity payout. For first-time enrolment, the published premium schedule is ₹436 for June–August, ₹342 for September–November, ₹228 for December–February and ₹114 for March–May. Renewal requires the full annual premium. The standard policy year runs from 1 June to 31 May. The first 30 days exclude non-accidental death claims for first-time entrants under the FAQ conditions."]},
       {"heading":"Application and documentation","paragraphs":["Ask the participating institution for its enrolment form, auto-debit consent, nominee details, insurer and current renewal terms. Keep confirmation of cover and ask the insurer for claim documentation."]},
       {
         "heading": "Why it matters",
@@ -271,7 +271,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     "intro": "Understand accident insurance protection.",
     "sections": [
       {"heading":"Eligibility and benefits","paragraphs":["Eligible account holders aged 18–70 can enrol through one participating bank or post office account. The official FAQ lists ₹20 annual premium, with ₹2 lakh for covered accidental death or specified total permanent disability and ₹1 lakh for specified partial permanent disability."]},
-      {"heading":"Practical example and restrictions","paragraphs":["A hospital bill following an accident does not itself qualify for reimbursement under PMSBY. The benefit depends on the covered event and disability definitions, rather than the amount spent on medical care."]},
+      {"heading":"Practical example and restrictions","paragraphs":["A hospital bill following an accident does not itself qualify for reimbursement under PMSBY. The benefit depends on the covered event and disability definitions, rather than the amount spent on medical care. The published policy year runs from 1 June to 31 May; cover can cease at the scheme age limit, account closure or insufficient funds for renewal."]},
       {"heading":"Application and documentation","paragraphs":["Submit enrolment and auto-debit consent through the participating institution. Confirm the insurer, nominee and renewal status. For claims, promptly obtain the relevant accident and medical evidence and follow insurer instructions."]},
       {
         "heading": "Why it matters",
@@ -329,7 +329,7 @@ export const schemeDrafts: readonly SchemeDraft[] = [
       }
     ],
     "sources": [
-      {"title":"PMJDY official scheme details (accessed 24 November 2026)","url":"https://www.pmjdy.gov.in/scheme"},
+      {"title":"PMJDY official scheme details (accessed 24 November 2026)","url":"https://pmjdy.gov.in/scheme-detail.aspx"},
       {
         "title": "PMJDY official portal",
         "url": "https://pmjdy.gov.in/"
