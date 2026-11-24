@@ -254,7 +254,7 @@ export const personalFinanceArticles = [
     description: "Compare existing debt obligations with household cash flow, retained liquidity and competing goals without a universal repayment order.",
     category: "personal-finance",
     publishedAt: "2026-10-02",
-    updatedAt: "2026-10-02",
+    updatedAt: "2026-11-24",
     readingTime: "4 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: null,
@@ -266,8 +266,8 @@ export const personalFinanceArticles = [
         id: "household-decision",
         heading: "Consider debt within the household's wider commitments",
         paragraphs: [
-          "Prioritizing debt means considering existing obligations alongside the household's cash flow, access needs and competing goals. This ArthaSiddhi educational planning framework helps you evaluate those trade-offs and plan what to review next. It is not a universal repayment method, a regulatory requirement or individualized financial advice.",
-          "Separate payments already required from decisions about using additional money. Choosing a purpose for unassigned cash does not make a required payment disappear. A debt's balance or cost alone does not describe all the constraints around that choice.",
+          "If you have more than one loan, start by checking which payments are due, how much each loan costs and how much money you need for everyday expenses. Then consider whether you have anything left for extra repayments. There is no single repayment order that suits every household.",
+          "Suppose you have a ₹12,000 loan EMI and a ₹5,000 credit card payment due this month. Even if you want to repay one debt faster, first account for both required payments and essential bills. Before making an extra payment, check the interest cost, any prepayment charges and the savings you need to keep accessible. This is an example, not personal repayment advice.",
         ],
       },
       {
@@ -331,7 +331,7 @@ export const personalFinanceArticles = [
     description: "Understand uncertainty, potential return, timing and access needs before comparing investment products, without a risk score or allocation recommendation.",
     category: "personal-finance",
     publishedAt: "2026-10-02",
-    updatedAt: "2026-10-02",
+    updatedAt: "2026-11-24",
     readingTime: "4 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: null,
@@ -347,7 +347,7 @@ export const personalFinanceArticles = [
         id: "decision-context",
         heading: "Understand the decision before comparing products",
         paragraphs: [
-          "Before comparing investment products, consider what uncertainty would mean for the money's purpose and when it may be needed. This ArthaSiddhi educational framework connects risk, potential return and time horizon; it does not classify you into a risk profile or provide individualized financial advice.",
+          "Before investing, ask what the money is for, when you will need it and what would happen if its value fell. For example, money set aside for school fees due in six months serves a different purpose from money saved for retirement in twenty years. Risk, return and time horizon help you think through those differences; they do not determine which investment is right for you.",
           [{ text: "Identifying and ordering household goals belongs in " }, { text: "How to Build a Personal Financial Plan", link: { kind: "article", slug: "how-to-build-a-personal-financial-plan" } }, { text: ". Here, use the goal's timing and access needs as context for understanding investment uncertainty." }],
         ],
       },
@@ -420,7 +420,7 @@ export const personalFinanceArticles = [
     description: "How inflation can raise future costs, reduce purchasing power and change a projection under one assumed annual rate.",
     category: "personal-finance",
     publishedAt: "2026-08-20",
-    updatedAt: "2026-08-20",
+    updatedAt: "2026-11-24",
     readingTime: "8 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: "inflation",
@@ -432,8 +432,8 @@ export const personalFinanceArticles = [
         id: "practical-meaning",
         heading: "Inflation changes what an amount of money can represent",
         paragraphs: [
-          "Inflation describes a rise in the general price level over time. In practical terms, a cost may require more rupees in the future, while the same nominal amount of money may represent less purchasing power.",
-          "The Inflation Calculator turns an entered amount, assumed annual inflation rate and whole-year period into a controlled scenario. It does not retrieve live CPI data or predict the future price of a particular item.",
+          "Inflation means that prices generally rise over time, so the same amount of money may buy less. Imagine your monthly groceries cost ₹5,000 today. If that particular basket costs 6% more next year, you would need ₹5,300 for the same items. This is an illustration, not a forecast of grocery prices or India's inflation rate.",
+          "Use the Inflation Calculator to explore how a cost or the buying power of your savings might change over several years. You choose the assumed annual rate; the calculator does not retrieve live CPI data or predict actual prices.",
         ],
       },
       {
