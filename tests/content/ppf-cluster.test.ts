@@ -105,7 +105,7 @@ describe("PPF post-maturity access", () => {
     expect(explanation).toContain("does not reset each year");
     expect(explanation).toContain("Closure during the block is restricted");
     expect(explanation).toContain("eligible regular accounts");
-    expect(article.updatedAt).toBe("2026-10-20");
+    expect(article.updatedAt).toBe("2026-11-24");
     expect(getArticleMaintenanceContext(article)?.verifiedAt).toBe("2026-08-20");
   });
 });

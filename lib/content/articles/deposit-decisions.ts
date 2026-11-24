@@ -7,7 +7,7 @@ export const depositDecisionArticles = [
     description: "Examine access needs, contribution timing, tenure, payout terms and deposit protection before choosing how to hold money in a bank deposit.",
     category: "banking",
     publishedAt: "2026-10-02",
-    updatedAt: "2026-10-03",
+    updatedAt: "2026-11-24",
     readingTime: "6 min read",
     maintenance: { kind: "evergreen" },
     primaryCalculator: null,
@@ -18,7 +18,7 @@ export const depositDecisionArticles = [
       {
         id: "start-with-money", heading: "Start with the money and its intended job",
         paragraphs: [
-          "Choosing a deposit starts with what the money needs to do. An amount already available, money expected from future monthly savings and money that may be needed unexpectedly have different constraints. This ArthaSiddhi educational decision framework helps you examine those constraints; it does not rank banks or prescribe a product.",
+          "Start with why you are saving. If you have ₹1 lakh available today, your choices may differ from those of someone saving ₹5,000 each month. Money kept for unexpected medical bills also has different access needs from money set aside for a planned purchase. This ArthaSiddhi educational decision framework helps you examine those constraints; it does not rank banks or prescribe a product.",
           [{ text: "Identify the intended use and competing priorities in your " }, { text: "personal financial plan", link: { kind: "article", slug: "how-to-build-a-personal-financial-plan" } }, { text: ". Here, the narrower question is which deposit terms to examine once that household context is understood." }],
         ],
       },
@@ -85,7 +85,7 @@ export const depositDecisionArticles = [
     description: "Understand current DICGC coverage, principal and interest limits, same-bank aggregation and joint-account ownership before assessing deposit protection.",
     category: "banking",
     publishedAt: "2026-10-02",
-    updatedAt: "2026-10-02",
+    updatedAt: "2026-11-24",
     readingTime: "5 min read",
     maintenance: { kind: "rule-sensitive", ruleSetId: "dicgc-deposit-insurance-2026-10" },
     primaryCalculator: null,
@@ -93,7 +93,7 @@ export const depositDecisionArticles = [
     relatedCalculators: [],
     relatedArticles: ["choosing-bank-deposit", "fixed-deposit-explained", "rd-explained"],
     sections: [
-      { id: "scope", heading: "Check the institution and deposit first", paragraphs: ["The Deposit Insurance and Credit Guarantee Corporation (DICGC), an RBI-owned subsidiary, insures eligible deposits at insured banks. Its scope includes savings, fixed, current and recurring deposits. Primary cooperative societies are not insured.", "DICGC excludes government and inter-bank deposits, deposits received outside India and deposits specifically exempted with RBI approval. Check the official insured-bank list and deposit scope; a product's name alone does not establish protection."] },
+      { id: "scope", heading: "Check the institution and deposit first", paragraphs: ["Deposit insurance helps protect eligible bank deposits if an insured bank fails, subject to the applicable rules and limit. In India, this protection is provided by the Deposit Insurance and Credit Guarantee Corporation (DICGC), an RBI-owned subsidiary. Its scope includes savings, fixed, current and recurring deposits. Primary cooperative societies are not insured.", "DICGC excludes government and inter-bank deposits, deposits received outside India and deposits specifically exempted with RBI approval. Check the official insured-bank list and deposit scope; a product's name alone does not establish protection."] },
       { id: "limit", heading: "The current ceiling includes interest", paragraphs: ["Verified on 2 October 2026, the ceiling is ₹5,00,000 for principal plus interest per depositor per bank in the same right and capacity. DICGC applies the relevant event date, such as liquidation, licence cancellation, a reconstruction scheme taking effect or RBI All Inclusive Directions. This is not a separate allowance for principal and interest."] },
       { id: "same-bank", heading: "Multiple accounts do not automatically multiply cover", paragraphs: ["Accounts held in the same right and capacity are combined across the same bank's branches. Separate savings, FD and RD accounts in your individual capacity do not each receive a fresh ceiling. A sole proprietor's business deposits and personal deposits are also aggregated.", "Right and capacity concern the ownership role in which deposits are held. DICGC distinguishes certain roles, such as individual ownership and holding as a partner or guardian. Do not infer a separate allowance from an account label; check the actual ownership classification."] },
       { id: "different-banks", heading: "Separate banks are different from separate branches", paragraphs: ["DICGC applies coverage separately at different banks. Branches of one bank are not separate banks for this purpose. Ownership/capacity rules still apply within each bank; this distinction is not a recommendation to distribute money in a particular way."] },
