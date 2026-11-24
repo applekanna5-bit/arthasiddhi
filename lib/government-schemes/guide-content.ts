@@ -305,4 +305,164 @@ export const schemeDrafts: readonly SchemeDraft[] = [
     ],
     "related": []
   },
+  {
+    "slug": "pmay-g",
+    "title": "Pradhan Mantri Awaas Yojana – Gramin",
+    "intro": "Understand rural housing assistance and household eligibility.",
+    "sections": [
+      {
+        "heading": "How it relates to household finances",
+        "paragraphs": [
+          "A family planning a rural home should distinguish government assistance from its own construction budget."
+        ]
+      },
+      {
+        "heading": "What to check before applying",
+        "paragraphs": [
+          "Check beneficiary selection, local verification, assistance amounts and instalment conditions through the official programme and local authorities."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Consult the official programme information and authorised application channel for current requirements. Keep application records and verify requests for documents or payments. This research draft does not establish eligibility or guarantee benefits."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "PMAY-G official portal",
+        "url": "https://pmayg.nic.in/"
+      }
+    ],
+    "related": []
+  },
+  {
+    "slug": "mudra",
+    "title": "Pradhan Mantri MUDRA Yojana",
+    "intro": "Understand business credit for eligible small enterprises.",
+    "sections": [
+      {
+        "heading": "How it relates to household finances",
+        "paragraphs": [
+          "A tailor buying a sewing machine should estimate monthly business receipts, expenses and loan repayments before borrowing."
+        ]
+      },
+      {
+        "heading": "What to check before applying",
+        "paragraphs": [
+          "Check current loan categories, eligible activities, lender requirements, interest and repayment terms. A loan is not a grant."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Consult the official programme information and authorised application channel for current requirements. Keep application records and verify requests for documents or payments. This research draft does not establish eligibility or guarantee benefits."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "MUDRA",
+        "url": "https://www.mudra.org.in/"
+      }
+    ],
+    "related": []
+  },
+  {
+    "slug": "pm-vishwakarma",
+    "title": "PM Vishwakarma",
+    "intro": "Understand support for eligible traditional artisans.",
+    "sections": [
+      {
+        "heading": "How it relates to household finances",
+        "paragraphs": [
+          "An artisan planning to purchase tools should separate equipment costs from working capital and household expenses."
+        ]
+      },
+      {
+        "heading": "What to check before applying",
+        "paragraphs": [
+          "Check eligible trades, registration, training, toolkit support and credit conditions; benefits depend on official approval."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Consult the official programme information and authorised application channel for current requirements. Keep application records and verify requests for documents or payments. This research draft does not establish eligibility or guarantee benefits."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "PM Vishwakarma official portal",
+        "url": "https://pmvishwakarma.gov.in/"
+      }
+    ],
+    "related": []
+  },
+  {
+    "slug": "pm-jay",
+    "title": "Ayushman Bharat PM-JAY",
+    "intro": "Understand eligible household healthcare protection.",
+    "sections": [
+      {
+        "heading": "How it relates to household finances",
+        "paragraphs": [
+          "Before a planned hospital visit, confirm whether the household, hospital and treatment are covered rather than assuming every medical expense is reimbursed."
+        ]
+      },
+      {
+        "heading": "What to check before applying",
+        "paragraphs": [
+          "Check current beneficiary eligibility, covered packages, empanelled hospitals and state-specific implementation."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Consult the official programme information and authorised application channel for current requirements. Keep application records and verify requests for documents or payments. This research draft does not establish eligibility or guarantee benefits."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "National Health Authority",
+        "url": "https://nha.gov.in/"
+      }
+    ],
+    "related": []
+  },
+  {
+    "slug": "pm-surya-ghar",
+    "title": "PM Surya Ghar Muft Bijli Yojana",
+    "intro": "Understand household rooftop solar support and electricity savings.",
+    "sections": [
+      {
+        "heading": "How it relates to household finances",
+        "paragraphs": [
+          "Compare your electricity bills, installation quotation and expected generation before estimating savings. Actual savings depend on consumption, tariffs and system performance."
+        ]
+      },
+      {
+        "heading": "What to check before applying",
+        "paragraphs": [
+          "Check current residential eligibility, subsidy conditions, vendor and electricity distribution company procedures, installation and inspection requirements."
+        ]
+      },
+      {
+        "heading": "How to proceed",
+        "paragraphs": [
+          "Consult the official programme information and authorised application channel for current requirements. Keep application records and verify requests for documents or payments. This research draft does not establish eligibility or guarantee benefits."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "PM Surya Ghar official portal",
+        "url": "https://pmsuryaghar.gov.in/"
+      }
+    ],
+    "related": []
+  },
 ];
