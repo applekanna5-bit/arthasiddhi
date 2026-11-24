@@ -5,7 +5,7 @@ import { plannedSchemeGuides } from "./schemes";
 
 describe("government scheme draft publication safeguards", () => {
   it("keeps all planned guides under verification", () => {
-    expect(plannedSchemeGuides).toHaveLength(3);
+    expect(plannedSchemeGuides).toHaveLength(16);
     expect(plannedSchemeGuides.every((scheme) => scheme.reviewStatus === "needs-verification")).toBe(true);
   });
 
