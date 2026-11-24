@@ -9,7 +9,7 @@ describe("Batch B2 expanded calculator voice", () => {
   });
 
   it("keeps the PPF rate-change meaning in the input hint", () => {
-    expect(source).toContain("Enter the rate for this projection. Government-notified PPF rates can change.");
+    expect(source).toContain("Government-notified PPF rates can change; the starting value is not a confirmation of the latest rate.");
     expect(source).not.toContain("PPF interest rates are periodically notified by the Government and can change.");
   });
 
