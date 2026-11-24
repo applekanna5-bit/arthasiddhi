@@ -34,7 +34,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "Senior Citizens Savings Scheme",
     "summary": "Understand a savings option designed for eligible senior citizens.",
     "category": "savings",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "National Savings Institute official website",
@@ -49,7 +49,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "National Savings Certificate",
     "summary": "Understand fixed-term small savings and maturity.",
     "category": "savings",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "National Savings Institute official website",
@@ -64,7 +64,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "Kisan Vikas Patra",
     "summary": "Understand the notified maturity period and savings commitment.",
     "category": "savings",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "National Savings Institute official website",
@@ -79,7 +79,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "Post Office Monthly Income Scheme",
     "summary": "Understand regular interest income from a deposit.",
     "category": "savings",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "India Post official website",
@@ -94,7 +94,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "Atal Pension Yojana",
     "summary": "Understand a pension scheme intended to support retirement income.",
     "category": "retirement",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "Pension Fund Regulatory and Development Authority",
@@ -109,7 +109,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "Pradhan Mantri Jeevan Jyoti Bima Yojana",
     "summary": "Understand life insurance protection under a government-supported scheme.",
     "category": "insurance",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "Department of Financial Services",
@@ -124,7 +124,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "Pradhan Mantri Suraksha Bima Yojana",
     "summary": "Understand accident insurance protection.",
     "category": "insurance",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "Department of Financial Services",
@@ -139,7 +139,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "Pradhan Mantri Jan Dhan Yojana",
     "summary": "Understand access to basic banking services.",
     "category": "banking",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "PMJDY official portal",
@@ -154,7 +154,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "Pradhan Mantri Awaas Yojana – Gramin",
     "summary": "Understand rural housing assistance and household eligibility.",
     "category": "housing",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "PMAY-G official portal",
@@ -169,7 +169,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "Pradhan Mantri MUDRA Yojana",
     "summary": "Understand business credit for eligible small enterprises.",
     "category": "business",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "MUDRA",
@@ -184,7 +184,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "PM Vishwakarma",
     "summary": "Understand support for eligible traditional artisans.",
     "category": "business",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "PM Vishwakarma official portal",
@@ -199,7 +199,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "Ayushman Bharat PM-JAY",
     "summary": "Understand eligible household healthcare protection.",
     "category": "health",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "National Health Authority",
@@ -214,7 +214,7 @@ export const plannedSchemeGuides: readonly SchemeGuide[] = [
     "title": "PM Surya Ghar Muft Bijli Yojana",
     "summary": "Understand household rooftop solar support and electricity savings.",
     "category": "energy",
-    "reviewStatus": "research",
+    "reviewStatus": "needs-verification",
     "sources": [
       {
         "title": "PM Surya Ghar official portal",
